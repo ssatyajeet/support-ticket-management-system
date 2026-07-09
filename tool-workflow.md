@@ -1,7 +1,7 @@
 # AI Tool Workflow — Support Ticket Management System
 
-**Document Version:** 1.0  
-**Last Updated:** July 7, 2026  
+**Document Version:** 1.1  
+**Last Updated:** July 9, 2026  
 **Status:** Living document — update after every major sprint  
 **Exercise:** JS AI Capability Exercise — Part A (AI Workflow Foundation)
 
@@ -17,9 +17,9 @@ This project is a **Support Ticket Management System** — an internal full-stac
 
 It is being built as part of the **JS AI Capability Exercise**, which evaluates not only whether the application works, but how effectively AI is used across the software development lifecycle: analysis, design, implementation, testing, debugging, and documentation.
 
-**Target stack (approved, not yet implemented):** React (Vite) + Express + PostgreSQL + Prisma.
+**Target stack (approved):** React (Vite) + Express + PostgreSQL + Prisma.
 
-**Current phase:** Planning and system design complete; implementation not yet started.
+**Current phase:** Backend foundation complete (Sprint 3.1); API and client implementation next.
 
 ---
 
@@ -69,13 +69,13 @@ Context was supplied **progressively** — each document built on the previous o
 
 The following were intentionally excluded from prompts:
 
-- Real database credentials or connection strings (not yet created)
+- Real database credentials or connection strings (stored in local `server/.env` only)
 - Any production or personal secrets
 - *(Additional exclusions will be recorded here as implementation begins)*
 
 ### Prompt History
 
-`prompt-history/` is **not yet initialized**. Prompt logging will begin during Sprint 3.1.
+`prompt-history/` is initialized. Sprint 1.1, 2.1, and 3.1 logs are complete. See `prompt-history/README.md` for the session index.
 
 ---
 
@@ -159,30 +159,55 @@ Through Ask-mode review, the developer evaluated **Next.js vs React + Express** 
 
 ## Code Generation
 
-**Status: Pending**
+**Status: In progress** — Sprint 3.1 server foundation complete.
 
-This section will be completed during implementation (Sprint 3.1 onward).
+### Sprint 3.1 — Server Foundation & Database (Complete)
 
-*Placeholder for future updates:*
+Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-task with developer approval between each step.
 
-- Server scaffold (Express, Prisma, PostgreSQL)
-- API endpoints and status state machine
-- React client pages and components
-- What AI generated vs what the developer wrote manually
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| Package & TypeScript | `server/package.json`, `tsconfig.json` | Pinned deps per spec §10; TS 6 `Node16` module resolution |
+| Environment | `server/src/config/env.ts` | Zod validation; fail-fast on missing vars |
+| Database | `prisma/schema.prisma`, `prisma.config.ts`, `prisma/migrations/*`, `prisma/seed.ts` | Prisma 7.8 — URL in `prisma.config.ts`; driver adapter required |
+| Prisma client | `server/src/lib/prisma.ts` | Singleton + `@prisma/adapter-pg` + `pg` pool |
+| Express app | `server/src/index.ts` | CORS to `CLIENT_URL`; `GET /api/health` |
+| Error handling | `asyncHandler.ts`, `errorHandler.ts` | `ErrorResponse` shape per spec §15 |
+| Docs | `server/.env.example`, `README.md` server section | Placeholders only |
+
+**Developer actions (manual):**
+
+- Created PostgreSQL database and local `server/.env` (gitignored)
+- Ran `prisma migrate dev --name initial` after fixing credential issues in agent shell
+- Manual Quality Gate: health endpoint, Prisma Studio seed data, restart persistence
+
+**Iterations / corrections:**
+
+| Issue | Resolution |
+| ----- | ---------- |
+| Prisma 7.8 rejects `url` in schema | Added `prisma.config.ts` |
+| `PrismaClient` runtime requires adapter | Added `@prisma/adapter-pg` + `pg`; updated `lib/prisma.ts` |
+| Seed command not found | Added `migrations.seed` to `prisma.config.ts` |
+| Agent migrate P1000 | Stale shell `DATABASE_URL` override; developer ran migrate manually |
+
+**Pending (future sprints):**
+
+- API endpoints and status state machine (Sprint 3.2–3.4)
+- React client pages and components (Phase 4)
+- Integration tests (Sprint 5.1)
 
 ---
 
 ## Code Validation
 
-**Status: Pending**
+**Status: In progress** — Sprint 3.1
 
-This section will be completed during implementation.
-
-*Placeholder for future updates:*
-
-- How AI-generated code was reviewed against `spec.md` and `cursor-rules-or-instructions.md`
-- Pre-implementation self-checklist results
-- Manual review findings and corrections
+- Each task reviewed against `spec.md` and `cursor-rules-or-instructions.md` before approval
+- `npm run build` passes in `server/`
+- Manual tests: health endpoint, seed data in Prisma Studio, data persistence after restart
+- Pre-implementation self-check applied per task (no secrets, env validation, CORS restricted)
 
 ---
 
@@ -243,18 +268,24 @@ This section will be completed in Sprint 6.2 before submission.
 | Execution roadmap | `tool-specific/cursor-workflow/tasks.md` | Done |
 | Acceptance criteria | `tool-specific/cursor-workflow/acceptance-criteria.md` | Done |
 | Engineering rules | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` | Done |
-| AI workflow (this doc) | `tool-workflow.md` v1.0 | Done |
+| **Phase 2 — Sprint 2.1** | Cursor workflow artifacts v2.0; `.gitignore`; prompt history initialized | Done |
+| **Phase 3 — Sprint 3.1** | Server foundation: Express, Prisma, migration, seed, health | Done |
+| AI workflow (this doc) | `tool-workflow.md` v1.1 | Done |
+| Prompt history | `prompt-history/sprint-3.1.md` | Done |
+| Server README section | `README.md` | Done |
+| `.gitignore` | Root `.gitignore` | Done |
+| `server/.env.example` | Placeholder env template | Done |
 
 ### Not Yet Started
 
 | Item | Notes |
 | ---- | ----- |
-| Application code (`client/`, `server/`) | No packages, no source files |
-| Database migrations & seed | Pending Sprint 3.1 |
+| Application code (`client/`) | Client scaffold pending Sprint 4.1 |
+| Ticket CRUD API | Pending Sprint 3.2 |
+| Status state machine API | Pending Sprint 3.3 |
+| Comments, search, filter API | Pending Sprint 3.4 |
 | Integration tests | Pending Sprint 5.1 |
-| `prompt-history/` | Not initialized |
-| `README.md` | Empty placeholder |
-| `.env.example`, `.gitignore` | Not created |
+| `client/.env.example` | Pending Sprint 6.1 |
 | `docs/testing-notes.md`, `docs/debugging-notes.md`, `docs/reflection.md` | Pending later sprints |
 
 ### Phase Summary
@@ -262,25 +293,25 @@ This section will be completed in Sprint 6.2 before submission.
 | Phase | Status |
 | ----- | ------ |
 | Phase 1 — Planning & Analysis | **Complete** |
-| Phase 2 — System Design | **Substantially complete** — minor Sprint 2.1 items remain (`.gitignore`, `prompt-history`, Quality Gate sign-off) |
-| Phase 3–6 — Implementation through Submission | **Not started** |
+| Phase 2 — System Design | **Complete** |
+| Phase 3 — Backend Development | **In progress** — Sprint 3.1 complete; 3.2–3.4 pending |
+| Phase 4–6 — Frontend, Testing, Submission | **Not started** |
 
 ---
 
 ## Next Planned Sprint
 
-**Sprint 3.1 — Server Foundation & Database** (Phase 3 — Backend Development)
+**Sprint 3.2 — Users & Ticket CRUD API** (Phase 3 — Backend Development)
 
 Per `tasks.md`, the next implementation sprint will:
 
-- Initialize the Express + TypeScript server
-- Define Prisma schema and run migrations
-- Create seed data (3 users, sample tickets across all statuses, comments)
-- Add `.env.example` and health endpoint
-- Verify data persists across restarts
+- Add `GET /api/users` endpoint
+- Implement ticket create, list, detail, and update (no status changes)
+- Reject `status` field on general `PATCH /api/tickets/:id` → 400
+- Add Zod validators and service layer for tickets
 
-No frontend or integration test work should begin until backend foundation exit criteria are met.
+Prerequisite: Sprint 3.1 Quality Gate passed.
 
 ---
 
-*Update this document after Sprint 3.1 completes and after every major sprint thereafter.*
+*Update this document after every major sprint. Last updated after Sprint 3.1 Quality Gate.*

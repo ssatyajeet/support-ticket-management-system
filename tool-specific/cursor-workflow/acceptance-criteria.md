@@ -85,11 +85,11 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| FND-01 | FR-C-24, AC-16 | Monorepo contains `client/` and `server/` per spec §8 | CR | Not Started |
-| FND-02 | NFR-05, AC-14 | `.gitignore` excludes `.env`, `node_modules`, build artifacts | CR | Not Started |
-| FND-03 | FR-C-24, AC-14 | `server/.env.example` and `client/.env.example` exist with no real secrets | DR, CR | Not Started |
-| FND-04 | A-04, spec §6 | Client and server start independently; CORS allows `CLIENT_URL` | MT | Not Started |
-| FND-05 | AC-21 | Cursor workflow artifacts present (`project-context`, `spec`, `tasks`, this file, `cursor-rules`) | DR | In Progress |
+| FND-01 | FR-C-24, AC-16 | Monorepo contains `client/` and `server/` per spec §8 | CR | In Progress |
+| FND-02 | NFR-05, AC-14 | `.gitignore` excludes `.env`, `node_modules`, build artifacts | CR | Completed |
+| FND-03 | FR-C-24, AC-14 | `server/.env.example` and `client/.env.example` exist with no real secrets | DR, CR | In Progress |
+| FND-04 | A-04, spec §6 | Client and server start independently; CORS allows `CLIENT_URL` | MT | In Progress |
+| FND-05 | AC-21 | Cursor workflow artifacts present (`project-context`, `spec`, `tasks`, this file, `cursor-rules`) | DR | Completed |
 
 ---
 
@@ -97,15 +97,15 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| DB-01 | OQ-12, FR-C-21 | PostgreSQL is the active database | CR, MT | Not Started |
-| DB-02 | FR-C-22, AC-15 | Prisma schema defines `users`, `tickets`, `comments` with correct enums | CR | Not Started |
-| DB-03 | OQ-06, spec §11 | All user FKs use `ON DELETE RESTRICT` | CR | Not Started |
-| DB-04 | OQ-10 | Column limits enforced: title 200, description 5000, message 2000 | CR, IT | Not Started |
-| DB-05 | FR-C-22, AC-15 | Migrations apply cleanly on empty database (`prisma migrate`) | MT | Not Started |
-| DB-06 | OQ-13, FR-C-23 | Seed creates 3 users (Agent, Manager, Admin) — one per role | MT | Not Started |
-| DB-07 | OQ-13 | Seed creates sample tickets covering all 5 statuses | MT | Not Started |
-| DB-08 | OQ-13 | Seed creates sample comments on tickets | MT | Not Started |
-| DB-09 | AC-12, NFR-01 | Data survives server and database restart | MT | Not Started |
+| DB-01 | OQ-12, FR-C-21 | PostgreSQL is the active database | CR, MT | Completed |
+| DB-02 | FR-C-22, AC-15 | Prisma schema defines `users`, `tickets`, `comments` with correct enums | CR | Completed |
+| DB-03 | OQ-06, spec §11 | All user FKs use `ON DELETE RESTRICT` | CR | Completed |
+| DB-04 | OQ-10 | Column limits enforced: title 200, description 5000, message 2000 | CR, IT | In Progress |
+| DB-05 | FR-C-22, AC-15 | Migrations apply cleanly on empty database (`prisma migrate`) | MT | Completed |
+| DB-06 | OQ-13, FR-C-23 | Seed creates 3 users (Agent, Manager, Admin) — one per role | MT | Completed |
+| DB-07 | OQ-13 | Seed creates sample tickets covering all 5 statuses | MT | Completed |
+| DB-08 | OQ-13 | Seed creates sample comments on tickets | MT | Completed |
+| DB-09 | AC-12, NFR-01 | Data survives server and database restart | MT | Completed |
 
 ---
 
@@ -198,7 +198,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| ERR-01 | spec §15 | API returns consistent `ErrorResponse` JSON (`message`, `code`, optional `details`) | IT, CR | Not Started |
+| ERR-01 | spec §15 | API returns consistent `ErrorResponse` JSON (`message`, `code`, optional `details`) | IT, CR | In Progress |
 | ERR-02 | NFR-04 | UI displays API error messages without requiring dev tools | MT | Not Started |
 | ERR-03 | EC-20 | Non-existent ticket ID returns 404 | IT | Not Started |
 | ERR-04 | EC-19 | Malformed JSON body returns 400 | MT | Not Started |

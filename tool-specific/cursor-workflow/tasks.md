@@ -606,19 +606,19 @@ docs: initialize prompt history
 ## Phase 3 — Backend Development
 
 **Phase goal:** Working REST API with PostgreSQL, validation, status state machine.  
-**Phase status:** [ ] Not started
+**Phase status:** [x] In progress (Sprint 3.1 complete)
 
 ### Sprint 3.1 — Server Foundation & Database
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Sprint goal:** Express skeleton, Prisma schema, migrations, seed data.  
 **Estimated effort:** 2–3 hours  
 **Traceability:** FR-C-21–23, DB-01–09, FND-01–04, AC-12, AC-15
 
 #### Prerequisites
 
-- [ ] Sprint 2.1 exit criteria met
-- [ ] PostgreSQL running locally or via Docker
+- [x] Sprint 2.1 exit criteria met
+- [x] PostgreSQL running locally or via Docker
 
 ---
 
@@ -733,7 +733,7 @@ docs: initialize prompt history
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | DB-05, FR-C-22, AC-15 |
 
 **Objective:** Apply schema to PostgreSQL.
@@ -754,7 +754,7 @@ docs: initialize prompt history
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | DB-06–08, FR-C-23, OQ-13 |
 
 **Objective:** Seed 3 users, ≥5 tickets (all statuses), comments.
@@ -775,7 +775,7 @@ docs: initialize prompt history
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | FND-04, BE-01 |
 
 **Objective:** Express app with CORS, JSON parser, `GET /api/health`.
@@ -796,7 +796,7 @@ docs: initialize prompt history
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | ERR-01, BE-01 |
 
 **Objective:** `asyncHandler` and `errorHandler` middleware scaffolding.
@@ -817,7 +817,7 @@ docs: initialize prompt history
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | FND-03, AC-15, AC-16 |
 
 **Objective:** Document server env vars; add server setup section to README.
@@ -836,21 +836,31 @@ docs: initialize prompt history
 
 #### Testing — Sprint 3.1
 
-- [ ] Manual: `GET /api/health` → 200
-- [ ] Manual: Prisma Studio shows seed data
-- [ ] Manual: Restart server + DB — data persists (DB-09)
+- [x] Manual: `GET /api/health` → 200
+- [x] Manual: Prisma Studio shows seed data
+- [x] Manual: Restart server + DB — data persists (DB-09)
 
 #### Documentation Sync — Sprint 3.1
 
-- [ ] `README.md` — server setup section
-- [ ] `tool-workflow.md` — Code Generation section (partial)
-- [ ] `prompt-history/`
-- [ ] `acceptance-criteria.md` — DB-*, FND-* criteria
-- [ ] `tasks.md` — task statuses
+- [x] `README.md` — server setup section
+- [x] `tool-workflow.md` — Code Generation section (partial)
+- [x] `prompt-history/` — `sprint-3.1.md` created
+- [x] `acceptance-criteria.md` — DB-*, FND-* criteria updated
+- [x] `tasks.md` — task statuses and Progress Tracker updated
 
 #### Quality Gate — Sprint 3.1
 
 Apply **Enhanced Quality Gate Template** plus FR-C-21–23, AC-12, AC-15 partial.
+
+- [x] **Requirements:** FR-C-21–23, DB-01–09 verified
+- [x] **Acceptance criteria:** Sprint 3.1 IDs updated in `acceptance-criteria.md`
+- [x] **Engineering standards:** `cursor-rules-or-instructions.md` followed
+- [x] **Architecture compliance:** Schema, layers, health endpoint per spec
+- [x] **Security review:** No secrets committed; env validation; CORS restricted
+- [x] **Tests:** Manual health, seed, persistence — all passing
+- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/` updated
+- [x] **README:** Server setup section added
+- [x] **Developer review:** All Tasks 3.1.1–3.1.10 approved
 
 **Rollback Rule:** Fix migration/seed/server issues before Sprint 3.2.
 
@@ -866,8 +876,8 @@ chore(server): add env example and readme server section
 
 #### Sprint Exit Criteria
 
-- [ ] All Tasks 3.1.1–3.1.10 complete and approved
-- [ ] Server starts; migrations + seed work on fresh DB
+- [x] All Tasks 3.1.1–3.1.10 complete and approved
+- [x] Server starts; migrations + seed work on fresh DB
 
 ---
 
@@ -880,7 +890,7 @@ chore(server): add env example and readme server section
 
 #### Prerequisites
 
-- [ ] Sprint 3.1 complete
+- [x] Sprint 3.1 complete
 
 ---
 
@@ -1469,7 +1479,7 @@ Enhanced template + spec §9 structure; CORS smoke test.
 | ----- | ------ | ------ | -------------- | ----- |
 | 1 | 1.1 Requirements | [x] Complete | | requirement-analysis v1.1 |
 | 2 | 2.1 Architecture & Spec | [x] Complete | 2026-07-07 | All Tasks 2.1.1–2.1.8 done; Quality Gate passed |
-| 3 | 3.1 Server Foundation | [ ] Not started | | Tasks 3.1.1–3.1.10 |
+| 3 | 3.1 Server Foundation | [x] Complete | 2026-07-09 | Tasks 3.1.1–3.1.10; Quality Gate passed |
 | 3 | 3.2 Users & Ticket CRUD | [ ] Not started | | |
 | 3 | 3.3 Status State Machine | [ ] Not started | | |
 | 3 | 3.4 Comments Search Filter | [ ] Not started | | |
