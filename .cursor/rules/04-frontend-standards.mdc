@@ -1,0 +1,36 @@
+---
+description: Frontend component rules, API client patterns, state management, and UX requirements
+alwaysApply: true
+---
+
+# Frontend Standards
+
+## API Client Layer
+
+- All API calls go through `client/src/api/` — never inline `fetch` in components
+- Never hardcode backend URLs — always use `import.meta.env.VITE_API_URL`
+- Custom hooks (`useTickets`, `useTicket`, `useUsers`) own: fetch + loading + error state
+- Components own render only — zero business logic inside JSX
+
+## Component Rules
+
+- Handle **loading, error, and empty states** on every list and page
+- Create reusable components in `components/common/`, `components/tickets/`, `components/comments/`
+- Never enforce status transition rules in the UI — display hints only; backend is authoritative
+- Show API `error.message` to the user near the relevant field (especially invalid transitions — AC-08)
+- Display `"Unassigned"` when `assignedTo` is null
+- Render user content as text — **never `dangerouslySetInnerHTML`**
+- Disable submit buttons while requests are in flight
+
+## State & Routing
+
+- Persist `search` and `status` filter in URL query params (`?search=...&status=Open`)
+- Use React Router `BrowserRouter`; routes: `/`, `/tickets/new`, `/tickets/:id`
+- Local component state for form inputs and UI toggles
+- No global store (Redux/Zustand) — custom hooks are sufficient for v1
+
+## Styling
+
+- All styling via Tailwind CSS utility classes (see `tailwind-css.mdc`)
+- Use `clsx` or `cn` for conditional class merging — never string concatenation
+- Responsive via Tailwind prefixes (`sm:`, `md:`, `lg:`) — no custom media queries

@@ -1,0 +1,35 @@
+---
+description: Clean Code principles, SOLID application, and software design principles for all code in this project
+alwaysApply: true
+---
+
+# Engineering Standards
+
+## Clean Code
+
+- Use domain language: `Ticket`, `Status`, `Priority`, `Comment`, `Role`
+- Keep functions small and focused; modules cohesive
+- No duplicated logic — status transitions have one source: `statusTransition.ts`
+- No magic strings or numbers — use constants and enums for status, priority, role, error codes
+- Comment only non-obvious business logic; code must be self-documenting
+- Eliminate dead code; prefer readability over cleverness
+
+## SOLID (apply pragmatically — do not over-engineer)
+
+| Principle | This project |
+| --------- | ------------ |
+| Single Responsibility | Controllers orchestrate; services enforce rules; validators validate shape |
+| Open/Closed | Extend via new services/endpoints; never modify state machine ad hoc per route |
+| Liskov Substitution | Service interfaces behave consistently; errors thrown predictably |
+| Interface Segregation | Small focused modules — avoid god services |
+| Dependency Inversion | Services depend on Prisma abstraction; routes depend on services |
+
+## Design Principles
+
+- **Separation of Concerns** — routes / controllers / services / data access layers
+- **DRY** — one state machine, one error format, one API client layer
+- **KISS** — simplest solution that satisfies requirements
+- **YAGNI** — no auth, pagination, soft delete, or optimistic locking unless explicitly in scope
+- **High cohesion** — ticket logic in ticket module; comment logic in comment module
+- **Low coupling** — frontend consumes API contracts; no shared DB access from client
+- **Composition over inheritance** — React functional components + hooks

@@ -1,0 +1,48 @@
+---
+description: Backend architecture rules, API contract, database standards, error handling, and security for server-side code
+alwaysApply: true
+---
+
+# Backend Standards
+
+## Architecture
+
+- **Controllers thin** — parse request, call service, send response; zero business logic
+- **Business logic in services only** — never in routes or controllers
+- **Status transitions** — exclusively in `statusTransition.ts` + `ticketService.changeStatus()`
+- **Zod validation before controller** — reject invalid shape at API boundary
+- **Centralized error handling** — `errorHandler` middleware; consistent `ErrorResponse` shape
+- **Prisma singleton** — instantiate only in `lib/prisma.ts`
+
+## API Contract (non-negotiable)
+
+| Method | Endpoint | Enforcement |
+| ------ | -------- | ----------- |
+| GET | `/api/tickets` | `search` = title+desc ILIKE; invalid `status` filter → 400 |
+| POST | `/api/tickets` | Status auto-set to Open; `createdBy` required valid user ID |
+| PATCH | `/api/tickets/:id` | **Reject `status` field → 400 `STATUS_NOT_ALLOWED_HERE`** |
+| PATCH | `/api/tickets/:id/status` | Validate transition; 400 `INVALID_STATUS_TRANSITION` on failure |
+| GET | `/api/tickets/:id` | Returns `createdByName`, `assignedToName`, `comments[]` ASC |
+| POST | `/api/tickets/:id/comments` | Ticket must exist; `createdBy` required valid user ID |
+
+## Database
+
+- Schema: `users`, `tickets`, `comments`; enums `Role`, `Priority`, `Status`
+- `ON DELETE RESTRICT` on all user FKs
+- Migrations incremental — one logical change per migration; never edit applied migrations
+- Seed: 3 users (Agent, Manager, Admin); ≥5 tickets across all 5 statuses; ≥5 comments
+- Enum display mapping: `"In Progress"` (API JSON) ↔ `InProgress` (Prisma enum)
+
+## Error Codes
+
+`VALIDATION_ERROR` · `INVALID_STATUS_TRANSITION` · `STATUS_NOT_ALLOWED_HERE` · `INVALID_FILTER` · `NOT_FOUND` · `INTERNAL_ERROR`
+
+Never expose Prisma errors or stack traces to API consumers.
+
+## Security
+
+- Validate all inputs server-side — Prisma parameterized queries only
+- CORS restricted to `CLIENT_URL` env var
+- Never log `DATABASE_URL`, passwords, or credentials
+- `.env` gitignored; only `.env.example` with placeholders committed
+- No authentication in v1 — document as known limitation, do not work around it

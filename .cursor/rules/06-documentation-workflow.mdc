@@ -1,0 +1,36 @@
+---
+description: When and how to update project documentation, acceptance criteria, and prompt history after every implementation change
+alwaysApply: true
+---
+
+# Documentation Workflow
+
+## After Every Task Completion
+
+| Document | Update trigger |
+| -------- | -------------- |
+| `tool-specific/cursor-workflow/tasks.md` | Mark task checkbox; update Sprint Progress Tracker |
+| `tool-specific/cursor-workflow/acceptance-criteria.md` | Mark criterion status Completed when verified |
+| `README.md` | Update only if setup, run, or test steps change |
+| `tool-workflow.md` | Update "Pending" sections as implementation phases complete |
+| `prompt-history/` | At sprint Quality Gate — see `prompt-history-sprint-log.mdc` |
+
+## Hard Rules
+
+- Do **not** silently edit `requirement-analysis.md` — it is the approved business authority
+- Do **not** mark acceptance criteria Completed without verification
+- Do **not** leave `tasks.md` sprint checkboxes unchecked after approved work
+- Do **not** update `tool-workflow.md` with work that has not actually been done
+
+## Acceptance Criteria Status Values
+
+`Not Started` → `In Progress` → `Completed`
+
+Only advance status after manual test, integration test, or code review confirms the criterion.
+
+## Prompt History Discipline
+
+- At sprint Quality Gate: generate `prompt-history/sprint-X.X.md` (see `prompt-history-sprint-log.mdc`)
+- Update `prompt-history/README.md` session index after each sprint file is created
+- Log verbatim prompts from transcript — never reconstruct from memory without noting it
+- Honest logging only — never fabricate sessions or mark prompts as iterated when they were not

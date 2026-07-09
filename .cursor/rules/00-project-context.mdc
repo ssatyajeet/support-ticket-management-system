@@ -1,0 +1,40 @@
+---
+description: Project identity, approved tech stack, architecture, and document authority hierarchy for every session
+alwaysApply: true
+---
+
+# Project Context — Support Ticket Management System
+
+## What This Project Is
+
+Full-stack internal ticket management app built as a JS AI Capability Exercise.
+Three-tier monorepo: `client/` (React + Vite + TS) + `server/` (Express + TS) + PostgreSQL (Prisma).
+
+## Approved Tech Stack (do not change)
+
+| Layer | Technology |
+| ----- | ---------- |
+| Frontend | React, Vite, TypeScript, React Router, Tailwind CSS |
+| Backend | Node.js, Express, TypeScript, Zod |
+| Database | PostgreSQL, Prisma ORM |
+| Testing | Vitest, Supertest |
+
+## Document Authority (resolve conflicts in this order)
+
+1. `docs/requirement-analysis.md` — FR/BR/AC business authority
+2. `tool-specific/cursor-workflow/spec.md` — technical blueprint
+3. `tool-specific/cursor-workflow/acceptance-criteria.md` — verification checklist
+4. `tool-specific/cursor-workflow/tasks.md` — sprint execution order
+5. `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` — engineering rules
+
+## Non-Negotiables
+
+| Topic | Rule |
+| ----- | ---- |
+| Status changes | `PATCH /api/tickets/:id/status` only — general PATCH rejects `status` → 400 |
+| State machine | `server/src/services/statusTransition.ts` — 5 valid transitions, backend-enforced |
+| Search | Title + description, case-insensitive partial (`ILIKE`) |
+| Auth | None in v1 — document as known limitation |
+| Delete | No ticket delete in v1 |
+| Secrets | Never in Git — `.env` gitignored; only `.env.example` committed |
+| Stretch | No stretch features until AC-01–AC-18 all pass |

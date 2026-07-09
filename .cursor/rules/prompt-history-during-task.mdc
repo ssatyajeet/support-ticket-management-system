@@ -1,0 +1,78 @@
+---
+description: After every completed task, remind developer about prompt logging and flag if the prompt was meaningful enough to log
+alwaysApply: true
+---
+
+# Prompt History — During-Task Reminder
+
+## When This Rule Applies
+
+After **every** task completion, when Cursor stops and requests developer review.
+
+---
+
+## What To Do
+
+At the end of every task summary (after the changes, decisions, and security/performance notes),
+append the following prompt log notice:
+
+```
+---
+> **Prompt log:** This prompt will be captured in the sprint log when the Quality Gate passes.
+> Meaningful: [Yes / No — reason]
+---
+```
+
+Set **Meaningful: Yes** if the prompt that triggered this task:
+- Contains a task instruction or task ID
+- Makes an architectural or design decision
+- Iterates on a previous AI output with feedback
+- Rejects or modifies AI-generated content
+- Contains a role persona ("You are acting as...")
+- Is longer than one sentence with specific direction
+
+Set **Meaningful: No** if the prompt was:
+- A single continuation word only (`proceed`, `yes`, `ok`, `approved`)
+- A status check with no new instruction
+- An acknowledgement with no decision
+
+---
+
+## Example output
+
+After completing Task 3.1.1:
+
+```
+---
+**Changes:** server/package.json created with Express, TypeScript, Prisma, Zod, Vitest dependencies.
+**Decision:** Used exact dependency list from spec.md §10 — no additional packages added.
+**Security:** No secrets included; DATABASE_URL will be in .env (gitignored).
+**Next:** Task 3.1.2 — TypeScript configuration.
+
+> **Prompt log:** This prompt will be captured in sprint-3.1.md at Quality Gate.
+> Meaningful: Yes — contains task ID and implementation instruction.
+---
+```
+
+---
+
+## Sprint Boundary Reminder
+
+When a sprint Quality Gate passes, add this notice before closing the sprint:
+
+```
+---
+> **Sprint log:** Now creating prompt-history/sprint-X.X.md from this session's transcript.
+> Following the prompt-history-sprint-log rule.
+---
+```
+
+Then immediately apply the `prompt-history-sprint-log` rule to generate the file.
+
+---
+
+## What NOT To Do
+
+- Do not create the sprint log file mid-sprint — only at Quality Gate
+- Do not ask the developer to manually copy prompts — Cursor reads the transcript
+- Do not include this notice in the sprint log file itself (it is a reminder only)

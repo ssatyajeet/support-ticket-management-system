@@ -1,0 +1,41 @@
+---
+description: Git commit conventions, branch safety, and secrets hygiene for every commit in this project
+alwaysApply: true
+---
+
+# Git Workflow
+
+## Commit Conventions
+
+- **Small logical commits** — one concern per commit; align with sprint task IDs where practical
+- **Commit message prefixes:**
+
+| Prefix | Use for |
+| ------ | ------- |
+| `feat(scope):` | New feature or endpoint |
+| `fix:` | Bug fix |
+| `test:` | Adding or updating tests |
+| `docs:` | Documentation changes only |
+| `chore:` | Config, dependencies, tooling |
+| `refactor:` | Code change with no behavior change |
+
+- Example: `feat(api): add PATCH /tickets/:id/status with state machine validation`
+
+## Commit Rules
+
+- **Never commit secrets** — verify `.env` is gitignored before every commit
+- **Commit only working code** — tests must pass for affected scope before commit
+- Keep history **readable and incremental** — one logical change per commit
+- Align commits with sprint deliverables (see `tasks.md` Git Commit Plan per sprint)
+
+## Branch Safety
+
+- Never push directly to `main` or `release` branches during development
+- Use feature branches per sprint: `cursor/<sprint>-<summary>` (e.g. `cursor/3.1-server-foundation`)
+- Merge only after sprint Quality Gate passes
+
+## Secrets Hygiene
+
+- `.env` — gitignored; never committed
+- `.env.example` — committed with placeholder values only (no real credentials)
+- If a secret appears in history: remove immediately and rotate the credential

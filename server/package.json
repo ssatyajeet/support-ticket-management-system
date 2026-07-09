@@ -1,0 +1,31 @@
+{
+  "name": "support-ticket-server",
+  "version": "1.0.0",
+  "description": "Express + TypeScript + Prisma backend for the Support Ticket Management System",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed"
+  },
+  "dependencies": {
+    "@prisma/client": "7.8.0",
+    "dotenv": "17.4.2",
+    "express": "5.2.1",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "26.1.1",
+    "@types/supertest": "7.2.0",
+    "nodemon": "3.1.14",
+    "prisma": "7.8.0",
+    "supertest": "7.2.2",
+    "tsx": "4.23.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10"
+  }
+}

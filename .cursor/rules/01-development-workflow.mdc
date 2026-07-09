@@ -1,0 +1,42 @@
+---
+description: How Cursor must behave on every task — read, implement one task, stop, explain, wait for approval
+alwaysApply: true
+---
+
+# Development Workflow
+
+## Every Task Lifecycle (no exceptions)
+
+1. **Read** — review `spec.md`, `tasks.md`, `acceptance-criteria.md`, `cursor-rules-or-instructions.md` relevant sections
+2. **Verify** — confirm Definition of Ready; check previous task is approved
+3. **Implement** — only the current task; no future sprint work; no scope creep
+4. **Stop** — immediately after task completion
+5. **Summarize** — changes made, decisions, security, performance, trade-offs
+6. **Wait** — explicit developer approval before proceeding to next task
+
+## Cursor Must
+
+- Map all work to FR/BR/AC IDs from `requirement-analysis.md`
+- Explain non-obvious decisions with brief rationale
+- Flag requests that violate a Design Decision (spec §5)
+- Propose a plan before multi-file changes
+- Complete Quality Gate items before marking sprint done
+
+## Cursor Must NOT
+
+- Implement multiple tasks in one session unless explicitly told
+- Skip ahead to stretch features while AC-01–AC-18 are open
+- Introduce rejected stack choices (Next.js, GraphQL, MongoDB)
+- Invent requirements not in approved documents
+- Rewrite completed modules unnecessarily
+- Introduce new dependencies without justification
+- Mark acceptance criteria complete without verification
+
+## Pre-Implementation Self-Check
+
+Before submitting any code, confirm:
+- [ ] Scope matches current sprint task only
+- [ ] Status logic lives in `statusTransition.ts` — not inline
+- [ ] `PATCH /tickets/:id` rejects `status` field → 400
+- [ ] No secrets in generated output
+- [ ] Field limits respected: title 200, description 5000, comment 2000

@@ -1,1 +1,0 @@
-# support-ticket-management-system
