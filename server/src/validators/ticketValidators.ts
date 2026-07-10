@@ -109,3 +109,59 @@ export function parseUpdateTicketInput(body: unknown): UpdateTicketInput {
   assertNoStatusField(body);
   return updateTicketSchema.parse(body);
 }
+
+export type ListTicketsFilters = {
+  search?: string;
+  status?: Status;
+};
+
+function parseOptionalSearchParam(raw: unknown): string | undefined {
+  if (raw === undefined || raw === null || raw === '') {
+    return undefined;
+  }
+
+  const value = Array.isArray(raw) ? String(raw[0] ?? '') : String(raw);
+  const trimmed = value.trim();
+
+  return trimmed.length > 0 ? trimmed : undefined;
+}
+
+function parseOptionalStatusParam(raw: unknown): Status | undefined {
+  if (raw === undefined || raw === null || raw === '') {
+    return undefined;
+  }
+
+  const value = Array.isArray(raw) ? String(raw[0] ?? '') : String(raw);
+  const trimmed = value.trim();
+
+  if (trimmed.length === 0) {
+    return undefined;
+  }
+
+  if (!(trimmed in API_TO_PRISMA_STATUS)) {
+    throw new AppError(400, 'INVALID_FILTER', 'Invalid status filter value');
+  }
+
+  return API_TO_PRISMA_STATUS[trimmed as keyof typeof API_TO_PRISMA_STATUS];
+}
+
+export function parseListTicketsQuery(query: unknown): ListTicketsFilters {
+  if (query === null || typeof query !== 'object' || Array.isArray(query)) {
+    return {};
+  }
+
+  const record = query as Record<string, unknown>;
+  const search = parseOptionalSearchParam(record.search);
+  const status = parseOptionalStatusParam(record.status);
+  const filters: ListTicketsFilters = {};
+
+  if (search !== undefined) {
+    filters.search = search;
+  }
+
+  if (status !== undefined) {
+    filters.status = status;
+  }
+
+  return filters;
+}

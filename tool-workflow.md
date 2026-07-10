@@ -1,6 +1,6 @@
 # AI Tool Workflow — Support Ticket Management System
 
-**Document Version:** 1.3  
+**Document Version:** 1.4  
 **Last Updated:** July 10, 2026  
 **Status:** Living document — update after every major sprint  
 **Exercise:** JS AI Capability Exercise — Part A (AI Workflow Foundation)
@@ -19,7 +19,7 @@ It is being built as part of the **JS AI Capability Exercise**, which evaluates 
 
 **Target stack (approved):** React (Vite) + Express + PostgreSQL + Prisma.
 
-**Current phase:** Backend foundation complete (Sprint 3.1); API and client implementation next.
+**Current phase:** Phase 4 frontend in progress (Sprint 4.2 complete); Sprint 4.3 next.
 
 ---
 
@@ -75,7 +75,7 @@ The following were intentionally excluded from prompts:
 
 ### Prompt History
 
-`prompt-history/` is initialized. Sprint 1.1, 2.1, and 3.1 logs are complete. See `prompt-history/README.md` for the session index.
+`prompt-history/` is initialized. Sprints 1.1 through 4.2 logs are complete. See `prompt-history/README.md` for the session index.
 
 ---
 
@@ -194,9 +194,67 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 
 **Pending (future sprints):**
 
-- Comments/search/filter API (Sprint 3.4)
-- React client pages and components (Phase 4)
+- React client pages and components (Phase 4 — list complete; create/detail pending Sprint 4.3)
 - Integration tests (Sprint 5.1)
+
+### Sprint 4.2 — Ticket List, Search & Filter (Complete)
+
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| Data hook | `hooks/useTickets.ts` | Fetch, loading, error, abort, refetch |
+| Dashboard hook | `hooks/useDashboard.ts` | Status counts for tabs and dashboard |
+| List UI | `TicketCard`, `TicketList`, `TicketTable`, badges | Table + card views |
+| Filters | `SearchBar`, `StatusFilter`, `StatusTabs` | 300ms debounce; URL params |
+| Page | `TicketListPage.tsx` | `?search=` & `?status=` via React Router |
+| Errors / empty | `ErrorAlert.tsx`, empty state in `TicketList` | API messages shown to user |
+| Layout (iteration) | `layout/Sidebar.tsx`, `icons/`, `charts/` | Sidebar + dashboard; mockup-aligned UI |
+| Dashboard | `DashboardPage.tsx` | Stat cards + SVG donut chart; `/dashboard` route |
+
+**Quality Gate:** `npm run build` (client) — passed; list/search/filter/URL/empty/error verified (see `prompt-history/sprint-4.2.md`).
+
+**Iterations / corrections:**
+
+| Issue | Resolution |
+| ----- | ---------- |
+| UI looked plain after initial batch | Modern redesign pass (Inter, cards, skeletons) |
+| User shared mockup reference | Sidebar layout, icons, dashboard charts, table view |
+| Build failed — unused `cn` import in `PageHeader.tsx` | Removed import; build green at QG |
+
+### Sprint 4.1 — Client Scaffold & API Layer (Complete)
+
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| Scaffold | `client/package.json`, `vite.config.ts` | Vite + React 19 + TypeScript 6 |
+| Types | `client/src/types/*` | DTOs mirroring spec §12.3 |
+| API client | `client/src/api/client.ts` | `fetch` wrapper, `ApiError`, env-based URL |
+| Resource APIs | `users.ts`, `tickets.ts`, `comments.ts` | All spec §12 endpoints covered |
+| Routing | `App.tsx`, `Layout.tsx`, placeholder pages | React Router; spec §9.3 routes |
+| Env | `client/.env.example` | `VITE_API_URL` |
+
+**Quality Gate:** `npm run build` + CORS preflight + `GET /api/users` — all passed (see `prompt-history/sprint-4.1.md`).
+
+### Sprint 3.4 — Comments, Search & Filter (Complete)
+
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| Comments | `commentValidators.ts`, `commentService.ts`, `commentController.ts`, `commentRoutes.ts` | `POST /api/tickets/:id/comments`; append-only |
+| Search | `ticketValidators.ts`, `ticketService.ts` | `?search=` ILIKE on title + description |
+| Status filter | `ticketValidators.ts`, `ticketService.ts` | `?status=`; invalid → `INVALID_FILTER` |
+
+**Endpoints delivered (Sprint 3.4):**
+
+- `POST /api/tickets/:id/comments`
+- `GET /api/tickets` extended with `search` and `status` query params
+
+**Quality Gate:** 6 new curl cases at QG (task-level curls not re-run) + `npm run build` — all passed (see `prompt-history/sprint-3.4.md`).
+
+**Phase 3 backend API:** Complete — all spec §12.1 endpoints implemented.
 
 ### Sprint 3.3 — Status State Machine (Complete)
 
@@ -246,12 +304,15 @@ Task-by-task implementation with developer approval between each step (same patt
 
 ## Code Validation
 
-**Status: In progress** — Sprints 3.1–3.3
+**Status: In progress** — Sprints 3.1–3.4, 4.1–4.2
 
 - Task-by-task review against `spec.md` and `cursor-rules-or-instructions.md`
-- `npm run build` at sprint QG (3.1, 3.2, 3.3)
+- `npm run build` at sprint QG (server 3.1–3.4; client 4.1–4.2)
 - Sprint 3.2: curl CRUD — 11/11
 - Sprint 3.3: curl transition matrix — 13/13
+- Sprint 3.4: QG curl — 6/6 new cases (task-level curls not re-run)
+- Sprint 4.1: build + CORS + users API — passed
+- Sprint 4.2: client build — passed; list UI manual checklist
 
 ---
 
@@ -315,8 +376,12 @@ This section will be completed in Sprint 6.2 before submission.
 | **Phase 2 — Sprint 2.1** | Cursor workflow artifacts v2.0; `.gitignore`; prompt history initialized | Done |
 | **Phase 3 — Sprint 3.1** | Server foundation: Express, Prisma, migration, seed, health | Done |
 | **Phase 3 — Sprint 3.3** | Status state machine + dedicated status endpoint | Done |
-| AI workflow (this doc) | `tool-workflow.md` v1.3 | Done |
-| Prompt history | `prompt-history/sprint-3.3.md` | Done |
+| **Phase 3 — Sprint 3.4** | Comments, search, filter API — backend complete | Done |
+| **Phase 4 — Sprint 4.1** | Client scaffold, types, API layer, routing | Done |
+| **Phase 4 — Sprint 4.2** | Ticket list, search, filter UI; sidebar + dashboard | Done |
+| AI workflow (this doc) | `tool-workflow.md` v1.4 | Done |
+| Prompt history | `prompt-history/sprint-4.2.md` | Done |
+| `client/.env.example` | `VITE_API_URL` template | Done |
 | Server README section | `README.md` | Done |
 | `.gitignore` | Root `.gitignore` | Done |
 | `server/.env.example` | Placeholder env template | Done |
@@ -325,11 +390,8 @@ This section will be completed in Sprint 6.2 before submission.
 
 | Item | Notes |
 | ---- | ----- |
-| Application code (`client/`) | Client scaffold pending Sprint 4.1 |
-| Status state machine API | Done (Sprint 3.3) |
-| Comments, search, filter API | Pending Sprint 3.4 |
+| Create ticket + detail UI | Sprint 4.3 |
 | Integration tests | Pending Sprint 5.1 |
-| `client/.env.example` | Pending Sprint 6.1 |
 | `docs/testing-notes.md`, `docs/debugging-notes.md`, `docs/reflection.md` | Pending later sprints |
 
 ### Phase Summary
@@ -338,23 +400,23 @@ This section will be completed in Sprint 6.2 before submission.
 | ----- | ------ |
 | Phase 1 — Planning & Analysis | **Complete** |
 | Phase 2 — System Design | **Complete** |
-| Phase 3 — Backend Development | **In progress** — Sprints 3.1–3.3 complete; 3.4 pending |
-| Phase 4–6 — Frontend, Testing, Submission | **Not started** |
+| Phase 3 — Backend Development | **Complete** — Sprints 3.1–3.4 done |
+| Phase 4 — Frontend Development | **In progress** — Sprint 4.2 complete; 4.3 next |
 
 ---
 
 ## Next Planned Sprint
 
-**Sprint 3.4 — Comments, Search & Filter** (Phase 3 — Backend Development)
+**Sprint 4.3 — Create Ticket & Ticket Detail** (Phase 4 — Frontend Development)
 
 Per `tasks.md`, the next implementation sprint will:
 
-- Add `POST /api/tickets/:id/comments`
-- Add search (`search` query param) and status filter on `GET /api/tickets`
-- Complete backend API per spec §12
+- Add `useUsers` hook and `UserSelect` component
+- Build `TicketForm` and wire `CreateTicketPage`
+- Add `useTicket` hook and full `TicketDetailPage` with comments list
 
-Prerequisite: Sprint 3.3 Quality Gate passed.
+Prerequisite: Sprint 4.2 Quality Gate passed.
 
 ---
 
-*Update this document after every major sprint. Last updated after Sprint 3.3 Quality Gate.*
+*Update this document after every major sprint. Last updated after Sprint 4.2 Quality Gate.*

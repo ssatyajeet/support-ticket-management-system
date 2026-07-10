@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AppError } from '../middleware/errorHandler';
 import * as ticketService from '../services/ticketService';
-import { parseCreateTicketInput, parseChangeStatusInput, parseUpdateTicketInput } from '../validators/ticketValidators';
+import { parseCreateTicketInput, parseChangeStatusInput, parseListTicketsQuery, parseUpdateTicketInput } from '../validators/ticketValidators';
 
 function parseTicketId(raw: string | undefined): number {
   if (!raw) {
@@ -17,8 +17,9 @@ function parseTicketId(raw: string | undefined): number {
   return id;
 }
 
-export async function listTickets(_req: Request, res: Response): Promise<void> {
-  const tickets = await ticketService.list();
+export async function listTickets(req: Request, res: Response): Promise<void> {
+  const filters = parseListTicketsQuery(req.query);
+  const tickets = await ticketService.list(filters);
   res.status(200).json(tickets);
 }
 

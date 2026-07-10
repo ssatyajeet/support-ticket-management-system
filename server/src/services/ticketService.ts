@@ -1,7 +1,7 @@
 import { Priority, Prisma, Status } from '@prisma/client';
 import { prisma } from '../lib/prisma';
 import { AppError } from '../middleware/errorHandler';
-import { CreateTicketInput, UpdateTicketInput } from '../validators/ticketValidators';
+import { CreateTicketInput, UpdateTicketInput, ListTicketsFilters } from '../validators/ticketValidators';
 import { validateTransition } from './statusTransition';
 
 export const ticketWithUsersInclude = {
@@ -145,8 +145,22 @@ export async function create(data: CreateTicketInput): Promise<TicketSummaryDto>
   return toDto(ticket);
 }
 
-export async function list(): Promise<TicketSummaryDto[]> {
+export async function list(filters: ListTicketsFilters = {}): Promise<TicketSummaryDto[]> {
+  const where: Prisma.TicketWhereInput = {};
+
+  if (filters.search) {
+    where.OR = [
+      { title: { contains: filters.search, mode: 'insensitive' } },
+      { description: { contains: filters.search, mode: 'insensitive' } },
+    ];
+  }
+
+  if (filters.status) {
+    where.status = filters.status;
+  }
+
   const tickets = await prisma.ticket.findMany({
+    where,
     include: ticketWithUsersInclude,
     orderBy: { createdAt: 'desc' },
   });

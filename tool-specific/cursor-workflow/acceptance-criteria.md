@@ -88,7 +88,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | FND-01 | FR-C-24, AC-16 | Monorepo contains `client/` and `server/` per spec §8 | CR | In Progress |
 | FND-02 | NFR-05, AC-14 | `.gitignore` excludes `.env`, `node_modules`, build artifacts | CR | Completed |
 | FND-03 | FR-C-24, AC-14 | `server/.env.example` and `client/.env.example` exist with no real secrets | DR, CR | In Progress |
-| FND-04 | A-04, spec §6 | Client and server start independently; CORS allows `CLIENT_URL` | MT | In Progress |
+| FND-04 | A-04, spec §6 | Client and server start independently; CORS allows `CLIENT_URL` | MT | Completed |
 | FND-05 | AC-21 | Cursor workflow artifacts present (`project-context`, `spec`, `tasks`, this file, `cursor-rules`) | DR | Completed |
 
 ---
@@ -127,11 +127,11 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | TKT-01 | FR-C-01, AC-01 | User can create ticket with title, description, priority | MT | Completed |
 | TKT-02 | FR-C-02, BR-01, AC-01 | New ticket status is always **Open** | MT, IT | Completed |
 | TKT-03 | FR-C-03 | `createdBy` and `createdAt` recorded on create | MT, IT | Completed |
-| TKT-04 | FR-C-04, AC-02 | `GET /api/tickets` returns list; UI displays all tickets | MT | In Progress |
+| TKT-04 | FR-C-04, AC-02 | `GET /api/tickets` returns list; UI displays all tickets | MT | Completed |
 | TKT-05 | FR-C-05, AC-03 | Detail view shows all fields, timestamps, resolved names, comments | MT | In Progress |
 | TKT-06 | FR-C-06, AC-04 | User can update title, description, priority | MT | Completed |
 | TKT-07 | FR-C-07, BR-08, AC-05 | User can reassign ticket (`assignedTo`); null = unassigned | MT | Completed |
-| TKT-08 | OQ-07, BR-07 | Ticket can be created without assignee; UI shows "Unassigned" | MT | In Progress |
+| TKT-08 | OQ-07, BR-07 | Ticket can be created without assignee; UI shows "Unassigned" | MT | Completed |
 | TKT-09 | FR-C-08 | `updatedAt` changes on every ticket modification | MT, IT | Completed |
 | TKT-10 | OQ-05 | No ticket delete endpoint exists in v1 | CR | Completed |
 
@@ -158,12 +158,12 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| CMT-01 | FR-C-14, AC-09 | User can add comment via `POST /api/tickets/:id/comments` | MT, IT | Not Started |
-| CMT-02 | FR-C-15 | Comment stores ticketId, message, createdBy, createdAt | IT, CR | Not Started |
-| CMT-03 | OQ-04, BR-10 | Comments allowed on tickets in **all** statuses including Closed/Cancelled | MT | Not Started |
-| CMT-04 | BR-12, FR-C-16 | Comments displayed chronologically (oldest first) with author name | MT | Not Started |
-| CMT-05 | BR-11 | No comment edit or delete endpoints in v1 | CR | Not Started |
-| CMT-06 | EC-09 | Comment on non-existent ticket returns 404 | IT | Not Started |
+| CMT-01 | FR-C-14, AC-09 | User can add comment via `POST /api/tickets/:id/comments` | MT, IT | Completed |
+| CMT-02 | FR-C-15 | Comment stores ticketId, message, createdBy, createdAt | IT, CR | Completed |
+| CMT-03 | OQ-04, BR-10 | Comments allowed on tickets in **all** statuses including Closed/Cancelled | MT | Completed |
+| CMT-04 | BR-12, FR-C-16 | Comments displayed chronologically (oldest first) with author name | MT | Completed |
+| CMT-05 | BR-11 | No comment edit or delete endpoints in v1 | CR | Completed |
+| CMT-06 | EC-09 | Comment on non-existent ticket returns 404 | IT | Completed |
 
 ---
 
@@ -171,12 +171,12 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| SRC-01 | FR-C-17, OQ-03, AC-10 | Search matches title **and** description; case-insensitive partial | MT, IT | Not Started |
-| SRC-02 | OQ-03 | Empty search string returns unfiltered results | MT | Not Started |
-| SRC-03 | FR-C-18, AC-11 | Status filter returns only matching tickets | MT | Not Started |
-| SRC-04 | OQ-15, EC-22 | Invalid status filter value returns 400 | IT | Not Started |
-| SRC-05 | EC-11 | No matches returns empty list; UI shows empty state | MT | Not Started |
-| SRC-06 | A-11 | List returns all matches without pagination in v1 | MT, CR | Not Started |
+| SRC-01 | FR-C-17, OQ-03, AC-10 | Search matches title **and** description; case-insensitive partial | MT, IT | Completed |
+| SRC-02 | OQ-03 | Empty search string returns unfiltered results | MT | Completed |
+| SRC-03 | FR-C-18, AC-11 | Status filter returns only matching tickets | MT | Completed |
+| SRC-04 | OQ-15, EC-22 | Invalid status filter value returns 400 | IT | Completed |
+| SRC-05 | EC-11 | No matches returns empty list; UI shows empty state | MT | Completed |
+| SRC-06 | A-11 | List returns all matches without pagination in v1 | MT, CR | Completed |
 
 ---
 
@@ -188,7 +188,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | VAL-02 | OQ-01 | Priority must be: Low, Medium, High, Critical | IT, MT | Completed |
 | VAL-03 | OQ-10 | Title required, max 200 chars after trim | IT, MT | Completed |
 | VAL-04 | OQ-10 | Description required, max 5000 chars after trim | IT, MT | Completed |
-| VAL-05 | OQ-10 | Comment message required, max 2000 chars after trim | IT, MT | Not Started |
+| VAL-05 | OQ-10 | Comment message required, max 2000 chars after trim | IT, MT | Completed |
 | VAL-06 | EC-08 | Invalid `createdBy` or `assignedTo` user ID returns 400/404 | IT | Completed |
 | VAL-07 | EC-06, EC-07 | Empty or invalid priority on create returns 400 | IT | Completed |
 
@@ -199,7 +199,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
 | ERR-01 | spec §15 | API returns consistent `ErrorResponse` JSON (`message`, `code`, optional `details`) | IT, CR | Completed |
-| ERR-02 | NFR-04 | UI displays API error messages without requiring dev tools | MT | Not Started |
+| ERR-02 | NFR-04 | UI displays API error messages without requiring dev tools | MT | Completed |
 | ERR-03 | EC-20 | Non-existent ticket ID returns 404 | IT | Completed |
 | ERR-04 | EC-19 | Malformed JSON body returns 400 | MT | Not Started |
 | ERR-05 | EC-17 | Database unavailable — server fails gracefully with logged error | MT | Not Started |
@@ -211,14 +211,14 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| FE-01 | spec §9 | Routes: `/`, `/tickets/new`, `/tickets/:id`, 404 fallback | MT | Not Started |
-| FE-02 | spec §9 | API calls centralized in `client/src/api/` — not inline in components | CR | Not Started |
-| FE-03 | DD-10 | State via hooks + local state; no unnecessary global store | CR | Not Started |
-| FE-04 | spec §9 | Search and status filter persisted in URL query params | MT | Not Started |
+| FE-01 | spec §9 | Routes: `/`, `/tickets/new`, `/tickets/:id`, 404 fallback | MT | Completed |
+| FE-02 | spec §9 | API calls centralized in `client/src/api/` — not inline in components | CR | Completed |
+| FE-03 | DD-10 | State via hooks + local state; no unnecessary global store | CR | Completed |
+| FE-04 | spec §9 | Search and status filter persisted in URL query params | MT | Completed |
 | FE-05 | STS-10 | StatusSelector shows valid next statuses as UX hint | MT | Not Started |
 | FE-06 | NFR-04 | Form validation errors shown near relevant fields | MT | Not Started |
-| FE-07 | EC-14 | Unassigned tickets display "Unassigned" | MT | Not Started |
-| FE-08 | — | Loading and submit-disabled states during API calls | MT | Not Started |
+| FE-07 | EC-14 | Unassigned tickets display "Unassigned" | MT | Completed |
+| FE-08 | — | Loading and submit-disabled states during API calls | MT | In Progress |
 
 ---
 
@@ -227,8 +227,8 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
 | BE-01 | spec §10 | Layered architecture: routes → controllers → services → Prisma | CR | Completed |
-| BE-02 | DD-01 | REST API under `/api` prefix with correct HTTP verbs and status codes | CR, IT | In Progress |
-| BE-03 | spec §12 | All endpoints from spec §12.1 implemented and functional | MT, IT | In Progress |
+| BE-02 | DD-01 | REST API under `/api` prefix with correct HTTP verbs and status codes | CR, IT | Completed |
+| BE-03 | spec §12 | All endpoints from spec §12.1 implemented and functional | MT, IT | Completed |
 | BE-04 | BR-16 | DTO mappers populate resolved user names on list and detail | IT, CR | Completed |
 | BE-05 | BR-09 | Reassignment does not auto-change ticket status | MT, IT | Completed |
 | BE-06 | DD-04 | General update and status change are separate code paths | CR | Completed |

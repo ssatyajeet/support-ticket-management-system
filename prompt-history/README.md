@@ -19,9 +19,9 @@ Prompts are summarized by intent (not pasted verbatim). Developer review status 
 | 3.1 — Server Foundation | [sprint-3.1.md](sprint-3.1.md) | 2026-07-09 | Verbatim (transcript) — Approved |
 | 3.2 — Users & Ticket CRUD | [sprint-3.2.md](sprint-3.2.md) | 2026-07-09 | Verbatim (transcript) — Approved |
 | 3.3 — Status State Machine | [sprint-3.3.md](sprint-3.3.md) | 2026-07-10 | Verbatim (transcript) — Approved |
-| 3.4 — Comments, Search, Filter | *(coming)* | — | Pending |
-| 4.1 — Client Scaffold | *(coming)* | — | Pending |
-| 4.2 — Ticket List | *(coming)* | — | Pending |
+| 3.4 — Comments, Search, Filter | [sprint-3.4.md](sprint-3.4.md) | 2026-07-10 | Verbatim (transcript) — Approved |
+| 4.1 — Client Scaffold | [sprint-4.1.md](sprint-4.1.md) | 2026-07-10 | Verbatim (transcript) — Approved |
+| 4.2 — Ticket List | [sprint-4.2.md](sprint-4.2.md) | 2026-07-10 | Verbatim (transcript) — Approved |
 | 4.3 — Create & Detail | *(coming)* | — | Pending |
 | 4.4 — Update Status & Comments | *(coming)* | — | Pending |
 | 5.1 — Integration Tests | *(coming)* | — | Pending |

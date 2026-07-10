@@ -76,7 +76,42 @@ Internal full-stack ticket management app (React + Express + PostgreSQL). See `d
 
 ## Client setup
 
-_Pending — Sprint 4.1._
+1. **Install dependencies**
+
+   ```bash
+   cd client
+   npm install
+   ```
+
+2. **Configure environment**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Required variable in `client/.env`:
+
+   | Variable | Purpose |
+   | -------- | ------- |
+   | `VITE_API_URL` | Backend API base URL including `/api` suffix (e.g. `http://localhost:3001/api`) |
+
+   `VITE_API_URL` must match your server `PORT` (see server setup above).
+
+3. **Start the client**
+
+   ```bash
+   npm run dev
+   ```
+
+   Opens at `http://localhost:5173` by default.
+
+## Client scripts
+
+| Command | Description |
+| ------- | ----------- |
+| `npm run dev` | Start Vite dev server |
+| `npm run build` | Type-check and production build |
+| `npm run preview` | Preview production build |
 
 ## License
 

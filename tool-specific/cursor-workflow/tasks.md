@@ -1180,7 +1180,7 @@ feat(api): add PATCH /tickets/:id/status endpoint
 
 ### Sprint 3.4 — Comments, Search & Filter
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Sprint goal:** Complete backend API.  
 **Estimated effort:** 1.5–2 hours  
 **Traceability:** CMT-01–06, SRC-01–06, FR-C-14–18, BR-10–12, AC-09–11
@@ -1195,7 +1195,7 @@ feat(api): add PATCH /tickets/:id/status endpoint
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | CMT-01–05, BR-10–12 |
 
 **Objective:** `POST /api/tickets/:id/comments`; append-only.
@@ -1212,7 +1212,7 @@ feat(api): add PATCH /tickets/:id/status endpoint
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | SRC-01–02, FR-C-17, OQ-03 |
 
 **Objective:** `search` query param — title + description, case-insensitive partial.
@@ -1229,7 +1229,7 @@ feat(api): add PATCH /tickets/:id/status endpoint
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | SRC-03–04, FR-C-18, OQ-15 |
 
 **Objective:** `status` query param; 400 on invalid value.
@@ -1242,9 +1242,46 @@ feat(api): add PATCH /tickets/:id/status endpoint
 
 ---
 
+#### Testing — Sprint 3.4
+
+Task-level curl (3.4.1–3.4.3) — verified during implementation:
+
+- [x] curl: `POST /api/tickets/:id/comments` → 201; 404 missing ticket
+- [x] curl: `GET /api/tickets/:id` includes new comment
+- [x] curl: `?search=` title + description ILIKE; empty ignored
+- [x] curl: `?status=` filter + `INVALID_FILTER` on invalid value
+- [x] curl: combined `?search=&status=`
+
+QG-only curl (not re-run from task smoke tests):
+
+- [x] curl: comment on **Closed** ticket → 201 (CMT-03)
+- [x] curl: empty comment message → 400 `VALIDATION_ERROR` (VAL-05)
+- [x] curl: invalid `createdBy` on comment → 404
+- [x] curl: `PATCH`/`DELETE` on comments → 404 (CMT-05)
+- [x] curl: `?search=zzzznomatchxyz` → `[]` (SRC-05 API)
+- [x] `npm run build` passes
+
+#### Documentation Sync — Sprint 3.4
+
+- [x] `prompt-history/sprint-3.4.md` created
+- [x] `acceptance-criteria.md` — CMT-01–06, SRC-01–06, VAL-05, BE-02–03 updated
+- [x] `tasks.md` — sprint status and Progress Tracker updated
+- [x] `tool-workflow.md` — Code Generation Sprint 3.4 section
+
 #### Quality Gate — Sprint 3.4
 
-Enhanced template + all spec §12 endpoints functional.
+Apply **Enhanced Quality Gate Template** plus comments/search/filter traceability.
+
+- [x] **Requirements:** FR-C-14–18, BR-10–12, OQ-03–04, OQ-15 verified
+- [x] **Acceptance criteria:** CMT-01–06, SRC-01–06 updated (UI portions of SRC-05/CMT-04 deferred to Phase 4)
+- [x] **Engineering standards:** Thin controllers; search/filter in validators + service
+- [x] **Architecture compliance:** All spec §12.1 endpoints implemented
+- [x] **Security review:** Zod validation; no secrets; append-only comments
+- [x] **Performance review:** Single `findMany` with `include`; ILIKE acceptable for v1 dataset
+- [x] **API consistency:** `CommentDto` matches spec; `INVALID_FILTER` on bad status
+- [x] **Tests:** Task-level curl + 6 QG-only curl cases — all passing
+- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/` updated
+- [x] **Developer review:** Tasks 3.4.1–3.4.3 approved
 
 **Rollback Rule:** Backend must be complete before Phase 4.
 
@@ -1257,62 +1294,111 @@ feat(api): add ticket search and status filter
 
 #### Sprint Exit Criteria
 
-- [ ] All API endpoints implemented; FR-C API support complete
+- [x] All API endpoints implemented; FR-C API support complete
 
 ---
 
 ## Phase 4 — Frontend Development
 
 **Phase goal:** React UI with full error handling.  
-**Phase status:** [ ] Not started
+**Phase status:** [x] In progress
 
 ### Sprint 4.1 — Client Scaffold & API Layer
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Estimated effort:** 1.5–2 hours  
 **Traceability:** FE-01–03, FND-04, AC-02 (partial)
 
 #### Prerequisites
 
-- [ ] Sprint 3.4 complete
+- [x] Sprint 3.4 complete
 
 | Task ID | Objective (summary) | Key files | Status |
 | ------- | ------------------- | --------- | ------ |
-| **4.1.1** | Init Vite + React + TS | `client/package.json`, `vite.config.ts` | [ ] |
-| **4.1.2** | Shared TypeScript DTOs | `client/src/types/*` | [ ] |
-| **4.1.3** | API client base + error parsing | `client/src/api/client.ts` | [ ] |
-| **4.1.4** | Resource API modules | `api/tickets.ts`, `users.ts`, `comments.ts` | [ ] |
-| **4.1.5** | Layout + React Router | `Layout.tsx`, `App.tsx`, routes | [ ] |
-| **4.1.6** | `client/.env.example` | `VITE_API_URL` | [ ] |
+| **4.1.1** | Init Vite + React + TS | `client/package.json`, `vite.config.ts` | [x] |
+| **4.1.2** | Shared TypeScript DTOs | `client/src/types/*` | [x] |
+| **4.1.3** | API client base + error parsing | `client/src/api/client.ts` | [x] |
+| **4.1.4** | Resource API modules | `api/tickets.ts`, `users.ts`, `comments.ts` | [x] |
+| **4.1.5** | Layout + React Router | `Layout.tsx`, `App.tsx`, routes | [x] |
+| **4.1.6** | `client/.env.example` | `VITE_API_URL` | [x] |
 
 *Each task: full Developer Review checkpoint per Standard Workflow.*
 
+#### Testing — Sprint 4.1
+
+- [x] `npm run build` passes (client)
+- [x] `GET /api/users` → 200 (3 seeded users)
+- [x] CORS preflight `OPTIONS` from `http://localhost:5173` → 204 + `Access-Control-Allow-Origin`
+- [x] Routes configured: `/`, `/tickets/new`, `/tickets/:id`, `*` (404)
+- [x] No inline `fetch` in pages/components — only `client/src/api/client.ts` (FE-02)
+
+#### Documentation Sync — Sprint 4.1
+
+- [x] `prompt-history/sprint-4.1.md` created
+- [x] `acceptance-criteria.md` — FE-01–03, FND-04 updated
+- [x] `tasks.md` — sprint status and Progress Tracker updated
+- [x] `tool-workflow.md` — Code Generation Sprint 4.1 section
+- [x] `README.md` — client setup section added
+
 #### Quality Gate — Sprint 4.1
 
-Enhanced template + spec §9 structure; CORS smoke test.
+Apply **Enhanced Quality Gate Template** plus client scaffold traceability.
+
+- [x] **Requirements:** FE-01–03, FND-04, spec §9 structure verified
+- [x] **Acceptance criteria:** FE-01–03, FND-04 updated (full UI flows deferred to Sprints 4.2–4.4)
+- [x] **Engineering standards:** API layer in `client/src/api/`; types in `client/src/types/`
+- [x] **Architecture compliance:** spec §9 routes, modules, `VITE_API_URL` env pattern
+- [x] **Security review:** No secrets in repo; `client/.env.example` only; API URL from env
+- [x] **API consistency:** Client DTOs mirror spec §12.3; resource modules match endpoints
+- [x] **Tests:** build + CORS + users API smoke — all passing
+- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/`, `README.md` updated
+- [x] **Developer review:** Tasks 4.1.1–4.1.6 approved
+
+**Rollback Rule:** Fix client scaffold before Sprint 4.2.
 
 #### Sprint Exit Criteria
 
-- [ ] Client runs; fetches users; routes work
+- [x] Client runs; fetches users; routes work
 
 ---
 
 ### Sprint 4.2 — Ticket List, Search & Filter
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Traceability:** FE-04, FE-07–08, TKT-04, SRC-*, AC-02, AC-10–11
+
+#### Prerequisites
+
+- [x] Sprint 4.1 complete
 
 | Task ID | Objective | Key files | Status |
 | ------- | --------- | --------- | ------ |
-| **4.2.1** | `useTickets` hook | `hooks/useTickets.ts` | [ ] |
-| **4.2.2** | List components (Card, List, Badges) | `components/tickets/*` | [ ] |
-| **4.2.3** | SearchBar + StatusFilter | `components/tickets/*` | [ ] |
-| **4.2.4** | TicketListPage + URL params | `pages/TicketListPage.tsx` | [ ] |
-| **4.2.5** | Empty state + ErrorAlert | `components/common/ErrorAlert.tsx` | [ ] |
+| **4.2.1** | `useTickets` hook | `hooks/useTickets.ts` | [x] |
+| **4.2.2** | List components (Card, List, Badges) | `components/tickets/*` | [x] |
+| **4.2.3** | SearchBar + StatusFilter | `components/tickets/*` | [x] |
+| **4.2.4** | TicketListPage + URL params | `pages/TicketListPage.tsx` | [x] |
+| **4.2.5** | Empty state + ErrorAlert | `components/common/ErrorAlert.tsx` | [x] |
+
+#### Quality Gate — Sprint 4.2
+
+Apply **Enhanced Quality Gate Template** plus ticket list UI traceability.
+
+- [x] **Requirements:** TKT-04, SRC-01–06, FE-04, FE-07, ERR-02 verified in UI
+- [x] **Acceptance criteria:** TKT-04, TKT-08 (UI), FE-04, FE-07, ERR-02 updated; FE-08 partial (list loading; submit states in 4.3+)
+- [x] **Engineering standards:** `useTickets` hook owns fetch/loading/error; no inline `fetch` in components
+- [x] **Architecture compliance:** URL `?search=` and `?status=` per spec §9; API via `client/src/api/tickets.ts`
+- [x] **Security review:** User content rendered as text; no `dangerouslySetInnerHTML`; API URL from env
+- [x] **Performance review:** 300ms search debounce; `AbortController` on filter changes
+- [x] **API consistency:** `ErrorAlert` displays `ApiError.message` from server
+- [x] **Tests:** `npm run build` (client) — passed; manual checklist — list, search, filter, URL params, empty/error states
+- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/sprint-4.2.md` updated
+- [x] **Developer review:** Tasks 4.2.1–4.2.5 approved; UI layout iteration approved
+
+**Rollback Rule:** Fix list/search/filter UI before Sprint 4.3.
 
 #### Sprint Exit Criteria
 
-- [ ] List, search, filter E2E; AC-02, AC-10–11 manual pass
+- [x] List, search, filter E2E; AC-02, AC-10–11 manual pass
 
 ---
 
@@ -1520,9 +1606,9 @@ Enhanced template + spec §9 structure; CORS smoke test.
 | 3 | 3.1 Server Foundation | [x] Complete | 2026-07-09 | Tasks 3.1.1–3.1.10; Quality Gate passed |
 | 3 | 3.2 Users & Ticket CRUD | [x] Complete | 2026-07-09 | Tasks 3.2.1–3.2.6; curl QG passed |
 | 3 | 3.3 Status State Machine | [x] Complete | 2026-07-10 | Tasks 3.3.1–3.3.3; curl QG passed |
-| 3 | 3.4 Comments Search Filter | [ ] Not started | | |
-| 4 | 4.1 Client Scaffold | [ ] Not started | | |
-| 4 | 4.2 Ticket List | [ ] Not started | | |
+| 3 | 3.4 Comments Search Filter | [x] Complete | 2026-07-10 | Tasks 3.4.1–3.4.3; QG 6 new curl + build |
+| 4 | 4.1 Client Scaffold | [x] Complete | 2026-07-10 | Tasks 4.1.1–4.1.6; build + CORS QG |
+| 4 | 4.2 Ticket List | [x] Complete | 2026-07-10 | Tasks 4.2.1–4.2.5; build + list UI QG |
 | 4 | 4.3 Create & Detail | [ ] Not started | | |
 | 4 | 4.4 Update Status Comments | [ ] Not started | | |
 | 5 | 5.1 Integration Tests | [ ] Not started | | |
