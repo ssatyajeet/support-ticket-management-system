@@ -14,16 +14,36 @@ alwaysApply: true
 - **Centralized error handling** — `errorHandler` middleware; consistent `ErrorResponse` shape
 - **Prisma singleton** — instantiate only in `lib/prisma.ts`
 
-## API Contract (non-negotiable)
+## API Contract Standards (All Endpoints)
 
-| Method | Endpoint | Enforcement |
-| ------ | -------- | ----------- |
+Every resource API must follow these strict structural patterns:
+
+### 1. Unified State & Status Modifications
+- **No Inline Status Edits:** State modifications (like changing a status field) must never be bundled inside a generic resource update.
+- **Generic updates (`PATCH /api/:resource/:id`)** must explicitly reject incoming `status` fields with a `400 STATUS_NOT_ALLOWED_HERE` error.
+- **Dedicated State Endpoints:** Any status or state transition requires a dedicated sub-resource endpoint (`PATCH /api/:resource/:id/status`). This endpoint must run validation rules and return `400 INVALID_STATUS_TRANSITION` on failure.
+
+### 2. Standard Query & Filtering Design
+- **Text Search:** `GET /api/:resource` lists with a `search` query must perform case-insensitive substring matching (`ILIKE`) across key text columns (e.g., title, description).
+- **Validation:** Passing invalid filter keys or unsupported enum values to listing endpoints must immediately return a `400 INVALID_FILTER` error.
+
+### 3. Creation & Audit Compliance
+- **Auto-Initialization:** `POST /api/:resource` requests must automatically initialize state fields to their default starting value on the server side.
+- **Ownership Verification:** Resources that track authorship or ownership must require a valid user ID string passed in the `createdBy` payload field.
+
+---
+
+## Reference Implementation: Tickets Feature API
+
+| Method | Endpoint | Specific Enforcement Pattern |
+| ------ | -------- | --------------------------- |
 | GET | `/api/tickets` | `search` = title+desc ILIKE; invalid `status` filter → 400 |
 | POST | `/api/tickets` | Status auto-set to Open; `createdBy` required valid user ID |
 | PATCH | `/api/tickets/:id` | **Reject `status` field → 400 `STATUS_NOT_ALLOWED_HERE`** |
-| PATCH | `/api/tickets/:id/status` | Validate transition; 400 `INVALID_STATUS_TRANSITION` on failure |
-| GET | `/api/tickets/:id` | Returns `createdByName`, `assignedToName`, `comments[]` ASC |
-| POST | `/api/tickets/:id/comments` | Ticket must exist; `createdBy` required valid user ID |
+| PATCH | `/api/tickets/:id/status` | Validate transition via `statusTransition.ts`; 400 on failure |
+| GET | `/api/tickets/:id` | Returns populated relation names: `createdByName`, `assignedToName`, `comments[]` ASC |
+| POST | `/api/tickets/:id/comments` | Parent ticket validation; `createdBy` required valid user ID |
+
 
 ## Database
 

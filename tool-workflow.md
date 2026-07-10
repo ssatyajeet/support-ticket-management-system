@@ -1,7 +1,7 @@
 # AI Tool Workflow — Support Ticket Management System
 
-**Document Version:** 1.1  
-**Last Updated:** July 9, 2026  
+**Document Version:** 1.3  
+**Last Updated:** July 10, 2026  
 **Status:** Living document — update after every major sprint  
 **Exercise:** JS AI Capability Exercise — Part A (AI Workflow Foundation)
 
@@ -159,7 +159,7 @@ Through Ask-mode review, the developer evaluated **Next.js vs React + Express** 
 
 ## Code Generation
 
-**Status: In progress** — Sprint 3.1 server foundation complete.
+**Status: In progress** — Sprints 3.1–3.3 complete.
 
 ### Sprint 3.1 — Server Foundation & Database (Complete)
 
@@ -194,20 +194,64 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 
 **Pending (future sprints):**
 
-- API endpoints and status state machine (Sprint 3.2–3.4)
+- Comments/search/filter API (Sprint 3.4)
 - React client pages and components (Phase 4)
 - Integration tests (Sprint 5.1)
+
+### Sprint 3.3 — Status State Machine (Complete)
+
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| State machine | `statusTransition.ts` | Single source for BR-02–BR-06 |
+| Service | `ticketService.changeStatus()` | Validates against live DB state (BR-17) |
+| Validator | `parseChangeStatusInput()` | API display strings → Prisma `Status` |
+| Endpoint | `PATCH /api/tickets/:id/status` | Separate from general PATCH (DD-04) |
+
+**Quality Gate:** curl transition matrix — 13/13 passed (see `prompt-history/sprint-3.3.md`).
+
+**Developer workflow note:** `npm run build` deferred to sprint QG (not per-task).
+
+### Sprint 3.2 — Users & Ticket CRUD API (Complete)
+
+Task-by-task implementation with developer approval between each step (same pattern as 3.1).
+
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| Validators | `server/src/validators/ticketValidators.ts` | Create/update Zod schemas; `STATUS_NOT_ALLOWED_HERE` on `status` |
+| Users API | `userService.ts`, `userController.ts`, `userRoutes.ts` | `GET /api/users` read-only |
+| Ticket service | `ticketService.ts` | DTO mappers, create/list/getById/update |
+| Ticket API | `ticketController.ts`, `ticketRoutes.ts` | Full CRUD except status change |
+
+**Endpoints delivered:**
+
+- `GET /api/users`
+- `GET /api/tickets`, `POST /api/tickets`
+- `GET /api/tickets/:id`, `PATCH /api/tickets/:id`
+
+**Quality Gate:** curl verification — 11/11 tests passed (see `prompt-history/sprint-3.2.md`).
+
+**Iterations / corrections:**
+
+| Issue | Resolution |
+| ----- | ---------- |
+| TypeScript `toDto` overload | Added `toDetailDto()` helper for detail responses |
+| Express 5 `req.params.id` type | Handle `string \| string[]` in controller |
+| Windows curl JSON escaping | Used `--data-binary @file.json` for POST/PATCH bodies |
 
 ---
 
 ## Code Validation
 
-**Status: In progress** — Sprint 3.1
+**Status: In progress** — Sprints 3.1–3.3
 
-- Each task reviewed against `spec.md` and `cursor-rules-or-instructions.md` before approval
-- `npm run build` passes in `server/`
-- Manual tests: health endpoint, seed data in Prisma Studio, data persistence after restart
-- Pre-implementation self-check applied per task (no secrets, env validation, CORS restricted)
+- Task-by-task review against `spec.md` and `cursor-rules-or-instructions.md`
+- `npm run build` at sprint QG (3.1, 3.2, 3.3)
+- Sprint 3.2: curl CRUD — 11/11
+- Sprint 3.3: curl transition matrix — 13/13
 
 ---
 
@@ -270,8 +314,9 @@ This section will be completed in Sprint 6.2 before submission.
 | Engineering rules | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` | Done |
 | **Phase 2 — Sprint 2.1** | Cursor workflow artifacts v2.0; `.gitignore`; prompt history initialized | Done |
 | **Phase 3 — Sprint 3.1** | Server foundation: Express, Prisma, migration, seed, health | Done |
-| AI workflow (this doc) | `tool-workflow.md` v1.1 | Done |
-| Prompt history | `prompt-history/sprint-3.1.md` | Done |
+| **Phase 3 — Sprint 3.3** | Status state machine + dedicated status endpoint | Done |
+| AI workflow (this doc) | `tool-workflow.md` v1.3 | Done |
+| Prompt history | `prompt-history/sprint-3.3.md` | Done |
 | Server README section | `README.md` | Done |
 | `.gitignore` | Root `.gitignore` | Done |
 | `server/.env.example` | Placeholder env template | Done |
@@ -281,8 +326,7 @@ This section will be completed in Sprint 6.2 before submission.
 | Item | Notes |
 | ---- | ----- |
 | Application code (`client/`) | Client scaffold pending Sprint 4.1 |
-| Ticket CRUD API | Pending Sprint 3.2 |
-| Status state machine API | Pending Sprint 3.3 |
+| Status state machine API | Done (Sprint 3.3) |
 | Comments, search, filter API | Pending Sprint 3.4 |
 | Integration tests | Pending Sprint 5.1 |
 | `client/.env.example` | Pending Sprint 6.1 |
@@ -294,24 +338,23 @@ This section will be completed in Sprint 6.2 before submission.
 | ----- | ------ |
 | Phase 1 — Planning & Analysis | **Complete** |
 | Phase 2 — System Design | **Complete** |
-| Phase 3 — Backend Development | **In progress** — Sprint 3.1 complete; 3.2–3.4 pending |
+| Phase 3 — Backend Development | **In progress** — Sprints 3.1–3.3 complete; 3.4 pending |
 | Phase 4–6 — Frontend, Testing, Submission | **Not started** |
 
 ---
 
 ## Next Planned Sprint
 
-**Sprint 3.2 — Users & Ticket CRUD API** (Phase 3 — Backend Development)
+**Sprint 3.4 — Comments, Search & Filter** (Phase 3 — Backend Development)
 
 Per `tasks.md`, the next implementation sprint will:
 
-- Add `GET /api/users` endpoint
-- Implement ticket create, list, detail, and update (no status changes)
-- Reject `status` field on general `PATCH /api/tickets/:id` → 400
-- Add Zod validators and service layer for tickets
+- Add `POST /api/tickets/:id/comments`
+- Add search (`search` query param) and status filter on `GET /api/tickets`
+- Complete backend API per spec §12
 
-Prerequisite: Sprint 3.1 Quality Gate passed.
+Prerequisite: Sprint 3.3 Quality Gate passed.
 
 ---
 
-*Update this document after every major sprint. Last updated after Sprint 3.1 Quality Gate.*
+*Update this document after every major sprint. Last updated after Sprint 3.3 Quality Gate.*

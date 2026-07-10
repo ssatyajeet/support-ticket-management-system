@@ -2,6 +2,8 @@ import express, { NextFunction, Request, Response } from 'express';
 import { env } from './config/env';
 import { asyncHandler } from './middleware/asyncHandler';
 import { errorHandler } from './middleware/errorHandler';
+import userRoutes from './routes/userRoutes';
+import ticketRoutes from './routes/ticketRoutes';
 
 const app = express();
 
@@ -20,6 +22,9 @@ function corsMiddleware(req: Request, res: Response, next: NextFunction): void {
 
 app.use(corsMiddleware);
 app.use(express.json());
+
+app.use('/api/users', userRoutes);
+app.use('/api/tickets', ticketRoutes);
 
 app.get(
   '/api/health',

@@ -883,7 +883,7 @@ chore(server): add env example and readme server section
 
 ### Sprint 3.2 — Users & Ticket CRUD API
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Sprint goal:** Users list + ticket create, list, detail, update (no status).  
 **Estimated effort:** 2–3 hours  
 **Traceability:** FR-C-01–08, FR-C-19, BR-15–16, USR-01–04, TKT-01–10, AC-01, AC-04–05, AC-13
@@ -898,7 +898,7 @@ chore(server): add env example and readme server section
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | VAL-01–07, OQ-10 |
 
 **Objective:** Request validation schemas for POST/PATCH ticket.
@@ -919,7 +919,7 @@ chore(server): add env example and readme server section
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | USR-01–02, FR-C-19 |
 
 **Objective:** Read-only user list endpoint.
@@ -940,7 +940,7 @@ chore(server): add env example and readme server section
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | USR-04, BR-16 |
 
 **Objective:** `toDto()` with `createdByName`, `assignedToName`.
@@ -961,7 +961,7 @@ chore(server): add env example and readme server section
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | TKT-01–04, BR-01, FR-C-01–04 |
 
 **Objective:** `POST /api/tickets`, `GET /api/tickets` (no search/filter yet).
@@ -982,7 +982,7 @@ chore(server): add env example and readme server section
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | TKT-05, FR-C-05, AC-03 |
 
 **Objective:** `GET /api/tickets/:id` with comments ascending.
@@ -1001,7 +1001,7 @@ chore(server): add env example and readme server section
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | TKT-06–09, BR-15, STS-06, FR-C-06–08 |
 
 **Objective:** `PATCH /api/tickets/:id` for title, description, priority, assignedTo only.
@@ -1018,15 +1018,34 @@ chore(server): add env example and readme server section
 
 #### Testing — Sprint 3.2
 
-- [ ] Manual: users, create, list, detail, update, status-on-patch → 400, validation errors
+- [x] curl: `GET /api/users` → 200
+- [x] curl: `POST /api/tickets` create, list, detail, update
+- [x] curl: `PATCH` with `status` → 400 `STATUS_NOT_ALLOWED_HERE`
+- [x] curl: validation errors (`POST` no title → 400; bad user → 404)
+- [x] curl: `GET /api/tickets/99999` → 404
+- [x] `npm run build` passes
 
 #### Documentation Sync — Sprint 3.2
 
-- [ ] `prompt-history/`, `acceptance-criteria.md` (USR-*, TKT-*), `tasks.md`
+- [x] `prompt-history/sprint-3.2.md` created
+- [x] `acceptance-criteria.md` — USR-*, TKT-*, VAL-*, BE-*, STS-06, ERR-* updated
+- [x] `tasks.md` — sprint status and Progress Tracker updated
+- [x] `tool-workflow.md` — Code Generation Sprint 3.2 section
 
 #### Quality Gate — Sprint 3.2
 
-Enhanced template + FR-C-01–08, BR-15–16, AC-01, AC-04–05, AC-13.
+Apply **Enhanced Quality Gate Template** plus FR-C-01–08, BR-15–16, AC-01, AC-04–05, AC-13.
+
+- [x] **Requirements:** FR-C-01–08, FR-C-19, BR-15–16 verified
+- [x] **Acceptance criteria:** Sprint 3.2 IDs updated in `acceptance-criteria.md`
+- [x] **Engineering standards:** `cursor-rules-or-instructions.md` followed
+- [x] **Architecture compliance:** Layered routes/controllers/services; spec §12 contracts
+- [x] **Security review:** Zod validation; no secrets; CORS restricted
+- [x] **Performance review:** Prisma `include` for users/comments — no N+1 in mappers
+- [x] **API consistency:** ErrorResponse shape; correct status codes
+- [x] **Tests:** curl CRUD checklist — 11/11 passing (see `prompt-history/sprint-3.2.md`)
+- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/` updated
+- [x] **Developer review:** Tasks 3.2.1–3.2.6 approved
 
 **Rollback Rule:** Do not start 3.3 until CRUD verified.
 
@@ -1041,20 +1060,20 @@ feat(api): add ticket update with status field rejection
 
 #### Sprint Exit Criteria
 
-- [ ] Tasks 3.2.1–3.2.6 approved; CRUD works except status change
+- [x] Tasks 3.2.1–3.2.6 approved; CRUD works except status change
 
 ---
 
 ### Sprint 3.3 — Status State Machine
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Sprint goal:** `statusTransition.ts` + `PATCH /api/tickets/:id/status`  
 **Estimated effort:** 2 hours  
 **Traceability:** STS-01–09, FR-C-09–13a, BR-02–06, BR-17, AC-06–08
 
 #### Prerequisites
 
-- [ ] Sprint 3.2 complete
+- [x] Sprint 3.2 complete
 
 ---
 
@@ -1062,7 +1081,7 @@ feat(api): add ticket update with status field rejection
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | STS-07, BR-02–06 |
 
 **Objective:** `validateTransition()` and `getAllowedTransitions()` in isolated module.
@@ -1081,7 +1100,7 @@ feat(api): add ticket update with status field rejection
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | STS-09, BR-17 |
 
 **Objective:** Load current status from DB; validate; update.
@@ -1100,7 +1119,7 @@ feat(api): add ticket update with status field rejection
 
 | Field | Value |
 | ----- | ----- |
-| **Status** | [ ] |
+| **Status** | [x] |
 | **Traceability** | STS-05, FR-C-12, AC-06–07 |
 
 **Objective:** `PATCH /api/tickets/:id/status` with Zod validator.
@@ -1119,11 +1138,30 @@ feat(api): add ticket update with status field rejection
 
 #### Testing — Sprint 3.3
 
-- [ ] Manual: all transition matrix cases from requirement-analysis §9.3
+- [x] curl: 5 valid transitions (requirement-analysis §9.3)
+- [x] curl: 6+ invalid transitions (skip, terminal, revert)
+- [x] curl: invalid status string → 400 `VALIDATION_ERROR`
+- [x] curl: general PATCH with `status` → 400 `STATUS_NOT_ALLOWED_HERE`
+- [x] `npm run build` passes
+
+#### Documentation Sync — Sprint 3.3
+
+- [x] `prompt-history/sprint-3.3.md` created
+- [x] `acceptance-criteria.md` — STS-01–09 updated
+- [x] `tasks.md` — sprint status and Progress Tracker updated
+- [x] `tool-workflow.md` — Code Generation Sprint 3.3 section
 
 #### Quality Gate — Sprint 3.3
 
-Enhanced template + state machine only in `statusTransition.ts`.
+Apply **Enhanced Quality Gate Template** plus state machine traceability.
+
+- [x] **Requirements:** FR-C-09–13a, BR-02–06, BR-17 verified
+- [x] **Acceptance criteria:** STS-01–09 updated (STS-10 UI deferred to Phase 4)
+- [x] **Engineering standards:** State machine only in `statusTransition.ts`
+- [x] **Architecture compliance:** Dedicated status endpoint per DD-04
+- [x] **Tests:** curl transition matrix — 13/13 passing
+- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/` updated
+- [x] **Developer review:** Tasks 3.3.1–3.3.3 approved
 
 **Rollback Rule:** Fix state machine before 3.4.
 
@@ -1136,7 +1174,7 @@ feat(api): add PATCH /tickets/:id/status endpoint
 
 #### Sprint Exit Criteria
 
-- [ ] All transition rules enforced; no status via general PATCH
+- [x] All transition rules enforced; no status via general PATCH
 
 ---
 
@@ -1149,7 +1187,7 @@ feat(api): add PATCH /tickets/:id/status endpoint
 
 #### Prerequisites
 
-- [ ] Sprint 3.3 complete
+- [x] Sprint 3.3 complete
 
 ---
 
@@ -1480,8 +1518,8 @@ Enhanced template + spec §9 structure; CORS smoke test.
 | 1 | 1.1 Requirements | [x] Complete | | requirement-analysis v1.1 |
 | 2 | 2.1 Architecture & Spec | [x] Complete | 2026-07-07 | All Tasks 2.1.1–2.1.8 done; Quality Gate passed |
 | 3 | 3.1 Server Foundation | [x] Complete | 2026-07-09 | Tasks 3.1.1–3.1.10; Quality Gate passed |
-| 3 | 3.2 Users & Ticket CRUD | [ ] Not started | | |
-| 3 | 3.3 Status State Machine | [ ] Not started | | |
+| 3 | 3.2 Users & Ticket CRUD | [x] Complete | 2026-07-09 | Tasks 3.2.1–3.2.6; curl QG passed |
+| 3 | 3.3 Status State Machine | [x] Complete | 2026-07-10 | Tasks 3.3.1–3.3.3; curl QG passed |
 | 3 | 3.4 Comments Search Filter | [ ] Not started | | |
 | 4 | 4.1 Client Scaffold | [ ] Not started | | |
 | 4 | 4.2 Ticket List | [ ] Not started | | |
