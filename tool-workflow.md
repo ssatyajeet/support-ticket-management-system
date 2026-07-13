@@ -1,7 +1,7 @@
 # AI Tool Workflow — Support Ticket Management System
 
-**Document Version:** 1.4  
-**Last Updated:** July 10, 2026  
+**Document Version:** 1.9  
+**Last Updated:** July 13, 2026  
 **Status:** Living document — update after every major sprint  
 **Exercise:** JS AI Capability Exercise — Part A (AI Workflow Foundation)
 
@@ -19,7 +19,7 @@ It is being built as part of the **JS AI Capability Exercise**, which evaluates 
 
 **Target stack (approved):** React (Vite) + Express + PostgreSQL + Prisma.
 
-**Current phase:** Phase 4 frontend in progress (Sprint 4.2 complete); Sprint 4.3 next.
+**Current phase:** Phase 6 complete — submission ready (Sprint 6.2 done).
 
 ---
 
@@ -75,7 +75,7 @@ The following were intentionally excluded from prompts:
 
 ### Prompt History
 
-`prompt-history/` is initialized. Sprints 1.1 through 4.2 logs are complete. See `prompt-history/README.md` for the session index.
+`prompt-history/` is organized. Sprints 1.1 through 5.2 logs are complete. See `prompt-history/README.md` for the session index.
 
 ---
 
@@ -151,15 +151,9 @@ AI was used to produce the full **Cursor workflow artifact set** before any appl
 - **Completed:** Permanent Cursor rules — Clean Code, SOLID, backend/frontend/DB/API/security/testing standards, AI collaboration philosophy
 - **Human review:** Approved structure aligned with assignment Part A expectations
 
-### Design Decisions Validated (Not Yet Implemented)
-
-Through Ask-mode review, the developer evaluated **Next.js vs React + Express** and confirmed the split-stack approach in `spec.md` DD-03 — no implementation change; architectural decision recorded.
-
----
-
 ## Code Generation
 
-**Status: In progress** — Sprints 3.1–3.3 complete.
+**Status: Complete** — Sprints 3.1–3.4 (backend), 4.1–4.4 (frontend), 5.1 (integration tests), 5.2 (manual QA fixes).
 
 ### Sprint 3.1 — Server Foundation & Database (Complete)
 
@@ -192,10 +186,67 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Seed command not found | Added `migrations.seed` to `prisma.config.ts` |
 | Agent migrate P1000 | Stale shell `DATABASE_URL` override; developer ran migrate manually |
 
-**Pending (future sprints):**
+### Sprint 5.2 — Manual QA & Defect Fix (Complete)
 
-- React client pages and components (Phase 4 — list complete; create/detail pending Sprint 4.3)
-- Integration tests (Sprint 5.1)
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| Manual regression | `docs/manual-regression-checklist.md` | 33 cases across sections A–K |
+| API regression script | `server/scripts/regression-521-api.mjs` | 26/26 API cases |
+| Persistence scripts | `server/scripts/persistence-522-*.mjs` | AC-12 verification |
+| Edge-case script | `server/scripts/edge-cases-523-api.mjs` | EC-04–10, 12–13, 15 |
+| Defect fix | `server/src/middleware/errorHandler.ts` | DEF-001: malformed JSON → 400 |
+| Debugging docs | `docs/debugging-notes.md` | Defect log and resolution |
+
+**Quality Gate:** 33/33 manual regression pass; DEF-001 fixed; acceptance criteria updated (see `prompt-history/sprint-5.2.md`).
+
+### Sprint 5.1 — Integration Test Suite (Complete)
+
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| App extraction | `server/src/app.ts`, `server/src/index.ts` | `createApp()` for Supertest; no `listen()` in tests |
+| Vitest setup | `server/vitest.config.ts`, `package.json` scripts | `npm run test`, `test:watch` |
+| Test harness | `server/tests/setup.ts`, `tests/helpers/db.ts` | Truncate + seed per test; Prisma disconnect in `afterAll` |
+| Integration tests | `server/tests/integration/statusTransition.integration.test.ts` | 15 scenarios: 5 valid, 6 invalid, 4 guards |
+| Testing docs | `docs/testing-notes.md` | Setup, coverage matrix, troubleshooting |
+
+**Quality Gate:** `npm run test` — **15/15 passed**; `npm run build` (server) — passed (see `prompt-history/sprint-5.1.md`).
+
+### Sprint 4.4 — Update, Status Change & Comments (Complete)
+
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| Status hints | `lib/statusTransitions.ts` | Mirrors backend state machine for UX only |
+| Status UI | `components/tickets/StatusSelector.tsx` | Valid next statuses; inline error on failure |
+| Edit mode | `TicketForm.tsx` (edit), `TicketDetailPage.tsx` | `PATCH /api/tickets/:id` |
+| Comments | `components/comments/CommentForm.tsx` | Author dropdown + message; refetch on post |
+| Loading / XSS | Detail page | Disabled during mutations; text-only render |
+
+**Quality Gate:** `npm run build` (client) — passed; edit/status/comment flows verified (see `prompt-history/sprint-4.4.md`).
+
+**Phase 4 frontend:** Complete — all core UI flows demo-ready.
+
+### Sprint 4.3 — Create Ticket & Ticket Detail (Complete)
+
+**AI-generated (reviewed and approved):**
+
+| Area | Files | Notes |
+| ---- | ----- | ----- |
+| Users hook | `hooks/useUsers.ts` | Fetch users for dropdowns |
+| User select | `components/common/UserSelect.tsx` | createdBy + assignee; optional Unassigned |
+| Ticket form | `components/tickets/TicketForm.tsx` | Client validation; API field errors |
+| Create page | `pages/CreateTicketPage.tsx` | `POST /api/tickets`; navigate to detail |
+| Ticket hook | `hooks/useTicket.ts` | Single ticket fetch; 404 detection |
+| Detail page | `pages/TicketDetailPage.tsx` | Full metadata, description, comments |
+| Comments | `components/comments/CommentList.tsx` | Chronological display; text-only render |
+| 404 state | `TicketDetailPage.tsx` | Invalid/missing ticket ID |
+
+**Quality Gate:** `npm run build` (client) — passed; create/detail/404/comments verified (see `prompt-history/sprint-4.3.md`).
 
 ### Sprint 4.2 — Ticket List, Search & Filter (Complete)
 
@@ -304,58 +355,89 @@ Task-by-task implementation with developer approval between each step (same patt
 
 ## Code Validation
 
-**Status: In progress** — Sprints 3.1–3.4, 4.1–4.2
+**Status: Complete** — Sprints 3.1–3.4, 4.1–4.4, 5.1–5.2 complete
 
 - Task-by-task review against `spec.md` and `cursor-rules-or-instructions.md`
-- `npm run build` at sprint QG (server 3.1–3.4; client 4.1–4.2)
+- `npm run build` at sprint QG (server 3.1–3.4; client 4.1–4.4)
 - Sprint 3.2: curl CRUD — 11/11
 - Sprint 3.3: curl transition matrix — 13/13
 - Sprint 3.4: QG curl — 6/6 new cases (task-level curls not re-run)
 - Sprint 4.1: build + CORS + users API — passed
 - Sprint 4.2: client build — passed; list UI manual checklist
+- Sprint 4.3: client build — passed; create/detail manual checklist
+- Sprint 4.4: client build — passed; edit/status/comment manual checklist
+- Sprint 5.1: `npm run test` — 15/15 passed; server build — passed
+- Sprint 5.2.1: manual regression — 33/33 pass (`docs/manual-regression-checklist.md`)
+- Sprint 5.2.2: persistence L1/L3 pass; secrets L4–L7 pass; L2 PG restart manual (admin)
+- Sprint 5.2.3: edge-case sampling EC-01–EC-22 — Section M in manual checklist; `edge-cases-523-api.mjs` added; EC-19 fixed (DEF-001)
+- Sprint 5.2.4: DEF-001 resolved — malformed JSON returns 400 `VALIDATION_ERROR`
 
 ---
 
 ## Testing
 
-**Status: Pending**
+**Status: Complete** — Sprint 5.1 integration suite; Sprint 5.2 manual QA complete (33/33 pass; DEF-001 fixed).
 
-This section will be completed during Sprint 5.1 onward.
+**Sprint 5.2.1 (2026-07-13):**
 
-*Placeholder for future updates:*
+- Created [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md) — 33 cases across sections A–K (AC-01–AC-11)
+- API regression: `server/scripts/regression-521-api.mjs` — 26/26 passed
+- UI-only cases verified via component code review (7 cases)
+- No defects logged; deferred edge cases to Task 5.2.3
 
-- Integration test development with AI assistance
-- How AI helped write status transition test cases
-- Test failures and fixes
-- Link to `docs/testing-notes.md`
+**Sprint 5.2.2 (2026-07-13):**
+
+- Marker ticket #184 + comment created; survived Express server restart (AC-12)
+- PostgreSQL service restart blocked without admin — manual step documented in checklist Section L
+- Secrets audit: `.env` gitignored; only `.env.example` tracked; no hardcoded credentials in source (AC-14)
+
+**Sprint 5.2.3 (2026-07-13):**
+
+- Added [`server/scripts/edge-cases-523-api.mjs`](server/scripts/edge-cases-523-api.mjs) for Tier 2 API cases (EC-04–10, 12–13, 15)
+- Documented all 22 edge cases in checklist Section M; DEF-001 fixed (EC-19 malformed JSON → 400)
+
+**Sprint 6.1 (2026-07-13):**
+
+- Completed root `README.md` — full setup, migrate, seed, run client + server, run tests (AC-16, DOC-07)
+- Verified README steps: server/client build pass; `npm run test` — 16/16; health endpoint OK
+- Updated this document (`tool-workflow.md` v1.8) — implementation sections current through Phase 5
+- Organized `prompt-history/` — session index updated; Sprints 5.1–5.2 marked approved
+
+**Next:** Submission — repository ready for exercise hand-in.
+
+**Sprint 6.2 (2026-07-13):**
+
+- `docs/reflection.md` — honest AI usage reflection (AC-23, DOC-10)
+- `docs/pr-description.md` — submission PR artifact (DOC-11)
+- Final regression: `npm run test` 16/16; API regression 26/26 (after re-seed)
+- Project Completion Checklist signed off in `tasks.md`
 
 ---
 
 ## Debugging
 
-**Status: Pending**
+**Status: Complete (Sprint 5.2.4)**
 
-This section will be completed when defects are encountered during implementation and QA.
+Defects found during manual QA documented in [`docs/debugging-notes.md`](docs/debugging-notes.md).
 
-*Placeholder for future updates:*
-
-- Issues found during manual QA (Sprint 5.2)
-- Root cause analysis
-- Link to `docs/debugging-notes.md`
+| Defect | Issue | Resolution |
+| ------ | ----- | ---------- |
+| DEF-001 | EC-19 malformed JSON → 500 | Fixed — `errorHandler` returns 400 `VALIDATION_ERROR` |
 
 ---
 
 ## Reflection
 
-**Status: Pending**
+**Status: Complete (Sprint 6.2)**
 
-This section will be completed in Sprint 6.2 before submission.
+Honest AI usage reflection in [`docs/reflection.md`](docs/reflection.md) (AC-23, DOC-10).
 
-*Placeholder for future updates:*
+**Highlights:**
 
-- What AI did well vs what required manual correction
-- Lessons for future AI-assisted projects
-- Link to `docs/reflection.md`
+- AI excelled at pattern-following implementation when spec was clear
+- Human decisions required for OQs, Prisma 7.8 adapter issues, UI iteration, DEF-001 fix
+- Prompt iteration and Quality Gates documented in `prompt-history/`
+- Submission PR artifact: [`docs/pr-description.md`](docs/pr-description.md)
 
 ---
 
@@ -379,20 +461,25 @@ This section will be completed in Sprint 6.2 before submission.
 | **Phase 3 — Sprint 3.4** | Comments, search, filter API — backend complete | Done |
 | **Phase 4 — Sprint 4.1** | Client scaffold, types, API layer, routing | Done |
 | **Phase 4 — Sprint 4.2** | Ticket list, search, filter UI; sidebar + dashboard | Done |
-| AI workflow (this doc) | `tool-workflow.md` v1.4 | Done |
-| Prompt history | `prompt-history/sprint-4.2.md` | Done |
-| `client/.env.example` | `VITE_API_URL` template | Done |
-| Server README section | `README.md` | Done |
+| **Phase 4 — Sprint 4.3** | Create ticket + detail pages; CommentList; 404 | Done |
+| **Phase 4 — Sprint 4.4** | Edit, status change, comment form; Phase 4 complete | Done |
+| **Phase 5 — Sprint 5.1** | Integration test suite; `docs/testing-notes.md` | Done |
+| **Phase 5 — Sprint 5.2** | Manual QA; `docs/debugging-notes.md`; DEF-001 fixed | Done |
+| **Phase 6 — Sprint 6.2** | Reflection, PR artifact, final regression, submission sign-off | Done |
+| `docs/reflection.md` | AC-23 honest AI reflection | Done |
+| `docs/pr-description.md` | Submission PR artifact (DOC-11) | Done |
+| AI workflow (this doc) | `tool-workflow.md` v1.8 | Done |
+| Prompt history | `prompt-history/sprint-5.2.md` | Done |
+| Root README | `README.md` — setup, run, test verified | Done |
 | `.gitignore` | Root `.gitignore` | Done |
 | `server/.env.example` | Placeholder env template | Done |
+| `client/.env.example` | `VITE_API_URL` template | Done |
 
 ### Not Yet Started
 
 | Item | Notes |
 | ---- | ----- |
-| Create ticket + detail UI | Sprint 4.3 |
-| Integration tests | Pending Sprint 5.1 |
-| `docs/testing-notes.md`, `docs/debugging-notes.md`, `docs/reflection.md` | Pending later sprints |
+| Stretch features (S.1) | Optional — not in core scope |
 
 ### Phase Summary
 
@@ -401,22 +488,18 @@ This section will be completed in Sprint 6.2 before submission.
 | Phase 1 — Planning & Analysis | **Complete** |
 | Phase 2 — System Design | **Complete** |
 | Phase 3 — Backend Development | **Complete** — Sprints 3.1–3.4 done |
-| Phase 4 — Frontend Development | **In progress** — Sprint 4.2 complete; 4.3 next |
+| Phase 4 — Frontend Development | **Complete** — Sprints 4.1–4.4 done |
+| Phase 5 — Integration Testing & QA | **Complete** — Sprints 5.1–5.2 done |
+| Phase 6 — Documentation & Submission | **Complete** — Sprints 6.1–6.2 done |
 
 ---
 
 ## Next Planned Sprint
 
-**Sprint 4.3 — Create Ticket & Ticket Detail** (Phase 4 — Frontend Development)
+**Optional — Stretch Sprint S.1** (only after core submission)
 
-Per `tasks.md`, the next implementation sprint will:
-
-- Add `useUsers` hook and `UserSelect` component
-- Build `TicketForm` and wire `CreateTicketPage`
-- Add `useTicket` hook and full `TicketDetailPage` with comments list
-
-Prerequisite: Sprint 4.2 Quality Gate passed.
+Per `tasks.md`, stretch is gated on 100% core Project Completion Checklist. Pick ≤2 items: JWT auth, RBAC, pagination, Docker Compose, or CI pipeline.
 
 ---
 
-*Update this document after every major sprint. Last updated after Sprint 4.2 Quality Gate.*
+*Update this document after every major sprint. Last updated after Sprint 6.2 Quality Gate.*

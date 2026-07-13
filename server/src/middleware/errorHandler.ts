@@ -14,6 +14,18 @@ export type ErrorResponse = {
   };
 };
 
+function isJsonParseError(err: unknown): err is SyntaxError & { status?: number; type?: string } {
+  return (
+    err instanceof SyntaxError &&
+    typeof err === 'object' &&
+    err !== null &&
+    'status' in err &&
+    (err as { status?: number }).status === 400 &&
+    'type' in err &&
+    (err as { type?: string }).type === 'entity.parse.failed'
+  );
+}
+
 export class AppError extends Error {
   readonly statusCode: number;
   readonly code: string;
@@ -53,6 +65,17 @@ export function errorHandler(
       },
     };
     res.status(err.statusCode).json(body);
+    return;
+  }
+
+  if (isJsonParseError(err)) {
+    const body: ErrorResponse = {
+      error: {
+        message: 'Invalid JSON in request body',
+        code: 'VALIDATION_ERROR',
+      },
+    };
+    res.status(400).json(body);
     return;
   }
 

@@ -5,8 +5,7 @@ AI-assisted development log for the Support Ticket Management System exercise (A
 This folder records how AI (Cursor) was used during each sprint — prompts given, iterations made,
 decisions taken by the developer, and what was accepted or changed.
 
-**Logging policy:** One file per sprint. Retroactive entries are clearly marked.
-Prompts are summarized by intent (not pasted verbatim). Developer review status recorded per session.
+**Logging policy:** One file per sprint at Quality Gate. Prompts are **verbatim** from the Cursor conversation transcript (see `.cursor/rules/prompt-history-sprint-log.mdc`). Developer review status recorded per session.
 
 ---
 
@@ -22,12 +21,12 @@ Prompts are summarized by intent (not pasted verbatim). Developer review status 
 | 3.4 — Comments, Search, Filter | [sprint-3.4.md](sprint-3.4.md) | 2026-07-10 | Verbatim (transcript) — Approved |
 | 4.1 — Client Scaffold | [sprint-4.1.md](sprint-4.1.md) | 2026-07-10 | Verbatim (transcript) — Approved |
 | 4.2 — Ticket List | [sprint-4.2.md](sprint-4.2.md) | 2026-07-10 | Verbatim (transcript) — Approved |
-| 4.3 — Create & Detail | *(coming)* | — | Pending |
-| 4.4 — Update Status & Comments | *(coming)* | — | Pending |
-| 5.1 — Integration Tests | *(coming)* | — | Pending |
-| 5.2 — Manual QA | *(coming)* | — | Pending |
-| 6.1 — README & Workflow | *(coming)* | — | Pending |
-| 6.2 — Reflection & Submit | *(coming)* | — | Pending |
+| 4.3 — Create & Detail | [sprint-4.3.md](sprint-4.3.md) | 2026-07-10 | Verbatim (transcript) — Approved |
+| 4.4 — Update Status & Comments | [sprint-4.4.md](sprint-4.4.md) | 2026-07-10 | Verbatim (transcript) — Approved |
+| 5.1 — Integration Tests | [sprint-5.1.md](sprint-5.1.md) | 2026-07-10 | Verbatim (transcript) — Approved |
+| 5.2 — Manual QA | [sprint-5.2.md](sprint-5.2.md) | 2026-07-13 | Verbatim (transcript) — Approved |
+| 6.1 — README & Workflow | [sprint-6.1.md](sprint-6.1.md) | 2026-07-13 | Verbatim (transcript) — Approved |
+| 6.2 — Reflection & Submit | [sprint-6.2.md](sprint-6.2.md) | 2026-07-13 | Verbatim (transcript) — Pending approval |
 
 ---
 

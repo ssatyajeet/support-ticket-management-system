@@ -1301,7 +1301,7 @@ feat(api): add ticket search and status filter
 ## Phase 4 — Frontend Development
 
 **Phase goal:** React UI with full error handling.  
-**Phase status:** [x] In progress
+**Phase status:** [x] Complete
 
 ### Sprint 4.1 — Client Scaffold & API Layer
 
@@ -1404,124 +1404,166 @@ Apply **Enhanced Quality Gate Template** plus ticket list UI traceability.
 
 ### Sprint 4.3 — Create Ticket & Ticket Detail
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Traceability:** TKT-01–05, CMT-04, USR-03, AC-01, AC-03
+
+#### Prerequisites
+
+- [x] Sprint 4.2 complete
 
 | Task ID | Objective | Key files | Status |
 | ------- | --------- | --------- | ------ |
-| **4.3.1** | `useUsers` + UserSelect | `hooks/useUsers.ts`, `components/common/UserSelect.tsx` | [ ] |
-| **4.3.2** | TicketForm component | `components/tickets/TicketForm.tsx` | [ ] |
-| **4.3.3** | CreateTicketPage | `pages/CreateTicketPage.tsx` | [ ] |
-| **4.3.4** | `useTicket` + TicketDetailPage | `hooks/useTicket.ts`, `pages/TicketDetailPage.tsx` | [ ] |
-| **4.3.5** | CommentList + 404 state | `components/comments/CommentList.tsx` | [ ] |
+| **4.3.1** | `useUsers` + UserSelect | `hooks/useUsers.ts`, `components/common/UserSelect.tsx` | [x] |
+| **4.3.2** | TicketForm component | `components/tickets/TicketForm.tsx` | [x] |
+| **4.3.3** | CreateTicketPage | `pages/CreateTicketPage.tsx` | [x] |
+| **4.3.4** | `useTicket` + TicketDetailPage | `hooks/useTicket.ts`, `pages/TicketDetailPage.tsx` | [x] |
+| **4.3.5** | CommentList + 404 state | `components/comments/CommentList.tsx` | [x] |
+
+#### Quality Gate — Sprint 4.3
+
+Apply **Enhanced Quality Gate Template** plus create/detail UI traceability.
+
+- [x] **Requirements:** TKT-01–05, CMT-04, USR-03 (createdBy), AC-01, AC-03 verified in UI
+- [x] **Acceptance criteria:** TKT-05, USR-03 (partial), FE-06, FE-08, ERR-06 (display) updated
+- [x] **Engineering standards:** Hooks own fetch/loading/error; API via `client/src/api/` only
+- [x] **Architecture compliance:** Create → `POST /api/tickets`; detail → `GET /api/tickets/:id`; 404 handling
+- [x] **Security review:** User content rendered as text; no `dangerouslySetInnerHTML`
+- [x] **Performance review:** `AbortController` on `useTicket` and `useUsers`
+- [x] **API consistency:** `CreateTicketInput` matches spec §12; field errors from `ApiError.details`
+- [x] **Tests:** `npm run build` (client) — passed; manual checklist — create, detail, 404, comments
+- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/sprint-4.3.md` updated
+- [x] **Developer review:** Tasks 4.3.1–4.3.5 approved
+
+**Rollback Rule:** Fix create/detail UI before Sprint 4.4.
 
 #### Sprint Exit Criteria
 
-- [ ] Create + detail work; AC-01, AC-03 manual pass
+- [x] Create + detail work; AC-01, AC-03 manual pass
 
 ---
 
 ### Sprint 4.4 — Update, Status Change & Comments
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Traceability:** TKT-06–09, STS-10, CMT-01, FE-05–06, AC-04–09
+
+#### Prerequisites
+
+- [x] Sprint 4.3 complete
 
 | Task ID | Objective | Key files | Status |
 | ------- | --------- | --------- | ------ |
-| **4.4.1** | Edit mode on detail (fields + reassign) | `TicketDetailPage.tsx` | [ ] |
-| **4.4.2** | StatusSelector + status API wire | `components/tickets/StatusSelector.tsx` | [ ] |
-| **4.4.3** | Invalid transition error display | detail page UX | [ ] |
-| **4.4.4** | CommentForm + submit | `components/comments/CommentForm.tsx` | [ ] |
-| **4.4.5** | Loading states + XSS-safe render | various | [ ] |
+| **4.4.1** | Edit mode on detail (fields + reassign) | `TicketDetailPage.tsx` | [x] |
+| **4.4.2** | StatusSelector + status API wire | `components/tickets/StatusSelector.tsx` | [x] |
+| **4.4.3** | Invalid transition error display | detail page UX | [x] |
+| **4.4.4** | CommentForm + submit | `components/comments/CommentForm.tsx` | [x] |
+| **4.4.5** | Loading states + XSS-safe render | various | [x] |
+
+#### Quality Gate — Sprint 4.4
+
+Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
+
+- [x] **Requirements:** TKT-06–09, STS-10, CMT-01, FE-05, USR-03, AC-04–09 verified in UI
+- [x] **Acceptance criteria:** STS-10, FE-05, USR-03, ERR-06 updated to Completed
+- [x] **Engineering standards:** Status hints in `statusTransitions.ts`; backend enforces transitions
+- [x] **Architecture compliance:** Edit via `PATCH /api/tickets/:id`; status via dedicated endpoint only
+- [x] **Security review:** Text-only render; no `dangerouslySetInnerHTML`; submit disabled in flight
+- [x] **Performance review:** Refetch after update/status/comment; disabled controls during mutations
+- [x] **API consistency:** Invalid transition shows `ApiError.message` near StatusSelector
+- [x] **Tests:** `npm run build` (client) — passed; manual checklist — edit, status, comment flows
+- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/sprint-4.4.md` updated
+- [x] **Developer review:** Tasks 4.4.1–4.4.5 approved
+
+**Rollback Rule:** Fix edit/status/comment UI before Phase 5.
 
 #### Sprint Exit Criteria
 
-- [ ] AC-01–AC-11 manual pass; full happy path demo-ready
+- [x] AC-01–AC-11 manual pass; full happy path demo-ready
 
 ---
 
 ## Phase 5 — Integration Testing & Quality Assurance
 
-**Phase status:** [ ] Not started
+**Phase status:** [x] Complete
 
 ### Sprint 5.1 — Integration Test Suite
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Traceability:** TST-01–07, AC-17–18, FR-C-11
 
 | Task ID | Objective | Key files | Status |
 | ------- | --------- | --------- | ------ |
-| **5.1.1** | Vitest + Supertest setup | `vitest.config.ts`, test scripts | [ ] |
-| **5.1.2** | Test DB setup/teardown | `tests/setup.ts` | [ ] |
-| **5.1.3** | Valid transition tests (5) | `statusTransition.integration.test.ts` | [ ] |
-| **5.1.4** | Invalid transition tests (≥6) | same | [ ] |
-| **5.1.5** | Guard tests (status on PATCH, filter, 404) | same | [ ] |
-| **5.1.6** | `docs/testing-notes.md` | docs | [ ] |
+| **5.1.1** | Vitest + Supertest setup | `vitest.config.ts`, test scripts | [x] |
+| **5.1.2** | Test DB setup/teardown | `tests/setup.ts` | [x] |
+| **5.1.3** | Valid transition tests (5) | `statusTransition.integration.test.ts` | [x] |
+| **5.1.4** | Invalid transition tests (≥6) | same | [x] |
+| **5.1.5** | Guard tests (status on PATCH, filter, 404) | same | [x] |
+| **5.1.6** | `docs/testing-notes.md` | docs | [x] |
 
 #### Sprint Exit Criteria
 
-- [ ] `npm run test` passes; AC-17, AC-18 satisfied
+- [x] `npm run test` passes; AC-17, AC-18 satisfied
 
 ---
 
 ### Sprint 5.2 — Manual QA & Defect Fix
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Traceability:** AC-01–AC-18, TST-09
 
 | Task ID | Objective | Status |
 | ------- | --------- | ------ |
-| **5.2.1** | Execute full manual regression script | [ ] |
-| **5.2.2** | Persistence + secrets verification (AC-12, AC-14) | [ ] |
-| **5.2.3** | Edge case sampling (EC-01–EC-22) | [ ] |
-| **5.2.4** | Log/fix defects; `docs/debugging-notes.md` | [ ] |
-| **5.2.5** | Update `acceptance-criteria.md` statuses | [ ] |
+| **5.2.1** | Execute full manual regression script | [x] |
+| **5.2.2** | Persistence + secrets verification (AC-12, AC-14) | [x] |
+| **5.2.3** | Edge case sampling (EC-01–EC-22) | [x] |
+| **5.2.4** | Log/fix defects; `docs/debugging-notes.md` | [x] |
+| **5.2.5** | Update `acceptance-criteria.md` statuses | [x] |
 
 #### Sprint Exit Criteria
 
-- [ ] AC-01–AC-18 pass; no critical open defects
+- [x] AC-01–AC-18 pass; no critical open defects
 
 ---
 
 ## Phase 6 — Documentation, Review & Submission
 
-**Phase status:** [ ] Not started
+**Phase status:** [x] Complete
 
 ### Sprint 6.1 — README & Workflow Documentation
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Traceability:** AC-15–16, DOC-07–09
 
 | Task ID | Objective | Status |
 | ------- | --------- | ------ |
-| **6.1.1** | Complete README (setup, run, test) | [ ] |
-| **6.1.2** | Verify README by fresh follow-through | [ ] |
-| **6.1.3** | Update `tool-workflow.md` implementation sections | [ ] |
-| **6.1.4** | Organize `prompt-history/` | [ ] |
-| **6.1.5** | Final workflow doc consistency review | [ ] |
+| **6.1.1** | Complete README (setup, run, test) | [x] |
+| **6.1.2** | Verify README by fresh follow-through | [x] |
+| **6.1.3** | Update `tool-workflow.md` implementation sections | [x] |
+| **6.1.4** | Organize `prompt-history/` | [x] |
+| **6.1.5** | Final workflow doc consistency review | [x] |
 
 #### Sprint Exit Criteria
 
-- [ ] README verified; assignment doc requirements met
+- [x] README verified; assignment doc requirements met
 
 ---
 
 ### Sprint 6.2 — Reflection, PR & Final Submission
 
-**Sprint status:** [ ] Not started  
+**Sprint status:** [x] Complete  
 **Traceability:** AC-23, DOC-10–11
 
 | Task ID | Objective | Status |
 | ------- | --------- | ------ |
-| **6.2.1** | `docs/reflection.md` | [ ] |
-| **6.2.2** | PR description artifact | [ ] |
-| **6.2.3** | Final regression (manual + tests) | [ ] |
-| **6.2.4** | Project Completion Checklist sign-off | [ ] |
-| **6.2.5** | Mark all sprints complete in this file | [ ] |
+| **6.2.1** | `docs/reflection.md` | [x] |
+| **6.2.2** | PR description artifact | [x] |
+| **6.2.3** | Final regression (manual + tests) | [x] |
+| **6.2.4** | Project Completion Checklist sign-off | [x] |
+| **6.2.5** | Mark all sprints complete in this file | [x] |
 
 #### Sprint Exit Criteria
 
-- [ ] Submission ready; can explain architecture and AI usage
+- [x] Submission ready; can explain architecture and AI usage
 
 ---
 
@@ -1547,49 +1589,51 @@ Apply **Enhanced Quality Gate Template** plus ticket list UI traceability.
 
 ## Application (Required)
 
-- [ ] Working frontend — all pages functional
-- [ ] Working backend API — all spec §12 endpoints
-- [ ] PostgreSQL persisting data
-- [ ] Migrations work on fresh DB
-- [ ] Seed: 3 users, tickets (all statuses), comments
-- [ ] Backend validation (Zod + lengths)
-- [ ] Error handling — API + UI
-- [ ] Search (title + description) and status filter
-- [ ] Status state machine — dedicated endpoint
-- [ ] Integration tests — AC-17, AC-18
+- [x] Working frontend — all pages functional
+- [x] Working backend API — all spec §12 endpoints
+- [x] PostgreSQL persisting data
+- [x] Migrations work on fresh DB
+- [x] Seed: 3 users, tickets (all statuses), comments
+- [x] Backend validation (Zod + lengths)
+- [x] Error handling — API + UI
+- [x] Search (title + description) and status filter
+- [x] Status state machine — dedicated endpoint
+- [x] Integration tests — AC-17, AC-18
 
 ## Configuration (Required)
 
-- [ ] `.env.example` (server + client)
+- [x] `.env.example` (server + client)
 - [x] `.gitignore` — no secrets in Git
-- [ ] No secrets in Git history
+- [x] No secrets in Git history (verified — no `.env` in git log)
 
 ## Documentation — `docs/` (Required)
 
-- [ ] `assignment.md`, `requirement-analysis.md` v1.1
-- [ ] `testing-notes.md`, `debugging-notes.md`, `reflection.md`
+- [x] `assignment.md`, `requirement-analysis.md` v1.1
+- [x] `testing-notes.md`
+- [x] `debugging-notes.md`
+- [x] `reflection.md`
 
 ## Documentation — Root & Workflow (Required)
 
-- [ ] `README.md` (AC-16)
+- [x] `README.md` (AC-16)
 - [x] `tool-workflow.md`
 - [x] All `tool-specific/cursor-workflow/*` artifacts current
 - [x] `prompt-history/` organized (AC-20)
-- [ ] PR description (AC-21)
+- [x] PR description (AC-21) — `docs/pr-description.md`
 
 ## Acceptance Criteria AC-01–AC-23
 
-- [ ] AC-01 through AC-11 — features
-- [ ] AC-12 through AC-16 — infrastructure
-- [ ] AC-17 through AC-18 — tests
-- [ ] AC-19 through AC-23 — artifacts
+- [x] AC-01 through AC-11 — features
+- [x] AC-12 through AC-16 — infrastructure
+- [x] AC-17 through AC-18 — tests
+- [x] AC-19 through AC-23 — artifacts
 
 ## Quality Bar (Required)
 
-- [ ] Runs from README alone
-- [ ] Can explain state machine and architecture
-- [ ] Clean incremental commits
-- [ ] Can explain AI vs manual work
+- [x] Runs from README alone (verified 2026-07-13 — build + test + health)
+- [x] Can explain state machine and architecture
+- [x] Clean incremental commits
+- [x] Can explain AI vs manual work
 
 ## Stretch (Optional)
 
@@ -1609,12 +1653,12 @@ Apply **Enhanced Quality Gate Template** plus ticket list UI traceability.
 | 3 | 3.4 Comments Search Filter | [x] Complete | 2026-07-10 | Tasks 3.4.1–3.4.3; QG 6 new curl + build |
 | 4 | 4.1 Client Scaffold | [x] Complete | 2026-07-10 | Tasks 4.1.1–4.1.6; build + CORS QG |
 | 4 | 4.2 Ticket List | [x] Complete | 2026-07-10 | Tasks 4.2.1–4.2.5; build + list UI QG |
-| 4 | 4.3 Create & Detail | [ ] Not started | | |
-| 4 | 4.4 Update Status Comments | [ ] Not started | | |
-| 5 | 5.1 Integration Tests | [ ] Not started | | |
-| 5 | 5.2 Manual QA | [ ] Not started | | |
-| 6 | 6.1 README & Workflow | [ ] Not started | | |
-| 6 | 6.2 Reflection & Submit | [ ] Not started | | |
+| 4 | 4.3 Create & Detail | [x] Complete | 2026-07-10 | Tasks 4.3.1–4.3.5; build + create/detail QG |
+| 4 | 4.4 Update Status Comments | [x] Complete | 2026-07-10 | Tasks 4.4.1–4.4.5; Phase 4 complete |
+| 5 | 5.1 Integration Tests | [x] Complete | 2026-07-10 | Tasks 5.1.1–5.1.6; 15/15 tests green |
+| 5 | 5.2 Manual QA | [x] Complete | 2026-07-13 | 5.2.4 DEF-001 fixed (EC-19); debugging-notes; acceptance criteria updated |
+| 6 | 6.1 README & Workflow | [x] Complete | 2026-07-13 | Tasks 6.1.1–6.1.5; README verified; tool-workflow v1.8 |
+| 6 | 6.2 Reflection & Submit | [x] Complete | 2026-07-13 | Tasks 6.2.1–6.2.5; reflection + PR artifact; final regression |
 | S | S.1 Stretch (optional) | [ ] Not started | | |
 
 ---

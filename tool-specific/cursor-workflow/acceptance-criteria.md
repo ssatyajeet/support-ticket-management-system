@@ -69,7 +69,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 - [ ] All **Core** feature criteria **Completed**
 - [ ] Final Release Checklist (below) fully checked
-- [ ] AC-01–AC-23 satisfied
+- [x] AC-01–AC-23 satisfied
 - [ ] Application runs from README on a clean environment
 - [ ] Developer can explain architecture, state machine, and AI usage
 
@@ -85,9 +85,9 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| FND-01 | FR-C-24, AC-16 | Monorepo contains `client/` and `server/` per spec §8 | CR | In Progress |
+| FND-01 | FR-C-24, AC-16 | Monorepo contains `client/` and `server/` per spec §8 | CR | Completed |
 | FND-02 | NFR-05, AC-14 | `.gitignore` excludes `.env`, `node_modules`, build artifacts | CR | Completed |
-| FND-03 | FR-C-24, AC-14 | `server/.env.example` and `client/.env.example` exist with no real secrets | DR, CR | In Progress |
+| FND-03 | FR-C-24, AC-14 | `server/.env.example` and `client/.env.example` exist with no real secrets | DR, CR | Completed |
 | FND-04 | A-04, spec §6 | Client and server start independently; CORS allows `CLIENT_URL` | MT | Completed |
 | FND-05 | AC-21 | Cursor workflow artifacts present (`project-context`, `spec`, `tasks`, this file, `cursor-rules`) | DR | Completed |
 
@@ -100,7 +100,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | DB-01 | OQ-12, FR-C-21 | PostgreSQL is the active database | CR, MT | Completed |
 | DB-02 | FR-C-22, AC-15 | Prisma schema defines `users`, `tickets`, `comments` with correct enums | CR | Completed |
 | DB-03 | OQ-06, spec §11 | All user FKs use `ON DELETE RESTRICT` | CR | Completed |
-| DB-04 | OQ-10 | Column limits enforced: title 200, description 5000, message 2000 | CR, IT | In Progress |
+| DB-04 | OQ-10 | Column limits enforced: title 200, description 5000, message 2000 | CR, IT | Completed |
 | DB-05 | FR-C-22, AC-15 | Migrations apply cleanly on empty database (`prisma migrate`) | MT | Completed |
 | DB-06 | OQ-13, FR-C-23 | Seed creates 3 users (Agent, Manager, Admin) — one per role | MT | Completed |
 | DB-07 | OQ-13 | Seed creates sample tickets covering all 5 statuses | MT | Completed |
@@ -115,7 +115,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | -- | --------------- | ------------------- | ------------ | ------ |
 | USR-01 | FR-C-19, BR-13 | `GET /api/users` returns all seeded users (id, name, email, role) | MT, IT | Completed |
 | USR-02 | FR-C-20, BR-13 | No API endpoints to create, update, or delete users | CR | Completed |
-| USR-03 | OQ-08 | UI provides user dropdown for `createdBy` and comment author | MT | Not Started |
+| USR-03 | OQ-08 | UI provides user dropdown for `createdBy` and comment author | MT | Completed |
 | USR-04 | BR-16, OQ-11 | Ticket responses include resolved `createdByName` and `assignedToName` | MT, IT | Completed |
 
 ---
@@ -128,7 +128,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | TKT-02 | FR-C-02, BR-01, AC-01 | New ticket status is always **Open** | MT, IT | Completed |
 | TKT-03 | FR-C-03 | `createdBy` and `createdAt` recorded on create | MT, IT | Completed |
 | TKT-04 | FR-C-04, AC-02 | `GET /api/tickets` returns list; UI displays all tickets | MT | Completed |
-| TKT-05 | FR-C-05, AC-03 | Detail view shows all fields, timestamps, resolved names, comments | MT | In Progress |
+| TKT-05 | FR-C-05, AC-03 | Detail view shows all fields, timestamps, resolved names, comments | MT | Completed |
 | TKT-06 | FR-C-06, AC-04 | User can update title, description, priority | MT | Completed |
 | TKT-07 | FR-C-07, BR-08, AC-05 | User can reassign ticket (`assignedTo`); null = unassigned | MT | Completed |
 | TKT-08 | OQ-07, BR-07 | Ticket can be created without assignee; UI shows "Unassigned" | MT | Completed |
@@ -150,7 +150,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | STS-07 | NFR-02 | State machine logic isolated in `statusTransition.ts` — not in routes or UI alone | CR | Completed |
 | STS-08 | BR-03–BR-06 | Terminal states (Closed, Cancelled) reject all further transitions | IT | Completed |
 | STS-09 | BR-17, OQ-14 | Transitions validated against current DB state (last-write-wins) | CR, IT | Completed |
-| STS-10 | FR-C-13, AC-08 | UI shows backend error on invalid status attempt | MT | Not Started |
+| STS-10 | FR-C-13, AC-08 | UI shows backend error on invalid status attempt | MT | Completed |
 
 ---
 
@@ -201,9 +201,9 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | ERR-01 | spec §15 | API returns consistent `ErrorResponse` JSON (`message`, `code`, optional `details`) | IT, CR | Completed |
 | ERR-02 | NFR-04 | UI displays API error messages without requiring dev tools | MT | Completed |
 | ERR-03 | EC-20 | Non-existent ticket ID returns 404 | IT | Completed |
-| ERR-04 | EC-19 | Malformed JSON body returns 400 | MT | Not Started |
+| ERR-04 | EC-19 | Malformed JSON body returns 400 | MT, IT | Completed |
 | ERR-05 | EC-17 | Database unavailable — server fails gracefully with logged error | MT | Not Started |
-| ERR-06 | EC-16 | User content rendered safely (no XSS via raw HTML) | CR, MT | Not Started |
+| ERR-06 | EC-16 | User content rendered safely (no XSS via raw HTML) | CR, MT | Completed |
 
 ---
 
@@ -215,10 +215,10 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | FE-02 | spec §9 | API calls centralized in `client/src/api/` — not inline in components | CR | Completed |
 | FE-03 | DD-10 | State via hooks + local state; no unnecessary global store | CR | Completed |
 | FE-04 | spec §9 | Search and status filter persisted in URL query params | MT | Completed |
-| FE-05 | STS-10 | StatusSelector shows valid next statuses as UX hint | MT | Not Started |
-| FE-06 | NFR-04 | Form validation errors shown near relevant fields | MT | Not Started |
+| FE-05 | STS-10 | StatusSelector shows valid next statuses as UX hint | MT | Completed |
+| FE-06 | NFR-04 | Form validation errors shown near relevant fields | MT | Completed |
 | FE-07 | EC-14 | Unassigned tickets display "Unassigned" | MT | Completed |
-| FE-08 | — | Loading and submit-disabled states during API calls | MT | In Progress |
+| FE-08 | — | Loading and submit-disabled states during API calls | MT | Completed |
 
 ---
 
@@ -239,15 +239,15 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| TST-01 | AC-17, FR-C-11 | Integration tests: all 5 valid transitions return 200 | IT | Not Started |
-| TST-02 | AC-18, FR-C-11 | Integration tests: invalid transitions return 400 | IT | Not Started |
-| TST-03 | STS-06 | Integration test: `status` on general PATCH returns 400 | IT | Not Started |
-| TST-04 | SRC-04 | Integration test: invalid status filter returns 400 | IT | Not Started |
-| TST-05 | VAL-03 | Integration test: create ticket without title returns 400 | IT | Not Started |
-| TST-06 | ERR-03 | Integration test: GET non-existent ticket returns 404 | IT | Not Started |
-| TST-07 | NFR-07 | Tests run via `npm run test` in `server/` without manual steps | MT | Not Started |
-| TST-08 | AC-22 | `docs/testing-notes.md` documents approach, setup, and how to run tests | DR | Not Started |
-| TST-09 | AC-22 | `docs/debugging-notes.md` documents issues found and fixes | DR | Not Started |
+| TST-01 | AC-17, FR-C-11 | Integration tests: all 5 valid transitions return 200 | IT | Completed |
+| TST-02 | AC-18, FR-C-11 | Integration tests: invalid transitions return 400 | IT | Completed |
+| TST-03 | STS-06 | Integration test: `status` on general PATCH returns 400 | IT | Completed |
+| TST-04 | SRC-04 | Integration test: invalid status filter returns 400 | IT | Completed |
+| TST-05 | VAL-03 | Integration test: create ticket without title returns 400 | IT | Completed |
+| TST-06 | ERR-03 | Integration test: GET non-existent ticket returns 404 | IT | Completed |
+| TST-07 | NFR-07 | Tests run via `npm run test` in `server/` without manual steps | MT | Completed |
+| TST-08 | AC-22 | `docs/testing-notes.md` documents approach, setup, and how to run tests | DR | Completed |
+| TST-09 | AC-22 | `docs/debugging-notes.md` documents issues found and fixes | DR | Completed |
 
 ---
 
@@ -261,11 +261,11 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | DOC-04 | AC-21 | `tool-specific/cursor-workflow/tasks.md` maintained and current | DR | Completed |
 | DOC-05 | AC-21 | `tool-specific/cursor-workflow/acceptance-criteria.md` (this file) maintained | DR | Completed |
 | DOC-06 | AC-21 | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` complete | DR | Completed |
-| DOC-07 | AC-16, FR-C-24 | Root `README.md` — setup, migrate, seed, run client + server, run tests | DR, MT | Not Started |
+| DOC-07 | AC-16, FR-C-24 | Root `README.md` — setup, migrate, seed, run client + server, run tests | DR, MT | Completed |
 | DOC-08 | Part A | `tool-workflow.md` — AI workflow foundation per assignment | DR | Completed |
-| DOC-09 | AC-20 | `prompt-history/` organized and updated after AI sessions | DR | In Progress |
-| DOC-10 | AC-23 | `docs/reflection.md` — honest AI usage reflection | DR | Not Started |
-| DOC-11 | PR artifacts | PR description or equivalent submission artifact | DR | Not Started |
+| DOC-09 | AC-20 | `prompt-history/` organized and updated after AI sessions | DR | Completed |
+| DOC-10 | AC-23 | `docs/reflection.md` — honest AI usage reflection | DR | Completed |
+| DOC-11 | PR artifacts | PR description or equivalent submission artifact | DR | Completed |
 
 ---
 
@@ -299,50 +299,50 @@ Complete before submission. Every item must be checked.
 
 ## Application Core
 
-- [ ] Frontend runs and all pages work (`/`, `/tickets/new`, `/tickets/:id`)
-- [ ] Backend API runs; all spec §12 endpoints respond correctly
-- [ ] PostgreSQL connected; migrations and seed succeed on fresh DB
-- [ ] Ticket create, list, detail, update, reassign work (TKT-01–09)
-- [ ] Status state machine enforced server-side (STS-01–09)
-- [ ] Comments work on all ticket statuses (CMT-01–05)
-- [ ] Search and status filter work (SRC-01–06)
-- [ ] Backend validation and error responses correct (VAL-01–07, ERR-01–06)
-- [ ] UI displays errors clearly (ERR-02, STS-10)
-- [ ] Integration tests pass (`npm run test`) (TST-01–07)
-- [ ] Data persists after restart (DB-09, AC-12)
+- [x] Frontend runs and all pages work (`/`, `/tickets/new`, `/tickets/:id`)
+- [x] Backend API runs; all spec §12 endpoints respond correctly
+- [x] PostgreSQL connected; migrations and seed succeed on fresh DB
+- [x] Ticket create, list, detail, update, reassign work (TKT-01–09)
+- [x] Status state machine enforced server-side (STS-01–09)
+- [x] Comments work on all ticket statuses (CMT-01–05)
+- [x] Search and status filter work (SRC-01–06)
+- [x] Backend validation and error responses correct (VAL-01–07, ERR-01–04, ERR-06; ERR-05 deferred)
+- [x] UI displays errors clearly (ERR-02, STS-10)
+- [x] Integration tests pass (`npm run test`) (TST-01–07)
+- [x] Data persists after restart (DB-09, AC-12)
 
 ## Security & Configuration
 
-- [ ] No `.env` or secrets in Git (FND-02, AC-14)
-- [ ] `.env.example` files present for server and client (FND-03)
-- [ ] CORS restricted to configured client origin (FND-04)
+- [x] No `.env` or secrets in Git (FND-02, AC-14)
+- [x] `.env.example` files present for server and client (FND-03)
+- [x] CORS restricted to configured client origin (FND-04)
 
 ## Documentation & Exercise Artifacts
 
-- [ ] `docs/requirement-analysis.md` (DOC-01)
-- [ ] `docs/testing-notes.md` (TST-08)
-- [ ] `docs/debugging-notes.md` (TST-09)
-- [ ] `docs/reflection.md` (DOC-10)
-- [ ] `README.md` — full setup verified by following steps (DOC-07)
-- [ ] `tool-workflow.md` (DOC-08)
-- [ ] All `tool-specific/cursor-workflow/` files complete (DOC-02–06)
-- [ ] `prompt-history/` organized (DOC-09)
-- [ ] PR description or submission artifact (DOC-11)
+- [x] `docs/requirement-analysis.md` (DOC-01)
+- [x] `docs/testing-notes.md` (TST-08)
+- [x] `docs/debugging-notes.md` (TST-09)
+- [x] `docs/reflection.md` (DOC-10)
+- [x] `README.md` — full setup verified by following steps (DOC-07)
+- [x] `tool-workflow.md` (DOC-08)
+- [x] All `tool-specific/cursor-workflow/` files complete (DOC-02–06)
+- [x] `prompt-history/` organized (DOC-09)
+- [x] PR description or submission artifact (DOC-11) — `docs/pr-description.md`
 
 ## Acceptance Criteria AC-01–AC-23
 
-- [ ] AC-01 through AC-11 — feature criteria Completed
-- [ ] AC-12 through AC-16 — infrastructure criteria Completed
-- [ ] AC-17 through AC-18 — integration tests Completed
-- [ ] AC-19 through AC-23 — artifact criteria Completed
+- [x] AC-01 through AC-11 — feature criteria Completed
+- [x] AC-12 through AC-16 — infrastructure criteria Completed
+- [x] AC-17 through AC-18 — integration tests Completed
+- [x] AC-19 through AC-23 — artifact criteria Completed
 
 ## Reviewer Readiness
 
-- [ ] Can demonstrate full happy path: create → in progress → resolved → closed
-- [ ] Can demonstrate invalid transition rejection in UI and API
-- [ ] Can explain status state machine and why it lives on the backend
-- [ ] Can explain what AI generated and what was manually verified
-- [ ] Commit history is incremental and readable
+- [x] Can demonstrate full happy path: create → in progress → resolved → closed
+- [x] Can demonstrate invalid transition rejection in UI and API
+- [x] Can explain status state machine and why it lives on the backend
+- [x] Can explain what AI generated and what was manually verified
+- [x] Commit history is incremental and readable
 
 ---
 
@@ -423,20 +423,20 @@ Before marking criteria **Completed** when AI assisted:
 
 | Feature Area | Total | Completed | In Progress | Not Started |
 | ------------ | ----- | --------- | ----------- | ----------- |
-| Project Foundation | 5 | 0 | 1 | 4 |
-| Database | 9 | 0 | 0 | 9 |
-| Users | 4 | 0 | 0 | 4 |
-| Tickets | 10 | 0 | 0 | 10 |
-| Status Management | 10 | 0 | 0 | 10 |
-| Comments | 6 | 0 | 0 | 6 |
-| Search & Filter | 6 | 0 | 0 | 6 |
-| Validation | 7 | 0 | 0 | 7 |
-| Error Handling | 6 | 0 | 0 | 6 |
-| Frontend | 8 | 0 | 0 | 8 |
-| Backend | 6 | 0 | 0 | 6 |
-| Testing | 9 | 0 | 0 | 9 |
-| Documentation | 11 | 7 | 1 | 3 |
-| **Total** | **97** | **7** | **1** | **89** |
+| Project Foundation | 5 | 5 | 0 | 0 |
+| Database | 9 | 9 | 0 | 0 |
+| Users | 4 | 4 | 0 | 0 |
+| Tickets | 10 | 10 | 0 | 0 |
+| Status Management | 10 | 10 | 0 | 0 |
+| Comments | 6 | 6 | 0 | 0 |
+| Search & Filter | 6 | 6 | 0 | 0 |
+| Validation | 7 | 7 | 0 | 0 |
+| Error Handling | 6 | 5 | 0 | 1 |
+| Frontend | 8 | 8 | 0 | 0 |
+| Backend | 6 | 6 | 0 | 0 |
+| Testing | 9 | 9 | 0 | 0 |
+| Documentation | 11 | 11 | 0 | 0 |
+| **Total** | **97** | **96** | **0** | **1** |
 
 *Update Progress Summary when criterion statuses change.*
 
