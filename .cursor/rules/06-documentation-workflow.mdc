@@ -9,7 +9,7 @@ alwaysApply: true
 
 | Document | Update trigger |
 | -------- | -------------- |
-| `tool-specific/cursor-workflow/tasks.md` | Mark task checkbox; update Sprint Progress Tracker |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Mark task checkbox; update Sprint Progress Tracker |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | Mark criterion status Completed when verified |
 | `README.md` | Update only if setup, run, or test steps change |
 | `tool-workflow.md` | Update "Pending" sections as implementation phases complete |
@@ -17,9 +17,9 @@ alwaysApply: true
 
 ## Hard Rules
 
-- Do **not** silently edit `requirement-analysis.md` — it is the approved business authority
+- Do **not** silently edit `requirements-analysis.md` — it is the approved business authority
 - Do **not** mark acceptance criteria Completed without verification
-- Do **not** leave `tasks.md` sprint checkboxes unchecked after approved work
+- Do **not** leave `implementation-plan.md` sprint checkboxes unchecked after approved work
 - Do **not** update `tool-workflow.md` with work that has not actually been done
 
 ## Acceptance Criteria Status Values

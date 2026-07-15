@@ -1,10 +1,24 @@
-# Technical Specification — Support Ticket Management System
+# Design Notes — Support Ticket Management System
 
-**Document Version:** 1.1  
-**Date:** July 7, 2026  
+**Document Version:** 1.2  
+**Date:** July 15, 2026  
 **Role:** Solution Architecture & Technical Lead  
 **Status:** Approved for Implementation  
-**Traceability:** `docs/requirement-analysis.md` (v1.1), `tool-specific/cursor-workflow/project-context.md`
+**Traceability:** `docs/requirements-analysis.md` (v1.1), `tool-specific/cursor-workflow/project-context.md`
+
+### Design sections
+
+| Section | Location in this document |
+| ------- | ------------------------- |
+| **Architecture Overview** | Three-tier diagram — frontend, backend, database |
+| **Frontend Design** | Pages, components, hooks, routing |
+| **Backend Design** | Layers, modules, state machine |
+| **Database Design** | Schema, enums, relationships, seed |
+| **Validation Strategy** | Zod + service-layer rules |
+| **Error Handling Strategy** | `ErrorResponse` shape and middleware |
+| **Testing Strategy Link** | Scope summary + links to testing docs |
+
+Supporting sections (goals, stack, API contract, traceability) follow the design sections above.
 
 ---
 
@@ -75,7 +89,7 @@ Describes architectural technology **roles** — not pinned dependency versions.
 
 ## 5. Design Decisions
 
-Technical and architectural decisions for v1. Product-level decisions (field lengths, seed data, etc.) remain in `docs/requirement-analysis.md` §16 (OQ-01–OQ-15). Cross-references noted where applicable.
+Technical and architectural decisions for v1. Product-level decisions (field lengths, seed data, etc.) remain in `docs/requirements-analysis.md` §16 (OQ-01–OQ-15). Cross-references noted where applicable.
 
 ### DD-01 — REST API over GraphQL
 
@@ -127,11 +141,13 @@ Technical and architectural decisions for v1. Product-level decisions (field len
 
 ---
 
-## 6. High-Level Architecture
+## Architecture Overview
+
+Three-tier **monorepo** — frontend (React), backend (Express), database (PostgreSQL).
 
 ### Pattern
 
-Three-tier **monorepo** with clear separation between presentation, application, and data layers.
+Clear separation between presentation, application, and data layers.
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -167,7 +183,7 @@ Three-tier **monorepo** with clear separation between presentation, application,
 
 ## 7. Risks & Trade-offs
 
-Single register of accepted architectural trade-offs and technical risks. Full business risk register: `docs/requirement-analysis.md` §13.
+Single register of accepted architectural trade-offs and technical risks. Full business risk register: `docs/requirements-analysis.md` §13.
 
 ### Trade-offs (Accepted)
 
@@ -189,7 +205,7 @@ Single register of accepted architectural trade-offs and technical risks. Full b
 | Status logic implemented only on frontend | Medium | High | `statusTransition.ts` service; mandatory integration tests (AC-17, AC-18) |
 | General PATCH accepts `status` and bypasses state machine | Medium | High | Explicit rejection in `ticketService.update`; integration test |
 | Enum mapping bugs between API and database | Medium | Medium | Single mapper layer; test all five statuses |
-| Scope creep into stretch features | Medium | High | §20 Out of Scope; sequencing in `tasks.md` |
+| Scope creep into stretch features | Medium | High | §20 Out of Scope; sequencing in `implementation-plan.md` |
 | Test database pollution between runs | Medium | Medium | Separate test `DATABASE_URL` or truncate between tests |
 | Secrets committed to Git | Low | High | `.env.example` + `.gitignore`; AC-14 |
 | Prisma/schema drift from API contracts | Low | Medium | DTO mappers; seed data as contract smoke test |
@@ -230,7 +246,7 @@ Single register of accepted architectural trade-offs and technical risks. Full b
 
 ---
 
-## 9. Frontend Specification
+## Frontend Design
 
 ### 9.1 Pages
 
@@ -292,7 +308,7 @@ Router: **React Router** (`BrowserRouter`).
 
 ---
 
-## 10. Backend Specification
+## Backend Design
 
 ### 10.1 Modules
 
@@ -375,7 +391,7 @@ Controllers: parse request → call service → map to HTTP status → send JSON
 
 ---
 
-## 11. Database Specification
+## Database Design
 
 ### 11.1 Tables
 
@@ -456,6 +472,8 @@ tickets 1───* comments (ticketId)
 ---
 
 ## 12. API Specification
+
+> **Standalone contract:** Per-endpoint Request / Response / Validation / Errors — [`api-contract.md`](api-contract.md)
 
 **Base URL:** `http://localhost:3001/api`  
 **Content-Type:** `application/json`
@@ -607,7 +625,7 @@ tickets 1───* comments (ticketId)
 
 ---
 
-## 13. Validation Rules
+## Validation Strategy
 
 Validation occurs in **Zod schemas** (request shape) and **services** (business rules). All errors return consistent `ErrorResponse`.
 
@@ -635,7 +653,7 @@ Validation occurs in **Zod schemas** (request shape) and **services** (business 
 | Ticket ID not found | 404 `NOT_FOUND` |
 | Invalid status transition | 400 `INVALID_STATUS_TRANSITION` |
 
-**Traceability:** Section 9 of requirement-analysis; OQ-10, OQ-15
+**Traceability:** Section 9 of requirements-analysis; OQ-10, OQ-15
 
 ---
 
@@ -659,7 +677,7 @@ Implementation must enforce these in the **service layer** (not UI alone).
 
 ---
 
-## 15. Error Handling Strategy
+## Error Handling Strategy
 
 ### Backend Error Pipeline
 
@@ -700,9 +718,19 @@ Request → Zod validate → Controller → Service
 
 ---
 
-## 16. Testing Scope
+## Testing Strategy Link
 
-### Mandatory (v1)
+**Detailed testing documentation:**
+
+| Document | Purpose |
+| -------- | ------- |
+| [`docs/test-strategy.md`](../../docs/test-strategy.md) | Formal strategy — scope, tiers, gaps |
+| [`docs/testing-notes.md`](../../docs/testing-notes.md) | Test stack, setup, scenarios, how to run |
+| [`docs/test-run-evidence.md`](../../docs/test-run-evidence.md) | Recorded test run output (AC-17, AC-18) |
+| [`docs/manual-regression-checklist.md`](../../docs/manual-regression-checklist.md) | Sprint 5.2 manual QA checklist |
+| [`docs/debugging-notes.md`](../../docs/debugging-notes.md) | Issues found and fixes during QA |
+
+### Scope summary (mandatory v1)
 
 | Suite | Location | Framework | Coverage |
 | ----- | -------- | --------- | -------- |
@@ -731,7 +759,7 @@ Frontend unit tests, E2E browser tests, load tests, 100% coverage targets.
 cd server && npm run test
 ```
 
-Document approach and failures in exercise testing notes.
+Document approach and failures in [`docs/testing-notes.md`](../../docs/testing-notes.md).
 
 ---
 
@@ -776,7 +804,7 @@ Document approach and failures in exercise testing notes.
 | A-07 | Last-write-wins for concurrent edits |
 | A-08 | Developer has Node.js LTS and a package manager installed |
 | A-09 | Exercise artifacts maintained alongside code |
-| A-10 | Implementation sequencing defined in `tool-specific/cursor-workflow/tasks.md` |
+| A-10 | Implementation sequencing defined in `tool-specific/cursor-workflow/implementation-plan.md` |
 
 ---
 
@@ -842,4 +870,4 @@ Document approach and failures in exercise testing notes.
 
 ---
 
-*This specification is the implementation blueprint for developers and AI assistants. Implementation sequencing is defined in `tool-specific/cursor-workflow/tasks.md`. For business rules and acceptance criteria authority, see `docs/requirement-analysis.md`. For collaboration conventions, see `tool-specific/cursor-workflow/project-context.md`.*
+*These design notes are the implementation blueprint for developers and AI assistants. Implementation sequencing: `tool-specific/cursor-workflow/implementation-plan.md`. Business rules authority: `docs/requirements-analysis.md`. Collaboration conventions: `tool-specific/cursor-workflow/project-context.md`. Full API contract: §12 API Specification in this file.*

@@ -51,6 +51,8 @@ Scaffold the React client: Vite + TypeScript, shared DTO types, centralized API 
 
 **What I accepted / changed:** Approved.
 
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
+
 **Iteration needed:** No
 
 ---
@@ -66,6 +68,8 @@ Scaffold the React client: Vite + TypeScript, shared DTO types, centralized API 
 - Created `client/src/types/*` (enums, user, comment, ticket, api)
 
 **What I accepted / changed:** Approved.
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 
 **Iteration needed:** No
 
@@ -83,6 +87,8 @@ Scaffold the React client: Vite + TypeScript, shared DTO types, centralized API 
 
 **What I accepted / changed:** Deferred UI branding.
 
+**What I rejected / why:** Rejected early UI branding/polish — functional scaffold first (proceed with 4.1.2).
+
 **Iteration needed:** No
 
 ---
@@ -98,6 +104,8 @@ Scaffold the React client: Vite + TypeScript, shared DTO types, centralized API 
 - `client/src/api/client.ts` with `ApiError`, env-based URL, error parsing
 
 **What I accepted / changed:** Approved.
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 
 **Iteration needed:** No
 
@@ -116,6 +124,8 @@ Scaffold the React client: Vite + TypeScript, shared DTO types, centralized API 
 
 **What I accepted / changed:** Approved batch.
 
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
+
 **Iteration needed:** No
 
 ---
@@ -132,6 +142,8 @@ Scaffold the React client: Vite + TypeScript, shared DTO types, centralized API 
 - Documentation sync; this sprint log
 
 **What I accepted / changed:** In progress.
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 
 **Iteration needed:** No
 
@@ -167,7 +179,7 @@ Scaffold the React client: Vite + TypeScript, shared DTO types, centralized API 
 | `client/src/App.tsx` | React Router |
 | `client/.env.example` | Created |
 | `README.md` | Client setup section |
-| `tool-specific/cursor-workflow/tasks.md` | Sprint 4.1 complete |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Sprint 4.1 complete |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | FE-01–03, FND-04 |
 | `tool-workflow.md` | Sprint 4.1 section |
 

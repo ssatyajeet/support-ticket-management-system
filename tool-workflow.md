@@ -1,7 +1,7 @@
 # AI Tool Workflow — Support Ticket Management System
 
-**Document Version:** 1.9  
-**Last Updated:** July 13, 2026  
+**Document Version:** 1.10  
+**Last Updated:** July 15, 2026  
 **Status:** Living document — update after every major sprint  
 **Exercise:** JS AI Capability Exercise — Part A (AI Workflow Foundation)
 
@@ -32,7 +32,7 @@ Cursor was selected as the primary AI tool for this project because:
 | Reason | Benefit for this project |
 | ------ | ------------------------ |
 | **IDE-integrated pair programming** | Generate and review docs/code in the same workspace |
-| **Persistent project context** | `@` references to `requirement-analysis.md`, `spec.md`, and workflow files keep AI aligned across sessions |
+| **Persistent project context** | `@` references to `requirements-analysis.md`, `design-notes.md`, and workflow files keep AI aligned across sessions |
 | **Custom rules support** | `cursor-rules-or-instructions.md` enforces architecture and engineering standards on every task |
 | **Full-lifecycle fit** | Suitable for analysis, specification, task planning, and upcoming implementation sprints |
 | **Exercise alignment** | Demonstrates visible, explainable AI-assisted engineering with artifact traceability |
@@ -50,10 +50,10 @@ Context was supplied **progressively** — each document built on the previous o
 | Document | Role in AI context |
 | -------- | ------------------ |
 | `docs/assignment.md` | Exercise rules, core vs stretch scope, mandatory deliverables |
-| `docs/requirement-analysis.md` | Business requirements, BR/FR rules, resolved OQ decisions, AC-01–AC-23 |
+| `docs/requirements-analysis.md` | Business requirements, BR/FR rules, resolved OQ decisions, AC-01–AC-23 |
 | `tool-specific/cursor-workflow/project-context.md` | Persistent architecture, stack, folder structure, collaboration rules |
-| `tool-specific/cursor-workflow/spec.md` | Technical blueprint — API, database, modules, design decisions |
-| `tool-specific/cursor-workflow/tasks.md` | Sprint order and execution roadmap |
+| `tool-specific/cursor-workflow/design-notes.md` | Technical blueprint — API, database, modules, design decisions |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Sprint order and execution roadmap |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | Definition of Done and verification checklist |
 | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` | Permanent engineering and AI behavior rules |
 
@@ -61,8 +61,8 @@ Context was supplied **progressively** — each document built on the previous o
 
 1. **Start from assignment** — first prompts referenced `docs/assignment.md` only
 2. **Layer requirements** — requirement analysis became the business authority for all later docs
-3. **Add technical specificity** — `project-context.md` and `spec.md` translated requirements into architecture
-4. **Add execution control** — `tasks.md` and `acceptance-criteria.md` constrain *when* and *how* to verify work
+3. **Add technical specificity** — `project-context.md` and `design-notes.md` translated requirements into architecture
+4. **Add execution control** — `implementation-plan.md` and `acceptance-criteria.md` constrain *when* and *how* to verify work
 5. **Add permanent rules** — `cursor-rules-or-instructions.md` governs all future implementation behavior
 
 ### Information Not Shared with Cursor
@@ -83,7 +83,7 @@ The following were intentionally excluded from prompts:
 
 ### How AI Assisted
 
-Cursor acted as a **Senior Business Analyst and Software Architect** to produce the initial `docs/requirement-analysis.md` from `docs/assignment.md`.
+Cursor acted as a **Senior Business Analyst and Software Architect** to produce the initial `docs/requirements-analysis.md` from `docs/assignment.md`.
 
 **Completed AI-assisted work:**
 
@@ -102,7 +102,7 @@ The first draft was **not** accepted blindly. The developer reviewed open questi
 | Concurrency | Last-write-wins; optimistic locking deferred |
 | Database | PostgreSQL |
 
-Cursor then updated `requirement-analysis.md` to **v1.1** with a **Design Decisions (Resolved)** section, replacing open questions with authoritative decisions.
+Cursor then updated `requirements-analysis.md` to **v1.1** with a **Design Decisions (Resolved)** section, replacing open questions with authoritative decisions.
 
 **Human review actions performed:**
 
@@ -120,9 +120,9 @@ AI was used to produce the full **Cursor workflow artifact set** before any appl
 
 - **AI role:** Senior Solution Architect
 - **Completed:** Persistent AI context document covering stack, architecture, folder structure, API principles, testing/error strategies, Definition of Done
-- **Human review:** Requested removal of version pins; addition of Design Decisions and Risks summaries aligned with `spec.md`
+- **Human review:** Requested removal of version pins; addition of Design Decisions and Risks summaries aligned with `design-notes.md`
 
-### Technical Specification (`spec.md`)
+### Technical Specification (`design-notes.md`)
 
 - **AI role:** Senior Solution Architect / Technical Lead
 - **Completed:** Implementation-ready spec — modules, frontend/backend/database/API contracts, validation, testing scope, security/performance
@@ -130,10 +130,10 @@ AI was used to produce the full **Cursor workflow artifact set** before any appl
   - Architecture over pinned dependency versions
   - New §5 Design Decisions (DD-01–DD-11) with OQ cross-refs
   - New §7 Risks & Trade-offs
-  - Removed implementation order (moved to `tasks.md`)
+  - Removed implementation order (moved to `implementation-plan.md`)
   - Renumbered sections
 
-### Sprint Planning (`tasks.md`)
+### Sprint Planning (`implementation-plan.md`)
 
 - **AI role:** Senior Engineering Manager / Agile Delivery Lead
 - **Completed:** 6-phase, 13-sprint execution roadmap with Quality Gates, deliverables, commit plans, and Project Completion Checklist
@@ -357,7 +357,7 @@ Task-by-task implementation with developer approval between each step (same patt
 
 **Status: Complete** — Sprints 3.1–3.4, 4.1–4.4, 5.1–5.2 complete
 
-- Task-by-task review against `spec.md` and `cursor-rules-or-instructions.md`
+- Task-by-task review against `design-notes.md` and `cursor-rules-or-instructions.md`
 - `npm run build` at sprint QG (server 3.1–3.4; client 4.1–4.4)
 - Sprint 3.2: curl CRUD — 11/11
 - Sprint 3.3: curl transition matrix — 13/13
@@ -371,6 +371,47 @@ Task-by-task implementation with developer approval between each step (same patt
 - Sprint 5.2.2: persistence L1/L3 pass; secrets L4–L7 pass; L2 PG restart manual (admin)
 - Sprint 5.2.3: edge-case sampling EC-01–EC-22 — Section M in manual checklist; `edge-cases-523-api.mjs` added; EC-19 fixed (DEF-001)
 - Sprint 5.2.4: DEF-001 resolved — malformed JSON returns 400 `VALIDATION_ERROR`
+
+---
+
+## Code Review
+
+**Status: Complete** — Consolidated in [`docs/code-review-notes.md`](docs/code-review-notes.md) (2026-07-15).
+
+Code review was performed throughout the project primarily as **Quality Gate verification** against `design-notes.md` and cursor rules — curl/API matrices (Sprints 3.2–3.3), client build + hook checklist (Sprint 4.2), integration tests (Sprint 5.1), and manual regression (Sprint 5.2). Supplemental targeted review of `statusTransition.ts`, `errorHandler.ts`, and `useTickets.ts` was completed before submission.
+
+**Highlights:**
+
+- State machine and `STATUS_NOT_ALLOWED_HERE` guard verified — no frontend transition enforcement
+- DEF-001 (`errorHandler` JSON parse) found in QA edge sampling; fix reviewed and approved
+- Scope suggestions rejected honestly (auth, delete, pagination, React Query, client-side state machine)
+- Retrospective + supplemental review documented with clear honesty note — not fabricated session logs
+
+See [`docs/code-review-notes.md`](docs/code-review-notes.md) for AI-assisted summary, developer observations, changes after review, and rejected suggestions.
+
+---
+
+## How This Workflow Would Be Reused
+
+**Status:** Documented in [`docs/reusable-workflow.md`](docs/reusable-workflow.md) (2026-07-15).
+
+This exercise produced a **repeatable AI-assisted lifecycle** — not a one-off ticket app. The reusable pack includes:
+
+| Component | Reuse on next project |
+| --------- | --------------------- |
+| Folder + doc skeleton | Copy `docs/reusable-workflow.md` §Folder structure |
+| Prompt templates A–H | Requirement analysis, spec, AC, tasks v2 refactor, implementation, code review, debugging, doc honesty |
+| `implementation-plan.md` v2.0 mechanics | One task per session, AI Validation Checklist, Enhanced Quality Gate, Rollback Rule |
+| `.cursor/rules/` | Adapt stack sections; keep workflow and security rules |
+| `prompt-history/` discipline | Verbatim prompts at sprint QG; accept/reject/iterate logged |
+| Information exclusions | Never share `.env` credentials or secrets (see §Information Not Shared with Cursor) |
+
+**What changes per project:** domain requirements, API/schema, sprint task list, acceptance criteria IDs.  
+**What stays constant:** progressive `@` context, planning freeze before code, developer approval gates, honest artifact logging.
+
+**Lessons baked into the template:** add task context to shallow “proceed” prompts; commit per approved task; run code review template mid-sprint.
+
+Full copy-paste prompts and adaptation checklist: [`docs/reusable-workflow.md`](docs/reusable-workflow.md).
 
 ---
 
@@ -410,7 +451,7 @@ Task-by-task implementation with developer approval between each step (same patt
 - `docs/reflection.md` — honest AI usage reflection (AC-23, DOC-10)
 - `docs/pr-description.md` — submission PR artifact (DOC-11)
 - Final regression: `npm run test` 16/16; API regression 26/26 (after re-seed)
-- Project Completion Checklist signed off in `tasks.md`
+- Project Completion Checklist signed off in `implementation-plan.md`
 
 ---
 
@@ -449,10 +490,10 @@ Honest AI usage reflection in [`docs/reflection.md`](docs/reflection.md) (AC-23,
 | --------- | ----------- | ------ |
 | Repository structure | `client/`, `server/`, `docs/`, `tool-specific/`, etc. | Done |
 | Assignment reviewed | `docs/assignment.md` | Done |
-| **Phase 1 — Sprint 1.1** | `docs/requirement-analysis.md` v1.1 | Done |
+| **Phase 1 — Sprint 1.1** | `docs/requirements-analysis.md` v1.1 | Done |
 | Project context | `tool-specific/cursor-workflow/project-context.md` | Done |
-| Technical specification | `tool-specific/cursor-workflow/spec.md` v1.1 | Done |
-| Execution roadmap | `tool-specific/cursor-workflow/tasks.md` | Done |
+| Technical specification | `tool-specific/cursor-workflow/design-notes.md` v1.1 | Done |
+| Execution roadmap | `tool-specific/cursor-workflow/implementation-plan.md` | Done |
 | Acceptance criteria | `tool-specific/cursor-workflow/acceptance-criteria.md` | Done |
 | Engineering rules | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` | Done |
 | **Phase 2 — Sprint 2.1** | Cursor workflow artifacts v2.0; `.gitignore`; prompt history initialized | Done |
@@ -498,7 +539,7 @@ Honest AI usage reflection in [`docs/reflection.md`](docs/reflection.md) (AC-23,
 
 **Optional — Stretch Sprint S.1** (only after core submission)
 
-Per `tasks.md`, stretch is gated on 100% core Project Completion Checklist. Pick ≤2 items: JWT auth, RBAC, pagination, Docker Compose, or CI pipeline.
+Per `implementation-plan.md`, stretch is gated on 100% core Project Completion Checklist. Pick ≤2 items: JWT auth, RBAC, pagination, Docker Compose, or CI pipeline.
 
 ---
 

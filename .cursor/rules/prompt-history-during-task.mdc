@@ -45,7 +45,7 @@ After completing Task 3.1.1:
 ```
 ---
 **Changes:** server/package.json created with Express, TypeScript, Prisma, Zod, Vitest dependencies.
-**Decision:** Used exact dependency list from spec.md §10 — no additional packages added.
+**Decision:** Used exact dependency list from design-notes.md §10 — no additional packages added.
 **Security:** No secrets included; DATABASE_URL will be in .env (gitignored).
 **Next:** Task 3.1.2 — TypeScript configuration.
 

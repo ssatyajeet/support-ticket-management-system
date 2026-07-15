@@ -1,12 +1,25 @@
-# Execution Playbook — Support Ticket Management System
+# Implementation Plan — Support Ticket Management System
 
-**Document Version:** 2.0  
-**Date:** July 7, 2026  
+**Document Version:** 2.1  
+**Date:** July 15, 2026  
 **Owner:** Single developer (AI-assisted)  
 **Status:** Living document — **progress updates only** after v2.0 (see Planning Freeze)  
-**Sources:** `docs/requirement-analysis.md`, `project-context.md`, `spec.md`, `acceptance-criteria.md`, `cursor-rules-or-instructions.md`
+**Sources:** `docs/requirements-analysis.md`, `project-context.md`, `design-notes.md`, `acceptance-criteria.md`, `cursor-rules-or-instructions.md`
 
 > **How to use:** Find the next incomplete **Task ID**. Implement **only that task**. Pass **Developer Review** and **Quality Gate** before proceeding. Update progress checkboxes, `acceptance-criteria.md`, and `prompt-history/` after each sprint.
+
+### Plan sections
+
+| Section | Location in this document |
+| ------- | ------------------------- |
+| **Overview** | Project objective, delivery approach, assumptions, strategy |
+| **AI Usage Plan** | How Cursor is used per task and sprint |
+| **Task Breakdown** | Phases 1–6 — atomic tasks per sprint |
+| **Milestones** | Sprint Progress Tracker |
+| **Risks** | Implementation and delivery risks |
+| **Mitigation** | Mitigation strategies per risk |
+
+Operational playbooks (workflow, Generic Cursor Prompt, Quality Gate, Git strategy) follow the plan sections and govern day-to-day execution.
 
 ---
 
@@ -16,7 +29,7 @@ Apply this workflow for **every implementation task** (Sprint 3.1 onward):
 
 | Step | Action |
 | ---- | ------ |
-| 1 | Read authoritative docs: `requirement-analysis.md`, `spec.md`, `acceptance-criteria.md`, `cursor-rules-or-instructions.md`, this playbook |
+| 1 | Read authoritative docs: `requirements-analysis.md`, `design-notes.md`, `acceptance-criteria.md`, `cursor-rules-or-instructions.md`, this playbook |
 | 2 | Identify the **next incomplete Task ID** (lowest number not marked complete) |
 | 3 | Verify **Definition of Ready** for that task |
 | 4 | Implement **ONLY** that task — no future tasks, no scope creep |
@@ -24,7 +37,7 @@ Apply this workflow for **every implementation task** (Sprint 3.1 onward):
 | 6 | Complete **AI Validation Checklist** |
 | 7 | **Stop.** Summarize changes, decisions, assumptions, security, performance, trade-offs |
 | 8 | **Wait for developer approval** before starting the next task |
-| 9 | After approval: update `tasks.md`, `acceptance-criteria.md` (if verified), `tool-workflow.md`, `prompt-history/`, README (if setup changed) |
+| 9 | After approval: update `implementation-plan.md`, `acceptance-criteria.md` (if verified), `tool-workflow.md`, `prompt-history/`, README (if setup changed) |
 | 10 | Proceed to next task only after approval |
 
 **Hard rules:**
@@ -42,7 +55,7 @@ The following rules govern every implementation task throughout the project.
 
 ## Task Execution Rules
 
-- `tasks.md` is the single source of truth for implementation.
+- `implementation-plan.md` is the single source of truth for implementation.
 - Never skip a task.
 - Never reorder tasks unless the developer explicitly approves.
 - Never merge multiple tasks into one implementation.
@@ -66,7 +79,7 @@ Before starting any task:
 During implementation:
 
 - Follow all engineering standards defined in `cursor-rules-or-instructions.md`.
-- Follow the architecture defined in `spec.md`.
+- Follow the architecture defined in `design-notes.md`.
 - Keep changes limited to the current task.
 - Avoid unnecessary refactoring outside the current task.
 - Keep commits focused on one logical change.
@@ -92,12 +105,12 @@ Before making any changes:
 
 1. Read the following documents:
 
-- docs/requirement-analysis.md
+- docs/requirements-analysis.md
 - tool-specific/cursor-workflow/project-context.md
-- tool-specific/cursor-workflow/spec.md
+- tool-specific/cursor-workflow/design-notes.md
 - tool-specific/cursor-workflow/acceptance-criteria.md
 - tool-specific/cursor-workflow/cursor-rules-or-instructions.md
-- tool-specific/cursor-workflow/tasks.md
+- tool-specific/cursor-workflow/implementation-plan.md
 
 2. Review the previously completed task.
 
@@ -150,7 +163,7 @@ Use these commands during implementation:
 - **Review Current Task** — Review the current implementation without making changes.
 - **Refactor Current Task** — Improve the current task without changing functionality.
 - **Run Quality Gate** — Perform all Quality Gate checks for the current sprint.
-- **Update Documentation** — Update tasks.md, acceptance-criteria.md, tool-workflow.md, README, and prompt-history where applicable.
+- **Update Documentation** — Update implementation-plan.md, acceptance-criteria.md, tool-workflow.md, README, and prompt-history where applicable.
 - **Prepare Commit** — Summarize completed work and suggest a Git commit message.
 
 -----
@@ -161,10 +174,10 @@ Use these commands during implementation:
 
 | Rule | Detail |
 | ---- | ------ |
-| **Frozen artifacts** | `requirement-analysis.md`, `project-context.md`, `spec.md`, `acceptance-criteria.md` (structure), `cursor-rules-or-instructions.md` |
+| **Frozen artifacts** | `requirements-analysis.md`, `project-context.md`, `design-notes.md`, `acceptance-criteria.md` (structure), `cursor-rules-or-instructions.md` |
 | **Allowed updates** | Progress checkboxes in this file; criterion **Status** in `acceptance-criteria.md`; `tool-workflow.md` pending sections; `README.md`; `prompt-history/`; testing/debugging/reflection docs |
 | **Not allowed** | Regenerating planning docs; changing OQ decisions; changing stack (DD-01–DD-11); adding features without requirement change |
-| **Exception** | If assignment requirements change, update `requirement-analysis.md` first, then propagate to spec with developer approval |
+| **Exception** | If assignment requirements change, update `requirements-analysis.md` first, then propagate to spec with developer approval |
 
 Future work = **execute tasks + update progress**, not re-plan.
 
@@ -177,12 +190,12 @@ Complete after **every implementation task** before requesting developer review:
 ### AI Validation
 
 - [ ] AI output reviewed by developer (not blindly accepted)
-- [ ] Architecture verified against `spec.md`
+- [ ] Architecture verified against `design-notes.md`
 - [ ] Business rules verified (BR/FR references for this task)
 - [ ] Security reviewed (input validation, no secrets, CORS, XSS)
 - [ ] Performance reviewed (queries, N+1, unnecessary re-renders)
 - [ ] Tests executed or manual verification performed (as applicable)
-- [ ] Documentation updated (`tasks.md`, `prompt-history/`, others if applicable)
+- [ ] Documentation updated (`implementation-plan.md`, `prompt-history/`, others if applicable)
 - [ ] Acceptance criteria IDs identified and verifiable
 - [ ] No future sprint work included in this task
 
@@ -201,7 +214,7 @@ Complete after **every implementation task** before requesting developer review:
 
 ---
 
-# Project Summary
+# Overview
 
 ## Project Objective
 
@@ -259,6 +272,49 @@ Planning ✓ → Design ✓ → DB schema → API (users → tickets → status 
 
 ---
 
+# AI Usage Plan
+
+## Tool and role
+
+| Item | Plan |
+| ---- | ---- |
+| **Primary tool** | Cursor (IDE-integrated) |
+| **AI role** | Draft code and docs; accelerate implementation |
+| **Developer role** | Decision maker — review, approve, or reject every AI output |
+| **Traceability** | Meaningful prompts logged in `prompt-history/` after each sprint |
+
+## When AI is used
+
+| Phase | AI assistance |
+| ----- | ------------- |
+| Planning (1–2) | Requirement analysis, spec, acceptance criteria, this plan |
+| Backend (3) | Services, routes, validators, Prisma schema, integration tests |
+| Frontend (4) | Components, hooks, API client, Tailwind UI |
+| QA (5) | Test scenarios, debugging notes, regression checklists |
+| Submission (6) | README, reflection, PR description — always human-verified |
+
+## Context strategy
+
+1. **`@` file references** — `requirements-analysis.md`, `design-notes.md`, `acceptance-criteria.md`, `cursor-rules-or-instructions.md`, this file
+2. **One task per session** — Generic Cursor Implementation Prompt (below) scopes each implementation task
+3. **No chat memory reliance** — authoritative docs are the source of truth
+4. **Planning freeze** — do not regenerate frozen artifacts; execute tasks and update progress only
+
+## Per-task validation
+
+Complete the **AI Validation Checklist** (below) after every implementation task before requesting developer review.
+
+## Information not shared with AI
+
+| Never paste into prompts | Where it lives |
+| ------------------------ | -------------- |
+| Real `DATABASE_URL` credentials | `server/.env` (gitignored) |
+| API keys, tokens, passwords | Local `.env` only |
+
+Full workflow narrative: `tool-workflow.md`.
+
+---
+
 # Enhanced Quality Gate Template
 
 Every sprint ends with this gate. Sprint-specific traceability items are listed per sprint.
@@ -268,14 +324,14 @@ Every sprint ends with this gate. Sprint-specific traceability items are listed 
 - [ ] **Requirements:** Sprint deliverables mapped to FR/BR/AC verified
 - [ ] **Acceptance criteria:** Relevant IDs in `acceptance-criteria.md` updated to Completed
 - [ ] **Engineering standards:** `cursor-rules-or-instructions.md` followed
-- [ ] **Architecture compliance:** Matches `spec.md` (layers, endpoints, schema)
+- [ ] **Architecture compliance:** Matches `design-notes.md` (layers, endpoints, schema)
 - [ ] **SOLID / Clean Code:** Thin controllers, services own logic, no duplication
 - [ ] **Security review:** Validation server-side; no secrets; CORS; XSS considered
 - [ ] **Performance review:** No obvious N+1; reasonable query patterns
 - [ ] **API consistency:** Error shape, status codes, DTO contracts per spec §12
 - [ ] **Tests:** Manual and/or automated per sprint — all passing
 - [ ] **AI Validation Checklist:** Completed for all tasks in sprint
-- [ ] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/` updated
+- [ ] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/` updated
 - [ ] **README:** Updated if setup/run steps changed
 - [ ] **Developer review:** All sprint tasks approved
 
@@ -291,7 +347,9 @@ Every sprint ends with this gate. Sprint-specific traceability items are listed 
 
 ---
 
-# Delivery Roadmap
+# Task Breakdown
+
+Phased delivery roadmap — atomic tasks per sprint with Quality Gates.
 
 ---
 
@@ -319,7 +377,7 @@ Every sprint ends with this gate. Sprint-specific traceability items are listed 
 | 1.1.2 | Document FR, NFR, entities, relationships | [x] |
 | 1.1.3 | Define business rules, validation, user stories | [x] |
 | 1.1.4 | Resolve OQ-01–OQ-15 with developer review | [x] |
-| 1.1.5 | Produce `docs/requirement-analysis.md` v1.1 | [x] |
+| 1.1.5 | Produce `docs/requirements-analysis.md` v1.1 | [x] |
 | 1.1.6 | Define AC-01–AC-23 | [x] |
 
 #### Quality Gate — Sprint 1.1
@@ -331,7 +389,7 @@ Every sprint ends with this gate. Sprint-specific traceability items are listed 
 
 #### Deliverables
 
-- [x] `docs/requirement-analysis.md` v1.1
+- [x] `docs/requirements-analysis.md` v1.1
 
 #### Git Commit Plan
 
@@ -361,7 +419,7 @@ docs: add requirement analysis v1.1 with resolved design decisions
 #### Prerequisites
 
 - [x] Sprint 1.1 complete
-- [x] `requirement-analysis.md` approved
+- [x] `requirements-analysis.md` approved
 
 ---
 
@@ -369,7 +427,7 @@ docs: add requirement analysis v1.1 with resolved design decisions
 
 **Task 2.1.1 — Gap review (2026-07-07): PASS**
 
-- All FR-C-01 through FR-C-24 mapped to `spec.md` sections; no blocking gaps.
+- All FR-C-01 through FR-C-24 mapped to `design-notes.md` sections; no blocking gaps.
 - All BR-01 through BR-17 reflected in spec §14; OQ-01 through OQ-15 aligned.
 - No contradictions on status API, field lengths, search, concurrency, or deferred features.
 - Optional doc polish only (Appendix A granularity); no spec edits required.
@@ -377,7 +435,7 @@ docs: add requirement analysis v1.1 with resolved design decisions
 
 **Task 2.1.2 — Folder structure and env plan (2026-07-07): CONFIRMED**
 
-- Repository layout matches `spec.md` §8 and `project-context.md` §6.
+- Repository layout matches `design-notes.md` §8 and `project-context.md` §6.
 - Top-level: `client/`, `server/`, `docs/`, `tool-specific/`, `prompt-history/`, root `README.md`, `.gitignore`, `.env.example` (created in Sprint 3.1 / 6.1).
 - `client/`: Vite + React + TS — `src/api`, `components/`, `pages/`, `types/`, `hooks/`, `utils/`.
 - `server/`: Express + TS — `src/{config,controllers,services,routes,validators,middleware,types,lib}`, `prisma/`, `tests/integration/`.
@@ -402,15 +460,15 @@ docs: add requirement analysis v1.1 with resolved design decisions
 | **Status** | [x] |
 | **Traceability** | AC-21, NFR-10 |
 
-**Objective:** Confirm `spec.md` covers all FR-C requirements with no contradictions.
+**Objective:** Confirm `design-notes.md` covers all FR-C requirements with no contradictions.
 
 **Expected output:** Short gap list (or "none") documented in sprint notes; any gaps fixed in spec with developer approval.
 
-**Files expected to change:** `tool-specific/cursor-workflow/spec.md` (only if gaps found)
+**Files expected to change:** `tool-specific/cursor-workflow/design-notes.md` (only if gaps found)
 
 **Dependencies:** Task 1.1.5
 
-**Definition of ready:** `requirement-analysis.md` v1.1 and `spec.md` v1.1 exist.
+**Definition of ready:** `requirements-analysis.md` v1.1 and `design-notes.md` v1.1 exist.
 
 **Definition of done:** Every FR-C-01–24 mapped to spec section; no unresolved contradictions.
 
@@ -548,7 +606,7 @@ docs: add requirement analysis v1.1 with resolved design decisions
 
 ---
 
-#### Task 2.1.8 — Refactor `tasks.md` to execution playbook v2.0
+#### Task 2.1.8 — Refactor `implementation-plan.md` to execution playbook v2.0
 
 | Field | Value |
 | ----- | ----- |
@@ -568,7 +626,7 @@ docs: add requirement analysis v1.1 with resolved design decisions
 - [x] `tool-workflow.md` — no update needed (v1.0 accurate)
 - [x] `prompt-history/` — initialized (Task 2.1.7)
 - [x] `acceptance-criteria.md` — DOC-04, DOC-05, DOC-06, DOC-08, DOC-09 updated
-- [x] `tasks.md` — sprint status and Progress Tracker updated
+- [x] `implementation-plan.md` — sprint status and Progress Tracker updated
 
 #### Quality Gate — Sprint 2.1
 
@@ -583,7 +641,7 @@ Apply **Enhanced Quality Gate Template** plus:
 
 #### Deliverables
 
-- [x] `project-context.md`, `spec.md`, `tasks.md` v2.0
+- [x] `project-context.md`, `design-notes.md`, `implementation-plan.md` v2.0
 - [x] `acceptance-criteria.md`, `cursor-rules-or-instructions.md`, `tool-workflow.md`
 - [x] `.gitignore`
 - [x] `prompt-history/` initialized
@@ -846,7 +904,7 @@ docs: initialize prompt history
 - [x] `tool-workflow.md` — Code Generation section (partial)
 - [x] `prompt-history/` — `sprint-3.1.md` created
 - [x] `acceptance-criteria.md` — DB-*, FND-* criteria updated
-- [x] `tasks.md` — task statuses and Progress Tracker updated
+- [x] `implementation-plan.md` — task statuses and Progress Tracker updated
 
 #### Quality Gate — Sprint 3.1
 
@@ -858,7 +916,7 @@ Apply **Enhanced Quality Gate Template** plus FR-C-21–23, AC-12, AC-15 partial
 - [x] **Architecture compliance:** Schema, layers, health endpoint per spec
 - [x] **Security review:** No secrets committed; env validation; CORS restricted
 - [x] **Tests:** Manual health, seed, persistence — all passing
-- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/` updated
+- [x] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/` updated
 - [x] **README:** Server setup section added
 - [x] **Developer review:** All Tasks 3.1.1–3.1.10 approved
 
@@ -1029,7 +1087,7 @@ chore(server): add env example and readme server section
 
 - [x] `prompt-history/sprint-3.2.md` created
 - [x] `acceptance-criteria.md` — USR-*, TKT-*, VAL-*, BE-*, STS-06, ERR-* updated
-- [x] `tasks.md` — sprint status and Progress Tracker updated
+- [x] `implementation-plan.md` — sprint status and Progress Tracker updated
 - [x] `tool-workflow.md` — Code Generation Sprint 3.2 section
 
 #### Quality Gate — Sprint 3.2
@@ -1044,7 +1102,7 @@ Apply **Enhanced Quality Gate Template** plus FR-C-01–08, BR-15–16, AC-01, A
 - [x] **Performance review:** Prisma `include` for users/comments — no N+1 in mappers
 - [x] **API consistency:** ErrorResponse shape; correct status codes
 - [x] **Tests:** curl CRUD checklist — 11/11 passing (see `prompt-history/sprint-3.2.md`)
-- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/` updated
+- [x] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/` updated
 - [x] **Developer review:** Tasks 3.2.1–3.2.6 approved
 
 **Rollback Rule:** Do not start 3.3 until CRUD verified.
@@ -1138,7 +1196,7 @@ feat(api): add ticket update with status field rejection
 
 #### Testing — Sprint 3.3
 
-- [x] curl: 5 valid transitions (requirement-analysis §9.3)
+- [x] curl: 5 valid transitions (requirements-analysis §9.3)
 - [x] curl: 6+ invalid transitions (skip, terminal, revert)
 - [x] curl: invalid status string → 400 `VALIDATION_ERROR`
 - [x] curl: general PATCH with `status` → 400 `STATUS_NOT_ALLOWED_HERE`
@@ -1148,7 +1206,7 @@ feat(api): add ticket update with status field rejection
 
 - [x] `prompt-history/sprint-3.3.md` created
 - [x] `acceptance-criteria.md` — STS-01–09 updated
-- [x] `tasks.md` — sprint status and Progress Tracker updated
+- [x] `implementation-plan.md` — sprint status and Progress Tracker updated
 - [x] `tool-workflow.md` — Code Generation Sprint 3.3 section
 
 #### Quality Gate — Sprint 3.3
@@ -1160,7 +1218,7 @@ Apply **Enhanced Quality Gate Template** plus state machine traceability.
 - [x] **Engineering standards:** State machine only in `statusTransition.ts`
 - [x] **Architecture compliance:** Dedicated status endpoint per DD-04
 - [x] **Tests:** curl transition matrix — 13/13 passing
-- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/` updated
+- [x] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/` updated
 - [x] **Developer review:** Tasks 3.3.1–3.3.3 approved
 
 **Rollback Rule:** Fix state machine before 3.4.
@@ -1265,7 +1323,7 @@ QG-only curl (not re-run from task smoke tests):
 
 - [x] `prompt-history/sprint-3.4.md` created
 - [x] `acceptance-criteria.md` — CMT-01–06, SRC-01–06, VAL-05, BE-02–03 updated
-- [x] `tasks.md` — sprint status and Progress Tracker updated
+- [x] `implementation-plan.md` — sprint status and Progress Tracker updated
 - [x] `tool-workflow.md` — Code Generation Sprint 3.4 section
 
 #### Quality Gate — Sprint 3.4
@@ -1280,7 +1338,7 @@ Apply **Enhanced Quality Gate Template** plus comments/search/filter traceabilit
 - [x] **Performance review:** Single `findMany` with `include`; ILIKE acceptable for v1 dataset
 - [x] **API consistency:** `CommentDto` matches spec; `INVALID_FILTER` on bad status
 - [x] **Tests:** Task-level curl + 6 QG-only curl cases — all passing
-- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/` updated
+- [x] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/` updated
 - [x] **Developer review:** Tasks 3.4.1–3.4.3 approved
 
 **Rollback Rule:** Backend must be complete before Phase 4.
@@ -1336,7 +1394,7 @@ feat(api): add ticket search and status filter
 
 - [x] `prompt-history/sprint-4.1.md` created
 - [x] `acceptance-criteria.md` — FE-01–03, FND-04 updated
-- [x] `tasks.md` — sprint status and Progress Tracker updated
+- [x] `implementation-plan.md` — sprint status and Progress Tracker updated
 - [x] `tool-workflow.md` — Code Generation Sprint 4.1 section
 - [x] `README.md` — client setup section added
 
@@ -1351,7 +1409,7 @@ Apply **Enhanced Quality Gate Template** plus client scaffold traceability.
 - [x] **Security review:** No secrets in repo; `client/.env.example` only; API URL from env
 - [x] **API consistency:** Client DTOs mirror spec §12.3; resource modules match endpoints
 - [x] **Tests:** build + CORS + users API smoke — all passing
-- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/`, `README.md` updated
+- [x] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/`, `README.md` updated
 - [x] **Developer review:** Tasks 4.1.1–4.1.6 approved
 
 **Rollback Rule:** Fix client scaffold before Sprint 4.2.
@@ -1391,7 +1449,7 @@ Apply **Enhanced Quality Gate Template** plus ticket list UI traceability.
 - [x] **Performance review:** 300ms search debounce; `AbortController` on filter changes
 - [x] **API consistency:** `ErrorAlert` displays `ApiError.message` from server
 - [x] **Tests:** `npm run build` (client) — passed; manual checklist — list, search, filter, URL params, empty/error states
-- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/sprint-4.2.md` updated
+- [x] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/sprint-4.2.md` updated
 - [x] **Developer review:** Tasks 4.2.1–4.2.5 approved; UI layout iteration approved
 
 **Rollback Rule:** Fix list/search/filter UI before Sprint 4.3.
@@ -1431,7 +1489,7 @@ Apply **Enhanced Quality Gate Template** plus create/detail UI traceability.
 - [x] **Performance review:** `AbortController` on `useTicket` and `useUsers`
 - [x] **API consistency:** `CreateTicketInput` matches spec §12; field errors from `ApiError.details`
 - [x] **Tests:** `npm run build` (client) — passed; manual checklist — create, detail, 404, comments
-- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/sprint-4.3.md` updated
+- [x] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/sprint-4.3.md` updated
 - [x] **Developer review:** Tasks 4.3.1–4.3.5 approved
 
 **Rollback Rule:** Fix create/detail UI before Sprint 4.4.
@@ -1471,7 +1529,7 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 - [x] **Performance review:** Refetch after update/status/comment; disabled controls during mutations
 - [x] **API consistency:** Invalid transition shows `ApiError.message` near StatusSelector
 - [x] **Tests:** `npm run build` (client) — passed; manual checklist — edit, status, comment flows
-- [x] **Documentation:** `tasks.md`, `tool-workflow.md`, `prompt-history/sprint-4.4.md` updated
+- [x] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/sprint-4.4.md` updated
 - [x] **Developer review:** Tasks 4.4.1–4.4.5 approved
 
 **Rollback Rule:** Fix edit/status/comment UI before Phase 5.
@@ -1608,7 +1666,7 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 
 ## Documentation — `docs/` (Required)
 
-- [x] `assignment.md`, `requirement-analysis.md` v1.1
+- [x] `assignment.md`, `requirements-analysis.md` v1.1
 - [x] `testing-notes.md`
 - [x] `debugging-notes.md`
 - [x] `reflection.md`
@@ -1641,11 +1699,13 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 
 ---
 
-# Sprint Progress Tracker
+# Milestones
+
+Sprint-level completion tracker — each row is a milestone gate before the next phase.
 
 | Phase | Sprint | Status | Completed Date | Notes |
 | ----- | ------ | ------ | -------------- | ----- |
-| 1 | 1.1 Requirements | [x] Complete | | requirement-analysis v1.1 |
+| 1 | 1.1 Requirements | [x] Complete | | requirements-analysis v1.1 |
 | 2 | 2.1 Architecture & Spec | [x] Complete | 2026-07-07 | All Tasks 2.1.1–2.1.8 done; Quality Gate passed |
 | 3 | 3.1 Server Foundation | [x] Complete | 2026-07-09 | Tasks 3.1.1–3.1.10; Quality Gate passed |
 | 3 | 3.2 Users & Ticket CRUD | [x] Complete | 2026-07-09 | Tasks 3.2.1–3.2.6; curl QG passed |
@@ -1660,6 +1720,46 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 | 6 | 6.1 README & Workflow | [x] Complete | 2026-07-13 | Tasks 6.1.1–6.1.5; README verified; tool-workflow v1.8 |
 | 6 | 6.2 Reflection & Submit | [x] Complete | 2026-07-13 | Tasks 6.2.1–6.2.5; reflection + PR artifact; final regression |
 | S | S.1 Stretch (optional) | [ ] Not started | | |
+
+---
+
+# Risks
+
+Implementation and delivery risks for this plan. Full analysis: `docs/requirements-analysis.md` §13.
+
+| ID | Risk | Likelihood | Impact |
+| -- | ---- | ---------- | ------ |
+| R-01 | Status transition logic implemented only on frontend | Medium | High |
+| R-02 | Ambiguous search behavior leads to inconsistent implementation | Low | Medium |
+| R-03 | Priority enum values not defined, causing seed/UI mismatch | Low | Medium |
+| R-04 | No authentication in core scope — any user can modify any ticket | High (by design) | Low |
+| R-05 | `createdBy` selection in UI without auth — user impersonation | Medium | Low |
+| R-06 | Scope creep into stretch features delays core delivery | Medium | High |
+| R-07 | Database choice impacts migration tooling and test setup | Low | Low |
+| R-08 | Insufficient test coverage for status machine edge cases | Medium | High |
+| R-09 | Secrets accidentally committed to Git | Low | High |
+| R-10 | Poor error message design leads to confusing UX | Medium | Medium |
+| R-11 | Status change via general update bypasses state machine | Medium | High |
+| R-12 | Time constraint (8–12 hours core effort) limits quality | Medium | Medium |
+
+---
+
+# Mitigation
+
+| ID | Mitigation |
+| -- | ---------- |
+| R-01 | Enforce exclusively on backend; mandatory integration tests (Sprint 5.1) |
+| R-02 | **Resolved** — search title + description, case-insensitive partial match |
+| R-03 | **Resolved** — Low, Medium, High, Critical |
+| R-04 | Document as known limitation; auth is stretch only |
+| R-05 | Acceptable for exercise; dropdown of seeded users |
+| R-06 | Core AC-01–AC-18 before stretch; Project Completion Checklist gates S.1 |
+| R-07 | **Resolved** — PostgreSQL; setup documented in README |
+| R-08 | Mandatory integration tests — all invalid transitions covered |
+| R-09 | `.env.example` committed; `.env` gitignored; review before push |
+| R-10 | Consistent `ErrorResponse` schema; test error paths in QA sprint |
+| R-11 | **Resolved** — dedicated `PATCH /tickets/:id/status`; 400 on general PATCH |
+| R-12 | One task at a time; Quality Gate every sprint; artifacts alongside code |
 
 ---
 
@@ -1678,4 +1778,4 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 
 ---
 
-*Living document — update task Status and Progress Tracker after each approved task and Quality Gate. Authority: `docs/requirement-analysis.md`. Blueprint: `spec.md`. Verification: `acceptance-criteria.md`.*
+*Living document — update task Status and Progress Tracker after each approved task and Quality Gate. Authority: `docs/requirements-analysis.md`. Blueprint: `design-notes.md`. Verification: `acceptance-criteria.md`.*

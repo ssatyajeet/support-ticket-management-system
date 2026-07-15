@@ -53,6 +53,8 @@ Execute full manual regression, persistence/secrets verification, edge-case samp
 
 **What I accepted / changed:** Approved regression and persistence artifacts.
 
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
+
 **Iteration needed:** No
 
 ---
@@ -72,6 +74,8 @@ Execute full manual regression, persistence/secrets verification, edge-case samp
 
 **What I accepted / changed:** Approved; deferred EC-19 fix to 5.2.4.
 
+**What I rejected / why:** Rejected fixing EC-19 in same prompt — separated defect fix to Task 5.2.4 for traceability.
+
 **Iteration needed:** No
 
 ---
@@ -81,16 +85,18 @@ Execute full manual regression, persistence/secrets verification, edge-case samp
 
 **Actual prompt:**
 
-> proceed with 5.2.4 , 5.2.5 task from @tool-specific/cursor-workflow/tasks.md
+> proceed with 5.2.4 , 5.2.5 task from @tool-specific/cursor-workflow/implementation-plan.md
 
 **AI output:**
 - Fixed DEF-001: `isJsonParseError()` in `errorHandler.ts` → 400 `VALIDATION_ERROR`
 - Integration test for EC-19; 16/16 tests pass
 - Created `docs/debugging-notes.md`
 - Updated `acceptance-criteria.md` statuses and progress summary
-- Marked Sprint 5.2 and Phase 5 complete in `tasks.md`
+- Marked Sprint 5.2 and Phase 5 complete in `implementation-plan.md`
 
 **What I accepted / changed:** Approved defect fix and criteria updates.
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 
 **Iteration needed:** No
 
@@ -127,7 +133,7 @@ Execute full manual regression, persistence/secrets verification, edge-case samp
 | `docs/debugging-notes.md` | Created — Task 5.2.4 |
 | `docs/testing-notes.md` | Updated — persistence, edge cases, fix note |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | Updated — Task 5.2.5 |
-| `tool-specific/cursor-workflow/tasks.md` | Updated — Sprint 5.2 complete |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Updated — Sprint 5.2 complete |
 | `tool-workflow.md` | Updated — debugging section, Phase 5 complete |
 
 ---

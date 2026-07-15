@@ -1,8 +1,8 @@
 /**
  * Task 5.2.2 — Create persistence marker ticket + comment.
- * Run: API_BASE=http://localhost:3000/api node scripts/persistence-522-baseline.mjs
+ * Run: API_BASE=http://localhost:3001/api node scripts/persistence-522-baseline.mjs
  */
-const BASE = process.env.API_BASE ?? 'http://localhost:3000/api';
+const BASE = process.env.API_BASE ?? 'http://localhost:3001/api';
 const MARKER_TITLE = 'Persistence check 5.2.2 — 2026-07-13';
 const MARKER_COMMENT = 'Marker comment for Task 5.2.2 persistence verification.';
 

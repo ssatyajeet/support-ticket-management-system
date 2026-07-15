@@ -34,6 +34,18 @@ The system must be delivered as a full-stack application comprising:
 - A **`.env.example`** file with local run instructions
 - At least one **meaningful test tier** (integration tests for status transitions are mandatory)
 
+### 1.5 My Understanding (in your own words)
+
+*Author: Satyajeet Singh — human summary before design and implementation.*
+
+I understand this project as an **internal** support ticket tool for a small team (agents, managers, admins) — not a public customer portal. The core value is tracking work through a **fixed status lifecycle** where the **backend** decides which transitions are legal; the UI can hint at next steps but must not be the authority.
+
+For v1, I am deliberately **not** building login, ticket delete, or pagination. That keeps scope aligned with the exercise core requirements and avoids stretch work before AC-01–AC-18 are proven. Users are seeded; `createdBy` comes from a dropdown today, with auth documented as a future improvement. Tickets persist in **PostgreSQL** so restarts and manual QA are meaningful.
+
+What matters most to me architecturally: **one state machine** (`statusTransition.ts`), **status changes only on a dedicated API endpoint**, and **integration tests** that prove invalid transitions return 400. Search and filter should hit the database (title + description, case-insensitive), not filter only in the browser.
+
+This exercise is not only “make it work.” I also need to show **how** AI was used — prompts, iteration, Quality Gates, debugging notes, and honest reflection — so reviewers can see developer judgment, not copy-paste output.
+
 ---
 
 ## 2. Business Goal
@@ -600,7 +612,7 @@ Derived from the assignment's Core Acceptance Criteria and expanded for testabil
 
 ### 15.7 Exercise Artifacts
 
-- [ ] **AC-19:** Requirement analysis document exists (`docs/requirement-analysis.md`).
+- [ ] **AC-19:** Requirement analysis document exists (`docs/requirements-analysis.md`).
 - [ ] **AC-20:** Prompt history is maintained.
 - [ ] **AC-21:** Design notes and tool-specific workflow artifacts are present.
 - [ ] **AC-22:** Testing and debugging notes are documented.

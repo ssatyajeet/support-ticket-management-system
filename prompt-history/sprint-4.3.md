@@ -52,6 +52,8 @@ Deliver create-ticket and ticket-detail UI: user dropdowns, ticket form with val
 
 **What I accepted / changed:** Approved batch implementation (4.31 interpreted as 4.3.1).
 
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
+
 **Iteration needed:** No
 
 ---
@@ -64,10 +66,12 @@ Deliver create-ticket and ticket-detail UI: user dropdowns, ticket form with val
 > : Sprint 4.3 Quality Gate
 
 **AI output:**
-- Verified build; updated `tasks.md`, `acceptance-criteria.md`, `tool-workflow.md`
+- Verified build; updated `implementation-plan.md`, `acceptance-criteria.md`, `tool-workflow.md`
 - Created this sprint log
 
 **What I accepted / changed:** Approved.
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 
 **Iteration needed:** No
 
@@ -100,7 +104,7 @@ Deliver create-ticket and ticket-detail UI: user dropdowns, ticket form with val
 | `client/src/components/comments/CommentList.tsx` | Created |
 | `client/src/pages/CreateTicketPage.tsx` | Updated — full create flow |
 | `client/src/pages/TicketDetailPage.tsx` | Updated — full detail + 404 |
-| `tool-specific/cursor-workflow/tasks.md` | Sprint 4.3 complete |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Sprint 4.3 complete |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | TKT-05, FE-06, FE-08, etc. |
 | `tool-workflow.md` | Sprint 4.3 section |
 

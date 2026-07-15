@@ -51,6 +51,8 @@ Deliver read-only users API and full ticket CRUD (create, list, detail, update) 
 
 **What I accepted / changed:** Approved validation rules.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -68,6 +70,8 @@ Deliver read-only users API and full ticket CRUD (create, list, detail, update) 
 
 **What I accepted / changed:** Approved via proceed.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -85,6 +89,8 @@ Deliver read-only users API and full ticket CRUD (create, list, detail, update) 
 
 **What I accepted / changed:** Approved.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -103,6 +109,8 @@ Deliver read-only users API and full ticket CRUD (create, list, detail, update) 
 
 **What I accepted / changed:** Approved.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** Yes — TypeScript overload fix for `toDetailDto()`
 
 ---
@@ -112,7 +120,7 @@ Deliver read-only users API and full ticket CRUD (create, list, detail, update) 
 
 **Actual prompt:**
 
-> aproved till 3.2.5 and mark that done in @tool-specific/cursor-workflow/tasks.md once done proceed with 3.2.6
+> aproved till 3.2.5 and mark that done in @tool-specific/cursor-workflow/implementation-plan.md once done proceed with 3.2.6
 
 **AI output:**
 - `ticketService.update()`, `PATCH /api/tickets/:id`
@@ -120,6 +128,8 @@ Deliver read-only users API and full ticket CRUD (create, list, detail, update) 
 
 **What I accepted / changed:** Approved.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -137,6 +147,8 @@ Deliver read-only users API and full ticket CRUD (create, list, detail, update) 
 
 **What I accepted / changed:** Requested curl instead of manual UI testing.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---

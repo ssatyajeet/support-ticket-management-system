@@ -26,7 +26,7 @@ alwaysApply: true
 - **Never commit secrets** — verify `.env` is gitignored before every commit
 - **Commit only working code** — tests must pass for affected scope before commit
 - Keep history **readable and incremental** — one logical change per commit
-- Align commits with sprint deliverables (see `tasks.md` Git Commit Plan per sprint)
+- Align commits with sprint deliverables (see `implementation-plan.md` Git Commit Plan per sprint)
 
 ## Branch Safety
 

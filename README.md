@@ -2,8 +2,8 @@
 
 Internal full-stack ticket management app built with **React + Vite**, **Express + TypeScript**, and **PostgreSQL (Prisma)**.
 
-- Business requirements: [`docs/requirement-analysis.md`](docs/requirement-analysis.md)
-- Technical blueprint: [`tool-specific/cursor-workflow/spec.md`](tool-specific/cursor-workflow/spec.md)
+- Business requirements: [`docs/requirements-analysis.md`](docs/requirements-analysis.md)
+- Technical blueprint: [`tool-specific/cursor-workflow/design-notes.md`](tool-specific/cursor-workflow/design-notes.md)
 - AI workflow log: [`tool-workflow.md`](tool-workflow.md)
 
 ## Prerequisites
@@ -216,7 +216,7 @@ npm run test
 
 Expected: all tests pass (status state machine — valid/invalid transitions and API guards).
 
-See [`docs/testing-notes.md`](docs/testing-notes.md) for coverage matrix, test DB strategy, and troubleshooting.
+See [`docs/test-run-evidence.md`](docs/test-run-evidence.md) for committed run results (16/16) and [`docs/testing-notes.md`](docs/testing-notes.md) for setup and coverage matrix.
 
 ### Manual regression
 
@@ -260,15 +260,19 @@ For defects found during QA, see [`docs/debugging-notes.md`](docs/debugging-note
 
 | Document | Purpose |
 | -------- | ------- |
-| [`docs/requirement-analysis.md`](docs/requirement-analysis.md) | Business requirements (FR/BR/AC) |
+| [`docs/candidate-info.md`](docs/candidate-info.md) | Candidate and submission overview |
+| [`docs/code-review-notes.md`](docs/code-review-notes.md) | AI-assisted and developer code review log |
+| [`docs/reusable-workflow.md`](docs/reusable-workflow.md) | Portable prompt and workflow template for reuse |
+| [`docs/requirements-analysis.md`](docs/requirements-analysis.md) | Business requirements (FR/BR/AC) |
 | [`docs/testing-notes.md`](docs/testing-notes.md) | Integration test setup and coverage |
+| [`docs/test-run-evidence.md`](docs/test-run-evidence.md) | Committed Vitest run results (16/16) |
 | [`docs/debugging-notes.md`](docs/debugging-notes.md) | Defects and resolutions |
 | [`docs/reflection.md`](docs/reflection.md) | Honest AI usage reflection (AC-23) |
 | [`docs/pr-description.md`](docs/pr-description.md) | Submission PR artifact |
 | [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md) | Manual QA script |
 | [`tool-workflow.md`](tool-workflow.md) | AI-assisted development workflow |
 | [`prompt-history/`](prompt-history/) | Sprint-by-sprint prompt logs |
-| [`tool-specific/cursor-workflow/spec.md`](tool-specific/cursor-workflow/spec.md) | API, schema, architecture |
+| [`tool-specific/cursor-workflow/design-notes.md`](tool-specific/cursor-workflow/design-notes.md) | API, schema, architecture |
 
 ---
 

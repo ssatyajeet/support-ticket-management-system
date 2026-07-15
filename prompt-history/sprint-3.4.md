@@ -50,6 +50,8 @@ Complete the backend API: comment creation endpoint, ticket list search (title +
 
 **What I accepted / changed:** Approved implementation.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -67,6 +69,8 @@ Complete the backend API: comment creation endpoint, ticket list search (title +
 
 **What I accepted / changed:** Approved.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -85,6 +89,8 @@ Complete the backend API: comment creation endpoint, ticket list search (title +
 
 **What I accepted / changed:** Approved implicitly by proceeding to QG.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -99,10 +105,12 @@ Complete the backend API: comment creation endpoint, ticket list search (title +
 **AI output:**
 - QG with 6 new curl cases only (skipped task-level duplicates)
 - `npm run build` passed
-- Documentation sync: `tasks.md`, `acceptance-criteria.md`, `tool-workflow.md`, this file
+- Documentation sync: `implementation-plan.md`, `acceptance-criteria.md`, `tool-workflow.md`, this file
 
 **What I accepted / changed:** In progress.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -136,7 +144,7 @@ Complete the backend API: comment creation endpoint, ticket list search (title +
 | `server/src/validators/ticketValidators.ts` | `parseListTicketsQuery`, search + status filters |
 | `server/src/services/ticketService.ts` | `list(filters)` with search and status |
 | `server/src/controllers/ticketController.ts` | Parse query in `listTickets` |
-| `tool-specific/cursor-workflow/tasks.md` | Sprint 3.4 complete |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Sprint 3.4 complete |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | CMT, SRC, VAL-05, BE-02–03 |
 | `tool-workflow.md` | Sprint 3.4 section |
 

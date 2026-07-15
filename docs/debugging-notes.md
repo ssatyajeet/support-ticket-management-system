@@ -14,12 +14,11 @@ This document records defects found during manual regression and edge-case sampl
 - [`docs/manual-regression-checklist.md`](manual-regression-checklist.md) — Sections L (persistence), M (edge cases)
 - [`docs/testing-notes.md`](testing-notes.md) — Test setup and edge-case procedures
 - [`server/scripts/edge-cases-523-api.mjs`](../server/scripts/edge-cases-523-api.mjs) — Tier 2 API sampler
+- [`docs/reusable-workflow.md`](reusable-workflow.md) — Template G (debugging with AI) for future projects
 
 ---
 
-## Defect log
-
-### DEF-001 — Malformed JSON returns 500 instead of 400 (EC-19)
+## Issue 1 — DEF-001: Malformed JSON returns 500 instead of 400 (EC-19)
 
 | Field | Detail |
 | ----- | ------ |
@@ -30,7 +29,7 @@ This document records defects found during manual regression and edge-case sampl
 | **Found in** | Task 5.2.3 — `curl -d "{invalid"` against `POST /api/tickets` |
 | **Status** | **Fixed** (2026-07-13) |
 
-#### Symptom
+### Problem
 
 ```http
 POST /api/tickets
@@ -46,13 +45,30 @@ HTTP 500
 { "error": { "message": "Internal server error", "code": "INTERNAL_ERROR" } }
 ```
 
-**Expected:** `400` with a parse error message per `requirement-analysis.md` EC-19.
+**Expected:** `400` with a parse error message per `requirements-analysis.md` EC-19.
 
-#### Root cause
+### How I Investigated
 
-`express.json()` delegates body parsing to `body-parser`. When JSON is syntactically invalid, the parser throws a `SyntaxError` with `status: 400` and `type: 'entity.parse.failed'`. This error was not handled in `errorHandler.ts` and fell through to the generic `INTERNAL_ERROR` branch.
+1. Reproduced with `curl -d "{invalid"` against `POST /api/tickets` (Task 5.2.3 edge-case sampling).
+2. Confirmed response was **500** `INTERNAL_ERROR`, not **400**.
+3. Traced the failure path: `express.json()` → body-parser throws `SyntaxError` with `status: 400` and `type: 'entity.parse.failed'` when JSON is syntactically invalid.
+4. Found `errorHandler.ts` did not handle parse errors — they fell through to the generic `INTERNAL_ERROR` branch.
 
-#### Fix
+### How AI Helped
+
+| Step | Detail |
+| ---- | ------ |
+| **Discovery (Task 5.2.3)** | Cursor built the edge-case matrix (Section M in manual checklist), `edge-cases-523-api.mjs`, and documented EC-19 repro steps. AI output flagged that malformed JSON returned **500** instead of **400**. |
+| **Investigation** | AI traced the failure path: body-parser `SyntaxError` not handled before generic `INTERNAL_ERROR` branch in `errorHandler.ts`. |
+| **Fix proposal (Task 5.2.4)** | AI proposed `isJsonParseError()` guard returning `400` `VALIDATION_ERROR` — aligned with spec error code set. |
+
+### What I Validated
+
+- Re-ran `curl` with `{invalid` body — confirmed **400** after fix (not 500).
+- Ran `cd server && npm run test` — **16/16** integration tests pass, including EC-19 regression test.
+- Verified error code matches `design-notes.md` §15 (`VALIDATION_ERROR`, not a new ad-hoc code).
+
+### Final Fix
 
 Added `isJsonParseError()` guard in `server/src/middleware/errorHandler.ts` to detect body-parser parse failures and return:
 
@@ -61,9 +77,9 @@ HTTP 400
 { "error": { "message": "Invalid JSON in request body", "code": "VALIDATION_ERROR" } }
 ```
 
-Used `VALIDATION_ERROR` to stay within the project's defined error code set (`spec.md` §15).
+Used `VALIDATION_ERROR` to stay within the project's defined error code set (`design-notes.md` §15).
 
-#### Verification
+**Verification:**
 
 | Method | Result |
 | ------ | ------ |
@@ -81,11 +97,11 @@ Used `VALIDATION_ERROR` to stay within the project's defined error code set (`sp
 
 These items were blocked or require admin/manual steps on the developer machine. They are **not** open code defects.
 
-| ID | Item | Notes | Owner action |
-| -- | ---- | ----- | ------------ |
-| ENV-001 | PostgreSQL service restart (L2, DB-09) | `Restart-Service postgresql-x64-17` denied without admin during 5.2.2 | Run verify script after service restart — see checklist Section L |
-| ENV-002 | Tier 2 edge-case script (EC-04–10, 12–13, 15) | PostgreSQL stopped during 5.2.3 sampling | `Start-Service postgresql-x64-17`, `npm run db:seed`, run `edge-cases-523-api.mjs` |
-| ENV-003 | DB unavailable startup (EC-17, ERR-05) | Not exercised in Sprint 5.2 | Set invalid `DATABASE_URL`, confirm graceful startup log without secret leak |
+| ID | Item | Notes | Owner action | How AI helped |
+| -- | ---- | ----- | ------------ | ------------- |
+| ENV-001 | PostgreSQL service restart (L2, DB-09) | `Restart-Service postgresql-x64-17` denied without admin during 5.2.2 | Run verify script after service restart — see checklist Section L | N/A — manual Windows admin step |
+| ENV-002 | Tier 2 edge-case script (EC-04–10, 12–13, 15) | PostgreSQL stopped during 5.2.3 sampling | `Start-Service postgresql-x64-17`, `npm run db:seed`, run `edge-cases-523-api.mjs` | N/A — environment blocked script execution |
+| ENV-003 | DB unavailable startup (EC-17, ERR-05) | Not exercised in Sprint 5.2 | Set invalid `DATABASE_URL`, confirm graceful startup log without secret leak | N/A — deferred manual test |
 
 ---
 

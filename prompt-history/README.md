@@ -26,7 +26,7 @@ decisions taken by the developer, and what was accepted or changed.
 | 5.1 — Integration Tests | [sprint-5.1.md](sprint-5.1.md) | 2026-07-10 | Verbatim (transcript) — Approved |
 | 5.2 — Manual QA | [sprint-5.2.md](sprint-5.2.md) | 2026-07-13 | Verbatim (transcript) — Approved |
 | 6.1 — README & Workflow | [sprint-6.1.md](sprint-6.1.md) | 2026-07-13 | Verbatim (transcript) — Approved |
-| 6.2 — Reflection & Submit | [sprint-6.2.md](sprint-6.2.md) | 2026-07-13 | Verbatim (transcript) — Pending approval |
+| 6.2 — Reflection & Submit | [sprint-6.2.md](sprint-6.2.md) | 2026-07-13 | Verbatim (transcript) — Approved |
 
 ---
 
@@ -42,7 +42,7 @@ Each session file uses this structure:
 
 ## Goal
 ## Tasks Completed  (table: Task ID | Summary | Outcome)
-## Prompts Log      (table: # | Reconstructed intent | Output summary | Accepted?)
+## Prompts Log      (table: # | Reconstructed intent | Output summary | Accepted? | Rejected?)
 ## Developer decisions made during this sprint
 ## What I did without AI assistance
 ## Files changed
@@ -57,12 +57,12 @@ Each session file uses this structure:
 
 - Prompts show **iteration**, not one-shot output
 - Developer made **explicit decisions** (especially OQs and arch choices)
-- Some AI output was **changed or rejected** (honest ownership)
+- Some AI output was **changed or rejected** (honest ownership) — each prompt logs **What I rejected / why**
 - Requirements are **traced** to AC / FR / BR IDs
 - History is **honest** — no fabricated sessions
 
 ---
 
-*For requirement authority see `docs/requirement-analysis.md`.
-For execution order see `tool-specific/cursor-workflow/tasks.md`.
+*For requirement authority see `docs/requirements-analysis.md`.
+For execution order see `tool-specific/cursor-workflow/implementation-plan.md`.
 For AI collaboration rules see `tool-specific/cursor-workflow/cursor-rules-or-instructions.md`.*

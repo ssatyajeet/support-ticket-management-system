@@ -1,8 +1,8 @@
 /**
  * Task 5.2.3 — API edge-case sampler (EC-04–10, 12, 13, 15).
- * Run: API_BASE=http://localhost:3000/api node scripts/edge-cases-523-api.mjs
+ * Run: API_BASE=http://localhost:3001/api node scripts/edge-cases-523-api.mjs
  */
-const BASE = process.env.API_BASE ?? 'http://localhost:3000/api';
+const BASE = process.env.API_BASE ?? 'http://localhost:3001/api';
 
 const results = [];
 

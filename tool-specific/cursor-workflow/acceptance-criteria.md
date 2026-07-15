@@ -4,7 +4,7 @@
 **Date:** July 7, 2026  
 **Role:** QA Lead / Solution Architect / Engineering Manager  
 **Status:** Living document — update after every sprint  
-**Sources:** `docs/requirement-analysis.md`, `spec.md`, `project-context.md`, `tasks.md`
+**Sources:** `docs/requirements-analysis.md`, `design-notes.md`, `project-context.md`, `implementation-plan.md`
 
 ---
 
@@ -28,9 +28,9 @@ This document is the project's **Definition of Done** and **quality verification
 
 | Document | Role |
 | -------- | ---- |
-| `docs/requirement-analysis.md` | **Authority** for business rules, FR/BR/AC definitions |
-| `spec.md` | **Blueprint** for how criteria are implemented |
-| `tasks.md` | **Execution order** — when criteria are delivered |
+| `docs/requirements-analysis.md` | **Authority** for business rules, FR/BR/AC definitions |
+| `design-notes.md` | **Blueprint** for how criteria are implemented |
+| `implementation-plan.md` | **Execution order** — when criteria are delivered |
 | **This document** | **Verification** — how to prove criteria are met |
 
 ## Status Legend
@@ -49,21 +49,21 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 ## Per-Feature Done
 
-- [ ] Implements mapped requirements from `requirement-analysis.md`
+- [ ] Implements mapped requirements from `requirements-analysis.md`
 - [ ] Backend validation in place (where API is involved)
 - [ ] Frontend displays API errors appropriately (where UI is involved)
 - [ ] No secrets committed; env vars used correctly
 - [ ] Integration tests updated if status logic or API contract changed
 - [ ] Relevant rows in this document marked **Completed**
-- [ ] `tasks.md` sprint Quality Gate checklist completed
+- [ ] `implementation-plan.md` sprint Quality Gate checklist completed
 - [ ] `prompt-history/` updated for meaningful AI-assisted work
 
 ## Sprint Done
 
 - [ ] All sprint-targeted acceptance criteria **Completed**
-- [ ] Quality Gate in `tasks.md` passed
+- [ ] Quality Gate in `implementation-plan.md` passed
 - [ ] No open **critical** or **high** defects for sprint scope
-- [ ] Sprint Progress Tracker in `tasks.md` updated
+- [ ] Sprint Progress Tracker in `implementation-plan.md` updated
 
 ## Release Done (Submission Ready)
 
@@ -255,10 +255,10 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| DOC-01 | AC-19 | `docs/requirement-analysis.md` complete and approved (v1.1) | DR | Completed |
+| DOC-01 | AC-19 | `docs/requirements-analysis.md` complete and approved (v1.1) | DR | Completed |
 | DOC-02 | AC-21 | `tool-specific/cursor-workflow/project-context.md` complete | DR | Completed |
-| DOC-03 | AC-21 | `tool-specific/cursor-workflow/spec.md` complete (v1.1) | DR | Completed |
-| DOC-04 | AC-21 | `tool-specific/cursor-workflow/tasks.md` maintained and current | DR | Completed |
+| DOC-03 | AC-21 | `tool-specific/cursor-workflow/design-notes.md` complete (v1.1) | DR | Completed |
+| DOC-04 | AC-21 | `tool-specific/cursor-workflow/implementation-plan.md` maintained and current | DR | Completed |
 | DOC-05 | AC-21 | `tool-specific/cursor-workflow/acceptance-criteria.md` (this file) maintained | DR | Completed |
 | DOC-06 | AC-21 | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` complete | DR | Completed |
 | DOC-07 | AC-16, FR-C-24 | Root `README.md` — setup, migrate, seed, run client + server, run tests | DR, MT | Completed |
@@ -271,7 +271,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 # Sprint Acceptance Mapping
 
-Maps each sprint from `tasks.md` to the feature criteria it must satisfy before exit.
+Maps each sprint from `implementation-plan.md` to the feature criteria it must satisfy before exit.
 
 | Sprint | Primary Criteria IDs | Exit Summary |
 | ------ | -------------------- | ------------ |
@@ -297,7 +297,7 @@ Maps each sprint from `tasks.md` to the feature criteria it must satisfy before 
 
 Complete before submission. Every item must be checked.
 
-## Application Core
+## Core
 
 - [x] Frontend runs and all pages work (`/`, `/tickets/new`, `/tickets/:id`)
 - [x] Backend API runs; all spec §12 endpoints respond correctly
@@ -319,7 +319,7 @@ Complete before submission. Every item must be checked.
 
 ## Documentation & Exercise Artifacts
 
-- [x] `docs/requirement-analysis.md` (DOC-01)
+- [x] `docs/requirements-analysis.md` (DOC-01)
 - [x] `docs/testing-notes.md` (TST-08)
 - [x] `docs/debugging-notes.md` (TST-09)
 - [x] `docs/reflection.md` (DOC-10)
@@ -368,7 +368,7 @@ Standards applied at every Quality Gate and before marking any criterion **Compl
 | Accuracy | Docs match actual behavior — not aspirational |
 | Setup works | README steps verified by following literally |
 | Traceability | FR/BR/AC references correct in this document |
-| Living docs | `tasks.md` and this file updated after each sprint |
+| Living docs | `implementation-plan.md` and this file updated after each sprint |
 | No secrets | Examples use placeholders only |
 
 ## AI-Generated Code Validation
@@ -378,7 +378,7 @@ Before marking criteria **Completed** when AI assisted:
 | Check | Action |
 | ----- | ------ |
 | Status rules | Confirm enforcement is server-side, not UI-only |
-| API contract | Confirm matches `spec.md` §12 |
+| API contract | Confirm matches `design-notes.md` §12 |
 | Field limits | Confirm 200 / 5000 / 2000 |
 | Security | No hardcoded secrets or credentials |
 | Tests | Run integration suite after AI changes to status logic |
@@ -404,7 +404,7 @@ Before marking criteria **Completed** when AI assisted:
 | Messages | Describe *why*, not just *what* |
 | No secrets | Pre-commit review for `.env` and credentials |
 | Branch safety | No force-push to main; use feature branches |
-| History | Reviewable progression aligned with `tasks.md` sprints |
+| History | Reviewable progression aligned with `implementation-plan.md` sprints |
 
 ## Security Checks
 
@@ -442,4 +442,4 @@ Before marking criteria **Completed** when AI assisted:
 
 ---
 
-*Living document — update statuses after each sprint Quality Gate. Authority for requirement definitions: `docs/requirement-analysis.md`. Execution order: `tool-specific/cursor-workflow/tasks.md`.*
+*Living document — update statuses after each sprint Quality Gate. Authority for requirement definitions: `docs/requirements-analysis.md`. Execution order: `tool-specific/cursor-workflow/implementation-plan.md`.*

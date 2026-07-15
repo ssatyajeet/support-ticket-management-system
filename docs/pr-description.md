@@ -1,4 +1,4 @@
-# Pull Request — Support Ticket Management System (Submission Artifact)
+# PR Description — Support Ticket Management System
 
 **Artifact type:** PR description equivalent (DOC-11, AC-21)  
 **Date:** 2026-07-13  
@@ -17,7 +17,7 @@ This PR delivers the **Support Ticket Management System** — a full-stack inter
 
 ---
 
-## What was built
+## Features Implemented
 
 ### Application
 
@@ -33,9 +33,11 @@ This PR delivers the **Support Ticket Management System** — a full-stack inter
 
 | Artifact | Location |
 | -------- | -------- |
-| Requirement analysis v1.1 | `docs/requirement-analysis.md` |
-| Technical spec | `tool-specific/cursor-workflow/spec.md` |
-| Sprint playbook | `tool-specific/cursor-workflow/tasks.md` |
+| Requirement analysis v1.1 | `docs/requirements-analysis.md` |
+| Design notes | `tool-specific/cursor-workflow/design-notes.md` |
+| API contract | `tool-specific/cursor-workflow/api-contract.md` |
+| Implementation plan | `tool-specific/cursor-workflow/implementation-plan.md` |
+| Test strategy | `docs/test-strategy.md` |
 | Acceptance criteria | `tool-specific/cursor-workflow/acceptance-criteria.md` |
 | AI workflow | `tool-workflow.md` |
 | Prompt history | `prompt-history/sprint-*.md` |
@@ -46,7 +48,9 @@ This PR delivers the **Support Ticket Management System** — a full-stack inter
 
 ---
 
-## Architecture highlights
+## Technical Changes
+
+### Architecture
 
 ```
 client/ (React)  ──HTTP──►  server/ (Express)
@@ -64,9 +68,7 @@ client/ (React)  ──HTTP──►  server/ (Express)
 - No authentication in v1 (documented limitation)
 - No ticket delete in v1 (deferred per DD-02)
 
----
-
-## API endpoints (spec §12)
+### API endpoints
 
 | Method | Endpoint | Notes |
 | ------ | -------- | ----- |
@@ -79,9 +81,35 @@ client/ (React)  ──HTTP──►  server/ (Express)
 | PATCH | `/api/tickets/:id/status` | State machine transitions |
 | POST | `/api/tickets/:id/comments` | Append comment |
 
+Full contract: [`tool-specific/cursor-workflow/api-contract.md`](../tool-specific/cursor-workflow/api-contract.md)
+
+### Key files
+
+| Area | Paths |
+| ---- | ----- |
+| State machine | `server/src/services/statusTransition.ts` |
+| Error handling | `server/src/middleware/errorHandler.ts` |
+| API client | `client/src/api/` |
+| Integration tests | `server/tests/integration/statusTransition.integration.test.ts` |
+
 ---
 
-## Test plan
+## Database Changes
+
+| Item | Detail |
+| ---- | ------ |
+| **Engine** | PostgreSQL |
+| **ORM** | Prisma — `server/prisma/schema.prisma` |
+| **Tables** | `users`, `tickets`, `comments` |
+| **Enums** | `Role`, `Priority`, `Status` |
+| **Integrity** | `ON DELETE RESTRICT` on all user foreign keys |
+| **Migrations** | `server/prisma/migrations/` |
+| **Seed** | 3 users (Agent, Manager, Admin); 5 tickets (all statuses); 6 comments |
+| **Commands** | `npm run db:migrate` · `npm run db:seed` |
+
+---
+
+## Testing Done
 
 ### Automated
 
@@ -91,6 +119,10 @@ npm run test
 ```
 
 **Expected:** 16/16 integration tests pass (valid/invalid transitions + API guards).
+
+Evidence: [`docs/test-run-evidence.md`](test-run-evidence.md) (latest run 2026-07-15; Sprint 6.2 run 2026-07-13).
+
+Strategy: [`docs/test-strategy.md`](test-strategy.md)
 
 ### API regression (optional)
 
@@ -131,7 +163,7 @@ See [`README.md`](../README.md) for full instructions.
 
 ---
 
-## Known limitations
+## Known Limitations
 
 - No authentication / RBAC
 - No pagination (full list returned)
@@ -151,13 +183,63 @@ Details: [`docs/debugging-notes.md`](debugging-notes.md)
 
 ---
 
-## AI usage summary
+## AI Usage Summary
 
 - **Tool:** Cursor (IDE-integrated)
 - **Approach:** Task-by-task implementation with developer approval between tasks
 - **Evidence:** `prompt-history/` (verbatim prompts per sprint), `tool-workflow.md`, `docs/reflection.md`
 
 The developer reviewed all AI output, made architectural decisions on open questions, ran Quality Gates, and manually verified behavior before marking criteria complete.
+
+---
+
+## Screenshots / Demo Notes
+
+**Screenshots:** Optional. You may add images under `docs/screenshots/` later. Below is a text demo walkthrough sufficient for review.
+
+| Item | Detail |
+| ---- | ------ |
+| **Client** | `http://localhost:5173` |
+| **API health** | `http://localhost:3001/api/health` (default per `server/.env.example`; match your `PORT`) |
+| **Dashboard** | `http://localhost:5173/dashboard` — status summary cards and chart |
+
+### Demo script (happy path)
+
+1. Open ticket list at `/` — seeded tickets visible in table or card view.
+2. Use search box and status tabs — URL updates with `?search=` and `?status=`.
+3. Create ticket at `/tickets/new` — redirect to detail; status is **Open**.
+4. On detail page: change status **Open → In Progress → Resolved → Closed** via status control.
+5. Add a comment — appears in chronological list with author name.
+
+### Demo script (error path)
+
+1. Open a **Closed** ticket — attempt invalid transition (e.g. back to Open).
+2. UI shows API error message (`INVALID_STATUS_TRANSITION`) near the status control (AC-08).
+
+### Build / test smoke
+
+```bash
+cd server && npm run test    # 16/16 integration tests
+cd client && npm run build   # production build
+```
+
+---
+
+## Future Improvements
+
+Deferred intentionally for v1 — documented, not hidden:
+
+| Area | Improvement | Source |
+| ---- | ----------- | ------ |
+| **Auth** | JWT or session login; replace author dropdown with logged-in user | Assignment stretch |
+| **Pagination / sorting** | List API pagination, sort by date/priority | Assignment stretch |
+| **Ticket delete** | Soft delete with `deletedAt` for audit trail | OQ-05 / DD-02 future |
+| **Concurrency** | Optimistic locking on concurrent edits | OQ-14 future |
+| **Ops** | Docker Compose, CI pipeline, OpenAPI/Swagger | Assignment stretch |
+| **Resilience** | EC-17 — graceful startup when DB unavailable (ERR-05) | Deferred in Sprint 5.2 |
+| **Observability** | Request correlation IDs in errors | Rejected in code review — out of v1 scope |
+
+See also [`docs/code-review-notes.md`](code-review-notes.md) §Suggestions Rejected for architecture-level deferrals.
 
 ---
 
@@ -174,9 +256,9 @@ The developer reviewed all AI output, made architectural decisions on open quest
 
 ## Related links
 
-- Requirement authority: `docs/requirement-analysis.md`
-- Technical blueprint: `tool-specific/cursor-workflow/spec.md`
-- Sprint execution: `tool-specific/cursor-workflow/tasks.md`
+- Requirement authority: `docs/requirements-analysis.md`
+- Technical blueprint: `tool-specific/cursor-workflow/design-notes.md`
+- Sprint execution: `tool-specific/cursor-workflow/implementation-plan.md`
 
 ---
 

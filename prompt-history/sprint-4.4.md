@@ -52,6 +52,8 @@ Complete the frontend: edit ticket fields on detail page, status changes via ded
 
 **What I accepted / changed:** Approved.
 
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
+
 **Iteration needed:** No
 
 ---
@@ -64,10 +66,12 @@ Complete the frontend: edit ticket fields on detail page, status changes via ded
 > proceed with 4.4 Quality gate
 
 **AI output:**
-- Verified build; updated `tasks.md`, `acceptance-criteria.md`, `tool-workflow.md`
+- Verified build; updated `implementation-plan.md`, `acceptance-criteria.md`, `tool-workflow.md`
 - Phase 4 marked complete; created this sprint log
 
 **What I accepted / changed:** Approved.
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 
 **Iteration needed:** No
 
@@ -97,7 +101,7 @@ Complete the frontend: edit ticket fields on detail page, status changes via ded
 | `client/src/components/comments/CommentForm.tsx` | Created |
 | `client/src/components/tickets/TicketForm.tsx` | Edit mode |
 | `client/src/pages/TicketDetailPage.tsx` | Edit, status, comments |
-| `tool-specific/cursor-workflow/tasks.md` | Sprint 4.4 + Phase 4 complete |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Sprint 4.4 + Phase 4 complete |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | STS-10, FE-05, USR-03, ERR-06 |
 | `tool-workflow.md` | Sprint 4.4 section |
 

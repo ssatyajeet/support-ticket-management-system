@@ -62,6 +62,8 @@ and server documentation (`.env.example` + README).
 
 **What I accepted / changed:** Approved dependency list as presented.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -78,6 +80,8 @@ and server documentation (`.env.example` + README).
 
 **What I accepted / changed:** Approved 3.1.1; proceeded to planning 3.1.2.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -98,6 +102,8 @@ _(Preceded by 3.1.2 implementation via plan attachment pattern)_
 
 **What I accepted / changed:** Approved; noted TS 6 moduleResolution change from plan.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** Yes — `moduleResolution: "node"` deprecated in TS 6; switched to `Node16`/`node16`.
 
 ---
@@ -118,6 +124,8 @@ _(Preceded by 3.1.2 implementation via plan attachment pattern)_
 
 **What I accepted / changed:** Approved security review.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -136,6 +144,8 @@ _(Preceded by 3.1.2 implementation via plan attachment pattern)_
 
 **What I accepted / changed:** Approved classic Prisma approach via AskQuestion.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -153,6 +163,8 @@ _(Preceded by 3.1.2 implementation via plan attachment pattern)_
 
 **What I accepted / changed:** Understood; proceeded to 3.1.5.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No (expected pre-generate state)
 
 ---
@@ -171,6 +183,8 @@ _(Preceded by 3.1.2 implementation via plan attachment pattern)_
 
 **What I accepted / changed:** Approved schema; accepted `prisma.config.ts` as Prisma 7 requirement.
 
+
+**What I rejected / why:** Rejected `url` in schema.prisma — Prisma 7.8 requires URL in prisma.config.ts.
 **Iteration needed:** Yes — `url` in `schema.prisma` rejected by Prisma 7.8.
 
 ---
@@ -192,6 +206,8 @@ _(Preceded by 3.1.2 implementation via plan attachment pattern)_
 
 **What I accepted / changed:** Applied migration manually after fixing `DATABASE_URL`.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** Yes — credential/env issue in automated run; manual migrate succeeded.
 
 ---
@@ -211,6 +227,8 @@ _(Preceded by 3.1.2 implementation via plan attachment pattern)_
 
 **What I accepted / changed:** Approved; accepted adapter packages as Prisma 7 necessity.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** Yes — seed failed without adapter; fixed with `PrismaPg` + `pg`.
 
 ---
@@ -229,6 +247,8 @@ _(Preceded by 3.1.2 implementation via plan attachment pattern)_
 
 **What I accepted / changed:** Approved.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -248,6 +268,8 @@ _(Preceded by 3.1.9 implementation approval)_
 
 **What I accepted / changed:** Approved.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -265,6 +287,8 @@ _(Preceded by 3.1.9 implementation approval)_
 
 **What I accepted / changed:** Approved.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -277,11 +301,13 @@ _(Preceded by 3.1.9 implementation approval)_
 > complete Sprint 3.1 documentation sync and Quality Gate
 
 **AI output:**
-- Updated `tasks.md`, `acceptance-criteria.md`, `tool-workflow.md`
+- Updated `implementation-plan.md`, `acceptance-criteria.md`, `tool-workflow.md`
 - Created this sprint prompt history file
 
 **What I accepted / changed:** In progress.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---

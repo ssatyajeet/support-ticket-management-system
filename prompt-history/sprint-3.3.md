@@ -48,6 +48,8 @@ Implement backend-enforced ticket status state machine: isolated transition logi
 
 **What I accepted / changed:** Approved state diagram.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -68,6 +70,8 @@ Implement backend-enforced ticket status state machine: isolated transition logi
 
 **What I accepted / changed:** Approved workflow preference.
 
+
+**What I rejected / why:** Rejected running `npm run build` after every task — sprint QG only.
 **Iteration needed:** No
 
 ---
@@ -86,6 +90,8 @@ Implement backend-enforced ticket status state machine: isolated transition logi
 
 **What I accepted / changed:** Approved.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---
@@ -103,6 +109,8 @@ Implement backend-enforced ticket status state machine: isolated transition logi
 
 **What I accepted / changed:** In progress.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No
 
 ---

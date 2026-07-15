@@ -391,7 +391,7 @@ tool-specific/
 └── kiro-specs/
     ├── requirements.md
     ├── design.md
-    └── tasks.md
+    └── implementation-plan.md
 ```
 
 ---
@@ -402,8 +402,8 @@ tool-specific/
 tool-specific/
 └── cursor-workflow/
     ├── project-context.md
-    ├── spec.md
-    ├── tasks.md
+    ├── design-notes.md
+    ├── implementation-plan.md
     ├── acceptance-criteria.md
     └── cursor-rules-or-instructions.md
 ```
@@ -416,8 +416,8 @@ tool-specific/
 tool-specific/
 └── other-tool-workflow/
     ├── project-context.md
-    ├── spec.md
-    ├── tasks.md
+    ├── design-notes.md
+    ├── implementation-plan.md
     ├── acceptance-criteria.md
     └── tool-usage-notes.md
 ```

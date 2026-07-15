@@ -18,7 +18,7 @@
 ## Goal
 
 Analyze `docs/assignment.md`, establish approved business and technical scope, resolve all
-open design questions (OQ-01–OQ-15), and produce `docs/requirement-analysis.md` v1.1 ready
+open design questions (OQ-01–OQ-15), and produce `docs/requirements-analysis.md` v1.1 ready
 to drive system design in Sprint 2.1.
 
 ---
@@ -32,7 +32,7 @@ to drive system design in Sprint 2.1.
 | 1.1.2 | Document FR, NFR, entities, relationships | FR-C-01–24, NFR-01–12, entities, ERD |
 | 1.1.3 | Define business rules, validation, user stories | BR-01–17, validation tables, US-01–17 |
 | 1.1.4 | Resolve OQ-01–OQ-15 with developer review | 2 prompt rounds; all 15 OQs closed |
-| 1.1.5 | Produce `docs/requirement-analysis.md` v1.1 | Final document approved |
+| 1.1.5 | Produce `docs/requirements-analysis.md` v1.1 | Final document approved |
 | 1.1.6 | Define AC-01–AC-23 | Included in Prompt 2 output; §15 + Appendix A |
 
 ---
@@ -62,8 +62,8 @@ to drive system design in Sprint 2.1.
 > README.md
 >
 > tool-specific/cursor-workflow/project-context.md
-> tool-specific/cursor-workflow/spec.md
-> tool-specific/cursor-workflow/tasks.md
+> tool-specific/cursor-workflow/design-notes.md
+> tool-specific/cursor-workflow/implementation-plan.md
 > tool-specific/cursor-workflow/acceptance-criteria.md
 > tool-specific/cursor-workflow/cursor-rules-or-instructions.md
 >
@@ -75,6 +75,8 @@ to drive system design in Sprint 2.1.
 
 **What I accepted / changed:** Accepted as-is. Explicit constraints ("do not generate application code") were essential — without them, AI tools often scaffold boilerplate.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No.
 
 ---
@@ -94,7 +96,7 @@ to drive system design in Sprint 2.1.
 >
 > Perform a complete requirement analysis and save it as:
 >
-> docs/requirement-analysis.md
+> docs/requirements-analysis.md
 >
 > Include:
 >
@@ -118,7 +120,7 @@ to drive system design in Sprint 2.1.
 > Think like a Business Analyst preparing documentation before development.
 
 **AI output:**
-- `docs/requirement-analysis.md` v1.0 (Draft) created
+- `docs/requirements-analysis.md` v1.0 (Draft) created
 - FR-C-01–24 across §3.1–3.6; FR-S-03–10 in §3.7
 - NFR-01–12 in §4
 - Actors (§5), Entities with attribute tables (§6), Relationships + ERD (§7)
@@ -131,6 +133,8 @@ to drive system design in Sprint 2.1.
 
 **What I accepted / changed:** Accepted overall structure. The role enum in OQ-02 had `user` as a label — I flagged this in the next prompt as potentially ambiguous for an internal tool. OQ-09 and OQ-14 were left as questions rather than decisions, which was correct — those needed deliberate architectural thought.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** Yes — OQ decisions required a separate round (Prompts 3 & 4).
 
 ---
@@ -170,6 +174,8 @@ to drive system design in Sprint 2.1.
 - OQ-14: Asked AI to explain what concurrent updates means; accepted last-write-wins recommendation
 - OQ-12: Deferred database decision to Prompt 4
 
+
+**What I rejected / why:** Rejected soft delete in v1 (OQ-05 — scope creep); rejected ambiguous `user` role label (OQ-02) — finalized as Agent/Manager/Admin in Prompt 4.
 **Iteration needed:** Yes — deliberate two-round design. Wanted AI critique before finalizing irreversible decisions.
 
 ---
@@ -194,6 +200,8 @@ to drive system design in Sprint 2.1.
 
 **What I accepted / changed:** Accepted all AI recommendations. This was a deliberate choice — the AI's reasoning for each was sound and I had reviewed it in Prompt 3 before committing.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No — decisions closed.
 
 ---
@@ -203,10 +211,10 @@ to drive system design in Sprint 2.1.
 
 **Actual prompt:**
 
-> do update the docs/requirement-analysis.md only and confirm me once you are done
+> do update the docs/requirements-analysis.md only and confirm me once you are done
 
 **AI output:**
-- `requirement-analysis.md` updated to **v1.1, Status: Approved**
+- `requirements-analysis.md` updated to **v1.1, Status: Approved**
 - §16 rewritten: "Open Questions" → "Design Decisions (Resolved)" with all 15 OQs resolved
 - §16.1 decisions table, §16.2 seed data plan, §16.3 API endpoint summary added
 - BR-15 (status endpoint rule), BR-16 (resolved names), BR-17 (last-write-wins) added
@@ -216,6 +224,8 @@ to drive system design in Sprint 2.1.
 
 **What I accepted / changed:** Accepted as-is after reviewing the diff. Prompt was intentionally minimal ("do update… and confirm me once you are done") because the decisions were already finalized — no risk of AI misinterpreting scope.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No.
 
 ---
@@ -225,7 +235,7 @@ to drive system design in Sprint 2.1.
 - Reviewed the assignment (`docs/assignment.md`) myself before starting any prompts
 - Deliberately chose to ask AI to **critique my OQ decisions** (Prompt 3) rather than accepting the first-draft document at face value — this was my design discipline, not AI-initiated
 - Made the final call on all 15 OQ decisions after reading AI reasoning (Prompt 4)
-- Reviewed `requirement-analysis.md` v1.1 before approving it
+- Reviewed `requirements-analysis.md` v1.1 before approving it
 
 ---
 
@@ -247,7 +257,7 @@ to drive system design in Sprint 2.1.
 |------|--------|
 | `client/`, `server/`, `docs/`, `tests/`, `prompt-history/`, `tool-specific/cursor-workflow/` | Folders created (pre-sprint) |
 | `README.md`, `tool-specific/cursor-workflow/*.md` | Empty placeholder files created (pre-sprint) |
-| `docs/requirement-analysis.md` | v1.0 created (Prompt 2) → v1.1 Approved (Prompt 5) |
+| `docs/requirements-analysis.md` | v1.0 created (Prompt 2) → v1.1 Approved (Prompt 5) |
 
 ---
 
@@ -282,4 +292,4 @@ to drive system design in Sprint 2.1.
 **Status:** Approved
 **Approved by:** Developer — 2026-07-07
 **Notes:** Prompts are verbatim from Cursor conversation transcript. Typos in prompts preserved.
-All OQ decisions verified as accurately recorded in `requirement-analysis.md` v1.1.
+All OQ decisions verified as accurately recorded in `requirements-analysis.md` v1.1.

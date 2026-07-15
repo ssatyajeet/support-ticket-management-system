@@ -23,17 +23,17 @@ Cursor acts as an **AI pair programmer** — accelerating implementation while t
 
 When guidance conflicts, resolve in this order:
 
-1. `docs/requirement-analysis.md` — business rules, FR/BR/AC authority
-2. `tool-specific/cursor-workflow/spec.md` — technical blueprint
+1. `docs/requirements-analysis.md` — business rules, FR/BR/AC authority
+2. `tool-specific/cursor-workflow/design-notes.md` — technical blueprint
 3. `tool-specific/cursor-workflow/acceptance-criteria.md` — verification checklist
-4. `tool-specific/cursor-workflow/tasks.md` — execution order and sprint scope
+4. `tool-specific/cursor-workflow/implementation-plan.md` — execution order and sprint scope
 5. `tool-specific/cursor-workflow/project-context.md` — persistent context and conventions
 6. **This document** — engineering and AI behavior rules
 
 ## How Cursor Should Behave
 
 - **Read before writing** — review relevant docs for every task
-- **Implement incrementally** — match current sprint scope in `tasks.md`
+- **Implement incrementally** — match current sprint scope in `implementation-plan.md`
 - **Explain decisions** — brief rationale for non-obvious choices
 - **Validate output** — never assume generated code is correct
 - **Stay in lane** — core before stretch; backend state machine before frontend status UI
@@ -46,15 +46,15 @@ When guidance conflicts, resolve in this order:
 Cursor must:
 
 - Always review existing project documents before generating code
-- Never contradict `requirement-analysis.md`, `spec.md`, `acceptance-criteria.md`, or `tasks.md`
-- Follow the sprint order defined in `tasks.md`
+- Never contradict `requirements-analysis.md`, `design-notes.md`, `acceptance-criteria.md`, or `implementation-plan.md`
+- Follow the sprint order defined in `implementation-plan.md`
 - Never implement future sprint work unless explicitly requested
 - Ask for clarification whenever requirements conflict
 - Preserve architectural consistency (three-tier monorepo: `client/` + `server/` + PostgreSQL)
 - Improve existing implementations rather than rewriting completed work
 - Explain major implementation decisions
 - Map work to requirement IDs (FR, BR, AC) when implementing features
-- Complete Quality Gate items in `tasks.md` before marking sprint work done
+- Complete Quality Gate items in `implementation-plan.md` before marking sprint work done
 - Update `acceptance-criteria.md` statuses when criteria are verified
 - Log meaningful AI interactions in `prompt-history/` when requested
 
@@ -138,7 +138,7 @@ Whenever appropriate, apply:
 
 # Backend Rules
 
-Follow the architecture defined in `spec.md` §6, §8, §10.
+Follow the architecture defined in `design-notes.md` §6, §8, §10.
 
 - Keep **controllers thin** — parse request, call service, map response
 - **Business logic belongs only in services** — never in routes or controllers
@@ -169,7 +169,7 @@ Follow the architecture defined in `spec.md` §6, §8, §10.
 
 # Frontend Rules
 
-Follow `spec.md` §9 and `project-context.md` folder structure.
+Follow `design-notes.md` §9 and `project-context.md` folder structure.
 
 - Create **reusable components** — badges, forms, alerts in `components/common/`, `tickets/`, `comments/`
 - Use **reusable custom hooks** — `useTickets`, `useTicket`, `useUsers` for API + loading + error state
@@ -189,7 +189,7 @@ Follow `spec.md` §9 and `project-context.md` folder structure.
 
 # Database Rules
 
-Follow `spec.md` §11 and approved Prisma schema.
+Follow `design-notes.md` §11 and approved Prisma schema.
 
 - Follow the **approved schema** — users, tickets, comments; enums for Role, Priority, Status
 - Preserve **referential integrity** — `ON DELETE RESTRICT` on all user FKs (OQ-06)
@@ -205,7 +205,7 @@ Follow `spec.md` §11 and approved Prisma schema.
 
 # API Standards
 
-Follow REST principles and `spec.md` §12.
+Follow REST principles and `design-notes.md` §12.
 
 - **Base path:** `/api`
 - **Consistent endpoint naming** — nouns, plural resources (`/tickets`, `/users`)
@@ -264,7 +264,7 @@ Prefer efficient and maintainable implementations.
 
 # Error Handling Standards
 
-Follow `spec.md` §15 and `project-context.md` §11.
+Follow `design-notes.md` §15 and `project-context.md` §11.
 
 - **Never silently ignore errors** — catch, map, respond, or log
 - **Use centralized error handling** — backend middleware; frontend `ErrorAlert` + hook error state
@@ -313,13 +313,13 @@ After changing status logic, **always** run `npm run test` in `server/`.
 Whenever implementation changes:
 
 - Update **relevant documentation** — spec deviations must be documented or corrected
-- Update **`tasks.md` progress** — sprint checkboxes and Progress Tracker
+- Update **`implementation-plan.md` progress** — sprint checkboxes and Progress Tracker
 - Update **`acceptance-criteria.md`** — criterion status after verification
 - Update **`prompt-history/`** — when developer requests or after significant AI sessions
 - Update **README** if setup, run, or test steps change
 - Keep documentation **synchronized with implementation** — docs must not lie
 
-Do not silently edit `requirement-analysis.md` — it is the approved business authority.
+Do not silently edit `requirements-analysis.md` — it is the approved business authority.
 
 ---
 
@@ -383,7 +383,7 @@ Keep explanations **concise and educational** — enough for exercise reflection
 
 Before submitting generated code, confirm:
 
-- [ ] Read relevant sections of requirement-analysis, spec, tasks, acceptance-criteria
+- [ ] Read relevant sections of requirements-analysis, spec, tasks, acceptance-criteria
 - [ ] Scope matches current sprint — core only unless told otherwise
 - [ ] Status logic is server-side in `statusTransition.ts`
 - [ ] `PATCH /tickets/:id` rejects `status` field
@@ -399,7 +399,7 @@ Before submitting generated code, confirm:
 
 Successful AI collaboration means:
 
-- **Requirements satisfied** — FR-C and BR rules implemented per requirement-analysis
+- **Requirements satisfied** — FR-C and BR rules implemented per requirements-analysis
 - **Acceptance criteria pass** — relevant rows in `acceptance-criteria.md` verified and marked Completed
 - **Code follows engineering standards** — this document and spec architecture
 - **Security and performance considered** — not afterthoughts
@@ -438,9 +438,9 @@ For every implementation request:
 | Delete | No ticket delete in v1 |
 | Tests | Integration tests for transitions mandatory |
 | Secrets | Never in Git |
-| Sprint order | Follow `tasks.md` |
+| Sprint order | Follow `implementation-plan.md` |
 | Verification | Follow `acceptance-criteria.md` |
 
 ---
 
-*Permanent rules for Cursor on this project. For architecture details see `spec.md`; for sprint scope see `tasks.md`; for verification see `acceptance-criteria.md`.*
+*Permanent rules for Cursor on this project. For architecture details see `design-notes.md`; for sprint scope see `implementation-plan.md`; for verification see `acceptance-criteria.md`.*

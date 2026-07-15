@@ -17,7 +17,7 @@
 
 ## Goal
 
-Produce all Cursor workflow artifacts (project-context.md, spec.md, tasks.md, acceptance-criteria.md,
+Produce all Cursor workflow artifacts (project-context.md, design-notes.md, implementation-plan.md, acceptance-criteria.md,
 cursor-rules-or-instructions.md, tool-workflow.md), confirm architectural decisions, complete the
 gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Quality Gate.
 
@@ -29,13 +29,13 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 | ------- | ------- | ------- |
 | Pre-2.1.1 | Create project-context.md | Cursor persistent context document |
 | Pre-2.1.2 | Stack decision — Next.js vs React+Express | Decided React + Express; context updated |
-| Pre-2.1.3 | Create spec.md v1.0 | Technical specification draft |
-| Pre-2.1.4 | Review and improve spec.md → v1.1 | Design Decisions, Risks & Trade-offs added |
+| Pre-2.1.3 | Create design-notes.md v1.0 | Technical specification draft |
+| Pre-2.1.4 | Review and improve design-notes.md → v1.1 | Design Decisions, Risks & Trade-offs added |
 | 2.1.4 | Finalize acceptance-criteria.md | 97 criteria, sprint mapping, release checklist |
 | 2.1.5 | Finalize cursor-rules-or-instructions.md | Permanent engineering + AI collaboration rules |
 | 2.1.6 | Create tool-workflow.md | AI workflow doc; implementation sections Pending |
-| 2.1.8 | Refactor tasks.md → v2.0 execution playbook | Atomic tasks, QG template, Generic Prompt, Freeze |
-| 2.1.1 | Gap review: spec.md vs requirement-analysis.md | PASS — no gaps, no contradictions |
+| 2.1.8 | Refactor implementation-plan.md → v2.0 execution playbook | Atomic tasks, QG template, Generic Prompt, Freeze |
+| 2.1.1 | Gap review: design-notes.md vs requirements-analysis.md | PASS — no gaps, no contradictions |
 | 2.1.2 | Confirm folder structure and env plan | Confirmed; env vars documented in sprint notes |
 | 2.1.3 | Create root .gitignore | .env, node_modules, dist, IDE artifacts excluded |
 | 2.1.7 | Initialize prompt-history/ | README + planning session log created |
@@ -53,7 +53,7 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 > You are a Senior Solution Architect.
 >
-> Using @docs/requirement-analysis.md as the source of truth, create a comprehensive project-context.md for Cursor.
+> Using @docs/requirements-analysis.md as the source of truth, create a comprehensive project-context.md for Cursor.
 >
 > This document will act as persistent AI context throughout the project.
 >
@@ -83,6 +83,8 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 **What I accepted / changed:** Accepted overall structure. Stack recommendation (React + Express) was made by AI — I chose to scrutinize it in Prompt 2 by asking about Next.js as an alternative before committing.
 
+
+**What I rejected / why:** Rejected exact version pins in spec; rejected missing Design Decisions and Risks sections.
 **Iteration needed:** Yes — deliberately opened a stack discussion before finalizing (Prompt 2).
 
 ---
@@ -102,11 +104,13 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 **What I accepted / changed:** Accepted the recommendation. The reasoning was sound — the assignment explicitly asks for a frontend + backend API structure, and integration tests are easier against a standalone Express server. Next.js would obscure the API layer the assignment is testing.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No — decision made, moved forward.
 
 ---
 
-### Prompt 3 — Create spec.md (technical specification)
+### Prompt 3 — Create design-notes.md (technical specification)
 **Time:** 4:25 PM | **Task:** Pre-2.1.3
 
 **Actual prompt:**
@@ -115,7 +119,7 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 >
 > Read the following documents carefully before producing any output:
 >
-> 1. docs/requirement-analysis.md
+> 1. docs/requirements-analysis.md
 > 2. tool-specific/cursor-workflow/project-context.md
 >
 > Do NOT generate implementation code.
@@ -124,7 +128,7 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 >
 > Save the output to:
 >
-> tool-specific/cursor-workflow/spec.md
+> tool-specific/cursor-workflow/design-notes.md
 >
 > The specification should be implementation-ready and include the following sections:
 >
@@ -164,23 +168,25 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 > Guidelines:
 >
 > - This document must be the implementation blueprint for developers.
-> - Do not repeat the requirement-analysis document word-for-word.
+> - Do not repeat the requirements-analysis document word-for-word.
 > - Do not include implementation code.
 > - Keep the specification concise but complete.
 > - Use markdown headings and tables where appropriate.
 > - Maintain traceability back to the requirement analysis.
 
 **AI output:**
-- `spec.md` v1.0 created — all 19 sections, endpoint summary with FR-C traceability, Prisma schema design, DTO contracts, error code catalog, status transition map, frontend component list, state management approach
+- `design-notes.md` v1.0 created — all 19 sections, endpoint summary with FR-C traceability, Prisma schema design, DTO contracts, error code catalog, status transition map, frontend component list, state management approach
 - Technology stack included exact version pins (e.g. React 18.x, Express 4.x)
 
 **What I accepted / changed:** Three issues identified on review — exact version pins were wrong (spec should describe architecture, not lock versions), no Design Decisions section, no Risks & Trade-offs section. These became Prompt 4 feedback.
 
+
+**What I rejected / why:** Rejected exact version pins in spec; rejected missing Design Decisions and Risks sections.
 **Iteration needed:** Yes — reviewed document and returned detailed written feedback (Prompt 4).
 
 ---
 
-### Prompt 4 — Spec.md review feedback (first pass)
+### Prompt 4 — design-notes.md review feedback (first pass)
 **Time:** 4:52 PM | **Task:** Pre-2.1.3 iteration
 
 **Actual prompt:**
@@ -204,15 +210,17 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 > ask questions if you have doubt
 
 **AI output:**
-- Clarified questions: how much OQ cross-reference in Design Decisions? One risks section or per-section? Should project-context.md also be updated? Should tasks.md be created now?
+- Clarified questions: how much OQ cross-reference in Design Decisions? One risks section or per-section? Should project-context.md also be updated? Should implementation-plan.md be created now?
 
 **What I accepted / changed:** Answered all clarification questions directly in Prompt 5 rather than accepting AI to guess. This is a deliberate pattern — when AI asks for clarification, answer precisely rather than letting it proceed on assumptions.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** Yes — clarification round (Prompt 5).
 
 ---
 
-### Prompt 5 — Spec.md refinement directions
+### Prompt 5 — design-notes.md refinement directions
 **Time:** 5:01 PM | **Task:** Pre-2.1.3 iteration
 
 **Actual prompt:**
@@ -220,20 +228,22 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 > 1. Technical-only with OQ cross-refs,
 > 2.  single § Risks & Trade-offs section
 > 3. project-context.md — Update in the same pass (versions out, DD/Risks summary in)
-> 4. will create tasks.md in a separate step
+> 4. will create implementation-plan.md in a separate step
 > 5. no
 
 **AI output:**
-- `spec.md` updated to v1.1: versions removed; Design Decisions §5 added (DD-01–DD-11 with reasons and OQ cross-refs); Risks & Trade-offs §7 added; Appendix C removed
+- `design-notes.md` updated to v1.1: versions removed; Design Decisions §5 added (DD-01–DD-11 with reasons and OQ cross-refs); Risks & Trade-offs §7 added; Appendix C removed
 - `project-context.md` updated in same pass: version pins replaced with "LTS/latest stable" language; DD summary and risks added
 
 **What I accepted / changed:** Accepted as-is. The compact 5-point response to AI questions is an efficient prompting pattern — direct answers to direct questions, no ambiguity for the AI to interpret.
 
+
+**What I rejected / why:** N/A — clarification answers only; no output to reject.
 **Iteration needed:** No.
 
 ---
 
-### Prompt 6 — Create tasks.md (execution roadmap)
+### Prompt 6 — Create implementation-plan.md (execution roadmap)
 **Time:** 5:23 PM | **Task:** 2.1.8 predecessor (v1.0)
 
 **Actual prompt:**
@@ -242,15 +252,15 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 >
 > Before producing any output, read and use these documents as the source of truth:
 >
-> 1. docs/requirement-analysis.md
+> 1. docs/requirements-analysis.md
 > 2. tool-specific/cursor-workflow/project-context.md
-> 3. tool-specific/cursor-workflow/spec.md
+> 3. tool-specific/cursor-workflow/design-notes.md
 >
 > Do NOT generate application code.
 >
 > Create a comprehensive execution plan and save it as:
 >
-> tool-specific/cursor-workflow/tasks.md
+> tool-specific/cursor-workflow/implementation-plan.md
 >
 > The purpose of this document is to become the single execution roadmap for the project from planning through final submission. include check box so we can track the progress
 >
@@ -339,7 +349,7 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 > Important Guidelines
 >
 > - This is an execution roadmap, not a specification.
-> - Do not repeat content from spec.md.
+> - Do not repeat content from design-notes.md.
 > - Keep tasks small and actionable.
 > - Order tasks by dependency.
 > - Assume a single developer.
@@ -347,10 +357,12 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 > - Make this document a living document that will be updated after every completed sprint.
 
 **AI output:**
-- `tasks.md` v1.0 created — 6 phases, 14 sprints, 80+ tasks with checkboxes, Quality Gates, Git commit plans, Sprint Exit Criteria, Project Completion Checklist
+- `implementation-plan.md` v1.0 created — 6 phases, 14 sprints, 80+ tasks with checkboxes, Quality Gates, Git commit plans, Sprint Exit Criteria, Project Completion Checklist
 
 **What I accepted / changed:** Accepted v1.0 as a solid foundation. Later identified that tasks were too coarse (multi-day tasks that should be atomic) and the document lacked an AI-specific workflow pattern, a Generic Cursor Prompt, and a Planning Freeze section. These became the refactor prompt (Prompt 9).
 
+
+**What I rejected / why:** Rejected implementation-plan.md v1.0 as final — too coarse; required atomic tasks and Generic Cursor Prompt.
 **Iteration needed:** Yes — refactor in a later dedicated prompt (Prompt 9).
 
 ---
@@ -364,10 +376,10 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 >
 > Before producing any output, carefully review these documents:
 >
-> 1. docs/requirement-analysis.md
+> 1. docs/requirements-analysis.md
 > 2. tool-specific/cursor-workflow/project-context.md
-> 3. tool-specific/cursor-workflow/spec.md
-> 4. tool-specific/cursor-workflow/tasks.md
+> 3. tool-specific/cursor-workflow/design-notes.md
+> 4. tool-specific/cursor-workflow/implementation-plan.md
 >
 > Do NOT generate application code.
 >
@@ -421,6 +433,8 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 **What I accepted / changed:** Accepted as-is. The instruction "Do not simply copy the acceptance criteria from the requirement analysis — reorganize into a practical verification document" was critical — without it, AI would have reproduced §15 verbatim. Explicit anti-pattern constraints in prompts prevent common AI failure modes.
 
+
+**What I rejected / why:** Rejected verbatim copy of requirements-analysis AC — required practical verification reorganisation.
 **Iteration needed:** No.
 
 ---
@@ -434,10 +448,10 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 >
 > Before producing any output, carefully review these documents:
 >
-> 1. docs/requirement-analysis.md
+> 1. docs/requirements-analysis.md
 > 2. tool-specific/cursor-workflow/project-context.md
-> 3. tool-specific/cursor-workflow/spec.md
-> 4. tool-specific/cursor-workflow/tasks.md
+> 3. tool-specific/cursor-workflow/design-notes.md
+> 4. tool-specific/cursor-workflow/implementation-plan.md
 > 5. tool-specific/cursor-workflow/acceptance-criteria.md
 >
 > Do NOT generate application code.
@@ -470,6 +484,8 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 **What I accepted / changed:** Accepted as-is. The multi-role persona ("Principal Software Engineer, Staff Software Architect, AI Engineering Lead, Security Reviewer, and Technical Reviewer") was deliberate — stacking roles primes the AI to consider the document from multiple professional perspectives simultaneously. Without Security Reviewer in the persona, security standards would have been lighter.
 
+
+**What I rejected / why:** N/A — cursor rules structure accepted as-is.
 **Iteration needed:** No.
 
 ---
@@ -483,10 +499,10 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 >
 > Before producing any output, review the following project documents:
 >
-> 1. docs/requirement-analysis.md
+> 1. docs/requirements-analysis.md
 > 2. tool-specific/cursor-workflow/project-context.md
-> 3. tool-specific/cursor-workflow/spec.md
-> 4. tool-specific/cursor-workflow/tasks.md
+> 3. tool-specific/cursor-workflow/design-notes.md
+> 4. tool-specific/cursor-workflow/implementation-plan.md
 > 5. tool-specific/cursor-workflow/acceptance-criteria.md
 > 6. tool-specific/cursor-workflow/cursor-rules-or-instructions.md
 >
@@ -518,11 +534,13 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 **What I accepted / changed:** Accepted as-is. The "Only document activities that have actually been completed. Do NOT invent future workflow" constraint was essential — without it, AI would fill every section with speculative content. Explicit honesty constraints in AI prompts for documentation are a strong pattern.
 
+
+**What I rejected / why:** Rejected speculative future-sprint content in tool-workflow.md.
 **Iteration needed:** No.
 
 ---
 
-### Prompt 10 — Refactor tasks.md to v2.0 execution playbook
+### Prompt 10 — Refactor implementation-plan.md to v2.0 execution playbook
 **Time:** 7:38 PM | **Task:** 2.1.8
 
 **Actual prompt:**
@@ -531,16 +549,16 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 >
 > Before making any changes, carefully review the following project documents as the single source of truth:
 >
-> 1. docs/requirement-analysis.md
+> 1. docs/requirements-analysis.md
 > 2. tool-specific/cursor-workflow/project-context.md
-> 3. tool-specific/cursor-workflow/spec.md
+> 3. tool-specific/cursor-workflow/design-notes.md
 > 4. tool-specific/cursor-workflow/acceptance-criteria.md
 > 5. tool-specific/cursor-workflow/cursor-rules-or-instructions.md
-> 6. tool-specific/cursor-workflow/tasks.md (current version)
+> 6. tool-specific/cursor-workflow/implementation-plan.md (current version)
 >
 > Do NOT generate application code.
 >
-> Your task is to **refactor and improve** the existing tasks.md into a production-quality execution playbook.
+> Your task is to **refactor and improve** the existing implementation-plan.md into a production-quality execution playbook.
 >
 > Do NOT rewrite the project scope.
 >
@@ -558,7 +576,7 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 > 8. Standard Cursor Workflow — section at document start: read docs → find next task → implement only → summarize → request review → wait → update docs → proceed
 > 9. Generic Cursor Prompt — reusable implementation prompt for remainder of project (replaces task-specific prompts)
 > 10. Freeze Planning — clearly indicate planning artifacts frozen; future work = update progress only
-> 11. Documentation Synchronization — every sprint reminds developer to update README, tool-workflow.md, prompt-history/, acceptance-criteria.md, tasks.md
+> 11. Documentation Synchronization — every sprint reminds developer to update README, tool-workflow.md, prompt-history/, acceptance-criteria.md, implementation-plan.md
 > 12. Git Strategy — small commits, one logical feature per commit, commit after QG passes
 > 13. Maintain Traceability — preserve FR/BR/AC IDs throughout
 > 14. Final Review — self-review: no duplicate tasks, logical order, no missing deps, consistent formatting
@@ -567,13 +585,15 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 >
 > Output the improved document by replacing the existing:
 >
-> tool-specific/cursor-workflow/tasks.md
+> tool-specific/cursor-workflow/implementation-plan.md
 
 **AI output:**
-- `tasks.md` v2.0 produced — Standard Cursor Workflow section, Generic Cursor Prompt, Developer Commands, Planning Freeze, AI Validation Checklist, Enhanced Quality Gate Template, Rollback Rule, atomic task tables (3.1.1–3.1.10 etc.), Sprint Progress Tracker, Document Self-Review
+- `implementation-plan.md` v2.0 produced — Standard Cursor Workflow section, Generic Cursor Prompt, Developer Commands, Planning Freeze, AI Validation Checklist, Enhanced Quality Gate Template, Rollback Rule, atomic task tables (3.1.1–3.1.10 etc.), Sprint Progress Tracker, Document Self-Review
 
 **What I accepted / changed:** Accepted as-is. This was the most complex prompt in Sprint 2.1 — 14 numbered improvement objectives with explicit constraints ("Do NOT remove... unless redundant or incorrect"). Breaking the improvement goals into a numbered list with examples for each point is a key pattern for complex AI refactoring tasks.
 
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 **Iteration needed:** No — v2.0 accepted as the planning freeze baseline.
 
 ---
@@ -583,13 +603,15 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 **Actual prompt:**
 
-> verify the task that is not completed yet @tool-specific/cursor-workflow/tasks.md
+> verify the task that is not completed yet @tool-specific/cursor-workflow/implementation-plan.md
 
 **AI output:**
 - Verification summary: Sprint 2.1 tasks 2.1.1, 2.1.2, 2.1.3, 2.1.7 still open; Phases 3–6 entirely not started; documentation drift noted in acceptance-criteria.md (DOC-06, DOC-08 stale)
 
 **What I accepted / changed:** Accepted summary. Used as the basis for closing the remaining Sprint 2.1 tasks.
 
+
+**What I rejected / why:** N/A — verification summary accepted as basis for closeout.
 **Iteration needed:** No.
 
 ---
@@ -603,12 +625,14 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 **AI output:**
 - Full FR-C-01–24 to spec section mapping table
-- All 15 OQ decisions verified against spec and requirement-analysis
+- All 15 OQ decisions verified against spec and requirements-analysis
 - Gap list: None — no spec edits required
-- Sprint notes draft for tasks.md
+- Sprint notes draft for implementation-plan.md
 
 **What I accepted / changed:** Accepted the gap review result. The "@tool-specific/cursor-workflow/cursor-rules-or-instructions.md always" tail on the prompt is a Cursor-specific technique — appending the rules doc reference ensures the AI re-grounds itself in engineering standards before proceeding, even on a documentation task.
 
+
+**What I rejected / why:** N/A — gap review confirmed no spec edits required.
 **Iteration needed:** No.
 
 ---
@@ -621,8 +645,8 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 > proceed
 
 **AI output:**
-- Sprint 2.1 Notes written into `tasks.md` (gap review PASS, folder structure confirmed, env vars documented)
-- Tasks 2.1.1–2.1.3, 2.1.7 marked `[x]` in `tasks.md`
+- Sprint 2.1 Notes written into `implementation-plan.md` (gap review PASS, folder structure confirmed, env vars documented)
+- Tasks 2.1.1–2.1.3, 2.1.7 marked `[x]` in `implementation-plan.md`
 - `.gitignore` created (`.env`, `node_modules`, `dist`, Prisma local DB, IDE artifacts)
 - `prompt-history/README.md` initialized with session log
 - `acceptance-criteria.md` updated: DOC-04/05/06/08 → Completed, DOC-09 → In Progress
@@ -630,15 +654,17 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 **What I accepted / changed:** Accepted all. The single word "proceed" as a prompt is valid here because the full context, approved plan, and task scope were already established in the previous exchange — there was no ambiguity for the AI to misinterpret.
 
+
+**What I rejected / why:** N/A — documentation sync only; no scope change.
 **Iteration needed:** No.
 
 ---
 
 ## What I did without AI assistance
 
-- Reviewed `spec.md` v1.0 myself before writing feedback (Prompt 4) — identified 3 specific issues rather than a vague "improve it"
+- Reviewed `design-notes.md` v1.0 myself before writing feedback (Prompt 4) — identified 3 specific issues rather than a vague "improve it"
 - Made the architectural stack decision (React + Express) after reading the AI comparison — did not blindly accept the first recommendation, deliberately challenged it with Prompt 2
-- Chose to refactor `tasks.md` into a v2.0 playbook rather than accepting the v1.0 as final — identified the need for atomic tasks, a Generic Cursor Prompt, and a Planning Freeze through my own review
+- Chose to refactor `implementation-plan.md` into a v2.0 playbook rather than accepting the v1.0 as final — identified the need for atomic tasks, a Generic Cursor Prompt, and a Planning Freeze through my own review
 - Approved all Sprint 2.1 documents as the planning baseline before closing the sprint
 
 ---
@@ -665,8 +691,8 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 | File | Change |
 |------|--------|
 | `tool-specific/cursor-workflow/project-context.md` | Created (Prompt 1) → updated to remove version pins, add DD/Risks summary (Prompt 5) |
-| `tool-specific/cursor-workflow/spec.md` | Created v1.0 (Prompt 3) → updated to v1.1 with DD, Risks, no version pins (Prompt 5) |
-| `tool-specific/cursor-workflow/tasks.md` | Created v1.0 (Prompt 6) → refactored to v2.0 execution playbook (Prompt 10) → sprint closeout updates (Prompt 13) |
+| `tool-specific/cursor-workflow/design-notes.md` | Created v1.0 (Prompt 3) → updated to v1.1 with DD, Risks, no version pins (Prompt 5) |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Created v1.0 (Prompt 6) → refactored to v2.0 execution playbook (Prompt 10) → sprint closeout updates (Prompt 13) |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | Created (Prompt 7) → DOC statuses updated (Prompt 13) |
 | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` | Created (Prompt 8) |
 | `tool-workflow.md` | Created (Prompt 9) |
@@ -679,7 +705,7 @@ gap review, initialize .gitignore and prompt-history/, and pass the Sprint 2.1 Q
 
 | ID | Coverage |
 |----|----------|
-| AC-19 | requirement-analysis.md v1.1 — approved |
+| AC-19 | requirements-analysis.md v1.1 — approved |
 | AC-20 | prompt-history/ initialized |
 | AC-21 | All workflow artifacts present (project-context, spec, tasks, acceptance-criteria, cursor-rules, tool-workflow) |
 | DOC-01–09 | All documentation criteria addressed; DOC-07 (README) deferred to Sprint 6.1 |

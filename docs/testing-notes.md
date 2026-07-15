@@ -7,6 +7,8 @@
 
 ## Overview
 
+Formal test strategy: [`docs/test-strategy.md`](test-strategy.md).
+
 Integration tests exercise the Express API over HTTP with Supertest against a live PostgreSQL database. They focus on the **status state machine** (AC-17, AC-18) and related API guards required by the exercise.
 
 **Location:** `server/tests/integration/`  
@@ -149,7 +151,7 @@ See also [`docs/manual-regression-checklist.md`](manual-regression-checklist.md)
 
 ## Edge cases (Task 5.2.3 — EC-01–EC-22)
 
-Samples all 22 edge cases from `docs/requirement-analysis.md` §12 using three tiers:
+Samples all 22 edge cases from `docs/requirements-analysis.md` §12 using three tiers:
 
 | Tier | Method | Cases |
 | ---- | ------ | ----- |
@@ -170,7 +172,7 @@ Covers EC-04, 05, 06 (description), 07, 08, 09, 10, 12, 13, 15. Exits non-zero o
 ### Malformed JSON (EC-19)
 
 ```powershell
-curl.exe -X POST http://localhost:3000/api/tickets -H "Content-Type: application/json" -d "{invalid"
+curl.exe -X POST http://localhost:3001/api/tickets -H "Content-Type: application/json" -d "{invalid"
 ```
 
 Expected: `400` with parse error. **Fixed (2026-07-13, Task 5.2.4):** returns `400` `VALIDATION_ERROR` — see [`docs/debugging-notes.md`](debugging-notes.md) DEF-001.

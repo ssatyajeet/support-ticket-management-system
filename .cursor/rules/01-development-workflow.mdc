@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Every Task Lifecycle (no exceptions)
 
-1. **Read & Target** — Do NOT read entire files. Target only the specific, relevant headers/lines inside `spec.md`, `tasks.md`, `acceptance-criteria.md`, and `cursor-rules-or-instructions.md` that apply to the current task. 
+1. **Read & Target** — Do NOT read entire files. Target only the specific, relevant headers/lines inside `design-notes.md`, `implementation-plan.md`, `acceptance-criteria.md`, and `cursor-rules-or-instructions.md` that apply to the current task. 
 2. **Verify** — confirm Definition of Ready; check previous task is approved
 3. **Implement** — only the current task; no future sprint work; no scope creep
 4. **Stop** — immediately after task completion
@@ -16,12 +16,12 @@ alwaysApply: true
 
 ## Cursor Must
 
-- Map all work to FR/BR/AC IDs from `requirement-analysis.md`
+- Map all work to FR/BR/AC IDs from `requirements-analysis.md`
 - Explain non-obvious decisions with brief rationale
 - Flag requests that violate a Design Decision (spec §5)
 - Propose a plan before multi-file changes
 - Complete Quality Gate items before marking sprint done
-- Treat `spec.md` and `acceptance-criteria.md` as indexed lookup files.
+- Treat `design-notes.md` and `acceptance-criteria.md` as indexed lookup files.
 - Read only the specific section matching the current Feature Requirement ID (e.g., `[FR-04]`).
 - Do not stream or ingest sections of the documentation unrelated to the active task
 

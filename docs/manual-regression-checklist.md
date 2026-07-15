@@ -4,7 +4,8 @@
 **Task:** 5.2.1 — Execute full manual regression  
 **Date:** 2026-07-13  
 **Tester:** Developer (AI-assisted execution)  
-**Environment:** PostgreSQL seeded; API `http://localhost:3000`; client `http://localhost:5173`  
+**Environment:** PostgreSQL seeded; API default `http://localhost:3001` (`server/.env.example`); client `http://localhost:5173`  
+**Note:** Original 5.2.1 session used `PORT=3000` on the developer machine. Re-run instructions below use the canonical default **3001**.  
 **Pre-flight:** `npm run db:seed` + `npm run test` (15/15) before regression  
 **Overall result:** **PASS** — 33/33 cases passed (26 API-automated, 7 UI code-review verified)
 
@@ -15,7 +16,7 @@
 1. Seed: `cd server && npm run db:seed`
 2. Start API: `npm run dev` (note your `PORT` in `.env`)
 3. Start client: `cd client && npm run dev`
-4. API regression: `API_BASE=http://localhost:<PORT>/api node scripts/regression-521-api.mjs`
+4. API regression: `API_BASE=http://localhost:3001/api node scripts/regression-521-api.mjs` (or set `API_BASE` to match your `PORT`)
 5. UI spot-check: walk sections marked **UI** in browser
 
 ---
@@ -138,7 +139,7 @@ Uses **ConfirmableSelect** in `TicketInfoPanel` (select → Save/Cancel).
 **Marker ticket ID:** 184  
 **Marker title:** `Persistence check 5.2.2 — 2026-07-13`  
 **Baseline ticket count:** 6 (5 seeded + 1 marker)  
-**API base:** `http://localhost:3000/api`
+**API base:** `http://localhost:3001/api` (default; match your `server/.env` `PORT`)
 
 | ID | Ref | Steps | Expected | Result | Notes |
 | -- | --- | ----- | -------- | ------ | ----- |
@@ -155,7 +156,7 @@ Uses **ConfirmableSelect** in `TicketInfoPanel` (select → Save/Cancel).
 ```powershell
 # Run as administrator, or use services.msc
 Restart-Service -Name postgresql-x64-17 -Force
-$env:API_BASE='http://localhost:3000/api'
+$env:API_BASE='http://localhost:3001/api'
 $env:TICKET_ID='184'
 node server/scripts/persistence-522-verify.mjs
 ```
@@ -167,10 +168,10 @@ Expect `pass: true`. No `npm run db:seed` or `npm run test` before verifying.
 ## Section M — Edge cases (Task 5.2.3)
 
 **Date:** 2026-07-13  
-**Traceability:** EC-01–EC-22 (`docs/requirement-analysis.md` §12)  
-**API base:** `http://localhost:3000/api`  
+**Traceability:** EC-01–EC-22 (`docs/requirements-analysis.md` §12)  
+**API base:** `http://localhost:3001/api` (default; match your `server/.env` `PORT`)  
 **Tier 1:** `cd server && npm run test` (Sprint 5.1 IT)  
-**Tier 2:** `API_BASE=http://localhost:3000/api node server/scripts/edge-cases-523-api.mjs`  
+**Tier 2:** `API_BASE=http://localhost:3001/api node server/scripts/edge-cases-523-api.mjs`  
 **Environment note:** PostgreSQL service `postgresql-x64-17` was **Stopped** during sampling (admin required to start). Tier 2 script and Tier 1 re-run blocked; EC-19 curl executed against live API.
 
 | ID | Scenario | Tier | Result | Notes |
@@ -205,7 +206,7 @@ Expect `pass: true`. No `npm run db:seed` or `npm run test` before verifying.
 Start-Service -Name postgresql-x64-17
 cd server
 npm run db:seed
-$env:API_BASE='http://localhost:3000/api'
+$env:API_BASE='http://localhost:3001/api'
 node scripts/edge-cases-523-api.mjs
 ```
 
@@ -258,4 +259,4 @@ None during Task 5.2.1 regression.
 
 API cases executed via [`server/scripts/regression-521-api.mjs`](../server/scripts/regression-521-api.mjs) on 2026-07-13 — **26/26 passed**.
 
-Set `API_BASE` to match your server port (e.g. `http://localhost:3000/api`).
+Set `API_BASE` to match your server port (default `http://localhost:3001/api` per `server/.env.example`).

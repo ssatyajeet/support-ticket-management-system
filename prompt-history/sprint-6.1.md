@@ -29,7 +29,7 @@ Complete root `README.md` with full local setup, run, and test instructions; ver
 | 6.1.2 | Verify README by fresh follow-through | `npm run test` 16/16; server + client build pass; health endpoint OK |
 | 6.1.3 | Update `tool-workflow.md` | v1.8 — Phase 5 complete; Sprint 5.2 + 6.1 sections; status sections current |
 | 6.1.4 | Organize `prompt-history/` | README index updated; 5.1–5.2 Approved; logging policy aligned with sprint-log rule |
-| 6.1.5 | Final workflow doc consistency review | `tasks.md`, `acceptance-criteria.md` updated; DOC-07 Completed |
+| 6.1.5 | Final workflow doc consistency review | `implementation-plan.md`, `acceptance-criteria.md` updated; DOC-07 Completed |
 
 ---
 
@@ -42,17 +42,19 @@ Complete root `README.md` with full local setup, run, and test instructions; ver
 
 **Actual prompt:**
 
-> please proceed with 6.1 tasks from @tool-specific/cursor-workflow/tasks.md
+> please proceed with 6.1 tasks from @tool-specific/cursor-workflow/implementation-plan.md
 
 **AI output:**
 - `README.md` — complete setup, run, test, troubleshooting, documentation index
 - `tool-workflow.md` — v1.8; Code Generation/Validation/Testing marked complete; Sprint 5.2 and 6.1 entries
 - `prompt-history/README.md` — session index and logging policy updated
-- `tool-specific/cursor-workflow/tasks.md` — Sprint 6.1 tasks marked complete; progress tracker updated
+- `tool-specific/cursor-workflow/implementation-plan.md` — Sprint 6.1 tasks marked complete; progress tracker updated
 - `tool-specific/cursor-workflow/acceptance-criteria.md` — DOC-07 Completed; release checklist items updated
 - Verification: integration tests 16/16, server build, client build, health check
 
-**What I accepted / changed:** Pending developer review.
+**What I accepted / changed:** Approved — README, tool-workflow v1.8, prompt-history index updated.
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 
 **Iteration needed:** No
 
@@ -68,8 +70,8 @@ Complete root `README.md` with full local setup, run, and test instructions; ver
 
 | Observation | What it shows |
 | ----------- | ------------- |
-| Single sprint-level prompt referencing `tasks.md` | Effective when sprint tasks are well-defined in the roadmap file |
-| `@tasks.md` file reference | Gives AI scoped context without pasting full sprint spec |
+| Single sprint-level prompt referencing `implementation-plan.md` | Effective when sprint tasks are well-defined in the roadmap file |
+| `@implementation-plan.md` file reference | Gives AI scoped context without pasting full sprint spec |
 
 ---
 
@@ -81,7 +83,7 @@ Complete root `README.md` with full local setup, run, and test instructions; ver
 | `tool-workflow.md` | Updated — v1.8, Phase 5–6 status |
 | `prompt-history/README.md` | Updated — index and logging policy |
 | `prompt-history/sprint-6.1.md` | Created |
-| `tool-specific/cursor-workflow/tasks.md` | Updated — Sprint 6.1 complete |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Updated — Sprint 6.1 complete |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | Updated — DOC-07 Completed |
 
 ---
@@ -107,7 +109,7 @@ Complete root `README.md` with full local setup, run, and test instructions; ver
 | README verified by follow-through | Passed — 16/16 tests, builds green |
 | `tool-workflow.md` current through Phase 5 | Passed |
 | `prompt-history/` organized | Passed |
-| `tasks.md` / `acceptance-criteria.md` synced | Passed |
+| `implementation-plan.md` / `acceptance-criteria.md` synced | Passed |
 
 **Sprint exit:** Passed. Ready for Sprint 6.2.
 

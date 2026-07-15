@@ -1,12 +1,12 @@
 # Project Context — Support Ticket Management System
 
 **Purpose:** Persistent AI context for Cursor throughout the project lifecycle.  
-**Source of Truth:** `docs/requirement-analysis.md` (v1.1)  
+**Source of Truth:** `docs/requirements-analysis.md` (v1.1)  
 **Last Updated:** July 7, 2026  
 **Status:** Active — Pre-Implementation  
-**Spec:** `tool-specific/cursor-workflow/spec.md` (v1.1)
+**Spec:** `tool-specific/cursor-workflow/design-notes.md` (v1.1)
 
-> When requirements conflict, **`docs/requirement-analysis.md` wins**. This document translates those requirements into architectural and collaboration guidance for AI-assisted development.
+> When requirements conflict, **`docs/requirements-analysis.md` wins**. This document translates those requirements into architectural and collaboration guidance for AI-assisted development.
 
 ---
 
@@ -116,7 +116,7 @@ Demonstrate effective, responsible AI-assisted software development across the f
 
 ## 4. Selected Technology Stack
 
-Architectural technology roles for v1. **Exact dependency versions are pinned in `package.json` at implementation time** — not in this document. Rationale for each choice: `spec.md` §5 Design Decisions.
+Architectural technology roles for v1. **Exact dependency versions are pinned in `package.json` at implementation time** — not in this document. Rationale for each choice: `design-notes.md` §5 Design Decisions.
 
 ### Stack Summary
 
@@ -150,7 +150,7 @@ Architectural technology roles for v1. **Exact dependency versions are pinned in
 
 ## 4a. Design Decisions (Summary)
 
-Full register with rationale: **`spec.md` §5**. Product decisions (OQ-01–OQ-15): `docs/requirement-analysis.md` §16.
+Full register with rationale: **`design-notes.md` §5**. Product decisions (OQ-01–OQ-15): `docs/requirements-analysis.md` §16.
 
 | ID | Decision |
 | -- | -------- |
@@ -170,7 +170,7 @@ Full register with rationale: **`spec.md` §5**. Product decisions (OQ-01–OQ-1
 
 ## 4b. Risks & Trade-offs (Summary)
 
-Full register: **`spec.md` §7**. Business risks: `docs/requirement-analysis.md` §13.
+Full register: **`design-notes.md` §7**. Business risks: `docs/requirements-analysis.md` §13.
 
 **Key trade-offs accepted:**
 
@@ -183,7 +183,7 @@ Full register: **`spec.md` §7**. Business risks: `docs/requirement-analysis.md`
 
 - Status logic implemented only on frontend → mitigate with `statusTransition.ts` + integration tests
 - `status` accepted on general PATCH → mitigate with explicit rejection + test
-- Scope creep → follow `tasks.md` sequencing; core before stretch
+- Scope creep → follow `implementation-plan.md` sequencing; core before stretch
 
 ---
 
@@ -299,7 +299,7 @@ support-ticket-management-system/
 │
 ├── docs/
 │   ├── assignment.md
-│   └── requirement-analysis.md      # Source of truth
+│   └── requirements-analysis.md      # Source of truth
 │
 ├── tests/                           # Cross-cutting test notes/fixtures (optional)
 │
@@ -308,8 +308,8 @@ support-ticket-management-system/
 ├── tool-specific/
 │   └── cursor-workflow/
 │       ├── project-context.md       # This file
-│       ├── spec.md
-│       ├── tasks.md
+│       ├── design-notes.md
+│       ├── implementation-plan.md
 │       ├── acceptance-criteria.md
 │       └── cursor-rules-or-instructions.md
 │
@@ -623,7 +623,7 @@ How Cursor should assist throughout this project.
 
 ### Before Writing Code
 
-1. **Read context first** — `docs/requirement-analysis.md` and this file
+1. **Read context first** — `docs/requirements-analysis.md` and this file
 2. **Confirm scope** — core vs stretch vs future; do not implement stretch unless asked
 3. **Plan before generating** — outline files to create/modify
 4. **Ask when ambiguous** — don't guess on unresolved requirements
@@ -663,11 +663,11 @@ When asking Cursor for help, include:
 
 **Example prompt:**
 
-> Implement `StatusTransitionService` per BR-02 in `docs/requirement-analysis.md`. Valid transitions only. Throw 400 with clear message on invalid. No frontend code.
+> Implement `StatusTransitionService` per BR-02 in `docs/requirements-analysis.md`. Valid transitions only. Throw 400 with clear message on invalid. No frontend code.
 
 ### Documentation Updates
 
-Cursor may update docs when asked, but should not silently change `requirement-analysis.md`. Implementation details go in `spec.md`, `tasks.md`, or README.
+Cursor may update docs when asked, but should not silently change `requirements-analysis.md`. Implementation details go in `design-notes.md`, `implementation-plan.md`, or README.
 
 ### Exercise Integrity
 
@@ -683,7 +683,7 @@ A feature or the overall project is **done** when all applicable criteria below 
 
 ### Per-Feature Done
 
-- [ ] Implements mapped functional requirements from `requirement-analysis.md`
+- [ ] Implements mapped functional requirements from `requirements-analysis.md`
 - [ ] Backend validation in place
 - [ ] Frontend displays API errors appropriately
 - [ ] No secrets committed
@@ -714,7 +714,7 @@ A feature or the overall project is **done** when all applicable criteria below 
 
 #### Exercise Artifacts
 
-- [ ] **AC-19:** `docs/requirement-analysis.md` complete
+- [ ] **AC-19:** `docs/requirements-analysis.md` complete
 - [ ] **AC-20:** `prompt-history/` maintained
 - [ ] **AC-21:** `tool-specific/cursor-workflow/` artifacts present
 - [ ] **AC-22:** Testing and debugging notes documented
@@ -758,4 +758,4 @@ A feature or the overall project is **done** when all applicable criteria below 
 
 ---
 
-*This document is the persistent Cursor context for the Support Ticket Management System. Update it when major architectural decisions change. Requirement details: `docs/requirement-analysis.md`. Implementation blueprint: `tool-specific/cursor-workflow/spec.md`. Work sequencing: `tool-specific/cursor-workflow/tasks.md`.*
+*This document is the persistent Cursor context for the Support Ticket Management System. Update it when major architectural decisions change. Requirement details: `docs/requirements-analysis.md`. Implementation blueprint: `tool-specific/cursor-workflow/design-notes.md`. Work sequencing: `tool-specific/cursor-workflow/implementation-plan.md`.*

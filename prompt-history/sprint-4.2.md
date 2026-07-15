@@ -50,6 +50,7 @@ Deliver the ticket list UI with search and status filtering: `useTickets` hook, 
 
 **What I accepted / changed:** Approved batch implementation.
 
+**What I rejected / why:** Rejected plain first-pass list UI — triggered redesign in Prompt 2.
 **Iteration needed:** Yes — UI redesign followed.
 
 ---
@@ -66,6 +67,7 @@ Deliver the ticket list UI with search and status filtering: `useTickets` hook, 
 
 **What I accepted / changed:** Accepted direction; further refined with mockup layout.
 
+**What I rejected / why:** Rejected stopping at generic modern UI — required mockup-aligned layout (Prompt 3).
 **Iteration needed:** Yes — mockup layout prompt next.
 
 ---
@@ -85,6 +87,8 @@ Deliver the ticket list UI with search and status filtering: `useTickets` hook, 
 
 **What I accepted / changed:** Approved — "looks good."
 
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
+
 **Iteration needed:** No
 
 ---
@@ -99,9 +103,11 @@ Deliver the ticket list UI with search and status filtering: `useTickets` hook, 
 **AI output:**
 - Fixed `PageHeader.tsx` unused import (build blocker)
 - `npm run build` — passed
-- Updated `tasks.md`, `acceptance-criteria.md`, `tool-workflow.md`, sprint log
+- Updated `implementation-plan.md`, `acceptance-criteria.md`, `tool-workflow.md`, sprint log
 
 **What I accepted / changed:** Approved.
+
+**What I rejected / why:** N/A — output verified at QG; no changes needed.
 
 **Iteration needed:** No
 
@@ -148,7 +154,7 @@ Deliver the ticket list UI with search and status filtering: `useTickets` hook, 
 | `client/src/index.css` | Updated — brand tokens, Tailwind v4 |
 | `client/src/lib/cn.ts` | Created |
 | `client/src/components/common/Layout.tsx` | Deleted (replaced by layout/) |
-| `tool-specific/cursor-workflow/tasks.md` | Sprint 4.2 complete |
+| `tool-specific/cursor-workflow/implementation-plan.md` | Sprint 4.2 complete |
 | `tool-specific/cursor-workflow/acceptance-criteria.md` | TKT-04, TKT-08, FE-04, FE-07, ERR-02 |
 | `tool-workflow.md` | Sprint 4.2 section |
 

@@ -1,8 +1,8 @@
 /**
  * Task 5.2.2 — Verify persistence marker after restart.
- * Run: API_BASE=http://localhost:3000/api TICKET_ID=<id> node scripts/persistence-522-verify.mjs
+ * Run: API_BASE=http://localhost:3001/api TICKET_ID=<id> node scripts/persistence-522-verify.mjs
  */
-const BASE = process.env.API_BASE ?? 'http://localhost:3000/api';
+const BASE = process.env.API_BASE ?? 'http://localhost:3001/api';
 const TICKET_ID = process.env.TICKET_ID;
 const EXPECTED_TITLE = 'Persistence check 5.2.2 — 2026-07-13';
 const EXPECTED_COMMENT = 'Marker comment for Task 5.2.2 persistence verification.';

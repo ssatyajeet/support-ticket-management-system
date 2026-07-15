@@ -21,10 +21,10 @@ Three-tier monorepo: `client/` (React + Vite + TS) + `server/` (Express + TS) + 
 
 ## Document Authority (resolve conflicts in this order)
 
-1. `docs/requirement-analysis.md` — FR/BR/AC business authority
-2. `tool-specific/cursor-workflow/spec.md` — technical blueprint
+1. `docs/requirements-analysis.md` — FR/BR/AC business authority
+2. `tool-specific/cursor-workflow/design-notes.md` — technical blueprint
 3. `tool-specific/cursor-workflow/acceptance-criteria.md` — verification checklist
-4. `tool-specific/cursor-workflow/tasks.md` — sprint execution order
+4. `tool-specific/cursor-workflow/implementation-plan.md` — sprint execution order
 5. `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` — engineering rules
 
 ## Non-Negotiables
