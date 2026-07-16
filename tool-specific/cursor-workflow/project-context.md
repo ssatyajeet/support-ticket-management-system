@@ -1,12 +1,12 @@
 # Project Context — Support Ticket Management System
 
-**Purpose:** Persistent AI context for Cursor throughout the project lifecycle.  
-**Source of Truth:** `docs/requirements-analysis.md` (v1.1)  
+> **Canonical planning docs** now live at repository root (`requirements-analysis.md`, `design-notes.md`, `implementation-plan.md`, `acceptance-criteria.md`). This file remains Cursor-specific context.  
+**Source of Truth:** `requirements-analysis.md` (v1.1)  
 **Last Updated:** July 7, 2026  
 **Status:** Active — Pre-Implementation  
-**Spec:** `tool-specific/cursor-workflow/design-notes.md` (v1.1)
+**Spec:** `design-notes.md` (v1.1)
 
-> When requirements conflict, **`docs/requirements-analysis.md` wins**. This document translates those requirements into architectural and collaboration guidance for AI-assisted development.
+> When requirements conflict, **`requirements-analysis.md` wins**. This document translates those requirements into architectural and collaboration guidance for AI-assisted development.
 
 ---
 
@@ -150,7 +150,7 @@ Architectural technology roles for v1. **Exact dependency versions are pinned in
 
 ## 4a. Design Decisions (Summary)
 
-Full register with rationale: **`design-notes.md` §5**. Product decisions (OQ-01–OQ-15): `docs/requirements-analysis.md` §16.
+Full register with rationale: **`design-notes.md` §5**. Product decisions (OQ-01–OQ-15): `requirements-analysis.md` §16.
 
 | ID | Decision |
 | -- | -------- |
@@ -170,7 +170,7 @@ Full register with rationale: **`design-notes.md` §5**. Product decisions (OQ-0
 
 ## 4b. Risks & Trade-offs (Summary)
 
-Full register: **`design-notes.md` §7**. Business risks: `docs/requirements-analysis.md` §13.
+Full register: **`design-notes.md` §7**. Business risks: `requirements-analysis.md` §13.
 
 **Key trade-offs accepted:**
 
@@ -623,7 +623,7 @@ How Cursor should assist throughout this project.
 
 ### Before Writing Code
 
-1. **Read context first** — `docs/requirements-analysis.md` and this file
+1. **Read context first** — `requirements-analysis.md` and this file
 2. **Confirm scope** — core vs stretch vs future; do not implement stretch unless asked
 3. **Plan before generating** — outline files to create/modify
 4. **Ask when ambiguous** — don't guess on unresolved requirements
@@ -663,7 +663,7 @@ When asking Cursor for help, include:
 
 **Example prompt:**
 
-> Implement `StatusTransitionService` per BR-02 in `docs/requirements-analysis.md`. Valid transitions only. Throw 400 with clear message on invalid. No frontend code.
+> Implement `StatusTransitionService` per BR-02 in `requirements-analysis.md`. Valid transitions only. Throw 400 with clear message on invalid. No frontend code.
 
 ### Documentation Updates
 
@@ -714,7 +714,7 @@ A feature or the overall project is **done** when all applicable criteria below 
 
 #### Exercise Artifacts
 
-- [ ] **AC-19:** `docs/requirements-analysis.md` complete
+- [ ] **AC-19:** `requirements-analysis.md` complete
 - [ ] **AC-20:** `prompt-history/` maintained
 - [ ] **AC-21:** `tool-specific/cursor-workflow/` artifacts present
 - [ ] **AC-22:** Testing and debugging notes documented
@@ -758,4 +758,4 @@ A feature or the overall project is **done** when all applicable criteria below 
 
 ---
 
-*This document is the persistent Cursor context for the Support Ticket Management System. Update it when major architectural decisions change. Requirement details: `docs/requirements-analysis.md`. Implementation blueprint: `tool-specific/cursor-workflow/design-notes.md`. Work sequencing: `tool-specific/cursor-workflow/implementation-plan.md`.*
+*This document is the persistent Cursor context for the Support Ticket Management System. Update it when major architectural decisions change. Requirement details: `requirements-analysis.md`. Implementation blueprint: `design-notes.md`. Work sequencing: `implementation-plan.md`.*

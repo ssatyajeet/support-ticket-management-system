@@ -4,16 +4,16 @@
 **Date:** July 15, 2026  
 **Role:** Solution Architecture & Technical Lead  
 **Status:** Approved for Implementation  
-**Traceability:** `docs/requirements-analysis.md` (v1.1), `tool-specific/cursor-workflow/project-context.md`
+**Traceability:** `requirements-analysis.md` (v1.1), `tool-specific/cursor-workflow/project-context.md`
 
 ### Design sections
 
 | Section | Location in this document |
 | ------- | ------------------------- |
 | **Architecture Overview** | Three-tier diagram — frontend, backend, database |
-| **Frontend Design** | Pages, components, hooks, routing |
-| **Backend Design** | Layers, modules, state machine |
-| **Database Design** | Schema, enums, relationships, seed |
+| **Frontend Design** | [`ui-flow.md`](ui-flow.md) — pages, components, routing, state |
+| **Backend Design** | Layers, modules, state machine (below) |
+| **Database Design** | [`data-model.md`](data-model.md) — schema, enums, relationships, seed |
 | **Validation Strategy** | Zod + service-layer rules |
 | **Error Handling Strategy** | `ErrorResponse` shape and middleware |
 | **Testing Strategy Link** | Scope summary + links to testing docs |
@@ -89,7 +89,7 @@ Describes architectural technology **roles** — not pinned dependency versions.
 
 ## 5. Design Decisions
 
-Technical and architectural decisions for v1. Product-level decisions (field lengths, seed data, etc.) remain in `docs/requirements-analysis.md` §16 (OQ-01–OQ-15). Cross-references noted where applicable.
+Technical and architectural decisions for v1. Product-level decisions (field lengths, seed data, etc.) remain in `requirements-analysis.md` §16 (OQ-01–OQ-15). Cross-references noted where applicable.
 
 ### DD-01 — REST API over GraphQL
 
@@ -183,7 +183,7 @@ Clear separation between presentation, application, and data layers.
 
 ## 7. Risks & Trade-offs
 
-Single register of accepted architectural trade-offs and technical risks. Full business risk register: `docs/requirements-analysis.md` §13.
+Single register of accepted architectural trade-offs and technical risks. Full business risk register: `requirements-analysis.md` §13.
 
 ### Trade-offs (Accepted)
 
@@ -248,63 +248,7 @@ Single register of accepted architectural trade-offs and technical risks. Full b
 
 ## Frontend Design
 
-### 9.1 Pages
-
-| Page | Route | Purpose | API Calls |
-| ---- | ----- | ------- | --------- |
-| **TicketListPage** | `/` | List tickets with search and status filter | `GET /api/tickets`, `GET /api/users` (optional cache) |
-| **TicketDetailPage** | `/tickets/:id` | View ticket, edit fields, change status, comments | `GET /api/tickets/:id`, `PATCH /api/tickets/:id`, `PATCH /api/tickets/:id/status`, `POST /api/tickets/:id/comments` |
-| **CreateTicketPage** | `/tickets/new` | Create new ticket | `POST /api/tickets`, `GET /api/users` |
-
-**Traceability:** US-01–US-06, US-09–US-15, AC-01–AC-11
-
-### 9.2 Components
-
-| Component | Type | Responsibility |
-| --------- | ---- | -------------- |
-| `TicketCard` | Presentational | Single row/card in list: title, status badge, priority, assignee |
-| `TicketList` | Container | Renders ticket array; empty state |
-| `TicketForm` | Form | Create/edit: title, description, priority, createdBy, assignedTo |
-| `StatusSelector` | Form | Shows only **valid next statuses** for current state (UX hint; backend enforces) |
-| `StatusBadge` | Presentational | Color-coded status label |
-| `PriorityBadge` | Presentational | Color-coded priority label |
-| `CommentList` | Presentational | Chronological comments with author name and timestamp |
-| `CommentForm` | Form | Message + createdBy dropdown |
-| `SearchBar` | Input | Debounced search term |
-| `StatusFilter` | Select | All statuses + individual status values |
-| `UserSelect` | Select | Dropdown of seeded users |
-| `ErrorAlert` | Feedback | Displays API error message |
-| `LoadingSpinner` | Feedback | Loading state |
-| `Layout` | Shell | Header, navigation, main content area |
-
-### 9.3 Routing
-
-| Path | Component | Notes |
-| ---- | --------- | ----- |
-| `/` | `TicketListPage` | Default landing |
-| `/tickets/new` | `CreateTicketPage` | |
-| `/tickets/:id` | `TicketDetailPage` | Invalid ID → show 404 from API |
-| `*` | NotFound fallback | Link back to list |
-
-Router: **React Router** (`BrowserRouter`).
-
-### 9.4 State Management
-
-| Approach | Usage |
-| -------- | ----- |
-| **Local component state** | Form inputs, UI toggles |
-| **Custom hooks** | `useTickets(filters)`, `useTicket(id)`, `useUsers()` — encapsulate fetch + loading + error |
-| **URL query params** | Persist `search` and `status` filter on list page (`?search=vpn&status=Open`) |
-| **No global store** | Redux/Zustand not required for v1 scope |
-
-**Data flow:** User action → hook calls `api/` → update local state on success → display `ErrorAlert` on failure.
-
-**UX rules:**
-
-- Display `assignedToName` or **"Unassigned"** when null
-- Render user content as text (XSS-safe; no `dangerouslySetInnerHTML`)
-- On invalid status transition, show API `error.message` near `StatusSelector`
-- Disable submit buttons while request in flight
+> **Canonical spec:** [`ui-flow.md`](ui-flow.md) — pages, components, routing, state management, UX rules (US-01–US-15, AC-01–AC-11).
 
 ---
 
@@ -393,81 +337,8 @@ Controllers: parse request → call service → map to HTTP status → send JSON
 
 ## Database Design
 
-### 11.1 Tables
-
-#### `users`
-
-| Column | Type | Constraints |
-| ------ | ---- | ----------- |
-| `id` | `SERIAL` or `UUID` | PRIMARY KEY |
-| `name` | `VARCHAR(100)` | NOT NULL |
-| `email` | `VARCHAR(255)` | NOT NULL, UNIQUE |
-| `role` | `Role` enum | NOT NULL |
-| `createdAt` | `TIMESTAMPTZ` | DEFAULT now() |
-
-#### `tickets`
-
-| Column | Type | Constraints |
-| ------ | ---- | ----------- |
-| `id` | `SERIAL` or `UUID` | PRIMARY KEY |
-| `title` | `VARCHAR(200)` | NOT NULL |
-| `description` | `VARCHAR(5000)` | NOT NULL |
-| `priority` | `Priority` enum | NOT NULL |
-| `status` | `Status` enum | NOT NULL, DEFAULT Open |
-| `assignedToId` | FK → users.id | NULLABLE |
-| `createdById` | FK → users.id | NOT NULL |
-| `createdAt` | `TIMESTAMPTZ` | DEFAULT now() |
-| `updatedAt` | `TIMESTAMPTZ` | UPDATED on change |
-
-#### `comments`
-
-| Column | Type | Constraints |
-| ------ | ---- | ----------- |
-| `id` | `SERIAL` or `UUID` | PRIMARY KEY |
-| `ticketId` | FK → tickets.id | NOT NULL |
-| `message` | `VARCHAR(2000)` | NOT NULL |
-| `createdById` | FK → users.id | NOT NULL |
-| `createdAt` | `TIMESTAMPTZ` | DEFAULT now() |
-
-### 11.2 Relationships
-
-```
-users 1───* tickets (createdById)
-users 1───* tickets (assignedToId)  [optional]
-users 1───* comments (createdById)
-tickets 1───* comments (ticketId)
-```
-
-### 11.3 Constraints
-
-| Constraint | Rule |
-| ---------- | ---- |
-| FK `createdById` | ON DELETE RESTRICT |
-| FK `assignedToId` | ON DELETE RESTRICT |
-| FK `comments.createdById` | ON DELETE RESTRICT |
-| FK `comments.ticketId` | ON DELETE RESTRICT (or CASCADE if ticket delete added later — not v1) |
-| `users.email` | UNIQUE |
-| Enum values | See below |
-
-**Prisma Enums:**
-
-| Enum | Values |
-| ---- | ------ |
-| `Role` | `Agent`, `Manager`, `Admin` |
-| `Priority` | `Low`, `Medium`, `High`, `Critical` |
-| `Status` | `Open`, `InProgress`, `Resolved`, `Closed`, `Cancelled` |
-
-**API ↔ DB status mapping:** API uses `"In Progress"` (with space) in JSON; map to/from `InProgress` in service layer or use `@map` in Prisma.
-
-### 11.4 Seed Data
-
-| Entity | Count | Requirements |
-| ------ | ----- | ------------ |
-| Users | 3 | One Agent, one Manager, one Admin |
-| Tickets | ≥5 | At least one per status |
-| Comments | ≥5 | At least one per sample ticket |
-
-**Seed command:** `npx prisma db seed` (configure in `package.json`).
+> **Canonical spec:** [`data-model.md`](data-model.md) — tables, relationships, constraints, enums, seed requirements.  
+> **Setup:** [`database/setup-notes.md`](database/setup-notes.md). **Implementation:** `server/prisma/`.
 
 ---
 
@@ -724,11 +595,10 @@ Request → Zod validate → Controller → Service
 
 | Document | Purpose |
 | -------- | ------- |
-| [`docs/test-strategy.md`](../../docs/test-strategy.md) | Formal strategy — scope, tiers, gaps |
-| [`docs/testing-notes.md`](../../docs/testing-notes.md) | Test stack, setup, scenarios, how to run |
-| [`docs/test-run-evidence.md`](../../docs/test-run-evidence.md) | Recorded test run output (AC-17, AC-18) |
-| [`docs/manual-regression-checklist.md`](../../docs/manual-regression-checklist.md) | Sprint 5.2 manual QA checklist |
-| [`docs/debugging-notes.md`](../../docs/debugging-notes.md) | Issues found and fixes during QA |
+| [`test-strategy.md`](test-strategy.md) | Formal strategy — scope, tiers, gaps, operational runbook |
+| [`test-results.md`](test-results.md) | Recorded test run output (AC-17, AC-18) |
+| [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md) | Sprint 5.2 manual QA checklist |
+| [`debugging-notes.md`](debugging-notes.md) | Issues found and fixes during QA |
 
 ### Scope summary (mandatory v1)
 
@@ -759,7 +629,7 @@ Frontend unit tests, E2E browser tests, load tests, 100% coverage targets.
 cd server && npm run test
 ```
 
-Document approach and failures in [`docs/testing-notes.md`](../../docs/testing-notes.md).
+Document approach and failures in [`test-strategy.md`](test-strategy.md).
 
 ---
 
@@ -804,7 +674,7 @@ Document approach and failures in [`docs/testing-notes.md`](../../docs/testing-n
 | A-07 | Last-write-wins for concurrent edits |
 | A-08 | Developer has Node.js LTS and a package manager installed |
 | A-09 | Exercise artifacts maintained alongside code |
-| A-10 | Implementation sequencing defined in `tool-specific/cursor-workflow/implementation-plan.md` |
+| A-10 | Implementation sequencing defined in `implementation-plan.md` |
 
 ---
 
@@ -870,4 +740,4 @@ Document approach and failures in [`docs/testing-notes.md`](../../docs/testing-n
 
 ---
 
-*These design notes are the implementation blueprint for developers and AI assistants. Implementation sequencing: `tool-specific/cursor-workflow/implementation-plan.md`. Business rules authority: `docs/requirements-analysis.md`. Collaboration conventions: `tool-specific/cursor-workflow/project-context.md`. Full API contract: §12 API Specification in this file.*
+*These design notes are the implementation blueprint for developers and AI assistants. Implementation sequencing: `implementation-plan.md`. Business rules authority: `requirements-analysis.md`. Collaboration conventions: `tool-specific/cursor-workflow/project-context.md`. Full API contract: [`api-contract.md`](api-contract.md). UI flow: [`ui-flow.md`](ui-flow.md). Data model: [`data-model.md`](data-model.md).*

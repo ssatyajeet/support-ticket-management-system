@@ -9,11 +9,10 @@
 
 | Document | Role |
 | -------- | ---- |
-| [`docs/testing-notes.md`](testing-notes.md) | Setup, commands, troubleshooting |
-| [`docs/test-run-evidence.md`](test-run-evidence.md) | Recorded Vitest output |
-| [`docs/manual-regression-checklist.md`](manual-regression-checklist.md) | Sprint 5.2 manual QA matrix |
-| [`docs/debugging-notes.md`](debugging-notes.md) | Defects found during QA |
-| [`tool-specific/cursor-workflow/acceptance-criteria.md`](../tool-specific/cursor-workflow/acceptance-criteria.md) | Verification checklist |
+| [`test-results.md`](test-results.md) | Recorded Vitest output |
+| [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md) | Sprint 5.2 manual QA matrix |
+| [`debugging-notes.md`](debugging-notes.md) | Defects found during QA |
+| [`acceptance-criteria.md`](acceptance-criteria.md) | Verification checklist |
 
 ---
 
@@ -175,7 +174,7 @@ Frontend **component tests are not implemented in v1** (no React Testing Library
 
 ### Strategy
 
-All **22 edge cases** (EC-01–EC-22) from `docs/requirements-analysis.md` §12 are addressed using a **three-tier** approach:
+All **22 edge cases** (EC-01–EC-22) from `requirements-analysis.md` §12 are addressed using a **three-tier** approach:
 
 | Tier | Method | Cases |
 | ---- | ------ | ----- |
@@ -210,7 +209,7 @@ All **22 edge cases** (EC-01–EC-22) from `docs/requirements-analysis.md` §12 
 | EC-21 | `status` on general PATCH | 1 | 400 |
 | EC-22 | Invalid status filter | 1 | 400 |
 
-Full manual matrix: [`docs/manual-regression-checklist.md`](manual-regression-checklist.md) Section M.
+Full manual matrix: [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md) Section M.
 
 ### Running edge-case API script
 
@@ -248,4 +247,87 @@ After AC-01–AC-18 pass and submission is complete, stretch sprint S.1 may add 
 
 ---
 
-*Operational runbook: [`docs/testing-notes.md`](testing-notes.md). Design context: [`tool-specific/cursor-workflow/design-notes.md`](../tool-specific/cursor-workflow/design-notes.md) § Testing Strategy Link.*
+## Operational runbook
+
+*Merged from former `docs/testing-notes.md` (TST-08).*
+
+### Prerequisites
+
+1. PostgreSQL running locally
+2. `server/.env` configured (copy from `server/.env.example`)
+3. Migrations applied: `cd server && npm run db:migrate`
+4. Prisma client generated: `npx prisma generate` (runs with migrate)
+
+### Environment variables
+
+| Variable | Purpose |
+| -------- | ------- |
+| `DATABASE_URL` | PostgreSQL connection for dev **and** tests |
+| `PORT` | API port (default `3001`) |
+| `CLIENT_URL` | CORS origin (default `http://localhost:5173`) |
+
+**Test database strategy:** Tests truncate `comments`, `tickets`, and `users` before each test case and re-seed minimal fixtures. You may use a dedicated test database by pointing `DATABASE_URL` to e.g. `support_tickets_test` — recommended for CI.
+
+### Test stack
+
+| Tool | Role |
+| ---- | ---- |
+| **Vitest** | Test runner (`server/vitest.config.ts`) |
+| **Supertest** | HTTP assertions against Express app |
+| **Prisma** | Direct DB seed/reset in `tests/helpers/db.ts` |
+
+The Express app is exported from `server/src/app.ts` (no `listen()` in tests).
+
+### Running tests
+
+```bash
+cd server
+npm run test
+```
+
+Watch mode (optional):
+
+```bash
+npm run test:watch
+```
+
+### Troubleshooting
+
+| Issue | Fix |
+| ----- | --- |
+| `DATABASE_URL is required` | Create `server/.env` from `.env.example` |
+| Connection refused | Start PostgreSQL; verify connection string |
+| Migration errors | Run `npm run db:migrate` |
+| Tests pollute dev data | Use a separate test database in `DATABASE_URL` |
+| Port conflicts | Tests do not start HTTP server; port only needed for env validation |
+
+### Persistence & secrets (Task 5.2.2 — AC-12, AC-14)
+
+1. **Do not** run `npm run test` or `npm run db:seed` after creating marker data.
+2. Create marker ticket + comment:
+   ```bash
+   API_BASE=http://localhost:<PORT>/api node server/scripts/persistence-522-baseline.mjs
+   ```
+3. **Server restart:** stop Express, then `npm run dev`. Verify with `persistence-522-verify.mjs`.
+4. **Database restart:** restart PostgreSQL service. Re-run verify script.
+
+**Secrets check:**
+
+```powershell
+git check-ignore -v server/.env client/.env
+git ls-files | Select-String "\.env"   # only *.env.example expected
+```
+
+See [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md) Section L.
+
+### Malformed JSON (EC-19)
+
+```powershell
+curl.exe -X POST http://localhost:3001/api/tickets -H "Content-Type: application/json" -d "{invalid"
+```
+
+Expected: `400` `VALIDATION_ERROR`. Fixed 2026-07-13 — see [`debugging-notes.md`](debugging-notes.md) DEF-001 and [`review-fixes.md`](review-fixes.md).
+
+---
+
+*Design context: [`design-notes.md`](design-notes.md). Test results: [`test-results.md`](test-results.md).*

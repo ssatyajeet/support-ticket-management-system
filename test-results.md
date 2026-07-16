@@ -1,4 +1,4 @@
-# Test Run Evidence — Support Ticket Management System
+# Test Results — Support Ticket Management System
 
 **Purpose:** Committed proof that the mandatory integration test suite passes (AC-17, AC-18, TST-08).  
 **Test file:** `server/tests/integration/statusTransition.integration.test.ts`  
@@ -43,9 +43,9 @@
 | **Date** | 2026-07-13 |
 | **Context** | Sprint 6.2.3 final regression before hand-in |
 | **Result** | **16 / 16 passed** |
-| **Traceability** | [`prompt-history/sprint-6.2.md`](../prompt-history/sprint-6.2.md), [`docs/pr-description.md`](pr-description.md) |
+| **Traceability** | [`prompt-history/sprint-6.2.md`](prompt-history/sprint-6.2.md), [`pr-description.md`](pr-description.md) |
 
-API regression script (separate from Vitest): `regression-521-api.mjs` — **26/26** on 2026-07-13 (after re-seed). See [`docs/manual-regression-checklist.md`](manual-regression-checklist.md).
+API regression script (separate from Vitest): `regression-521-api.mjs` — **26/26** on 2026-07-13 (after re-seed). See [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md).
 
 ---
 
@@ -94,7 +94,7 @@ npm run test
 
 Expected: `Tests 16 passed (16)`, exit code 0.
 
-Further detail: [`docs/testing-notes.md`](testing-notes.md).
+Further detail: [`test-strategy.md`](test-strategy.md).
 
 ---
 

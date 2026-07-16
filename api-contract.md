@@ -5,7 +5,7 @@
 **Status:** Approved — matches implemented API  
 **Base URL:** `http://localhost:3001/api`  
 **Content-Type:** `application/json`  
-**Authority:** `tool-specific/cursor-workflow/design-notes.md` (architecture); `docs/requirements-analysis.md` (business rules)
+**Authority:** `design-notes.md` (architecture); `requirements-analysis.md` (business rules)
 
 ### Shared types
 
@@ -488,4 +488,4 @@ Malformed JSON body → **400** with parse error message (EC-19).
 
 ---
 
-*Full design context: `tool-specific/cursor-workflow/design-notes.md`. Verification checklist: `tool-specific/cursor-workflow/acceptance-criteria.md`.*
+*Full design context: `design-notes.md`. Verification checklist: `acceptance-criteria.md`.*

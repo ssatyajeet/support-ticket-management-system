@@ -5,6 +5,8 @@ AI-assisted development log for the Support Ticket Management System exercise (A
 This folder records how AI (Cursor) was used during each sprint — prompts given, iterations made,
 decisions taken by the developer, and what was accepted or changed.
 
+**Curated activity view (reviewer-friendly):** [`ai-prompts/README.md`](../ai-prompts/README.md) — `planning.md`, `design.md`, `implementation.md`, `testing.md`, `debugging.md`, `code-review.md`, `documentation.md`.
+
 **Logging policy:** One file per sprint at Quality Gate. Prompts are **verbatim** from the Cursor conversation transcript (see `.cursor/rules/prompt-history-sprint-log.mdc`). Developer review status recorded per session.
 
 ---
@@ -60,9 +62,10 @@ Each session file uses this structure:
 - Some AI output was **changed or rejected** (honest ownership) — each prompt logs **What I rejected / why**
 - Requirements are **traced** to AC / FR / BR IDs
 - History is **honest** — no fabricated sessions
+- **Activity portfolio:** [`ai-prompts/`](../ai-prompts/) — curated by lifecycle (requirements → submission)
 
 ---
 
-*For requirement authority see `docs/requirements-analysis.md`.
-For execution order see `tool-specific/cursor-workflow/implementation-plan.md`.
+*For requirement authority see `requirements-analysis.md`.
+For execution order see `implementation-plan.md`.
 For AI collaboration rules see `tool-specific/cursor-workflow/cursor-rules-or-instructions.md`.*

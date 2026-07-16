@@ -33,17 +33,18 @@ This PR delivers the **Support Ticket Management System** — a full-stack inter
 
 | Artifact | Location |
 | -------- | -------- |
-| Requirement analysis v1.1 | `docs/requirements-analysis.md` |
-| Design notes | `tool-specific/cursor-workflow/design-notes.md` |
-| API contract | `tool-specific/cursor-workflow/api-contract.md` |
-| Implementation plan | `tool-specific/cursor-workflow/implementation-plan.md` |
-| Test strategy | `docs/test-strategy.md` |
-| Acceptance criteria | `tool-specific/cursor-workflow/acceptance-criteria.md` |
+| Requirement analysis v1.1 | `requirements-analysis.md` |
+| Design notes | `design-notes.md` |
+| API contract | `api-contract.md` |
+| Implementation plan | `implementation-plan.md` |
+| Test strategy | `test-strategy.md` |
+| Acceptance criteria | `acceptance-criteria.md` |
 | AI workflow | `tool-workflow.md` |
-| Prompt history | `prompt-history/sprint-*.md` |
-| Testing notes | `docs/testing-notes.md` |
-| Debugging notes | `docs/debugging-notes.md` |
-| Reflection | `docs/reflection.md` |
+| Prompt history (sprint archive) | `prompt-history/sprint-*.md` |
+| AI prompts (activity portfolio) | `ai-prompts/` |
+| Test results | `test-results.md` |
+| Debugging notes | `debugging-notes.md` |
+| Reflection | `reflection.md` |
 | Setup guide | `README.md` |
 
 ---
@@ -81,7 +82,7 @@ client/ (React)  ──HTTP──►  server/ (Express)
 | PATCH | `/api/tickets/:id/status` | State machine transitions |
 | POST | `/api/tickets/:id/comments` | Append comment |
 
-Full contract: [`tool-specific/cursor-workflow/api-contract.md`](../tool-specific/cursor-workflow/api-contract.md)
+Full contract: [`api-contract.md`](api-contract.md)
 
 ### Key files
 
@@ -120,9 +121,9 @@ npm run test
 
 **Expected:** 16/16 integration tests pass (valid/invalid transitions + API guards).
 
-Evidence: [`docs/test-run-evidence.md`](test-run-evidence.md) (latest run 2026-07-15; Sprint 6.2 run 2026-07-13).
+Evidence: [`test-results.md`](test-results.md) (latest run 2026-07-15; Sprint 6.2 run 2026-07-13).
 
-Strategy: [`docs/test-strategy.md`](test-strategy.md)
+Strategy: [`test-strategy.md`](test-strategy.md)
 
 ### API regression (optional)
 
@@ -138,7 +139,7 @@ node scripts/regression-521-api.mjs
 
 ### Manual
 
-- Follow [`docs/manual-regression-checklist.md`](manual-regression-checklist.md) — 33 cases
+- Follow [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md) — 33 cases
 - Demo happy path: create → In Progress → Resolved → Closed
 - Demo invalid transition rejection in UI and API
 
@@ -179,7 +180,7 @@ See [`README.md`](../README.md) for full instructions.
 | -- | ----- | --- |
 | DEF-001 | Malformed JSON → 500 | `errorHandler.ts` returns 400 `VALIDATION_ERROR` |
 
-Details: [`docs/debugging-notes.md`](debugging-notes.md)
+Details: [`debugging-notes.md`](debugging-notes.md)
 
 ---
 
@@ -187,7 +188,7 @@ Details: [`docs/debugging-notes.md`](debugging-notes.md)
 
 - **Tool:** Cursor (IDE-integrated)
 - **Approach:** Task-by-task implementation with developer approval between tasks
-- **Evidence:** `prompt-history/` (verbatim prompts per sprint), `tool-workflow.md`, `docs/reflection.md`
+- **Evidence:** `prompt-history/` (sprint logs), [`ai-prompts/`](ai-prompts/) (`planning.md` … `documentation.md`), `tool-workflow.md`, `reflection.md`
 
 The developer reviewed all AI output, made architectural decisions on open questions, ran Quality Gates, and manually verified behavior before marking criteria complete.
 
@@ -239,7 +240,7 @@ Deferred intentionally for v1 — documented, not hidden:
 | **Resilience** | EC-17 — graceful startup when DB unavailable (ERR-05) | Deferred in Sprint 5.2 |
 | **Observability** | Request correlation IDs in errors | Rejected in code review — out of v1 scope |
 
-See also [`docs/code-review-notes.md`](code-review-notes.md) §Suggestions Rejected for architecture-level deferrals.
+See also [`code-review-notes.md`](code-review-notes.md) §Suggestions Rejected for architecture-level deferrals.
 
 ---
 
@@ -249,16 +250,16 @@ See also [`docs/code-review-notes.md`](code-review-notes.md) §Suggestions Rejec
 - [ ] `npm run test` passes
 - [ ] Ticket list, create, detail, edit, status, comments work in UI
 - [ ] Invalid status transition shows API error in UI
-- [ ] `prompt-history/` shows iteration, not one-shot generation
-- [ ] `docs/reflection.md` present and honest
+- [ ] `prompt-history/` and `ai-prompts/` show iteration, not one-shot generation
+- [ ] `reflection.md` present and honest
 
 ---
 
 ## Related links
 
-- Requirement authority: `docs/requirements-analysis.md`
-- Technical blueprint: `tool-specific/cursor-workflow/design-notes.md`
-- Sprint execution: `tool-specific/cursor-workflow/implementation-plan.md`
+- Requirement authority: `requirements-analysis.md`
+- Technical blueprint: `design-notes.md`
+- Sprint execution: `implementation-plan.md`
 
 ---
 

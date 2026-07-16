@@ -18,11 +18,12 @@ It is a **floor, not a ceiling** — adapt names, stack details, and sprint brea
 
 | Artifact | Location |
 | -------- | -------- |
-| Execution playbook | `tool-specific/cursor-workflow/implementation-plan.md` (v2.0 — Generic Cursor Prompt, QG template) |
+| Execution playbook | `implementation-plan.md` (v2.0 — Generic Cursor Prompt, QG template) |
 | Permanent engineering rules | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` |
 | Lifecycle narrative | `tool-workflow.md` |
 | Sprint prompt logs | `prompt-history/` |
-| Code review pattern | `docs/code-review-notes.md` |
+| Activity prompt portfolio | `ai-prompts/` (curated by lifecycle — optional reviewer view) |
+| Code review pattern | `code-review-notes.md` |
 
 ---
 
@@ -44,30 +45,43 @@ It is a **floor, not a ceiling** — adapt names, stack details, and sprint brea
 
 ```text
 <project-root>/
-├── client/                          # Frontend
-├── server/                          # Backend API
+├── client/                          # Frontend (maps to target src/)
+├── server/                          # Backend API (maps to src/, tests/, database/)
+├── database/                        # setup-notes.md + pointers to server/prisma/
+├── tests/                           # README pointer to server/tests/
 ├── docs/
 │   ├── assignment.md                # Exercise / product brief (input)
-│   ├── requirements-analysis.md      # Business authority (FR/BR/AC)
-│   ├── candidate-info.md
-│   ├── reflection.md
-│   ├── code-review-notes.md
-│   ├── debugging-notes.md
-│   ├── testing-notes.md
-│   ├── pr-description.md
-│   └── reusable-workflow.md         # This file — update per project
+│   ├── manual-regression-checklist.md
+│   ├── reusable-workflow.md       # This file
+│   └── screenshots/
+├── requirements-analysis.md         # Business authority (FR/BR/AC)
+├── design-notes.md
+├── api-contract.md
+├── data-model.md
+├── ui-flow.md
+├── implementation-plan.md
+├── acceptance-criteria.md
+├── test-strategy.md
+├── test-results.md
+├── debugging-notes.md
+├── code-review-notes.md
+├── review-fixes.md
+├── reflection.md
+├── final-ai-usage-summary.md
+├── pr-description.md
+├── candidate-info.md
 ├── prompt-history/
-│   ├── README.md                    # Session index
-│   └── sprint-X.X.md                # Verbatim prompts at sprint QG
+│   ├── README.md
+│   └── sprint-X.X.md
+├── ai-prompts/
+│   ├── planning.md … documentation.md
 ├── tool-specific/
-│   └── cursor-workflow/             # Or kiro-specs / other-tool-workflow
+│   └── cursor-workflow/
+│       ├── README.md                # Pointer to root docs
 │       ├── project-context.md
-│       ├── design-notes.md
-│       ├── implementation-plan.md
-│       ├── acceptance-criteria.md
 │       └── cursor-rules-or-instructions.md
-├── tool-workflow.md                 # Part A lifecycle narrative
-├── .cursor/rules/                   # Sync from cursor-rules-or-instructions.md
+├── tool-workflow.md
+├── .cursor/rules/
 └── README.md
 ```
 
@@ -121,7 +135,7 @@ Read docs/assignment.md carefully.
 
 Do NOT generate code.
 
-Perform a complete requirement analysis and save it as docs/requirements-analysis.md.
+Perform a complete requirement analysis and save it as requirements-analysis.md.
 
 Include: overview, goals, functional/non-functional requirements, actors, entities,
 relationships, business rules, validation, user stories, flows, edge cases, risks,
@@ -139,11 +153,11 @@ Think like a BA preparing documentation before development.
 ```text
 You are acting as a Senior Solution Architect.
 
-Read docs/requirements-analysis.md (approved v1.1).
+Read requirements-analysis.md (approved v1.1).
 
 Do NOT generate application code.
 
-Produce tool-specific/cursor-workflow/design-notes.md: architecture, API contract, database schema,
+Produce design-notes.md: architecture, API contract, database schema,
 modules, error handling, validation strategy, design decisions (DD-01…), and traceability to FR/BR.
 
 Do not repeat the requirements-analysis document word-for-word.
@@ -160,7 +174,7 @@ Read requirements-analysis.md and design-notes.md.
 
 Do NOT generate application code.
 
-Produce tool-specific/cursor-workflow/acceptance-criteria.md as a practical verification
+Produce acceptance-criteria.md as a practical verification
 checklist (MT / IT / CR / DR methods).
 
 Do not simply copy the acceptance criteria from the requirement analysis —
@@ -177,12 +191,12 @@ Use after a first `implementation-plan.md` draft exists. This project's **Prompt
 You are acting as Principal Engineering Manager and AI Engineering Reviewer.
 
 Review as single source of truth:
-- docs/requirements-analysis.md
+- requirements-analysis.md
 - tool-specific/cursor-workflow/project-context.md
-- tool-specific/cursor-workflow/design-notes.md
-- tool-specific/cursor-workflow/acceptance-criteria.md
+- design-notes.md
+- acceptance-criteria.md
 - tool-specific/cursor-workflow/cursor-rules-or-instructions.md
-- tool-specific/cursor-workflow/implementation-plan.md (current)
+- implementation-plan.md (current)
 
 Do NOT generate application code.
 Do NOT rewrite project scope.
@@ -204,7 +218,7 @@ Refactor implementation-plan.md into a production-quality execution playbook:
 
 ### Template E — Generic implementation (every task)
 
-**Canonical copy** lives in `tool-specific/cursor-workflow/implementation-plan.md` §Generic Cursor Implementation Prompt. Short form:
+**Canonical copy** lives in `implementation-plan.md` §Generic Cursor Implementation Prompt. Short form:
 
 ```text
 You are implementing {PROJECT_NAME}.
@@ -237,7 +251,7 @@ For each finding: severity and recommended fix.
 Do not change code — review only. I will accept or reject each suggestion.
 ```
 
-Log outcomes in `docs/code-review-notes.md`.
+Log outcomes in `code-review-notes.md`.
 
 ---
 
@@ -254,7 +268,7 @@ Read @{relevant service/controller/middleware}.
 Root cause analysis only first — then propose minimal fix aligned with design-notes.md.
 ```
 
-Log in `docs/debugging-notes.md` with: Problem · Investigation · How AI helped · Validation · Final fix.
+Log in `debugging-notes.md` with: Problem · Investigation · How AI helped · Validation · Final fix.
 
 ---
 
@@ -307,7 +321,7 @@ Copy into each task completion note:
 
 ## Sprint Quality Gate (end of every sprint)
 
-Use **Enhanced Quality Gate Template** in `tool-specific/cursor-workflow/implementation-plan.md`:
+Use **Enhanced Quality Gate Template** in `implementation-plan.md`:
 
 - Requirements + AC verified
 - Engineering standards + architecture compliance
@@ -322,7 +336,7 @@ Use **Enhanced Quality Gate Template** in `tool-specific/cursor-workflow/impleme
 
 ## Prompt history discipline
 
-At **sprint Quality Gate only** (not every chat message), create `prompt-history/sprint-X.X.md`:
+At **sprint Quality Gate only** (not every chat message), create `prompt-history/sprint-X.X.md`. Optionally maintain `ai-prompts/` as an activity-grouped portfolio for reviewers (see this repo's `ai-prompts/README.md`).
 
 | Field per prompt | Content |
 | ---------------- | ------- |
@@ -389,7 +403,7 @@ Rules should encode **non-negotiables** (e.g. dedicated status endpoint, no secr
 
 - [`tool-workflow.md`](../tool-workflow.md) — how this workflow was applied on this project
 - [`reflection.md`](reflection.md) — lessons learned
-- [`tool-specific/cursor-workflow/implementation-plan.md`](../tool-specific/cursor-workflow/implementation-plan.md) — full Generic Prompt + QG template
+- [`implementation-plan.md`](../implementation-plan.md) — full Generic Prompt + QG template
 - [`prompt-history/sprint-2.1.md`](../prompt-history/sprint-2.1.md) — playbook refactor prompts
 
 ---

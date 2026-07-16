@@ -2,8 +2,8 @@
 
 Internal full-stack ticket management app built with **React + Vite**, **Express + TypeScript**, and **PostgreSQL (Prisma)**.
 
-- Business requirements: [`docs/requirements-analysis.md`](docs/requirements-analysis.md)
-- Technical blueprint: [`tool-specific/cursor-workflow/design-notes.md`](tool-specific/cursor-workflow/design-notes.md)
+- Business requirements: [`requirements-analysis.md`](requirements-analysis.md)
+- Technical blueprint: [`design-notes.md`](design-notes.md)
 - AI workflow log: [`tool-workflow.md`](tool-workflow.md)
 
 ## Prerequisites
@@ -18,12 +18,25 @@ Internal full-stack ticket management app built with **React + Vite**, **Express
 
 ```
 support-ticket-management-system/
-├── client/          # React + Vite frontend
-├── server/          # Express API + Prisma
-├── docs/            # Requirement analysis, testing, debugging notes
-├── prompt-history/  # AI-assisted development log (AC-20)
-└── tool-specific/   # Cursor workflow artifacts (spec, tasks, AC)
+├── client/              # React + Vite frontend (maps to target src/)
+├── server/              # Express API + Prisma (maps to target src/, tests/, database/)
+├── database/            # Setup notes + pointers to server/prisma/
+├── tests/               # Pointer to server/tests/
+├── docs/                # Exercise brief, manual QA evidence
+├── prompt-history/      # Sprint-by-sprint AI prompt archive (AC-20)
+├── ai-prompts/          # Activity-grouped AI prompt portfolio
+├── tool-specific/       # Cursor-only context (project-context, cursor-rules)
+├── requirements-analysis.md, design-notes.md, implementation-plan.md, …
+└── tool-workflow.md
 ```
+
+### Target structure mapping (monorepo preserved)
+
+| Target path | Actual location |
+| ----------- | --------------- |
+| `src/` | `client/src/` + `server/src/` |
+| `tests/` | `server/tests/` — see [`tests/README.md`](tests/README.md) |
+| `database/` | `server/prisma/` — see [`database/setup-notes.md`](database/setup-notes.md) |
 
 ## Quick start
 
@@ -216,7 +229,7 @@ npm run test
 
 Expected: all tests pass (status state machine — valid/invalid transitions and API guards).
 
-See [`docs/test-run-evidence.md`](docs/test-run-evidence.md) for committed run results (16/16) and [`docs/testing-notes.md`](docs/testing-notes.md) for setup and coverage matrix.
+See [`test-results.md`](test-results.md) for committed run results (16/16) and [`test-strategy.md`](test-strategy.md) for setup and coverage matrix.
 
 ### Manual regression
 
@@ -252,7 +265,7 @@ Both should complete without errors.
 | Empty ticket list after seed | Seed not run | `cd server && npm run db:seed` |
 | Tests fail on first run | Migrations not applied | `cd server && npm run db:migrate` |
 
-For defects found during QA, see [`docs/debugging-notes.md`](docs/debugging-notes.md).
+For defects found during QA, see [`debugging-notes.md`](debugging-notes.md).
 
 ---
 
@@ -260,19 +273,28 @@ For defects found during QA, see [`docs/debugging-notes.md`](docs/debugging-note
 
 | Document | Purpose |
 | -------- | ------- |
-| [`docs/candidate-info.md`](docs/candidate-info.md) | Candidate and submission overview |
-| [`docs/code-review-notes.md`](docs/code-review-notes.md) | AI-assisted and developer code review log |
-| [`docs/reusable-workflow.md`](docs/reusable-workflow.md) | Portable prompt and workflow template for reuse |
-| [`docs/requirements-analysis.md`](docs/requirements-analysis.md) | Business requirements (FR/BR/AC) |
-| [`docs/testing-notes.md`](docs/testing-notes.md) | Integration test setup and coverage |
-| [`docs/test-run-evidence.md`](docs/test-run-evidence.md) | Committed Vitest run results (16/16) |
-| [`docs/debugging-notes.md`](docs/debugging-notes.md) | Defects and resolutions |
-| [`docs/reflection.md`](docs/reflection.md) | Honest AI usage reflection (AC-23) |
-| [`docs/pr-description.md`](docs/pr-description.md) | Submission PR artifact |
+| [`candidate-info.md`](candidate-info.md) | Candidate and submission overview |
+| [`requirements-analysis.md`](requirements-analysis.md) | Business requirements (FR/BR/AC) |
+| [`design-notes.md`](design-notes.md) | API, schema, architecture |
+| [`api-contract.md`](api-contract.md) | Per-endpoint API contract |
+| [`data-model.md`](data-model.md) | Database schema and seed |
+| [`ui-flow.md`](ui-flow.md) | Frontend pages, components, routing |
+| [`implementation-plan.md`](implementation-plan.md) | Sprint execution plan |
+| [`acceptance-criteria.md`](acceptance-criteria.md) | Verification checklist |
+| [`test-strategy.md`](test-strategy.md) | Test strategy and operational runbook |
+| [`test-results.md`](test-results.md) | Committed Vitest run results (16/16) |
+| [`debugging-notes.md`](debugging-notes.md) | Defects and resolutions |
+| [`code-review-notes.md`](code-review-notes.md) | AI-assisted code review log |
+| [`review-fixes.md`](review-fixes.md) | Post-review fix log |
+| [`reflection.md`](reflection.md) | Honest AI usage reflection (AC-23) |
+| [`final-ai-usage-summary.md`](final-ai-usage-summary.md) | AI usage rollup |
+| [`pr-description.md`](pr-description.md) | Submission PR artifact |
+| [`docs/reusable-workflow.md`](docs/reusable-workflow.md) | Portable workflow template |
 | [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md) | Manual QA script |
 | [`tool-workflow.md`](tool-workflow.md) | AI-assisted development workflow |
-| [`prompt-history/`](prompt-history/) | Sprint-by-sprint prompt logs |
-| [`tool-specific/cursor-workflow/design-notes.md`](tool-specific/cursor-workflow/design-notes.md) | API, schema, architecture |
+| [`prompt-history/`](prompt-history/) | Sprint-by-sprint verbatim prompt logs |
+| [`ai-prompts/`](ai-prompts/) | Activity-grouped prompts |
+| [`tool-specific/cursor-workflow/`](tool-specific/cursor-workflow/) | Cursor context and rules |
 
 ---
 

@@ -9,8 +9,8 @@ alwaysApply: true
 
 | Document | Update trigger |
 | -------- | -------------- |
-| `tool-specific/cursor-workflow/implementation-plan.md` | Mark task checkbox; update Sprint Progress Tracker |
-| `tool-specific/cursor-workflow/acceptance-criteria.md` | Mark criterion status Completed when verified |
+| `implementation-plan.md` | Mark task checkbox; update Sprint Progress Tracker |
+| `acceptance-criteria.md` | Mark criterion status Completed when verified |
 | `README.md` | Update only if setup, run, or test steps change |
 | `tool-workflow.md` | Update "Pending" sections as implementation phases complete |
 | `prompt-history/` | At sprint Quality Gate — see `prompt-history-sprint-log.mdc` |

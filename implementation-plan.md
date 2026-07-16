@@ -4,7 +4,7 @@
 **Date:** July 15, 2026  
 **Owner:** Single developer (AI-assisted)  
 **Status:** Living document — **progress updates only** after v2.0 (see Planning Freeze)  
-**Sources:** `docs/requirements-analysis.md`, `project-context.md`, `design-notes.md`, `acceptance-criteria.md`, `cursor-rules-or-instructions.md`
+**Sources:** `requirements-analysis.md`, `project-context.md`, `design-notes.md`, `acceptance-criteria.md`, `cursor-rules-or-instructions.md`
 
 > **How to use:** Find the next incomplete **Task ID**. Implement **only that task**. Pass **Developer Review** and **Quality Gate** before proceeding. Update progress checkboxes, `acceptance-criteria.md`, and `prompt-history/` after each sprint.
 
@@ -105,12 +105,12 @@ Before making any changes:
 
 1. Read the following documents:
 
-- docs/requirements-analysis.md
+- requirements-analysis.md
 - tool-specific/cursor-workflow/project-context.md
-- tool-specific/cursor-workflow/design-notes.md
-- tool-specific/cursor-workflow/acceptance-criteria.md
+- design-notes.md
+- acceptance-criteria.md
 - tool-specific/cursor-workflow/cursor-rules-or-instructions.md
-- tool-specific/cursor-workflow/implementation-plan.md
+- implementation-plan.md
 
 2. Review the previously completed task.
 
@@ -377,7 +377,7 @@ Phased delivery roadmap — atomic tasks per sprint with Quality Gates.
 | 1.1.2 | Document FR, NFR, entities, relationships | [x] |
 | 1.1.3 | Define business rules, validation, user stories | [x] |
 | 1.1.4 | Resolve OQ-01–OQ-15 with developer review | [x] |
-| 1.1.5 | Produce `docs/requirements-analysis.md` v1.1 | [x] |
+| 1.1.5 | Produce `requirements-analysis.md` v1.1 | [x] |
 | 1.1.6 | Define AC-01–AC-23 | [x] |
 
 #### Quality Gate — Sprint 1.1
@@ -389,7 +389,7 @@ Phased delivery roadmap — atomic tasks per sprint with Quality Gates.
 
 #### Deliverables
 
-- [x] `docs/requirements-analysis.md` v1.1
+- [x] `requirements-analysis.md` v1.1
 
 #### Git Commit Plan
 
@@ -464,7 +464,7 @@ docs: add requirement analysis v1.1 with resolved design decisions
 
 **Expected output:** Short gap list (or "none") documented in sprint notes; any gaps fixed in spec with developer approval.
 
-**Files expected to change:** `tool-specific/cursor-workflow/design-notes.md` (only if gaps found)
+**Files expected to change:** `design-notes.md` (only if gaps found)
 
 **Dependencies:** Task 1.1.5
 
@@ -533,7 +533,7 @@ docs: add requirement analysis v1.1 with resolved design decisions
 
 **Expected output:** `acceptance-criteria.md` with feature criteria, sprint mapping, release checklist.
 
-**Files expected to change:** `tool-specific/cursor-workflow/acceptance-criteria.md`
+**Files expected to change:** `acceptance-criteria.md`
 
 **Dependencies:** Task 1.1.6
 
@@ -1556,7 +1556,7 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 | **5.1.3** | Valid transition tests (5) | `statusTransition.integration.test.ts` | [x] |
 | **5.1.4** | Invalid transition tests (≥6) | same | [x] |
 | **5.1.5** | Guard tests (status on PATCH, filter, 404) | same | [x] |
-| **5.1.6** | `docs/testing-notes.md` | docs | [x] |
+| **5.1.6** | `test-strategy.md` | root | [x] |
 
 #### Sprint Exit Criteria
 
@@ -1574,7 +1574,7 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 | **5.2.1** | Execute full manual regression script | [x] |
 | **5.2.2** | Persistence + secrets verification (AC-12, AC-14) | [x] |
 | **5.2.3** | Edge case sampling (EC-01–EC-22) | [x] |
-| **5.2.4** | Log/fix defects; `docs/debugging-notes.md` | [x] |
+| **5.2.4** | Log/fix defects; `debugging-notes.md` | [x] |
 | **5.2.5** | Update `acceptance-criteria.md` statuses | [x] |
 
 #### Sprint Exit Criteria
@@ -1613,7 +1613,7 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 
 | Task ID | Objective | Status |
 | ------- | --------- | ------ |
-| **6.2.1** | `docs/reflection.md` | [x] |
+| **6.2.1** | `reflection.md` | [x] |
 | **6.2.2** | PR description artifact | [x] |
 | **6.2.3** | Final regression (manual + tests) | [x] |
 | **6.2.4** | Project Completion Checklist sign-off | [x] |
@@ -1664,7 +1664,7 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 - [x] `.gitignore` — no secrets in Git
 - [x] No secrets in Git history (verified — no `.env` in git log)
 
-## Documentation — `docs/` (Required)
+## Documentation — root + `docs/` (Required)
 
 - [x] `assignment.md`, `requirements-analysis.md` v1.1
 - [x] `testing-notes.md`
@@ -1677,7 +1677,7 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 - [x] `tool-workflow.md`
 - [x] All `tool-specific/cursor-workflow/*` artifacts current
 - [x] `prompt-history/` organized (AC-20)
-- [x] PR description (AC-21) — `docs/pr-description.md`
+- [x] PR description (AC-21) — `pr-description.md`
 
 ## Acceptance Criteria AC-01–AC-23
 
@@ -1725,7 +1725,7 @@ Sprint-level completion tracker — each row is a milestone gate before the next
 
 # Risks
 
-Implementation and delivery risks for this plan. Full analysis: `docs/requirements-analysis.md` §13.
+Implementation and delivery risks for this plan. Full analysis: `requirements-analysis.md` §13.
 
 | ID | Risk | Likelihood | Impact |
 | -- | ---- | ---------- | ------ |
@@ -1778,4 +1778,4 @@ Implementation and delivery risks for this plan. Full analysis: `docs/requiremen
 
 ---
 
-*Living document — update task Status and Progress Tracker after each approved task and Quality Gate. Authority: `docs/requirements-analysis.md`. Blueprint: `design-notes.md`. Verification: `acceptance-criteria.md`.*
+*Living document — update task Status and Progress Tracker after each approved task and Quality Gate. Authority: `requirements-analysis.md`. Blueprint: `design-notes.md`. Verification: `acceptance-criteria.md`.*

@@ -3,7 +3,7 @@
 **Author:** Satyajeet Singh  
 **Date:** 2026-07-15 (consolidated); retrospective evidence from Sprints 2.1–5.2  
 **Traceability:** Part A (`tool-workflow.md` — code review with AI), AC-19–AC-23, DOC-10  
-**Standards used:** `docs/requirements-analysis.md`, `tool-specific/cursor-workflow/design-notes.md`, `.cursor/rules/`
+**Standards used:** `requirements-analysis.md`, `design-notes.md`, `.cursor/rules/`
 
 ---
 

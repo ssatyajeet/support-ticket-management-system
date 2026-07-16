@@ -145,9 +145,10 @@ The workflow used on this project is **documented as a portable template** for t
 | Reuse asset | Location | What it provides |
 | ----------- | -------- | ---------------- |
 | **Reusable workflow playbook** | [`docs/reusable-workflow.md`](reusable-workflow.md) | Folder skeleton, 8 prompt templates (A–H), validation/QG checklists, adaptation guide |
-| **Generic implementation prompt** | `tool-specific/cursor-workflow/implementation-plan.md` | Copy-paste prompt for every implementation task |
+| **Generic implementation prompt** | `implementation-plan.md` | Copy-paste prompt for every implementation task |
 | **Permanent Cursor rules** | `.cursor/rules/` + `cursor-rules-or-instructions.md` | Stack and architecture enforcement |
-| **Sprint prompt logs** | `prompt-history/` | Pattern for honest verbatim logging at Quality Gate |
+| **Sprint prompt logs** | `prompt-history/` | Verbatim sprint archive at Quality Gate |
+| **Activity prompt portfolio** | [`ai-prompts/`](../ai-prompts/) — `planning.md`, `design.md`, `implementation.md`, `testing.md`, `debugging.md`, `code-review.md`, `documentation.md` |
 
 **How I would reuse it:** Copy folder structure → run requirement analysis template → freeze planning (`implementation-plan.md` v2) → one-task-at-a-time implementation with developer approval → sprint QG + prompt history → submission artifacts (reflection, code-review-notes, this template updated for the new domain).
 
@@ -170,9 +171,10 @@ See [`docs/reusable-workflow.md`](reusable-workflow.md) for full copy-paste prom
 
 - [`tool-workflow.md`](../tool-workflow.md) — lifecycle AI workflow narrative
 - [`prompt-history/`](../prompt-history/) — verbatim sprint prompt logs
-- [`docs/testing-notes.md`](testing-notes.md) — how to run tests
-- [`docs/debugging-notes.md`](debugging-notes.md) — defects and fixes
-- [`docs/pr-description.md`](pr-description.md) — submission PR artifact
+- [`ai-prompts/`](../ai-prompts/) — activity-grouped prompt portfolio
+- [`test-strategy.md`](test-strategy.md) — how to run tests
+- [`debugging-notes.md`](debugging-notes.md) — defects and fixes
+- [`pr-description.md`](pr-description.md) — submission PR artifact
 - [`docs/reusable-workflow.md`](reusable-workflow.md) — portable prompt and workflow template
 
 ---

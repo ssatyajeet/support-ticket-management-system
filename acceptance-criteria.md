@@ -4,7 +4,7 @@
 **Date:** July 7, 2026  
 **Role:** QA Lead / Solution Architect / Engineering Manager  
 **Status:** Living document — update after every sprint  
-**Sources:** `docs/requirements-analysis.md`, `design-notes.md`, `project-context.md`, `implementation-plan.md`
+**Sources:** `requirements-analysis.md`, `design-notes.md`, `tool-specific/cursor-workflow/project-context.md`, `implementation-plan.md`
 
 ---
 
@@ -28,7 +28,7 @@ This document is the project's **Definition of Done** and **quality verification
 
 | Document | Role |
 | -------- | ---- |
-| `docs/requirements-analysis.md` | **Authority** for business rules, FR/BR/AC definitions |
+| `requirements-analysis.md` | **Authority** for business rules, FR/BR/AC definitions |
 | `design-notes.md` | **Blueprint** for how criteria are implemented |
 | `implementation-plan.md` | **Execution order** — when criteria are delivered |
 | **This document** | **Verification** — how to prove criteria are met |
@@ -246,8 +246,8 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | TST-05 | VAL-03 | Integration test: create ticket without title returns 400 | IT | Completed |
 | TST-06 | ERR-03 | Integration test: GET non-existent ticket returns 404 | IT | Completed |
 | TST-07 | NFR-07 | Tests run via `npm run test` in `server/` without manual steps | MT | Completed |
-| TST-08 | AC-22 | `docs/testing-notes.md` documents approach, setup, and how to run tests | DR | Completed |
-| TST-09 | AC-22 | `docs/debugging-notes.md` documents issues found and fixes | DR | Completed |
+| TST-08 | AC-22 | `test-strategy.md` documents approach, setup, and how to run tests | DR | Completed |
+| TST-09 | AC-22 | `debugging-notes.md` documents issues found and fixes | DR | Completed |
 
 ---
 
@@ -255,16 +255,16 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 
 | ID | Requirement Ref | Acceptance Criteria | Verification | Status |
 | -- | --------------- | ------------------- | ------------ | ------ |
-| DOC-01 | AC-19 | `docs/requirements-analysis.md` complete and approved (v1.1) | DR | Completed |
+| DOC-01 | AC-19 | `requirements-analysis.md` complete and approved (v1.1) | DR | Completed |
 | DOC-02 | AC-21 | `tool-specific/cursor-workflow/project-context.md` complete | DR | Completed |
-| DOC-03 | AC-21 | `tool-specific/cursor-workflow/design-notes.md` complete (v1.1) | DR | Completed |
-| DOC-04 | AC-21 | `tool-specific/cursor-workflow/implementation-plan.md` maintained and current | DR | Completed |
-| DOC-05 | AC-21 | `tool-specific/cursor-workflow/acceptance-criteria.md` (this file) maintained | DR | Completed |
+| DOC-03 | AC-21 | `design-notes.md` complete (v1.1) | DR | Completed |
+| DOC-04 | AC-21 | `implementation-plan.md` maintained and current | DR | Completed |
+| DOC-05 | AC-21 | `acceptance-criteria.md` (this file) maintained | DR | Completed |
 | DOC-06 | AC-21 | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` complete | DR | Completed |
 | DOC-07 | AC-16, FR-C-24 | Root `README.md` — setup, migrate, seed, run client + server, run tests | DR, MT | Completed |
 | DOC-08 | Part A | `tool-workflow.md` — AI workflow foundation per assignment | DR | Completed |
-| DOC-09 | AC-20 | `prompt-history/` organized and updated after AI sessions | DR | Completed |
-| DOC-10 | AC-23 | `docs/reflection.md` — honest AI usage reflection | DR | Completed |
+| DOC-09 | AC-20 | `prompt-history/` organized; `ai-prompts/` activity portfolio for reviewer evaluation | DR | Completed |
+| DOC-10 | AC-23 | `reflection.md` — honest AI usage reflection | DR | Completed |
 | DOC-11 | PR artifacts | PR description or equivalent submission artifact | DR | Completed |
 
 ---
@@ -319,15 +319,16 @@ Complete before submission. Every item must be checked.
 
 ## Documentation & Exercise Artifacts
 
-- [x] `docs/requirements-analysis.md` (DOC-01)
-- [x] `docs/testing-notes.md` (TST-08)
-- [x] `docs/debugging-notes.md` (TST-09)
-- [x] `docs/reflection.md` (DOC-10)
+- [x] `requirements-analysis.md` (DOC-01)
+- [x] `test-strategy.md` (TST-08)
+- [x] `debugging-notes.md` (TST-09)
+- [x] `reflection.md` (DOC-10)
 - [x] `README.md` — full setup verified by following steps (DOC-07)
 - [x] `tool-workflow.md` (DOC-08)
 - [x] All `tool-specific/cursor-workflow/` files complete (DOC-02–06)
 - [x] `prompt-history/` organized (DOC-09)
-- [x] PR description or submission artifact (DOC-11) — `docs/pr-description.md`
+- [x] `ai-prompts/` activity portfolio (DOC-09)
+- [x] PR description or submission artifact (DOC-11) — `pr-description.md`
 
 ## Acceptance Criteria AC-01–AC-23
 
@@ -442,4 +443,4 @@ Before marking criteria **Completed** when AI assisted:
 
 ---
 
-*Living document — update statuses after each sprint Quality Gate. Authority for requirement definitions: `docs/requirements-analysis.md`. Execution order: `tool-specific/cursor-workflow/implementation-plan.md`.*
+*Living document — update statuses after each sprint Quality Gate. Authority for requirement definitions: `requirements-analysis.md`. Execution order: `implementation-plan.md`.*

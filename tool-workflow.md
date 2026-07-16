@@ -50,11 +50,11 @@ Context was supplied **progressively** — each document built on the previous o
 | Document | Role in AI context |
 | -------- | ------------------ |
 | `docs/assignment.md` | Exercise rules, core vs stretch scope, mandatory deliverables |
-| `docs/requirements-analysis.md` | Business requirements, BR/FR rules, resolved OQ decisions, AC-01–AC-23 |
+| `requirements-analysis.md` | Business requirements, BR/FR rules, resolved OQ decisions, AC-01–AC-23 |
 | `tool-specific/cursor-workflow/project-context.md` | Persistent architecture, stack, folder structure, collaboration rules |
-| `tool-specific/cursor-workflow/design-notes.md` | Technical blueprint — API, database, modules, design decisions |
-| `tool-specific/cursor-workflow/implementation-plan.md` | Sprint order and execution roadmap |
-| `tool-specific/cursor-workflow/acceptance-criteria.md` | Definition of Done and verification checklist |
+| `design-notes.md` | Technical blueprint — API, database, modules, design decisions |
+| `implementation-plan.md` | Sprint order and execution roadmap |
+| `acceptance-criteria.md` | Definition of Done and verification checklist |
 | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` | Permanent engineering and AI behavior rules |
 
 ### Context Strategy
@@ -75,7 +75,12 @@ The following were intentionally excluded from prompts:
 
 ### Prompt History
 
-`prompt-history/` is organized. Sprints 1.1 through 5.2 logs are complete. See `prompt-history/README.md` for the session index.
+| Location | Purpose |
+| -------- | ------- |
+| `prompt-history/` | Sprint-by-sprint **verbatim archive** (Sprints 1.1–6.2 complete) — see `prompt-history/README.md` |
+| `ai-prompts/` | **Activity-grouped portfolio** for reviewers — `planning.md`, `design.md`, `implementation.md`, `testing.md`, `debugging.md`, `code-review.md`, `documentation.md` |
+
+Context-not-shared policy is documented in `ai-prompts/README.md`.
 
 ---
 
@@ -83,7 +88,7 @@ The following were intentionally excluded from prompts:
 
 ### How AI Assisted
 
-Cursor acted as a **Senior Business Analyst and Software Architect** to produce the initial `docs/requirements-analysis.md` from `docs/assignment.md`.
+Cursor acted as a **Senior Business Analyst and Software Architect** to produce the initial `requirements-analysis.md` from `docs/assignment.md`.
 
 **Completed AI-assisted work:**
 
@@ -197,7 +202,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Persistence scripts | `server/scripts/persistence-522-*.mjs` | AC-12 verification |
 | Edge-case script | `server/scripts/edge-cases-523-api.mjs` | EC-04–10, 12–13, 15 |
 | Defect fix | `server/src/middleware/errorHandler.ts` | DEF-001: malformed JSON → 400 |
-| Debugging docs | `docs/debugging-notes.md` | Defect log and resolution |
+| Debugging docs | `debugging-notes.md` | Defect log and resolution |
 
 **Quality Gate:** 33/33 manual regression pass; DEF-001 fixed; acceptance criteria updated (see `prompt-history/sprint-5.2.md`).
 
@@ -211,7 +216,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Vitest setup | `server/vitest.config.ts`, `package.json` scripts | `npm run test`, `test:watch` |
 | Test harness | `server/tests/setup.ts`, `tests/helpers/db.ts` | Truncate + seed per test; Prisma disconnect in `afterAll` |
 | Integration tests | `server/tests/integration/statusTransition.integration.test.ts` | 15 scenarios: 5 valid, 6 invalid, 4 guards |
-| Testing docs | `docs/testing-notes.md` | Setup, coverage matrix, troubleshooting |
+| Testing docs | `test-strategy.md` | Setup, coverage matrix, troubleshooting |
 
 **Quality Gate:** `npm run test` — **15/15 passed**; `npm run build` (server) — passed (see `prompt-history/sprint-5.1.md`).
 
@@ -376,7 +381,7 @@ Task-by-task implementation with developer approval between each step (same patt
 
 ## Code Review
 
-**Status: Complete** — Consolidated in [`docs/code-review-notes.md`](docs/code-review-notes.md) (2026-07-15).
+**Status: Complete** — Consolidated in [`code-review-notes.md`](code-review-notes.md) (2026-07-15).
 
 Code review was performed throughout the project primarily as **Quality Gate verification** against `design-notes.md` and cursor rules — curl/API matrices (Sprints 3.2–3.3), client build + hook checklist (Sprint 4.2), integration tests (Sprint 5.1), and manual regression (Sprint 5.2). Supplemental targeted review of `statusTransition.ts`, `errorHandler.ts`, and `useTickets.ts` was completed before submission.
 
@@ -387,7 +392,7 @@ Code review was performed throughout the project primarily as **Quality Gate ver
 - Scope suggestions rejected honestly (auth, delete, pagination, React Query, client-side state machine)
 - Retrospective + supplemental review documented with clear honesty note — not fabricated session logs
 
-See [`docs/code-review-notes.md`](docs/code-review-notes.md) for AI-assisted summary, developer observations, changes after review, and rejected suggestions.
+See [`code-review-notes.md`](code-review-notes.md) for AI-assisted summary, developer observations, changes after review, and rejected suggestions.
 
 ---
 
@@ -448,8 +453,8 @@ Full copy-paste prompts and adaptation checklist: [`docs/reusable-workflow.md`](
 
 **Sprint 6.2 (2026-07-13):**
 
-- `docs/reflection.md` — honest AI usage reflection (AC-23, DOC-10)
-- `docs/pr-description.md` — submission PR artifact (DOC-11)
+- `reflection.md` — honest AI usage reflection (AC-23, DOC-10)
+- `pr-description.md` — submission PR artifact (DOC-11)
 - Final regression: `npm run test` 16/16; API regression 26/26 (after re-seed)
 - Project Completion Checklist signed off in `implementation-plan.md`
 
@@ -459,7 +464,7 @@ Full copy-paste prompts and adaptation checklist: [`docs/reusable-workflow.md`](
 
 **Status: Complete (Sprint 5.2.4)**
 
-Defects found during manual QA documented in [`docs/debugging-notes.md`](docs/debugging-notes.md).
+Defects found during manual QA documented in [`debugging-notes.md`](debugging-notes.md).
 
 | Defect | Issue | Resolution |
 | ------ | ----- | ---------- |
@@ -471,14 +476,14 @@ Defects found during manual QA documented in [`docs/debugging-notes.md`](docs/de
 
 **Status: Complete (Sprint 6.2)**
 
-Honest AI usage reflection in [`docs/reflection.md`](docs/reflection.md) (AC-23, DOC-10).
+Honest AI usage reflection in [`reflection.md`](reflection.md) (AC-23, DOC-10).
 
 **Highlights:**
 
 - AI excelled at pattern-following implementation when spec was clear
 - Human decisions required for OQs, Prisma 7.8 adapter issues, UI iteration, DEF-001 fix
 - Prompt iteration and Quality Gates documented in `prompt-history/`
-- Submission PR artifact: [`docs/pr-description.md`](docs/pr-description.md)
+- Submission PR artifact: [`pr-description.md`](pr-description.md)
 
 ---
 
@@ -490,11 +495,11 @@ Honest AI usage reflection in [`docs/reflection.md`](docs/reflection.md) (AC-23,
 | --------- | ----------- | ------ |
 | Repository structure | `client/`, `server/`, `docs/`, `tool-specific/`, etc. | Done |
 | Assignment reviewed | `docs/assignment.md` | Done |
-| **Phase 1 — Sprint 1.1** | `docs/requirements-analysis.md` v1.1 | Done |
+| **Phase 1 — Sprint 1.1** | `requirements-analysis.md` v1.1 | Done |
 | Project context | `tool-specific/cursor-workflow/project-context.md` | Done |
-| Technical specification | `tool-specific/cursor-workflow/design-notes.md` v1.1 | Done |
-| Execution roadmap | `tool-specific/cursor-workflow/implementation-plan.md` | Done |
-| Acceptance criteria | `tool-specific/cursor-workflow/acceptance-criteria.md` | Done |
+| Technical specification | `design-notes.md` v1.1 | Done |
+| Execution roadmap | `implementation-plan.md` | Done |
+| Acceptance criteria | `acceptance-criteria.md` | Done |
 | Engineering rules | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` | Done |
 | **Phase 2 — Sprint 2.1** | Cursor workflow artifacts v2.0; `.gitignore`; prompt history initialized | Done |
 | **Phase 3 — Sprint 3.1** | Server foundation: Express, Prisma, migration, seed, health | Done |
@@ -504,11 +509,11 @@ Honest AI usage reflection in [`docs/reflection.md`](docs/reflection.md) (AC-23,
 | **Phase 4 — Sprint 4.2** | Ticket list, search, filter UI; sidebar + dashboard | Done |
 | **Phase 4 — Sprint 4.3** | Create ticket + detail pages; CommentList; 404 | Done |
 | **Phase 4 — Sprint 4.4** | Edit, status change, comment form; Phase 4 complete | Done |
-| **Phase 5 — Sprint 5.1** | Integration test suite; `docs/testing-notes.md` | Done |
-| **Phase 5 — Sprint 5.2** | Manual QA; `docs/debugging-notes.md`; DEF-001 fixed | Done |
+| **Phase 5 — Sprint 5.1** | Integration test suite; `test-strategy.md` | Done |
+| **Phase 5 — Sprint 5.2** | Manual QA; `debugging-notes.md`; DEF-001 fixed | Done |
 | **Phase 6 — Sprint 6.2** | Reflection, PR artifact, final regression, submission sign-off | Done |
-| `docs/reflection.md` | AC-23 honest AI reflection | Done |
-| `docs/pr-description.md` | Submission PR artifact (DOC-11) | Done |
+| `reflection.md` | AC-23 honest AI reflection | Done |
+| `pr-description.md` | Submission PR artifact (DOC-11) | Done |
 | AI workflow (this doc) | `tool-workflow.md` v1.8 | Done |
 | Prompt history | `prompt-history/sprint-5.2.md` | Done |
 | Root README | `README.md` — setup, run, test verified | Done |

@@ -23,10 +23,10 @@ Cursor acts as an **AI pair programmer** — accelerating implementation while t
 
 When guidance conflicts, resolve in this order:
 
-1. `docs/requirements-analysis.md` — business rules, FR/BR/AC authority
-2. `tool-specific/cursor-workflow/design-notes.md` — technical blueprint
-3. `tool-specific/cursor-workflow/acceptance-criteria.md` — verification checklist
-4. `tool-specific/cursor-workflow/implementation-plan.md` — execution order and sprint scope
+1. `requirements-analysis.md` — business rules, FR/BR/AC authority
+2. `design-notes.md` — technical blueprint
+3. `acceptance-criteria.md` — verification checklist
+4. `implementation-plan.md` — execution order and sprint scope
 5. `tool-specific/cursor-workflow/project-context.md` — persistent context and conventions
 6. **This document** — engineering and AI behavior rules
 

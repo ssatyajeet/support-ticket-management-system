@@ -12,7 +12,7 @@ This document records defects found during manual regression and edge-case sampl
 **Related artifacts:**
 
 - [`docs/manual-regression-checklist.md`](manual-regression-checklist.md) — Sections L (persistence), M (edge cases)
-- [`docs/testing-notes.md`](testing-notes.md) — Test setup and edge-case procedures
+- [`test-strategy.md`](test-strategy.md) — Test setup and edge-case procedures
 - [`server/scripts/edge-cases-523-api.mjs`](../server/scripts/edge-cases-523-api.mjs) — Tier 2 API sampler
 - [`docs/reusable-workflow.md`](reusable-workflow.md) — Template G (debugging with AI) for future projects
 

@@ -168,7 +168,7 @@ Expect `pass: true`. No `npm run db:seed` or `npm run test` before verifying.
 ## Section M — Edge cases (Task 5.2.3)
 
 **Date:** 2026-07-13  
-**Traceability:** EC-01–EC-22 (`docs/requirements-analysis.md` §12)  
+**Traceability:** EC-01–EC-22 (`requirements-analysis.md` §12)  
 **API base:** `http://localhost:3001/api` (default; match your `server/.env` `PORT`)  
 **Tier 1:** `cd server && npm run test` (Sprint 5.1 IT)  
 **Tier 2:** `API_BASE=http://localhost:3001/api node server/scripts/edge-cases-523-api.mjs`  
@@ -229,7 +229,7 @@ None during Task 5.2.1 regression.
 
 **Task 5.2.2:** No code defects. L2 PostgreSQL restart requires manual admin step on this machine.
 
-**Task 5.2.3:** DEF-001 (EC-19 malformed JSON) fixed in Task 5.2.4 — see [`docs/debugging-notes.md`](debugging-notes.md).
+**Task 5.2.3:** DEF-001 (EC-19 malformed JSON) fixed in Task 5.2.4 — see [`debugging-notes.md`](../debugging-notes.md).
 
 **Blocked (environment):** EC-04–08, EC-09–10, EC-12–13, EC-15 Tier 2 API script — PostgreSQL stopped during sampling. Re-run script after service start + seed.
 
