@@ -2,7 +2,8 @@
 
 **Activity:** Reviewing and correcting AI output  
 **Sprints:** 2.1, 4.2  
-**Source archives:** [`prompt-history/sprint-2.1.md`](../prompt-history/sprint-2.1.md), [`prompt-history/sprint-4.2.md`](../prompt-history/sprint-4.2.md)  
+**Sprints:** 2.1, 4.2  
+**QG evidence:** [`code-review-notes.md`](../code-review-notes.md)  
 **Written review:** [`code-review-notes.md`](../code-review-notes.md)
 
 ---

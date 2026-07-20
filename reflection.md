@@ -17,7 +17,7 @@ The project delivered a working full-stack **Support Ticket Management System** 
 | **State machine** | `statusTransition.ts` — 5 valid transitions; terminal states; invalid → 400 |
 | **Frontend** | React (Vite) — list, dashboard, create, detail, edit, status change, comments |
 | **Database** | PostgreSQL + Prisma — migrations, seed (3 users, 5 tickets, 6 comments) |
-| **Tests** | 16 integration tests (Vitest + Supertest) — AC-17, AC-18 |
+| **Tests** | 32 automated tests (16 integration + 16 unit) — AC-17, AC-18 |
 | **Artifacts** | Requirements, design notes, implementation plan, prompt history, testing/debugging/reflection docs |
 
 The exercise goal was not one-shot code generation but **visible, explainable AI-assisted engineering** — prompt history, iteration, defects, and manual verification are all documented.
@@ -37,7 +37,7 @@ The exercise goal was not one-shot code generation but **visible, explainable AI
 - **Integration tests** — Mandatory for state machine (AC-17, AC-18); hit HTTP layer, not just unit tests
 - **Manual regression** — 33 UI/API cases; catches UX and integration gaps tests miss
 - **Edge-case sampling** — EC matrix found DEF-001; fixed before submission
-- **Honest deferrals** — EC-17 (DB down) not simulated; logged, not hidden
+- **Honest deferrals** — EC-17 (DB down) verified in Sprint 5.2.6 (ERR-05); ENV-001/002 logged where blocked
 
 ---
 
@@ -64,7 +64,7 @@ Cursor was used across analysis, design, implementation, testing, debugging, and
 | **Design** | Full workflow artifact set (`design-notes.md`, `implementation-plan.md`, acceptance criteria, cursor rules) | Implementation-ready blueprint before any app code |
 | **Backend** | Express + Prisma scaffold, validators, services, state machine | Thin controllers, single `statusTransition.ts` source of truth |
 | **Frontend** | React components, hooks, API layer, routing | Consistent patterns; loading/error states |
-| **Tests** | Vitest + Supertest integration suite (16 scenarios) | AC-17/AC-18 satisfied |
+| **Tests** | Vitest suite — 16 integration + 16 unit for `statusTransition.ts` | AC-17/AC-18 + isolated state machine coverage |
 | **QA artifacts** | Manual regression checklist, API scripts, debugging notes | Repeatable verification; DEF-001 found and fixed |
 | **Documentation** | README, testing notes, tool-workflow updates | Faster than writing from scratch; required accuracy review |
 
@@ -109,7 +109,7 @@ Summary of AI mistakes or gaps that required human correction. Detail per item: 
 - Manual persistence verification (marker ticket survived server restart)
 - PostgreSQL service restart (admin-required step)
 - Sprint approvals and Quality Gate sign-offs
-- Judgment calls on deferred items (ERR-05 / EC-17 DB-unavailable test not run)
+- EC-17 (ERR-05) DB-unavailable startup probe verified in Sprint 5.2.6
 
 ---
 
@@ -132,7 +132,7 @@ Summary of AI mistakes or gaps that required human correction. Detail per item: 
 | **Spec before code** | Phases 1–2 prevented rework; AI implemented faster because constraints were clear |
 | **One source of truth** | Status rules in one file — AI tried to add logic in controllers early on; rules caught it |
 | **Verify, don't trust** | Every sprint had a Quality Gate with curls, builds, or tests |
-| **Document as you go** | `prompt-history/` at sprint end is easier than reconstructing |
+| **Document as you go** | `ai-prompts/` activity portfolio at sprint end is easier than reconstructing |
 | **Iteration is evidence** | Reviewers want to see prompts improved, not perfect first outputs |
 | **Environment matters** | Windows paths, ports, and shell env vars caused more friction than AI code quality |
 
@@ -147,10 +147,9 @@ The workflow used on this project is **documented as a portable template** for t
 | **Reusable workflow playbook** | [`docs/reusable-workflow.md`](reusable-workflow.md) | Folder skeleton, 8 prompt templates (A–H), validation/QG checklists, adaptation guide |
 | **Generic implementation prompt** | `implementation-plan.md` | Copy-paste prompt for every implementation task |
 | **Permanent Cursor rules** | `.cursor/rules/` + `cursor-rules-or-instructions.md` | Stack and architecture enforcement |
-| **Sprint prompt logs** | `prompt-history/` | Verbatim sprint archive at Quality Gate |
-| **Activity prompt portfolio** | [`ai-prompts/`](../ai-prompts/) — `planning.md`, `design.md`, `implementation.md`, `testing.md`, `debugging.md`, `code-review.md`, `documentation.md` |
+| **Activity prompt portfolio** | [`ai-prompts/`](../ai-prompts/) — primary archive (`planning.md` … `documentation.md`) |
 
-**How I would reuse it:** Copy folder structure → run requirement analysis template → freeze planning (`implementation-plan.md` v2) → one-task-at-a-time implementation with developer approval → sprint QG + prompt history → submission artifacts (reflection, code-review-notes, this template updated for the new domain).
+**How I would reuse it:** Copy folder structure → run requirement analysis template → freeze planning (`implementation-plan.md` v2) → one-task-at-a-time implementation with developer approval → sprint QG + `ai-prompts/` portfolio update → submission artifacts (reflection, code-review-notes, this template updated for the new domain).
 
 See [`docs/reusable-workflow.md`](reusable-workflow.md) for full copy-paste prompts and the new-project checklist.
 
@@ -162,7 +161,7 @@ See [`docs/reusable-workflow.md`](reusable-workflow.md) for full copy-paste prom
 | --------- | ------ |
 | Working app (core AC-01–AC-18) | Yes — verified in Sprint 5.2 + final regression |
 | Exercise artifacts (AC-19–AC-23) | Yes — this file completes AC-23 |
-| Can explain AI vs manual work | Yes — see `tool-workflow.md` and `prompt-history/` |
+| Can explain AI vs manual work | Yes — see `tool-workflow.md` and `ai-prompts/` |
 | Stretch features | Not implemented — core scope prioritized per assignment |
 
 ---
@@ -170,8 +169,7 @@ See [`docs/reusable-workflow.md`](reusable-workflow.md) for full copy-paste prom
 ## Related artifacts
 
 - [`tool-workflow.md`](../tool-workflow.md) — lifecycle AI workflow narrative
-- [`prompt-history/`](../prompt-history/) — verbatim sprint prompt logs
-- [`ai-prompts/`](../ai-prompts/) — activity-grouped prompt portfolio
+- [`ai-prompts/`](../ai-prompts/) — activity-grouped prompt portfolio (primary archive, AC-20)
 - [`test-strategy.md`](test-strategy.md) — how to run tests
 - [`debugging-notes.md`](debugging-notes.md) — defects and fixes
 - [`pr-description.md`](pr-description.md) — submission PR artifact

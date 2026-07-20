@@ -101,7 +101,21 @@ These items were blocked or require admin/manual steps on the developer machine.
 | -- | ---- | ----- | ------------ | ------------- |
 | ENV-001 | PostgreSQL service restart (L2, DB-09) | `Restart-Service postgresql-x64-17` denied without admin during 5.2.2 | Run verify script after service restart — see checklist Section L | N/A — manual Windows admin step |
 | ENV-002 | Tier 2 edge-case script (EC-04–10, 12–13, 15) | PostgreSQL stopped during 5.2.3 sampling | `Start-Service postgresql-x64-17`, `npm run db:seed`, run `edge-cases-523-api.mjs` | N/A — environment blocked script execution |
-| ENV-003 | DB unavailable startup (EC-17, ERR-05) | Not exercised in Sprint 5.2 | Set invalid `DATABASE_URL`, confirm graceful startup log without secret leak | N/A — deferred manual test |
+| ENV-003 | DB unavailable startup (EC-17, ERR-05) | **Verified** — Sprint 5.2.6 | Invalid `DATABASE_URL` (`127.0.0.1:59999`); server exits 1 with safe log | See log excerpt below |
+
+### ENV-003 verification log (EC-17 / ERR-05)
+
+**Procedure:** Set `DATABASE_URL=postgresql://invalid@127.0.0.1:59999/nodb` in `server/.env` (unreachable port). Run `npx tsx src/index.ts`.
+
+**Observed output:**
+
+```text
+Database connection failed — check DATABASE_URL and that PostgreSQL is running.
+```
+
+**Exit code:** 1  
+**Secret leak check:** Connection string not printed in console output.  
+**Script:** `server/scripts/verify-ec17-startup.ts` (repeatable probe).
 
 ---
 
@@ -112,7 +126,7 @@ These items were blocked or require admin/manual steps on the developer machine.
 | Defects found | 1 (DEF-001) |
 | Defects fixed | 1 |
 | Open critical/high defects | 0 |
-| Environment follow-ups | 3 (manual) |
+| Environment follow-ups | 2 (ENV-001 PG restart; ENV-002 tier-2 script) |
 
 **Regression (5.2.1):** 33/33 cases passed — no defects.  
 **Persistence (5.2.2):** Secrets audit passed; server restart verified; PG restart deferred (ENV-001).  
@@ -126,5 +140,6 @@ These items were blocked or require admin/manual steps on the developer machine.
 | ---- | -------- |
 | TST-09 | This document |
 | ERR-04 | DEF-001 fix + verification |
+| ERR-05 | ENV-003 EC-17 startup probe (Sprint 5.2.6) |
 | EC-19 | DEF-001 |
 | AC-13 | Input validation includes malformed JSON rejection |

@@ -1,21 +1,21 @@
 # Test Results — Support Ticket Management System
 
 **Purpose:** Committed proof that the mandatory integration test suite passes (AC-17, AC-18, TST-08).  
-**Test file:** `server/tests/integration/statusTransition.integration.test.ts`  
+**Test files:** `server/tests/integration/statusTransition.integration.test.ts`, `server/tests/unit/statusTransition.test.ts`  
 **Command:** `cd server && npm run test`
 
 ---
 
-## Latest run (pre-submission refresh)
+## Latest run (Sprint 6.2 final regression)
 
 | Field | Value |
 | ----- | ----- |
-| **Date** | 2026-07-15 |
+| **Date** | 2026-07-13 |
 | **Runner** | Satyajeet Singh (local) |
 | **Environment** | Windows 10; Node.js; PostgreSQL; `server/.env` configured |
 | **Vitest** | v4.1.10 |
-| **Result** | **16 / 16 passed** |
-| **Duration** | ~2.25s |
+| **Result** | **32 / 32 passed** (16 integration + 16 unit) |
+| **Duration** | ~4.1s |
 | **Exit code** | 0 |
 
 ### Console output (excerpt)
@@ -26,13 +26,22 @@
 
  RUN  v4.1.10 .../server
 
- Test Files  1 passed (1)
-      Tests  16 passed (16)
-   Start at  17:17:20
-   Duration  2.25s (transform 260ms, setup 181ms, import 770ms, tests 966ms, environment 0ms)
+ Test Files  2 passed (2)
+      Tests  32 passed (32)
+   Duration  4.08s
 ```
 
 **Note:** A `pg` client deprecation warning may appear in output; it does not affect test results.
+
+---
+
+## Previous run (pre-submission refresh)
+
+| Field | Value |
+| ----- | ----- |
+| **Date** | 2026-07-15 |
+| **Result** | **16 / 16 passed** (integration only) |
+| **Duration** | ~2.25s |
 
 ---
 
@@ -43,15 +52,26 @@
 | **Date** | 2026-07-13 |
 | **Context** | Sprint 6.2.3 final regression before hand-in |
 | **Result** | **16 / 16 passed** |
-| **Traceability** | [`prompt-history/sprint-6.2.md`](prompt-history/sprint-6.2.md), [`pr-description.md`](pr-description.md) |
+| **Traceability** | [`ai-prompts/testing.md`](ai-prompts/testing.md), [`pr-description.md`](pr-description.md) |
 
 API regression script (separate from Vitest): `regression-521-api.mjs` — **26/26** on 2026-07-13 (after re-seed). See [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md).
 
 ---
 
-## Scenarios covered (16 tests)
+## Scenarios covered
 
-### Valid transitions (AC-17) — 5 tests
+### Unit tests — `statusTransition.ts` (16 tests)
+
+| Category | Count |
+| -------- | ----- |
+| `getAllowedTransitions` | 3 |
+| Valid transitions (AC-17) | 5 |
+| Invalid transitions (AC-18) | 6 |
+| Terminal state guards | 2 |
+
+### Integration tests (16 tests)
+
+#### Valid transitions (AC-17) — 5 tests
 
 | # | Transition | Expected |
 | - | ---------- | -------- |
@@ -61,7 +81,7 @@ API regression script (separate from Vitest): `regression-521-api.mjs` — **26/
 | 4 | Open → Cancelled | 200 |
 | 5 | In Progress → Cancelled | 200 |
 
-### Invalid transitions (AC-18) — 6 tests
+#### Invalid transitions (AC-18) — 6 tests
 
 | # | Transition | Expected |
 | - | ---------- | -------- |
@@ -72,7 +92,7 @@ API regression script (separate from Vitest): `regression-521-api.mjs` — **26/
 | 10 | Cancelled → In Progress | 400 `INVALID_STATUS_TRANSITION` |
 | 11 | Cancelled → Closed | 400 `INVALID_STATUS_TRANSITION` |
 
-### API guards and validation — 5 tests
+#### API guards and validation — 5 tests
 
 | # | Scenario | Expected |
 | - | -------- | -------- |
@@ -92,7 +112,7 @@ cd server
 npm run test
 ```
 
-Expected: `Tests 16 passed (16)`, exit code 0.
+Expected: `Tests 32 passed (32)`, exit code 0.
 
 Further detail: [`test-strategy.md`](test-strategy.md).
 

@@ -41,5 +41,5 @@ Planning and submission artifacts were moved to the **repository root** to match
 ## Related
 
 - AI workflow narrative: [`tool-workflow.md`](../../tool-workflow.md)
-- Sprint prompt archive: [`prompt-history/`](../../prompt-history/)
+- Activity prompt portfolio: [`ai-prompts/`](../../ai-prompts/)
 - Activity prompt portfolio: [`ai-prompts/`](../../ai-prompts/)

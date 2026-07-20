@@ -23,8 +23,7 @@ support-ticket-management-system/
 ├── database/            # Setup notes + pointers to server/prisma/
 ├── tests/               # Pointer to server/tests/
 ├── docs/                # Exercise brief, manual QA evidence
-├── prompt-history/      # Sprint-by-sprint AI prompt archive (AC-20)
-├── ai-prompts/          # Activity-grouped AI prompt portfolio
+├── ai-prompts/          # Activity-grouped AI prompt portfolio (AC-20)
 ├── tool-specific/       # Cursor-only context (project-context, cursor-rules)
 ├── requirements-analysis.md, design-notes.md, implementation-plan.md, …
 └── tool-workflow.md
@@ -229,7 +228,7 @@ npm run test
 
 Expected: all tests pass (status state machine — valid/invalid transitions and API guards).
 
-See [`test-results.md`](test-results.md) for committed run results (16/16) and [`test-strategy.md`](test-strategy.md) for setup and coverage matrix.
+See [`test-results.md`](test-results.md) for committed run results (**32/32** — 16 integration + 16 unit) and [`test-strategy.md`](test-strategy.md) for setup and coverage matrix.
 
 ### Manual regression
 
@@ -282,7 +281,7 @@ For defects found during QA, see [`debugging-notes.md`](debugging-notes.md).
 | [`implementation-plan.md`](implementation-plan.md) | Sprint execution plan |
 | [`acceptance-criteria.md`](acceptance-criteria.md) | Verification checklist |
 | [`test-strategy.md`](test-strategy.md) | Test strategy and operational runbook |
-| [`test-results.md`](test-results.md) | Committed Vitest run results (16/16) |
+| [`test-results.md`](test-results.md) | Committed Vitest run results (32/32) |
 | [`debugging-notes.md`](debugging-notes.md) | Defects and resolutions |
 | [`code-review-notes.md`](code-review-notes.md) | AI-assisted code review log |
 | [`review-fixes.md`](review-fixes.md) | Post-review fix log |
@@ -291,9 +290,9 @@ For defects found during QA, see [`debugging-notes.md`](debugging-notes.md).
 | [`pr-description.md`](pr-description.md) | Submission PR artifact |
 | [`docs/reusable-workflow.md`](docs/reusable-workflow.md) | Portable workflow template |
 | [`docs/manual-regression-checklist.md`](docs/manual-regression-checklist.md) | Manual QA script |
+| [`docs/api.md`](docs/api.md) | API reference with curl examples |
 | [`tool-workflow.md`](tool-workflow.md) | AI-assisted development workflow |
-| [`prompt-history/`](prompt-history/) | Sprint-by-sprint verbatim prompt logs |
-| [`ai-prompts/`](ai-prompts/) | Activity-grouped prompts |
+| [`ai-prompts/`](ai-prompts/) | Activity-grouped prompt portfolio (AC-20) |
 | [`tool-specific/cursor-workflow/`](tool-specific/cursor-workflow/) | Cursor context and rules |
 
 ---

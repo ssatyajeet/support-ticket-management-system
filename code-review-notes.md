@@ -13,12 +13,12 @@ This document consolidates **code review activity that actually occurred** durin
 
 | Source | What it covers |
 | ------ | -------------- |
-| **Retrospective (Sprints 2.1–5.2)** | Quality Gate checks, curl/API verification, build review, and corrections documented in `prompt-history/` and `tool-workflow.md` |
+| **Retrospective (Sprints 2.1–5.2)** | Quality Gate checks, curl/API verification, build review, and corrections documented in `ai-prompts/` and `tool-workflow.md` |
 | **Supplemental (2026-07-15)** | Targeted read-only review of high-signal modules before submission — findings recorded in §AI-Assisted Review Summary (Reviews 4–6) |
 
 During Sprints 3–4, implementation followed an approved spec. My review at each Quality Gate was primarily **verification against requirements** rather than large rewrites. Where AI output diverged from spec or build/tests failed, I corrected before approval.
 
-**Related artifacts:** [`reflection.md`](reflection.md) · [`debugging-notes.md`](debugging-notes.md) · [`prompt-history/`](../prompt-history/)
+**Related artifacts:** [`reflection.md`](reflection.md) · [`debugging-notes.md`](debugging-notes.md) · [`ai-prompts/`](../ai-prompts/)
 
 ---
 
@@ -43,7 +43,7 @@ During Sprints 3–4, implementation followed an approved spec. My review at eac
 
 **Files:** `ticketValidators.ts`, `ticketService.ts`, `ticketController.ts`
 
-**Review method:** Code read + 11 curl cases at Quality Gate (`prompt-history/sprint-3.2.md`).
+**Review method:** Code read + 11 curl cases at Quality Gate (`ai-prompts/implementation.md`).
 
 **AI-assisted implementation; human verification:**
 
@@ -63,7 +63,7 @@ During Sprints 3–4, implementation followed an approved spec. My review at eac
 
 **Files:** `statusTransition.ts`, `ticketService.changeStatus()`
 
-**Review method:** Code read + 13-case curl transition matrix (`prompt-history/sprint-3.3.md`).
+**Review method:** Code read + 13-case curl transition matrix (`ai-prompts/implementation.md`).
 
 **Observations:**
 
@@ -118,7 +118,7 @@ During Sprints 3–4, implementation followed an approved spec. My review at eac
 
 **Files:** `client/src/hooks/useTickets.ts`, list page components
 
-**Sprint 4.2 QG (retrospective):** Verified loading, error, abort on unmount, no inline `fetch`, URL param sync (`prompt-history/sprint-4.2.md`).
+**Sprint 4.2 QG (retrospective):** Verified loading, error, abort on unmount, no inline `fetch`, URL param sync (`ai-prompts/implementation.md`, `ai-prompts/code-review.md`).
 
 **Supplemental findings:**
 
@@ -152,7 +152,7 @@ Most implementation batches were **approved after verification**, not rewritten:
 - Sprint 3.2: 11/11 curl cases before accepting CRUD API.
 - Sprint 3.3: 13/13 transition matrix before accepting state machine.
 - Sprint 4.2: code review checklist — `useTickets`, URL params, debounce, empty/error states, no inline fetch.
-- Sprint 5.1: `npm run test` — 16/16 integration scenarios.
+- Sprint 5.1: `npm run test` — 32/32 (16 integration + 16 unit).
 
 ### Issues I caught (implementation corrections)
 
@@ -224,10 +224,10 @@ Most implementation batches were **approved after verification**, not rewritten:
 
 | Artifact | Relevance |
 | -------- | --------- |
-| [`prompt-history/sprint-3.2.md`](../prompt-history/sprint-3.2.md) | CRUD curl verification |
-| [`prompt-history/sprint-3.3.md`](../prompt-history/sprint-3.3.md) | Transition matrix QG |
-| [`prompt-history/sprint-4.2.md`](../prompt-history/sprint-4.2.md) | Frontend hook QG checklist |
-| [`prompt-history/sprint-5.2.md`](../prompt-history/sprint-5.2.md) | DEF-001 discovery and fix |
+| [`ai-prompts/implementation.md`](../ai-prompts/implementation.md) | CRUD curl verification |
+| [`ai-prompts/implementation.md`](../ai-prompts/implementation.md) | Transition matrix QG |
+| [`ai-prompts/implementation.md`](../ai-prompts/implementation.md), [`ai-prompts/code-review.md`](../ai-prompts/code-review.md) | Frontend hook QG checklist |
+| [`ai-prompts/testing.md`](../ai-prompts/testing.md), [`ai-prompts/debugging.md`](../ai-prompts/debugging.md) | DEF-001 discovery and fix |
 | [`tool-workflow.md`](../tool-workflow.md) | Code Validation + Code Review sections |
 | [`reflection.md`](reflection.md) | Lifecycle; manual corrections table |
 

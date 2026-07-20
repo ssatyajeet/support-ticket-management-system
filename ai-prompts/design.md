@@ -2,7 +2,8 @@
 
 **Activity:** Technical specification, architecture, design decisions  
 **Sprint:** 2.1  
-**Source archive:** [`prompt-history/sprint-2.1.md`](../prompt-history/sprint-2.1.md)
+**Sprints:** 2.1  
+**QG evidence:** [`tool-workflow.md`](../tool-workflow.md) — Planning Freeze section
 
 ---
 

@@ -51,27 +51,32 @@ See **Tests Not Covered** below.
 
 ### Strategy
 
-Unit tests are **not implemented in v1**. Business logic that would be unit-tested (e.g. `statusTransition.ts`) is verified through **integration tests** that exercise the full HTTP → service → database path.
+Unit tests cover **pure business logic** without database round-trips. Added in Sprint 5.1 (Task 5.1.7).
+
+| Module | File | Cases |
+| ------ | ---- | ----- |
+| `statusTransition.ts` | `server/tests/unit/statusTransition.test.ts` | 16 — allowed transitions, invalid transitions, terminal states |
+
+Integration tests remain the primary tier for AC-17/AC-18 (HTTP + database path).
 
 ### Rationale
 
 | Factor | Decision |
 | ------ | -------- |
-| Exercise requirement | At least one meaningful test tier — integration tests satisfy AC-17/AC-18 |
-| Highest risk area | Status state machine — integration tests prove real API behavior |
-| Time budget | 8–12 hours core app effort; unit suite deferred to stretch (FR-S-08) |
+| Exercise requirement | Integration tests satisfy AC-17/AC-18; unit tier adds fast isolated coverage |
+| Highest risk area | Status state machine — unit tests prove pure logic; integration tests prove API behavior |
+| Time budget | Unit suite added in Sprint 5.1.7 alongside mandatory integration tier |
 
 ### Future (stretch)
 
-- Unit tests for `statusTransition.validateTransition()` in isolation
-- Unit tests for Zod schemas and DTO mappers
-- Target: fast feedback without database round-trips
+- Unit tests for Zod schemas and DTO mappers (FR-S-08)
+- Frontend component/hook tests
 
 ### Current coverage
 
-| Module | Unit tests | Verified instead by |
-| ------ | ---------- | ------------------- |
-| `statusTransition.ts` | None | Integration tests (16 cases) |
+| Module | Unit tests | Verified also by |
+| ------ | ---------- | ---------------- |
+| `statusTransition.ts` | 16 cases | Integration tests (16 cases) |
 | Zod validators | None | Integration + manual regression |
 | React components/hooks | None | Manual QA + code review |
 
@@ -117,7 +122,7 @@ Frontend **component tests are not implemented in v1** (no React Testing Library
 | **Location** | `server/tests/integration/statusTransition.integration.test.ts` |
 | **Framework** | Vitest + Supertest |
 | **Command** | `cd server && npm run test` |
-| **Count** | 16 tests (latest evidence: 16/16 passed) |
+| **Count** | 32 tests — 16 integration + 16 unit (latest evidence: 32/32 passed) |
 
 ### Scenarios covered
 
@@ -202,7 +207,7 @@ All **22 edge cases** (EC-01–EC-22) from `requirements-analysis.md` §12 are a
 | EC-14 | Unassigned ticket | 3 | "Unassigned" |
 | EC-15 | Max length exceeded | 2 | 400 |
 | EC-16 | XSS in user content | 3 | Text render, no `dangerouslySetInnerHTML` |
-| EC-17 | DB unavailable | 3 | Graceful failure (ERR-05 deferred) |
+| EC-17 | DB unavailable | 3 | Graceful failure — verified manual (ERR-05 Completed) |
 | EC-18 | Duplicate seed email | 3 | Unique constraint |
 | EC-19 | Malformed JSON | 1 | 400 (DEF-001 fixed) |
 | EC-20 | Non-existent ticket | 1 | 404 |
@@ -234,7 +239,7 @@ API_BASE=http://localhost:3001/api node scripts/edge-cases-523-api.mjs
 | **Comment edit/delete tests** | Update/remove comments | BR-11 — append-only in v1 |
 | **Ticket delete tests** | Hard/soft delete | OQ-05 — deferred |
 | **Optimistic locking tests** | 409 on stale version | OQ-14 — last-write-wins in v1 |
-| **DB unavailable (EC-17)** | Automated failure test | ERR-05 marked Not Started; manual observation only |
+| **DB unavailable (EC-17)** | Automated failure test | ERR-05 verified manual — `debugging-notes.md` ENV-003; `server/scripts/verify-ec17-startup.ts` |
 | **CI pipeline tests** | Automated run on every push | Stretch FR-S-10 |
 
 ### Accepted trade-off

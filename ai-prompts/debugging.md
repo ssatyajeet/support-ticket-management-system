@@ -2,7 +2,8 @@
 
 **Activity:** Defect discovery and fix  
 **Sprint:** 5.2  
-**Source archive:** [`prompt-history/sprint-5.2.md`](../prompt-history/sprint-5.2.md)  
+**Sprints:** 5.2  
+**QG evidence:** [`tool-workflow.md`](../tool-workflow.md) — Sprint 5.2 QG; [`debugging-notes.md`](../debugging-notes.md) DEF-001  
 **Defect log:** [`debugging-notes.md`](../debugging-notes.md) — DEF-001
 
 ---

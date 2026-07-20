@@ -2,7 +2,7 @@
 
 **Activity:** Backend and frontend code generation  
 **Sprints:** 3.1–3.4 (backend), 4.1–4.4 (frontend)  
-**Source archives:** [`prompt-history/sprint-3.2.md`](../prompt-history/sprint-3.2.md), [`sprint-3.3.md`](../prompt-history/sprint-3.3.md), [`sprint-3.4.md`](../prompt-history/sprint-3.4.md), [`sprint-4.1.md`](../prompt-history/sprint-4.1.md), [`sprint-4.2.md`](../prompt-history/sprint-4.2.md), [`sprint-4.4.md`](../prompt-history/sprint-4.4.md)
+**QG evidence:** [`tool-workflow.md`](../tool-workflow.md) — Sprints 3.1–4.4 QG sections
 
 ---
 

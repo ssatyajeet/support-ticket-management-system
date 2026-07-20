@@ -56,7 +56,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 - [ ] Integration tests updated if status logic or API contract changed
 - [ ] Relevant rows in this document marked **Completed**
 - [ ] `implementation-plan.md` sprint Quality Gate checklist completed
-- [ ] `prompt-history/` updated for meaningful AI-assisted work
+- [ ] `ai-prompts/` updated for meaningful AI-assisted work
 
 ## Sprint Done
 
@@ -202,7 +202,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | ERR-02 | NFR-04 | UI displays API error messages without requiring dev tools | MT | Completed |
 | ERR-03 | EC-20 | Non-existent ticket ID returns 404 | IT | Completed |
 | ERR-04 | EC-19 | Malformed JSON body returns 400 | MT, IT | Completed |
-| ERR-05 | EC-17 | Database unavailable — server fails gracefully with logged error | MT | Not Started |
+| ERR-05 | EC-17 | Database unavailable — server fails gracefully with logged error | MT | Completed |
 | ERR-06 | EC-16 | User content rendered safely (no XSS via raw HTML) | CR, MT | Completed |
 
 ---
@@ -263,7 +263,7 @@ A sprint, feature, or the full project is **done** only when **all** applicable 
 | DOC-06 | AC-21 | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` complete | DR | Completed |
 | DOC-07 | AC-16, FR-C-24 | Root `README.md` — setup, migrate, seed, run client + server, run tests | DR, MT | Completed |
 | DOC-08 | Part A | `tool-workflow.md` — AI workflow foundation per assignment | DR | Completed |
-| DOC-09 | AC-20 | `prompt-history/` organized; `ai-prompts/` activity portfolio for reviewer evaluation | DR | Completed |
+| DOC-09 | AC-20 | `ai-prompts/` activity portfolio organized for reviewer evaluation (primary prompt archive) | DR | Completed |
 | DOC-10 | AC-23 | `reflection.md` — honest AI usage reflection | DR | Completed |
 | DOC-11 | PR artifacts | PR description or equivalent submission artifact | DR | Completed |
 
@@ -306,7 +306,7 @@ Complete before submission. Every item must be checked.
 - [x] Status state machine enforced server-side (STS-01–09)
 - [x] Comments work on all ticket statuses (CMT-01–05)
 - [x] Search and status filter work (SRC-01–06)
-- [x] Backend validation and error responses correct (VAL-01–07, ERR-01–04, ERR-06; ERR-05 deferred)
+- [x] Backend validation and error responses correct (VAL-01–07, ERR-01–06)
 - [x] UI displays errors clearly (ERR-02, STS-10)
 - [x] Integration tests pass (`npm run test`) (TST-01–07)
 - [x] Data persists after restart (DB-09, AC-12)
@@ -326,8 +326,7 @@ Complete before submission. Every item must be checked.
 - [x] `README.md` — full setup verified by following steps (DOC-07)
 - [x] `tool-workflow.md` (DOC-08)
 - [x] All `tool-specific/cursor-workflow/` files complete (DOC-02–06)
-- [x] `prompt-history/` organized (DOC-09)
-- [x] `ai-prompts/` activity portfolio (DOC-09)
+- [x] `ai-prompts/` activity portfolio organized (DOC-09)
 - [x] PR description or submission artifact (DOC-11) — `pr-description.md`
 
 ## Acceptance Criteria AC-01–AC-23
@@ -384,7 +383,7 @@ Before marking criteria **Completed** when AI assisted:
 | Security | No hardcoded secrets or credentials |
 | Tests | Run integration suite after AI changes to status logic |
 | Explainability | Developer can explain the generated code |
-| Prompt log | Meaningful prompts recorded in `prompt-history/` |
+| Prompt log | Meaningful prompts recorded in `ai-prompts/` activity portfolio |
 
 ## Testing Quality
 

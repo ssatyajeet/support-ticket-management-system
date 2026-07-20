@@ -2,7 +2,7 @@
 
 **Activity:** README, workflow docs, reflection, PR artifact, reusable workflow  
 **Sprints:** 2.1, 6.1, 6.2  
-**Source archives:** [`prompt-history/sprint-2.1.md`](../prompt-history/sprint-2.1.md), [`prompt-history/sprint-6.1.md`](../prompt-history/sprint-6.1.md), [`prompt-history/sprint-6.2.md`](../prompt-history/sprint-6.2.md)
+**QG evidence:** [`tool-workflow.md`](../tool-workflow.md) — Documentation & Submission sections
 
 ---
 
@@ -26,17 +26,18 @@
 
 ### Prompt 2 — README and workflow (6.1)
 
-**Source:** sprint-6.1.md — Prompt 1 | **Task:** 6.1.1–6.1.5
+**Source:** sprint-6.1.md — Prompt 1 | **Task:** 6.1.1–6.1.7
 
 **Prompt:**
 
 > please proceed with 6.1 tasks from @implementation-plan.md
 
 **AI response summary:**
-- Complete `README.md`; `tool-workflow.md` v1.8; `prompt-history/README.md` updated.
-- Verified: 16/16 tests, server + client build, health endpoint.
+- Complete `README.md`; `tool-workflow.md` v1.8; `ai-prompts/` portfolio organized.
+- Risk severity + Top 5 tables in planning docs; `docs/api.md` with curl examples.
+- Verified: 32/32 tests, server + client build, health endpoint.
 
-**What I accepted:** README and workflow sync.
+**What I accepted:** README, workflow, API reference, and risk register sync.
 
 **What I rejected / why:** N/A — verified by following README steps.
 
@@ -67,12 +68,11 @@
 **Source:** reflection.md, assignment guideline | **Activity:** Meta-documentation
 
 **Developer action:**
-- `docs/reusable-workflow.md` — portable prompt templates A–H.
+- `docs/reusable-workflow.md` — portable prompt templates A–I (continuation prompt).
 - `ai-prompts/` — activity-grouped portfolio per submission guideline:
   `planning.md`, `design.md`, `implementation.md`, `testing.md`, `debugging.md`, `code-review.md`, `documentation.md`.
-- `prompt-history/` retained as sprint verbatim archive.
 
-**What I accepted:** Dual structure — sprint archive + guideline-aligned activity files.
+**What I accepted:** Single portfolio structure — activity files with QG evidence in `tool-workflow.md`.
 
 **What I rejected / why:** N/A
 

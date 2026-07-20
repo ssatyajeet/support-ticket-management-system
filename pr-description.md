@@ -39,8 +39,8 @@ This PR delivers the **Support Ticket Management System** — a full-stack inter
 | Implementation plan | `implementation-plan.md` |
 | Test strategy | `test-strategy.md` |
 | Acceptance criteria | `acceptance-criteria.md` |
+| API reference (curl) | `docs/api.md` |
 | AI workflow | `tool-workflow.md` |
-| Prompt history (sprint archive) | `prompt-history/sprint-*.md` |
 | AI prompts (activity portfolio) | `ai-prompts/` |
 | Test results | `test-results.md` |
 | Debugging notes | `debugging-notes.md` |
@@ -82,7 +82,7 @@ client/ (React)  ──HTTP──►  server/ (Express)
 | PATCH | `/api/tickets/:id/status` | State machine transitions |
 | POST | `/api/tickets/:id/comments` | Append comment |
 
-Full contract: [`api-contract.md`](api-contract.md)
+Full contract: [`api-contract.md`](api-contract.md) · Quick reference with curl: [`docs/api.md`](docs/api.md)
 
 ### Key files
 
@@ -119,9 +119,9 @@ cd server
 npm run test
 ```
 
-**Expected:** 16/16 integration tests pass (valid/invalid transitions + API guards).
+**Expected:** 32/32 tests pass (16 integration + 16 unit for `statusTransition.ts`).
 
-Evidence: [`test-results.md`](test-results.md) (latest run 2026-07-15; Sprint 6.2 run 2026-07-13).
+Evidence: [`test-results.md`](test-results.md) (Sprint 6.2 final regression).
 
 Strategy: [`test-strategy.md`](test-strategy.md)
 
@@ -170,7 +170,7 @@ See [`README.md`](../README.md) for full instructions.
 - No pagination (full list returned)
 - No ticket delete
 - Last-write-wins on concurrent edits
-- ERR-05 (EC-17 DB-unavailable graceful failure) — not manually tested; deferred
+- ERR-05 (EC-17 DB-unavailable graceful failure) — verified in Sprint 5.2.6 (`debugging-notes.md` ENV-003)
 
 ---
 
@@ -188,7 +188,7 @@ Details: [`debugging-notes.md`](debugging-notes.md)
 
 - **Tool:** Cursor (IDE-integrated)
 - **Approach:** Task-by-task implementation with developer approval between tasks
-- **Evidence:** `prompt-history/` (sprint logs), [`ai-prompts/`](ai-prompts/) (`planning.md` … `documentation.md`), `tool-workflow.md`, `reflection.md`
+- **Evidence:** [`ai-prompts/`](ai-prompts/) activity portfolio, `tool-workflow.md`, `reflection.md`
 
 The developer reviewed all AI output, made architectural decisions on open questions, ran Quality Gates, and manually verified behavior before marking criteria complete.
 
@@ -220,7 +220,7 @@ The developer reviewed all AI output, made architectural decisions on open quest
 ### Build / test smoke
 
 ```bash
-cd server && npm run test    # 16/16 integration tests
+cd server && npm run test    # 32/32 tests (integration + unit)
 cd client && npm run build   # production build
 ```
 
@@ -237,7 +237,7 @@ Deferred intentionally for v1 — documented, not hidden:
 | **Ticket delete** | Soft delete with `deletedAt` for audit trail | OQ-05 / DD-02 future |
 | **Concurrency** | Optimistic locking on concurrent edits | OQ-14 future |
 | **Ops** | Docker Compose, CI pipeline, OpenAPI/Swagger | Assignment stretch |
-| **Resilience** | EC-17 — graceful startup when DB unavailable (ERR-05) | Deferred in Sprint 5.2 |
+| **Resilience** | EC-17 — graceful startup when DB unavailable (ERR-05) | Completed — Sprint 5.2.6; `index.ts` startup probe |
 | **Observability** | Request correlation IDs in errors | Rejected in code review — out of v1 scope |
 
 See also [`code-review-notes.md`](code-review-notes.md) §Suggestions Rejected for architecture-level deferrals.
@@ -250,7 +250,7 @@ See also [`code-review-notes.md`](code-review-notes.md) §Suggestions Rejected f
 - [ ] `npm run test` passes
 - [ ] Ticket list, create, detail, edit, status, comments work in UI
 - [ ] Invalid status transition shows API error in UI
-- [ ] `prompt-history/` and `ai-prompts/` show iteration, not one-shot generation
+- [ ] `ai-prompts/` shows iteration, not one-shot generation
 - [ ] `reflection.md` present and honest
 
 ---

@@ -56,7 +56,7 @@ Cursor must:
 - Map work to requirement IDs (FR, BR, AC) when implementing features
 - Complete Quality Gate items in `implementation-plan.md` before marking sprint work done
 - Update `acceptance-criteria.md` statuses when criteria are verified
-- Log meaningful AI interactions in `prompt-history/` when requested
+- Log meaningful AI interactions in `ai-prompts/` when requested
 
 Cursor must not:
 
@@ -315,7 +315,7 @@ Whenever implementation changes:
 - Update **relevant documentation** — spec deviations must be documented or corrected
 - Update **`implementation-plan.md` progress** — sprint checkboxes and Progress Tracker
 - Update **`acceptance-criteria.md`** — criterion status after verification
-- Update **`prompt-history/`** — when developer requests or after significant AI sessions
+- Update **`ai-prompts/`** — when developer requests or after significant AI sessions
 - Update **README** if setup, run, or test steps change
 - Keep documentation **synchronized with implementation** — docs must not lie
 

@@ -6,7 +6,7 @@
 **Status:** Living document — **progress updates only** after v2.0 (see Planning Freeze)  
 **Sources:** `requirements-analysis.md`, `project-context.md`, `design-notes.md`, `acceptance-criteria.md`, `cursor-rules-or-instructions.md`
 
-> **How to use:** Find the next incomplete **Task ID**. Implement **only that task**. Pass **Developer Review** and **Quality Gate** before proceeding. Update progress checkboxes, `acceptance-criteria.md`, and `prompt-history/` after each sprint.
+> **How to use:** Find the next incomplete **Task ID**. Implement **only that task**. Pass **Developer Review** and **Quality Gate** before proceeding. Update progress checkboxes, `acceptance-criteria.md`, and `ai-prompts/` after each sprint.
 
 ### Plan sections
 
@@ -37,7 +37,7 @@ Apply this workflow for **every implementation task** (Sprint 3.1 onward):
 | 6 | Complete **AI Validation Checklist** |
 | 7 | **Stop.** Summarize changes, decisions, assumptions, security, performance, trade-offs |
 | 8 | **Wait for developer approval** before starting the next task |
-| 9 | After approval: update `implementation-plan.md`, `acceptance-criteria.md` (if verified), `tool-workflow.md`, `prompt-history/`, README (if setup changed) |
+| 9 | After approval: update `implementation-plan.md`, `acceptance-criteria.md` (if verified), `tool-workflow.md`, `ai-prompts/`, README (if setup changed) |
 | 10 | Proceed to next task only after approval |
 
 **Hard rules:**
@@ -163,7 +163,7 @@ Use these commands during implementation:
 - **Review Current Task** — Review the current implementation without making changes.
 - **Refactor Current Task** — Improve the current task without changing functionality.
 - **Run Quality Gate** — Perform all Quality Gate checks for the current sprint.
-- **Update Documentation** — Update implementation-plan.md, acceptance-criteria.md, tool-workflow.md, README, and prompt-history where applicable.
+- **Update Documentation** — Update implementation-plan.md, acceptance-criteria.md, tool-workflow.md, README, and ai-prompts where applicable.
 - **Prepare Commit** — Summarize completed work and suggest a Git commit message.
 
 -----
@@ -175,7 +175,7 @@ Use these commands during implementation:
 | Rule | Detail |
 | ---- | ------ |
 | **Frozen artifacts** | `requirements-analysis.md`, `project-context.md`, `design-notes.md`, `acceptance-criteria.md` (structure), `cursor-rules-or-instructions.md` |
-| **Allowed updates** | Progress checkboxes in this file; criterion **Status** in `acceptance-criteria.md`; `tool-workflow.md` pending sections; `README.md`; `prompt-history/`; testing/debugging/reflection docs |
+| **Allowed updates** | Progress checkboxes in this file; criterion **Status** in `acceptance-criteria.md`; `tool-workflow.md` pending sections; `README.md`; `ai-prompts/`; testing/debugging/reflection docs |
 | **Not allowed** | Regenerating planning docs; changing OQ decisions; changing stack (DD-01–DD-11); adding features without requirement change |
 | **Exception** | If assignment requirements change, update `requirements-analysis.md` first, then propagate to spec with developer approval |
 
@@ -195,7 +195,7 @@ Complete after **every implementation task** before requesting developer review:
 - [ ] Security reviewed (input validation, no secrets, CORS, XSS)
 - [ ] Performance reviewed (queries, N+1, unnecessary re-renders)
 - [ ] Tests executed or manual verification performed (as applicable)
-- [ ] Documentation updated (`implementation-plan.md`, `prompt-history/`, others if applicable)
+- [ ] Documentation updated (`implementation-plan.md`, `ai-prompts/`, others if applicable)
 - [ ] Acceptance criteria IDs identified and verifiable
 - [ ] No future sprint work included in this task
 
@@ -250,7 +250,7 @@ Deliver a working **Support Ticket Management System** (core scope) and complete
 - [ ] Single developer with Node.js LTS, PostgreSQL, and Cursor available locally
 - [x] Core planning artifacts approved before implementation sprints
 - [ ] Stretch features **not** started until Project Completion Checklist core items pass
-- [x] `prompt-history/` updated honestly after meaningful AI interactions
+- [x] `ai-prompts/` updated honestly after meaningful AI interactions
 - [x] No secrets committed to Git (`.env` gitignored)
 
 ## Overall Implementation Strategy
@@ -281,7 +281,7 @@ Planning ✓ → Design ✓ → DB schema → API (users → tickets → status 
 | **Primary tool** | Cursor (IDE-integrated) |
 | **AI role** | Draft code and docs; accelerate implementation |
 | **Developer role** | Decision maker — review, approve, or reject every AI output |
-| **Traceability** | Meaningful prompts logged in `prompt-history/` after each sprint |
+| **Traceability** | Meaningful prompts logged in `ai-prompts/` after each sprint |
 
 ## When AI is used
 
@@ -331,7 +331,7 @@ Every sprint ends with this gate. Sprint-specific traceability items are listed 
 - [ ] **API consistency:** Error shape, status codes, DTO contracts per spec §12
 - [ ] **Tests:** Manual and/or automated per sprint — all passing
 - [ ] **AI Validation Checklist:** Completed for all tasks in sprint
-- [ ] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `prompt-history/` updated
+- [ ] **Documentation:** `implementation-plan.md`, `tool-workflow.md`, `ai-prompts/` updated
 - [ ] **README:** Updated if setup/run steps changed
 - [ ] **Developer review:** All sprint tasks approved
 
@@ -436,7 +436,7 @@ docs: add requirement analysis v1.1 with resolved design decisions
 **Task 2.1.2 — Folder structure and env plan (2026-07-07): CONFIRMED**
 
 - Repository layout matches `design-notes.md` §8 and `project-context.md` §6.
-- Top-level: `client/`, `server/`, `docs/`, `tool-specific/`, `prompt-history/`, root `README.md`, `.gitignore`, `.env.example` (created in Sprint 3.1 / 6.1).
+- Top-level: `client/`, `server/`, `docs/`, `tool-specific/`, `ai-prompts/`, root `README.md`, `.gitignore`, `.env.example` (created in Sprint 3.1 / 6.1).
 - `client/`: Vite + React + TS — `src/api`, `components/`, `pages/`, `types/`, `hooks/`, `utils/`.
 - `server/`: Express + TS — `src/{config,controllers,services,routes,validators,middleware,types,lib}`, `prisma/`, `tests/integration/`.
 - **Environment variables (for `.env.example` in Sprint 3.1):**
@@ -1557,10 +1557,11 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 | **5.1.4** | Invalid transition tests (≥6) | same | [x] |
 | **5.1.5** | Guard tests (status on PATCH, filter, 404) | same | [x] |
 | **5.1.6** | `test-strategy.md` | root | [x] |
+| **5.1.7** | Unit tests for `statusTransition.ts` | `tests/unit/statusTransition.test.ts` | [x] |
 
 #### Sprint Exit Criteria
 
-- [x] `npm run test` passes; AC-17, AC-18 satisfied
+- [x] `npm run test` passes (32/32 — integration + unit); AC-17, AC-18 satisfied
 
 ---
 
@@ -1576,10 +1577,11 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 | **5.2.3** | Edge case sampling (EC-01–EC-22) | [x] |
 | **5.2.4** | Log/fix defects; `debugging-notes.md` | [x] |
 | **5.2.5** | Update `acceptance-criteria.md` statuses | [x] |
+| **5.2.6** | ERR-05 startup DB probe + EC-17 verification | `index.ts`, `debugging-notes.md` | [x] |
 
 #### Sprint Exit Criteria
 
-- [x] AC-01–AC-18 pass; no critical open defects
+- [x] AC-01–AC-18 pass; ERR-05 verified; no critical open defects
 
 ---
 
@@ -1597,8 +1599,10 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 | **6.1.1** | Complete README (setup, run, test) | [x] |
 | **6.1.2** | Verify README by fresh follow-through | [x] |
 | **6.1.3** | Update `tool-workflow.md` implementation sections | [x] |
-| **6.1.4** | Organize `prompt-history/` | [x] |
+| **6.1.4** | Organize `ai-prompts/` activity portfolio | [x] |
 | **6.1.5** | Final workflow doc consistency review | [x] |
+| **6.1.6** | Risk severity + Top 5 tables | `requirements-analysis.md`, `design-notes.md` | [x] |
+| **6.1.7** | `docs/api.md` with curl examples | `docs/api.md` | [x] |
 
 #### Sprint Exit Criteria
 
@@ -1676,7 +1680,7 @@ Apply **Enhanced Quality Gate Template** plus full UI flow traceability.
 - [x] `README.md` (AC-16)
 - [x] `tool-workflow.md`
 - [x] All `tool-specific/cursor-workflow/*` artifacts current
-- [x] `prompt-history/` organized (AC-20)
+- [x] `ai-prompts/` activity portfolio organized (AC-20)
 - [x] PR description (AC-21) — `pr-description.md`
 
 ## Acceptance Criteria AC-01–AC-23
@@ -1715,9 +1719,9 @@ Sprint-level completion tracker — each row is a milestone gate before the next
 | 4 | 4.2 Ticket List | [x] Complete | 2026-07-10 | Tasks 4.2.1–4.2.5; build + list UI QG |
 | 4 | 4.3 Create & Detail | [x] Complete | 2026-07-10 | Tasks 4.3.1–4.3.5; build + create/detail QG |
 | 4 | 4.4 Update Status Comments | [x] Complete | 2026-07-10 | Tasks 4.4.1–4.4.5; Phase 4 complete |
-| 5 | 5.1 Integration Tests | [x] Complete | 2026-07-10 | Tasks 5.1.1–5.1.6; 15/15 tests green |
-| 5 | 5.2 Manual QA | [x] Complete | 2026-07-13 | 5.2.4 DEF-001 fixed (EC-19); debugging-notes; acceptance criteria updated |
-| 6 | 6.1 README & Workflow | [x] Complete | 2026-07-13 | Tasks 6.1.1–6.1.5; README verified; tool-workflow v1.8 |
+| 5 | 5.1 Integration Tests | [x] Complete | 2026-07-10 | Tasks 5.1.1–5.1.7; 32/32 tests green |
+| 5 | 5.2 Manual QA | [x] Complete | 2026-07-13 | 5.2.4 DEF-001 fixed; 5.2.6 ERR-05 verified; debugging-notes |
+| 6 | 6.1 README & Workflow | [x] Complete | 2026-07-13 | Tasks 6.1.1–6.1.7; README verified; tool-workflow v1.8; docs/api.md |
 | 6 | 6.2 Reflection & Submit | [x] Complete | 2026-07-13 | Tasks 6.2.1–6.2.5; reflection + PR artifact; final regression |
 | S | S.1 Stretch (optional) | [ ] Not started | | |
 
@@ -1725,41 +1729,51 @@ Sprint-level completion tracker — each row is a milestone gate before the next
 
 # Risks
 
-Implementation and delivery risks for this plan. Full analysis: `requirements-analysis.md` §13.
+Implementation and delivery risks for this plan. Full analysis and severity scale: `requirements-analysis.md` §13.
 
-| ID | Risk | Likelihood | Impact |
-| -- | ---- | ---------- | ------ |
-| R-01 | Status transition logic implemented only on frontend | Medium | High |
-| R-02 | Ambiguous search behavior leads to inconsistent implementation | Low | Medium |
-| R-03 | Priority enum values not defined, causing seed/UI mismatch | Low | Medium |
-| R-04 | No authentication in core scope — any user can modify any ticket | High (by design) | Low |
-| R-05 | `createdBy` selection in UI without auth — user impersonation | Medium | Low |
-| R-06 | Scope creep into stretch features delays core delivery | Medium | High |
-| R-07 | Database choice impacts migration tooling and test setup | Low | Low |
-| R-08 | Insufficient test coverage for status machine edge cases | Medium | High |
-| R-09 | Secrets accidentally committed to Git | Low | High |
-| R-10 | Poor error message design leads to confusing UX | Medium | Medium |
-| R-11 | Status change via general update bypasses state machine | Medium | High |
-| R-12 | Time constraint (8–12 hours core effort) limits quality | Medium | Medium |
+| ID | Risk | Likelihood | Impact | Severity |
+| -- | ---- | ---------- | ------ | -------- |
+| R-01 | Status transition logic implemented only on frontend | Medium | High | **High** |
+| R-02 | Ambiguous search behavior leads to inconsistent implementation | Low | Medium | Medium |
+| R-03 | Priority enum values not defined, causing seed/UI mismatch | Low | Medium | Medium |
+| R-04 | No authentication in core scope — any user can modify any ticket | High (by design) | Low | Medium |
+| R-05 | `createdBy` selection in UI without auth — user impersonation | Medium | Low | Low |
+| R-06 | Scope creep into stretch features delays core delivery | Medium | High | **High** |
+| R-07 | Database choice impacts migration tooling and test setup | Low | Low | Low |
+| R-08 | Insufficient test coverage for status machine edge cases | Medium | High | **High** |
+| R-09 | Secrets accidentally committed to Git | Low | High | **High** |
+| R-10 | Poor error message design leads to confusing UX | Medium | Medium | Medium |
+| R-11 | Status change via general update bypasses state machine | Medium | High | **High** |
+| R-12 | Time constraint (8–12 hours core effort) limits quality | Medium | Medium | Medium |
+
+### Top 5 risks by severity
+
+| Rank | ID | Severity | Verification evidence |
+| ---- | -- | -------- | ----------------------- |
+| 1 | R-08 | **High** | Sprint 5.1 — 32/32 tests; 33/33 manual regression |
+| 2 | R-01 | **High** | `statusTransition.ts`; backend `changeStatus()` only |
+| 3 | R-11 | **High** | `STATUS_NOT_ALLOWED_HERE` IT; dedicated status endpoint |
+| 4 | R-09 | **High** | `.gitignore`; Sprint 5.2.2 secrets audit; AC-14 |
+| 5 | R-06 | **High** | Core checklist 100%; stretch S.1 not started |
 
 ---
 
 # Mitigation
 
-| ID | Mitigation |
-| -- | ---------- |
-| R-01 | Enforce exclusively on backend; mandatory integration tests (Sprint 5.1) |
-| R-02 | **Resolved** — search title + description, case-insensitive partial match |
-| R-03 | **Resolved** — Low, Medium, High, Critical |
-| R-04 | Document as known limitation; auth is stretch only |
-| R-05 | Acceptable for exercise; dropdown of seeded users |
-| R-06 | Core AC-01–AC-18 before stretch; Project Completion Checklist gates S.1 |
-| R-07 | **Resolved** — PostgreSQL; setup documented in README |
-| R-08 | Mandatory integration tests — all invalid transitions covered |
-| R-09 | `.env.example` committed; `.env` gitignored; review before push |
-| R-10 | Consistent `ErrorResponse` schema; test error paths in QA sprint |
-| R-11 | **Resolved** — dedicated `PATCH /tickets/:id/status`; 400 on general PATCH |
-| R-12 | One task at a time; Quality Gate every sprint; artifacts alongside code |
+| ID | Mitigation | Verified by |
+| -- | ---------- | ----------- |
+| R-01 | Enforce exclusively on backend; mandatory integration tests (Sprint 5.1) | 32/32 tests pass |
+| R-02 | **Resolved** — search title + description, case-insensitive partial match | AC-09 manual QA |
+| R-03 | **Resolved** — Low, Medium, High, Critical | Prisma enum + seed |
+| R-04 | Document as known limitation; auth is stretch only | README Known limitations |
+| R-05 | Acceptable for exercise; dropdown of seeded users | `UserSelect` component |
+| R-06 | Core AC-01–AC-18 before stretch; Project Completion Checklist gates S.1 | Checklist signed off |
+| R-07 | **Resolved** — PostgreSQL; setup documented in README | README + migrations |
+| R-08 | Mandatory integration tests — all invalid transitions covered | AC-17, AC-18 complete |
+| R-09 | `.env.example` committed; `.env` gitignored; review before push | AC-14 audit |
+| R-10 | Consistent `ErrorResponse` schema; test error paths in QA sprint | ERR-01–04 verified |
+| R-11 | **Resolved** — dedicated `PATCH /tickets/:id/status`; 400 on general PATCH | Guard IT scenario |
+| R-12 | One task at a time; Quality Gate every sprint; artifacts alongside code | All sprint QGs passed |
 
 ---
 

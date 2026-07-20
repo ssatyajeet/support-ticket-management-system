@@ -2,7 +2,7 @@
 
 **Activity:** Requirements analysis, scope, execution plan, acceptance criteria  
 **Sprints:** 1.1, 2.1 (planning portions)  
-**Source archive:** [`prompt-history/sprint-1.1.md`](../prompt-history/sprint-1.1.md), [`prompt-history/sprint-2.1.md`](../prompt-history/sprint-2.1.md)
+**QG evidence:** [`tool-workflow.md`](../tool-workflow.md) — Requirement Analysis, Planning Freeze sections
 
 ---
 
@@ -15,7 +15,7 @@
 > Create the initial project structure… Do not generate application code. Do not create React or Express projects. Only create the project structure.
 
 **AI response summary:**
-- Created folder scaffold (`client/`, `server/`, `docs/`, `prompt-history/`, `tool-specific/cursor-workflow/`) and empty placeholder files.
+- Created folder scaffold (`client/`, `server/`, `docs/`, `ai-prompts/`, `tool-specific/cursor-workflow/`) and empty placeholder files.
 
 **What I accepted:** Folder layout and explicit no-code constraint worked — prevented premature scaffolding.
 

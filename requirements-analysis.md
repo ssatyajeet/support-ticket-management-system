@@ -529,20 +529,42 @@ Frontend: Update list display
 
 ## 13. Risks
 
-| ID | Risk | Likelihood | Impact | Mitigation |
-| -- | ---- | ---------- | ------ | ---------- |
-| R-01 | Status transition logic implemented only on frontend | Medium | High | Enforce exclusively on backend; mandatory integration tests |
-| R-02 | Ambiguous search behavior leads to inconsistent implementation | Low | Medium | **Resolved:** search title + description, case-insensitive partial match |
-| R-03 | Priority enum values not defined, causing seed/UI mismatch | Low | Medium | **Resolved:** Low, Medium, High, Critical |
-| R-04 | No authentication in core scope — any user can modify any ticket | High (by design) | Low (exercise scope) | Document as known limitation; implement auth as stretch if needed |
-| R-05 | `createdBy` selection in UI without auth — user impersonation | Medium | Low | Acceptable for exercise; use dropdown of seeded users |
-| R-06 | Scope creep into stretch features delays core delivery | Medium | High | Prioritize core acceptance criteria; treat stretch as time-permitting |
-| R-07 | Database choice impacts migration tooling and test setup | Low | Low | **Resolved:** PostgreSQL selected; document setup in README |
-| R-08 | Insufficient test coverage for status machine edge cases | Medium | High | Mandatory integration tests are non-negotiable; cover all invalid transitions |
-| R-09 | Secrets accidentally committed to Git | Low | High | Use `.env.example`; add `.env` to `.gitignore`; review before push |
-| R-10 | Poor error message design leads to confusing UX | Medium | Medium | Define error response schema in API design; test error paths |
-| R-11 | Status change via general update bypasses state machine | Medium | High | **Resolved:** separate status endpoint; reject `status` on general update with 400 |
-| R-12 | Time constraint (8–12 hours core effort) limits quality | Medium | Medium | Focus on core features; maintain artifact quality for exercise evaluation |
+### Severity scale
+
+Composite **Severity** from Likelihood × Impact:
+
+| Likelihood \ Impact | Low | Medium | High |
+| ------------------- | --- | ------ | ---- |
+| High | Medium | High | Critical |
+| Medium | Low | Medium | **High** |
+| Low | Low | Medium | **High** |
+
+### Full risk register
+
+| ID | Risk | Likelihood | Impact | Severity | Mitigation | Verified by |
+| -- | ---- | ---------- | ------ | -------- | ---------- | ----------- |
+| R-01 | Status transition logic implemented only on frontend | Medium | High | **High** | Enforce exclusively on backend; mandatory integration tests | `statusTransition.ts`; Sprint 5.1 — 16/16 IT (AC-17, AC-18) |
+| R-02 | Ambiguous search behavior leads to inconsistent implementation | Low | Medium | Medium | **Resolved:** search title + description, case-insensitive partial match | `ticketService.list` ILIKE; manual QA AC-09 |
+| R-03 | Priority enum values not defined, causing seed/UI mismatch | Low | Medium | Medium | **Resolved:** Low, Medium, High, Critical | Prisma enum + seed; UI badges verified |
+| R-04 | No authentication in core scope — any user can modify any ticket | High (by design) | Low (exercise scope) | Medium | Document as known limitation; implement auth as stretch if needed | README Known limitations; `reflection.md` |
+| R-05 | `createdBy` selection in UI without auth — user impersonation | Medium | Low | Low | Acceptable for exercise; use dropdown of seeded users | `UserSelect` dropdown; seed users only |
+| R-06 | Scope creep into stretch features delays core delivery | Medium | High | **High** | Prioritize core acceptance criteria; treat stretch as time-permitting | Core AC-01–AC-18 complete; S.1 stretch not started |
+| R-07 | Database choice impacts migration tooling and test setup | Low | Low | Low | **Resolved:** PostgreSQL selected; document setup in README | README + `database/setup-notes.md`; migrations applied |
+| R-08 | Insufficient test coverage for status machine edge cases | Medium | High | **High** | Mandatory integration tests are non-negotiable; cover all invalid transitions | Sprint 5.1 — 32/32 tests (16 IT + 16 unit); 33/33 manual regression |
+| R-09 | Secrets accidentally committed to Git | Low | High | **High** | Use `.env.example`; add `.env` to `.gitignore`; review before push | `.gitignore`; no `.env` in git history; AC-14 audit |
+| R-10 | Poor error message design leads to confusing UX | Medium | Medium | Medium | Define error response schema in API design; test error paths | `ErrorResponse` shape; ERR-01–04 verified in QA |
+| R-11 | Status change via general update bypasses state machine | Medium | High | **High** | **Resolved:** separate status endpoint; reject `status` on general update with 400 | `STATUS_NOT_ALLOWED_HERE` IT; dedicated `PATCH …/status` |
+| R-12 | Time constraint (8–12 hours core effort) limits quality | Medium | Medium | Medium | Focus on core features; maintain artifact quality for exercise evaluation | All core sprints QG-passed; submission artifacts complete |
+
+### Top 5 risks by severity
+
+| Rank | ID | Severity | Risk (summary) | Verification evidence |
+| ---- | -- | -------- | -------------- | ----------------------- |
+| 1 | R-08 | **High** | Insufficient state-machine test coverage | 32/32 tests (16 IT + 16 unit); invalid-transition matrix (AC-18) |
+| 2 | R-01 | **High** | Status logic enforced only on frontend | `server/src/services/statusTransition.ts`; backend-only transitions |
+| 3 | R-11 | **High** | Status change bypasses state machine via general PATCH | `assertNoStatusField`; IT guard scenario |
+| 4 | R-09 | **High** | Secrets committed to Git | `.env` gitignored; `.env.example` placeholders only |
+| 5 | R-06 | **High** | Scope creep delays core delivery | Stretch deferred; Project Completion Checklist signed off |
 
 ---
 
@@ -613,7 +635,7 @@ Derived from the assignment's Core Acceptance Criteria and expanded for testabil
 ### 15.7 Exercise Artifacts
 
 - [ ] **AC-19:** Requirement analysis document exists (`docs/requirements-analysis.md`).
-- [ ] **AC-20:** Prompt history is maintained.
+- [ ] **AC-20:** Prompt history maintained (`ai-prompts/` activity portfolio).
 - [ ] **AC-21:** Design notes and tool-specific workflow artifacts are present.
 - [ ] **AC-22:** Testing and debugging notes are documented.
 - [ ] **AC-23:** Reflection document is included.

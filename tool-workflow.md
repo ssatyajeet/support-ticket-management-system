@@ -77,8 +77,8 @@ The following were intentionally excluded from prompts:
 
 | Location | Purpose |
 | -------- | ------- |
-| `prompt-history/` | Sprint-by-sprint **verbatim archive** (Sprints 1.1–6.2 complete) — see `prompt-history/README.md` |
-| `ai-prompts/` | **Activity-grouped portfolio** for reviewers — `planning.md`, `design.md`, `implementation.md`, `testing.md`, `debugging.md`, `code-review.md`, `documentation.md` |
+| `ai-prompts/` | **Activity-grouped prompt portfolio** — primary archive for AC-20 (see `ai-prompts/README.md`) |
+| `tool-workflow.md` | Sprint QG outcomes, curl verification, and workflow narrative |
 
 Context-not-shared policy is documented in `ai-prompts/README.md`.
 
@@ -204,7 +204,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Defect fix | `server/src/middleware/errorHandler.ts` | DEF-001: malformed JSON → 400 |
 | Debugging docs | `debugging-notes.md` | Defect log and resolution |
 
-**Quality Gate:** 33/33 manual regression pass; DEF-001 fixed; acceptance criteria updated (see `prompt-history/sprint-5.2.md`).
+**Quality Gate:** 33/33 manual regression pass; DEF-001 fixed; acceptance criteria updated (see `ai-prompts/testing.md` and `ai-prompts/debugging.md`).
 
 ### Sprint 5.1 — Integration Test Suite (Complete)
 
@@ -218,7 +218,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Integration tests | `server/tests/integration/statusTransition.integration.test.ts` | 15 scenarios: 5 valid, 6 invalid, 4 guards |
 | Testing docs | `test-strategy.md` | Setup, coverage matrix, troubleshooting |
 
-**Quality Gate:** `npm run test` — **15/15 passed**; `npm run build` (server) — passed (see `prompt-history/sprint-5.1.md`).
+**Quality Gate:** `npm run test` — **15/15 passed**; `npm run build` (server) — passed (see `ai-prompts/testing.md`).
 
 ### Sprint 4.4 — Update, Status Change & Comments (Complete)
 
@@ -232,7 +232,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Comments | `components/comments/CommentForm.tsx` | Author dropdown + message; refetch on post |
 | Loading / XSS | Detail page | Disabled during mutations; text-only render |
 
-**Quality Gate:** `npm run build` (client) — passed; edit/status/comment flows verified (see `prompt-history/sprint-4.4.md`).
+**Quality Gate:** `npm run build` (client) — passed; edit/status/comment flows verified (see `ai-prompts/implementation.md`).
 
 **Phase 4 frontend:** Complete — all core UI flows demo-ready.
 
@@ -251,7 +251,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Comments | `components/comments/CommentList.tsx` | Chronological display; text-only render |
 | 404 state | `TicketDetailPage.tsx` | Invalid/missing ticket ID |
 
-**Quality Gate:** `npm run build` (client) — passed; create/detail/404/comments verified (see `prompt-history/sprint-4.3.md`).
+**Quality Gate:** `npm run build` (client) — passed; create/detail/404/comments verified (see `ai-prompts/implementation.md`).
 
 ### Sprint 4.2 — Ticket List, Search & Filter (Complete)
 
@@ -268,7 +268,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Layout (iteration) | `layout/Sidebar.tsx`, `icons/`, `charts/` | Sidebar + dashboard; mockup-aligned UI |
 | Dashboard | `DashboardPage.tsx` | Stat cards + SVG donut chart; `/dashboard` route |
 
-**Quality Gate:** `npm run build` (client) — passed; list/search/filter/URL/empty/error verified (see `prompt-history/sprint-4.2.md`).
+**Quality Gate:** `npm run build` (client) — passed; list/search/filter/URL/empty/error verified (see `ai-prompts/implementation.md` and `ai-prompts/code-review.md`).
 
 **Iterations / corrections:**
 
@@ -291,7 +291,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Routing | `App.tsx`, `Layout.tsx`, placeholder pages | React Router; spec §9.3 routes |
 | Env | `client/.env.example` | `VITE_API_URL` |
 
-**Quality Gate:** `npm run build` + CORS preflight + `GET /api/users` — all passed (see `prompt-history/sprint-4.1.md`).
+**Quality Gate:** `npm run build` + CORS preflight + `GET /api/users` — all passed (see `ai-prompts/implementation.md`).
 
 ### Sprint 3.4 — Comments, Search & Filter (Complete)
 
@@ -308,7 +308,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 - `POST /api/tickets/:id/comments`
 - `GET /api/tickets` extended with `search` and `status` query params
 
-**Quality Gate:** 6 new curl cases at QG (task-level curls not re-run) + `npm run build` — all passed (see `prompt-history/sprint-3.4.md`).
+**Quality Gate:** 6 new curl cases at QG (task-level curls not re-run) + `npm run build` — all passed (see `ai-prompts/implementation.md`).
 
 **Phase 3 backend API:** Complete — all spec §12.1 endpoints implemented.
 
@@ -323,7 +323,7 @@ Cursor implemented the Express + TypeScript + Prisma server scaffold task-by-tas
 | Validator | `parseChangeStatusInput()` | API display strings → Prisma `Status` |
 | Endpoint | `PATCH /api/tickets/:id/status` | Separate from general PATCH (DD-04) |
 
-**Quality Gate:** curl transition matrix — 13/13 passed (see `prompt-history/sprint-3.3.md`).
+**Quality Gate:** curl transition matrix — 13/13 passed (see `ai-prompts/implementation.md`).
 
 **Developer workflow note:** `npm run build` deferred to sprint QG (not per-task).
 
@@ -346,7 +346,7 @@ Task-by-task implementation with developer approval between each step (same patt
 - `GET /api/tickets`, `POST /api/tickets`
 - `GET /api/tickets/:id`, `PATCH /api/tickets/:id`
 
-**Quality Gate:** curl verification — 11/11 tests passed (see `prompt-history/sprint-3.2.md`).
+**Quality Gate:** curl verification — 11/11 tests passed (see `ai-prompts/implementation.md`).
 
 **Iterations / corrections:**
 
@@ -408,7 +408,7 @@ This exercise produced a **repeatable AI-assisted lifecycle** — not a one-off 
 | Prompt templates A–H | Requirement analysis, spec, AC, tasks v2 refactor, implementation, code review, debugging, doc honesty |
 | `implementation-plan.md` v2.0 mechanics | One task per session, AI Validation Checklist, Enhanced Quality Gate, Rollback Rule |
 | `.cursor/rules/` | Adapt stack sections; keep workflow and security rules |
-| `prompt-history/` discipline | Verbatim prompts at sprint QG; accept/reject/iterate logged |
+| `ai-prompts/` discipline | Activity-grouped prompts; accept/reject/iterate logged per lifecycle phase |
 | Information exclusions | Never share `.env` credentials or secrets (see §Information Not Shared with Cursor) |
 
 **What changes per project:** domain requirements, API/schema, sprint task list, acceptance criteria IDs.  
@@ -445,9 +445,9 @@ Full copy-paste prompts and adaptation checklist: [`docs/reusable-workflow.md`](
 **Sprint 6.1 (2026-07-13):**
 
 - Completed root `README.md` — full setup, migrate, seed, run client + server, run tests (AC-16, DOC-07)
-- Verified README steps: server/client build pass; `npm run test` — 16/16; health endpoint OK
+- Verified README steps: server/client build pass; `npm run test` — 32/32; health endpoint OK
 - Updated this document (`tool-workflow.md` v1.8) — implementation sections current through Phase 5
-- Organized `prompt-history/` — session index updated; Sprints 5.1–5.2 marked approved
+- Organized `ai-prompts/` portfolio — Sprints 5.1–5.2 testing and debugging entries complete
 
 **Next:** Submission — repository ready for exercise hand-in.
 
@@ -455,7 +455,7 @@ Full copy-paste prompts and adaptation checklist: [`docs/reusable-workflow.md`](
 
 - `reflection.md` — honest AI usage reflection (AC-23, DOC-10)
 - `pr-description.md` — submission PR artifact (DOC-11)
-- Final regression: `npm run test` 16/16; API regression 26/26 (after re-seed)
+- Final regression: `npm run test` 32/32; API regression 26/26 (after re-seed)
 - Project Completion Checklist signed off in `implementation-plan.md`
 
 ---
@@ -482,7 +482,7 @@ Honest AI usage reflection in [`reflection.md`](reflection.md) (AC-23, DOC-10).
 
 - AI excelled at pattern-following implementation when spec was clear
 - Human decisions required for OQs, Prisma 7.8 adapter issues, UI iteration, DEF-001 fix
-- Prompt iteration and Quality Gates documented in `prompt-history/`
+- Prompt iteration and Quality Gates documented in `ai-prompts/` and `tool-workflow.md`
 - Submission PR artifact: [`pr-description.md`](pr-description.md)
 
 ---
@@ -515,7 +515,7 @@ Honest AI usage reflection in [`reflection.md`](reflection.md) (AC-23, DOC-10).
 | `reflection.md` | AC-23 honest AI reflection | Done |
 | `pr-description.md` | Submission PR artifact (DOC-11) | Done |
 | AI workflow (this doc) | `tool-workflow.md` v1.8 | Done |
-| Prompt history | `prompt-history/sprint-5.2.md` | Done |
+| Prompt portfolio | `ai-prompts/testing.md`, `ai-prompts/debugging.md` | Done |
 | Root README | `README.md` — setup, run, test verified | Done |
 | `.gitignore` | Root `.gitignore` | Done |
 | `server/.env.example` | Placeholder env template | Done |

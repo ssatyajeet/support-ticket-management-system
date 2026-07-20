@@ -27,7 +27,7 @@ Concise rollup of AI usage across the project lifecycle. Full detail in [`tool-w
 | **Analysis** | Drafted `requirements-analysis.md` from assignment; surfaced OQ-01–15 | Resolved roles, PostgreSQL, dedicated status endpoint, no delete in v1 |
 | **Design** | design-notes, implementation-plan, acceptance-criteria, cursor rules | v1.1 updates: DD-01–11, risks, removed version pins |
 | **Implementation** | Backend + frontend task-by-task code generation | Curl/build/test at each sprint QG |
-| **Testing** | 16 integration tests, regression scripts, manual checklist | 16/16 pass; 33/33 manual regression |
+| **Testing** | 16 integration + 16 unit tests, regression scripts, manual checklist | 32/32 pass; 33/33 manual regression |
 | **Debugging** | Edge-case matrix; DEF-001 root-cause trace | Approved `errorHandler` fix |
 | **Code review** | Spec review, architecture rejections | Documented in `code-review-notes.md` |
 | **Documentation** | README, PR description, reflection, prompt history | Accuracy review before submission |
@@ -69,10 +69,10 @@ See [`review-fixes.md`](review-fixes.md) for full fix log.
 
 | Location | Purpose |
 | -------- | ------- |
-| [`prompt-history/`](prompt-history/) | Sprint-by-sprint **verbatim archive** (Sprints 1.1–6.2) — source of truth |
-| [`ai-prompts/`](ai-prompts/) | **Activity-grouped portfolio** for reviewer evaluation |
+| [`ai-prompts/`](ai-prompts/) | **Activity-grouped prompt portfolio** — primary archive for reviewer evaluation (AC-20) |
+| [`tool-workflow.md`](tool-workflow.md) | Sprint QG outcomes, curl matrices, and workflow narrative |
 
-**Honesty note:** Sprint 5.2.1/5.2.2 verbatim prompts unavailable — outcomes in `docs/manual-regression-checklist.md` + persistence scripts. Short prompts (`proceed`, `go ahead`) valid when scope is in `implementation-plan.md`.
+**Honesty note:** Sprint 5.2.1/5.2.2 verbatim prompts unavailable — outcomes captured in `ai-prompts/testing.md`, `docs/manual-regression-checklist.md`, and persistence scripts. Short prompts (`proceed`, `go ahead`) valid when scope is in `implementation-plan.md`; see continuation template in `docs/reusable-workflow.md`.
 
 ---
 

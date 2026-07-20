@@ -200,15 +200,27 @@ Single register of accepted architectural trade-offs and technical risks. Full b
 
 ### Technical Risks
 
-| Risk | Likelihood | Impact | Mitigation |
-| ---- | ---------- | ------ | ---------- |
-| Status logic implemented only on frontend | Medium | High | `statusTransition.ts` service; mandatory integration tests (AC-17, AC-18) |
-| General PATCH accepts `status` and bypasses state machine | Medium | High | Explicit rejection in `ticketService.update`; integration test |
-| Enum mapping bugs between API and database | Medium | Medium | Single mapper layer; test all five statuses |
-| Scope creep into stretch features | Medium | High | §20 Out of Scope; sequencing in `implementation-plan.md` |
-| Test database pollution between runs | Medium | Medium | Separate test `DATABASE_URL` or truncate between tests |
-| Secrets committed to Git | Low | High | `.env.example` + `.gitignore`; AC-14 |
-| Prisma/schema drift from API contracts | Low | Medium | DTO mappers; seed data as contract smoke test |
+Severity scale: see `requirements-analysis.md` §13. **High** = Medium likelihood × High impact, or Low likelihood × High impact.
+
+| Risk | Likelihood | Impact | Severity | Mitigation | Verified by |
+| ---- | ---------- | ------ | -------- | ---------- | ----------- |
+| Status logic implemented only on frontend | Medium | High | **High** | `statusTransition.ts` service; mandatory integration tests (AC-17, AC-18) | 16/16 IT; `changeStatus()` reads live DB state |
+| General PATCH accepts `status` and bypasses state machine | Medium | High | **High** | Explicit rejection in `ticketService.update`; integration test | `STATUS_NOT_ALLOWED_HERE` guard IT |
+| Enum mapping bugs between API and database | Medium | Medium | Medium | Single mapper layer; test all five statuses | All five statuses in seed + API responses |
+| Scope creep into stretch features | Medium | High | **High** | §20 Out of Scope; sequencing in `implementation-plan.md` | Core AC complete; S.1 not started |
+| Test database pollution between runs | Medium | Medium | Medium | Separate test `DATABASE_URL` or truncate between tests | `server/tests/helpers/db.ts` truncate/seed |
+| Secrets committed to Git | Low | High | **High** | `.env.example` + `.gitignore`; AC-14 | Secrets audit Sprint 5.2.2 |
+| Prisma/schema drift from API contracts | Low | Medium | Medium | DTO mappers; seed data as contract smoke test | `api-contract.md` matches implemented API |
+
+### Top 5 technical risks (aligned with `requirements-analysis.md` §13)
+
+| Rank | Severity | Risk | Verification |
+| ---- | -------- | ---- | ------------ |
+| 1 | **High** | State machine untested or frontend-only | `statusTransition.ts` + 16/16 IT |
+| 2 | **High** | Status bypass via general PATCH | Dedicated status endpoint + guard IT |
+| 3 | **High** | Secrets in version control | `.gitignore`; AC-14 audit |
+| 4 | **High** | Scope creep into stretch | QG gates; checklist sign-off |
+| 5 | **High** | Insufficient transition edge-case coverage | AC-17/AC-18 matrix complete |
 
 ---
 

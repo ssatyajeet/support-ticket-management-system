@@ -12,7 +12,7 @@
 
 This document is a **portable playbook** extracted from a completed exercise. Use it to start the next full-stack, AI-assisted project without rebuilding the workflow from scratch.
 
-It is a **floor, not a ceiling** — adapt names, stack details, and sprint breakdown to the new assignment. The patterns below were validated on this repository (`prompt-history/`, Sprint 2.1 planning freeze, Sprints 3–5 implementation).
+It is a **floor, not a ceiling** — adapt names, stack details, and sprint breakdown to the new assignment. The patterns below were validated on this repository (`ai-prompts/` portfolio, Sprint 2.1 planning freeze, Sprints 3–5 implementation).
 
 **Companion artifacts in this repo (reference implementations):**
 
@@ -21,8 +21,7 @@ It is a **floor, not a ceiling** — adapt names, stack details, and sprint brea
 | Execution playbook | `implementation-plan.md` (v2.0 — Generic Cursor Prompt, QG template) |
 | Permanent engineering rules | `tool-specific/cursor-workflow/cursor-rules-or-instructions.md` |
 | Lifecycle narrative | `tool-workflow.md` |
-| Sprint prompt logs | `prompt-history/` |
-| Activity prompt portfolio | `ai-prompts/` (curated by lifecycle — optional reviewer view) |
+| Activity prompt portfolio | `ai-prompts/` (curated by lifecycle — primary reviewer view) |
 | Code review pattern | `code-review-notes.md` |
 
 ---
@@ -36,7 +35,7 @@ It is a **floor, not a ceiling** — adapt names, stack details, and sprint brea
 5. Add `.cursor/rules/` from `cursor-rules-or-instructions.md` (adapt stack sections).
 6. Create `implementation-plan.md` v1 → refactor to v2 with **Prompt Template E** (atomic tasks + generic implementation prompt).
 7. Implement **one task at a time** with **Prompt Template F**; stop for developer approval each task.
-8. At each sprint end: Quality Gate + `prompt-history/sprint-X.X.md`.
+8. At each sprint end: Quality Gate + update relevant `ai-prompts/{activity}.md` entry.
 9. Before submission: reflection, code-review-notes, reusable-workflow (update this file for the new project).
 
 ---
@@ -70,10 +69,8 @@ It is a **floor, not a ceiling** — adapt names, stack details, and sprint brea
 ├── final-ai-usage-summary.md
 ├── pr-description.md
 ├── candidate-info.md
-├── prompt-history/
-│   ├── README.md
-│   └── sprint-X.X.md
 ├── ai-prompts/
+│   ├── README.md
 │   ├── planning.md … documentation.md
 ├── tool-specific/
 │   └── cursor-workflow/
@@ -185,7 +182,7 @@ reorganize into a verification document a developer can run sprint by sprint.
 
 ### Template D — Execution playbook v1 → v2 refactor
 
-Use after a first `implementation-plan.md` draft exists. This project's **Prompt 10** in `prompt-history/sprint-2.1.md` produced `implementation-plan.md` v2.0 with atomic tasks and the Generic Implementation Prompt.
+Use after a first `implementation-plan.md` draft exists. This project's **Prompt 10** in `ai-prompts/planning.md` produced `implementation-plan.md` v2.0 with atomic tasks and the Generic Implementation Prompt.
 
 ```text
 You are acting as Principal Engineering Manager and AI Engineering Reviewer.
@@ -274,14 +271,42 @@ Log in `debugging-notes.md` with: Problem · Investigation · How AI helped · V
 
 ### Template H — Documentation honesty constraint
 
-Use whenever AI drafts lifecycle docs (`tool-workflow.md`, reflection, prompt-history summaries):
+Use whenever AI drafts lifecycle docs (`tool-workflow.md`, reflection, `ai-prompts/` summaries):
 
 ```text
 Only document activities that have actually been completed.
 Do NOT invent future workflow or speculative sprints.
 ```
 
-This constraint prevented fabricated content in Sprint 2.1 (`prompt-history/sprint-2.1.md`, Prompt 9).
+This constraint prevented fabricated content in Sprint 2.1 (`ai-prompts/planning.md`, Prompt 9).
+
+---
+
+### Template I — Continuation prompt (scope frozen)
+
+Use when resuming work with a short directive — **never** send bare `proceed` without context:
+
+```text
+Proceed with Task {X.Y.Z} per @implementation-plan.md.
+
+Context: Sprint {X.Y} QG passed for tasks through {X.Y.N-1} / artifact version {v}.
+Constraints: Follow @.cursor/rules/{relevant-rule}.mdc — no stretch features.
+Verify before marking complete: {test command | curl cases | checklist section}.
+Acceptance criteria: {AC-IDs or criterion IDs for this task}.
+```
+
+**Example (this project):**
+
+```text
+Proceed with Task 5.2.4 per @implementation-plan.md.
+
+Context: Sprint 5.2.3 edge-case sampling complete; DEF-001 logged in debugging-notes.md.
+Constraints: Follow @.cursor/rules/03-backend-standards.mdc — minimal fix only.
+Verify: curl malformed JSON returns 400 VALIDATION_ERROR; npm run test 32/32.
+Acceptance criteria: ERR-04, EC-19.
+```
+
+Short prompts are acceptable when scope is frozen, but this template preserves auditability for reviewers.
 
 ---
 
@@ -298,7 +323,7 @@ From `implementation-plan.md` §Standard Cursor Implementation Workflow:
 | 5 | Complete AI Validation Checklist |
 | 6 | Summarize + stop |
 | 7 | Wait for developer approval |
-| 8 | Update tasks, AC, tool-workflow, prompt-history |
+| 8 | Update tasks, AC, tool-workflow, ai-prompts |
 | 9 | Proceed |
 
 ---
@@ -313,7 +338,7 @@ Copy into each task completion note:
 - [ ] Security: validation, no secrets, CORS/XSS considered
 - [ ] Performance: N+1, query patterns, render loops
 - [ ] Tests or manual verification run
-- [ ] Docs updated (`implementation-plan.md`, `prompt-history/`)
+- [ ] Docs updated (`implementation-plan.md`, `ai-prompts/`)
 - [ ] Acceptance criteria IDs identified
 - [ ] No future-sprint work included
 
@@ -327,16 +352,16 @@ Use **Enhanced Quality Gate Template** in `implementation-plan.md`:
 - Engineering standards + architecture compliance
 - Security + performance review
 - Tests passing
-- Documentation sync (`implementation-plan.md`, `tool-workflow.md`, `prompt-history/`)
+- Documentation sync (`implementation-plan.md`, `tool-workflow.md`, `ai-prompts/`)
 - Developer review approved
 
 **Rollback rule:** If QG fails → stop → fix → re-run → repeat. Do not start next sprint.
 
 ---
 
-## Prompt history discipline
+## Prompt portfolio discipline
 
-At **sprint Quality Gate only** (not every chat message), create `prompt-history/sprint-X.X.md`. Optionally maintain `ai-prompts/` as an activity-grouped portfolio for reviewers (see this repo's `ai-prompts/README.md`).
+At **sprint Quality Gate**, add or update the relevant file in `ai-prompts/` (e.g. `testing.md` after QA sprint). Use **Template I** for continuation prompts when scope is frozen in `implementation-plan.md`. See this repo's `ai-prompts/README.md`.
 
 | Field per prompt | Content |
 | ---------------- | ------- |
@@ -369,7 +394,7 @@ Rules should encode **non-negotiables** (e.g. dedicated status endpoint, no secr
 | 3 | Regenerate spec, AC, project-context for new domain |
 | 4 | Build `implementation-plan.md` v2 with Template D |
 | 5 | Update `.cursor/rules/` stack and domain language |
-| 6 | Reset `prompt-history/` index |
+| 6 | Reset `ai-prompts/` activity index |
 | 7 | Keep **workflow mechanics** (one task, QG, rollback, prompt logs) unchanged |
 
 ---
@@ -404,7 +429,7 @@ Rules should encode **non-negotiables** (e.g. dedicated status endpoint, no secr
 - [`tool-workflow.md`](../tool-workflow.md) — how this workflow was applied on this project
 - [`reflection.md`](reflection.md) — lessons learned
 - [`implementation-plan.md`](../implementation-plan.md) — full Generic Prompt + QG template
-- [`prompt-history/sprint-2.1.md`](../prompt-history/sprint-2.1.md) — playbook refactor prompts
+- [`ai-prompts/planning.md`](../ai-prompts/planning.md) — playbook refactor prompts
 
 ---
 

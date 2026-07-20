@@ -303,7 +303,7 @@ support-ticket-management-system/
 │
 ├── tests/                           # Cross-cutting test notes/fixtures (optional)
 │
-├── prompt-history/                  # AI prompt log for exercise submission
+├── ai-prompts/                      # Activity-grouped AI prompt portfolio (AC-20)
 │
 ├── tool-specific/
 │   └── cursor-workflow/
@@ -366,7 +366,7 @@ support-ticket-management-system/
 
 - Small, focused commits with clear messages
 - Never commit `.env`, `node_modules`, or build artifacts
-- Keep `prompt-history/` updated for exercise artifacts
+- Keep `ai-prompts/` updated for exercise artifacts
 
 ### Dependencies
 
@@ -637,7 +637,7 @@ How Cursor should assist throughout this project.
 | Follow folder structure in Section 6 | Invent new architecture patterns |
 | Add integration tests when changing status logic | Skip tests for state machine changes |
 | Use Zod + service layer separation | Put business logic in route handlers |
-| Update `prompt-history/` when asked | Fabricate prompt history |
+| Update `ai-prompts/` when asked | Fabricate prompt history |
 | Match existing code style | Introduce new frameworks mid-project |
 
 ### Validation of AI Output
@@ -715,7 +715,7 @@ A feature or the overall project is **done** when all applicable criteria below 
 #### Exercise Artifacts
 
 - [ ] **AC-19:** `requirements-analysis.md` complete
-- [ ] **AC-20:** `prompt-history/` maintained
+- [ ] **AC-20:** `ai-prompts/` activity portfolio maintained
 - [ ] **AC-21:** `tool-specific/cursor-workflow/` artifacts present
 - [ ] **AC-22:** Testing and debugging notes documented
 - [ ] **AC-23:** Reflection document included

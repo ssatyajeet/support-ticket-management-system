@@ -38,7 +38,7 @@ The exercise demonstrates AI-assisted engineering across the full lifecycle: req
 | **Version control** | Git | Sprint-aligned feature branches |
 | **Local environment** | Windows 10, PowerShell, npm | Development and manual regression |
 
-**Workflow artifacts:** [`tool-workflow.md`](../tool-workflow.md) · [`tool-specific/cursor-workflow/`](../tool-specific/cursor-workflow/) · [`prompt-history/`](../prompt-history/)
+**Workflow artifacts:** [`tool-workflow.md`](../tool-workflow.md) · [`tool-specific/cursor-workflow/`](../tool-specific/cursor-workflow/) · [`ai-prompts/`](../ai-prompts/)
 
 ---
 
