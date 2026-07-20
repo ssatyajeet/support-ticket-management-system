@@ -36,3 +36,6 @@ server/prisma/*.db-journal
 
 # Vite
 client/.vite/
+
+#package-lock.json from all folders
+**/package-lock.json
